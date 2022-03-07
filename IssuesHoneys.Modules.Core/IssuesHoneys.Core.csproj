@@ -87,7 +87,10 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Images\issues_32.ico" />
+    <Resource Include="Resources\Images\projects_32.ico" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="Resources\ResourceDictionary_en.xaml">
       <SubType>Designer</SubType>
@@ -99,10 +102,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\projects.ico" />
+    <Resource Include="Resources\Images\projects_128.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\issues.ico" />
+    <Resource Include="Resources\Images\issues_128.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -2,9 +2,18 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--Icons-->
-    <BitmapImage x:Key="Issues_ico" UriSource="Images/Issues.ico" />
-    <BitmapImage x:Key="Projects_ico" UriSource="Images/Projects.ico" />
+    <BitmapImage x:Key="Issues_128_ico" UriSource="Images/Issues_128.ico" />
+    <BitmapImage x:Key="Projects_128_ico" UriSource="Images/Projects_128.ico" />
+    <BitmapImage x:Key="Issues_32_ico" UriSource="Images/Issues_32.ico" />
+    <BitmapImage x:Key="Projects_32_ico" UriSource="Images/Projects_32.ico" />
 
     <!--Colors-->
     <Brush x:Key="MainBorderBrush">LightGray</Brush>
+    
+    <!--Texts--><!--
+    <system:String x:Key="RibbonWindowTitle">Issues Honeys</system:String>
+    <system:String x:Key="FirstRibbonTabItem">Home</system:String>
+    <system:String x:Key="FirstRibbonGroupBox">Items</system:String>
+    <system:String x:Key="IssuesButtonCaption">Issues</system:String>
+    <system:String x:Key="ProjectsButtonCaption">Project</system:String>-->
 </ResourceDictionary>
