@@ -1,7 +1,6 @@
 ﻿using Fluent;
-using IssuesHoneys.Core.Interfaces;
-using Prism.Commands;
-using Prism.Regions;
+using IssuesHoneys.Core.NameDefinition;
+using IssuesHoneys.Core.Types.Interfaces;
 using System.Windows;
 
 namespace Issues_Honeys.Views
@@ -20,7 +19,7 @@ namespace Issues_Honeys.Views
 
         private void RibbonWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            _applicationCommands.NavigationNavigateCommand.Execute("");
+            _applicationCommands.NavigationNavigateCommand.Execute(ModuleNameParams.Shell);
         }
     }
 }

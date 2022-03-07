@@ -25,7 +25,7 @@ namespace IssuesHoneys.Modules.Projects
         {
             ViewModelLocationProvider.Register<AppFooter, AppFooterViewModel>();
             ViewModelLocationProvider.Register<AppMain, AppMainViewModel>();
-            ViewModelLocationProvider.Register<AppRibbonTabButton, AppRibbonTabViewModel>();
+            ViewModelLocationProvider.Register<AppRibbonTabButton, AppRibbonTabButtonViewModel>();
 
             containerRegistry.RegisterForNavigation<AppFooter, AppFooterViewModel>(RegisterForNavigation.ProjectFooter);
             containerRegistry.RegisterForNavigation<AppMain, AppMainViewModel>(RegisterForNavigation.ProjectMain);

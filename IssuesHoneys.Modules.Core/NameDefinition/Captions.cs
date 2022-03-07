@@ -9,6 +9,13 @@
         public const string ProjectsButtonCaption = "Project";
     }
 
+    public static class ModuleNameParams
+    {
+        public const string Shell = "Shell";
+        public const string Projects = "Projects";
+        public const string Issues = "Issues";
+    }
+
     public static class RegionNames
     {
         public const string FooterContentRegion = "FooterContentRegion";
