@@ -1,2 +1,2 @@
 # Issues-Honeys
-Issue management based on gitHub management in WPF.
+Issues management based on gitHub management in WPF.
