@@ -1,6 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <!--Icons-->
     <BitmapImage x:Key="Issues_ico" UriSource="Images/Issues.ico" />
     <BitmapImage x:Key="Projects_ico" UriSource="Images/Projects.ico" />
+
+    <!--Colors-->
+    <Brush x:Key="MainBorderBrush">LightGray</Brush>
 </ResourceDictionary>
