@@ -6,7 +6,7 @@
                xmlns:fluent="urn:fluent-ribbon"
                xmlns:core="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
                Header="{x:Static core:Captions.IssuesButtonCaption}"
-               LargeIcon="{StaticResource Issues_ico}"
+               LargeIcon="{StaticResource Issues_128_ico}"
                Command="{Binding SelectedCommand}"
                CommandParameter="{x:Static core:ModuleNameParams.Issues}">
 

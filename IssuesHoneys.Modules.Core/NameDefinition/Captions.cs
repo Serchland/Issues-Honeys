@@ -2,11 +2,16 @@
 {
     public static class Captions
     {
+        //TODO: Move to resource dictionary
         public const string RibbonWindowTitle = "Issues Honeys";
         public const string FirstRibbonTabItem = "Home";
         public const string FirstRibbonGroupBox = "Items";
         public const string IssuesButtonCaption = "Issues";
         public const string ProjectsButtonCaption = "Project";
+        public const string NewLabel = "New label";
+        public const string Cancel = "Cancel";
+        public const string CreateLabel = "Create label";
+
     }
 
     public static class ModuleNameParams
