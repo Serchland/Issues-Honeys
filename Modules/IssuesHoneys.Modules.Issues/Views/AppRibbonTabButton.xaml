@@ -1,0 +1,11 @@
+﻿<fluent:Button x:Class="IssuesHoneys.Modules.Issues.Views.AppRibbonTabButton"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:prism="http://prismlibrary.com/"
+                      prism:ViewModelLocator.AutoWireViewModel="True"
+                      xmlns:fluent="urn:fluent-ribbon"
+                      xmlns:core="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
+                      Header="{x:Static core:Captions.IssuesButtonCaption}"
+                      LargeIcon="{StaticResource Issues_ico}">
+
+</fluent:Button>

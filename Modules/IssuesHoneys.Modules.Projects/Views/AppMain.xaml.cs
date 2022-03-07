@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace IssuesHoneys.Modules.Issues.Views
+namespace IssuesHoneys.Modules.Projects.Views
 {
     /// <summary>
-    /// Lógica de interacción para AppButton.xaml
+    /// Lógica de interacción para AppMain.xaml
     /// </summary>
-    public partial class AppButton : UserControl
+    public partial class AppMain : UserControl
     {
-        public AppButton()
+        public AppMain()
         {
             InitializeComponent();
         }

@@ -3,9 +3,10 @@
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:Fluent="urn:fluent-ribbon"
                      xmlns:prism="http://prismlibrary.com/"
-                     xmlns:core="clr-namespace:IssuesHoneys.Core.NameDefinition.Prism;assembly=IssuesHoneys.Core"
+                     xmlns:core="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
                      prism:ViewModelLocator.AutoWireViewModel="True"
-                     Title="Issues Honeys">
+                     Title="{x:Static core:Captions.RibbonWindowTitle}"
+                     Loaded="RibbonWindow_Loaded">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -21,8 +22,7 @@
         <!--RibbonControl-->
         <Fluent:Ribbon Grid.Column="0"
                        Grid.ColumnSpan="2"
-                       Grid.Row="0"
-                       prism:RegionManager.RegionName="{x:Static core:RegionNames.RibbonContentRegion}">
+                       Grid.Row="0">
             <!--Backstage-->
             <Fluent:Ribbon.Menu>
                 <Fluent:Backstage Header="">
@@ -33,39 +33,28 @@
                     </Fluent:BackstageTabControl>
                 </Fluent:Backstage>
             </Fluent:Ribbon.Menu>
+
+            <Fluent:RibbonTabItem Header="{x:Static core:Captions.FirstRibbonTabItem}">
+                <Fluent:RibbonGroupBox Header="{x:Static core:Captions.FirstRibbonGroupBox}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       prism:RegionManager.RegionName="{x:Static core:RegionNames.RibbonTabButtonContentRegion}">
+
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
         </Fluent:Ribbon>
-
-        <!--NavigationContent-->
-        <Grid Grid.Column="0"
-              Grid.Row="1"
-              Margin="2.5,5,0,2.5">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-            </Grid.RowDefinitions>
-
-            <ContentControl Grid.Row="0"
-                            prism:RegionManager.RegionName="{x:Static core:RegionNames.NavigationContentRegion}">
-            </ContentControl>
-
-            <!--ButtonContent-->
-            <StackPanel Grid.Row="1"
-                        prism:RegionManager.RegionName="{x:Static core:RegionNames.ButtonContentRegion}">
-            </StackPanel>
-        </Grid>
 
         <!--MainContent-->
         <ContentControl Grid.Column="1"
                         Grid.Row="1"
-                        Margin="2.5,5,2.5,2.5"
-                        prism:RegionManager.RegionName="{x:Static core:RegionNames.ListContentRegion}">
+                        Margin="2.5"
+                        prism:RegionManager.RegionName="{x:Static core:RegionNames.MainContentRegion}">
         </ContentControl>
 
         <!--FooterContent-->
         <ContentControl Grid.Column="0"
                         Grid.ColumnSpan="2"
                         Grid.Row="2"
-                        Margin="0,2.5,0,5"
                         prism:RegionManager.RegionName="{x:Static core:RegionNames.FooterContentRegion}">
         </ContentControl>
     </Grid>

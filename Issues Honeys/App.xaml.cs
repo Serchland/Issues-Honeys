@@ -2,6 +2,7 @@
 using Issues;
 using Issues_Honeys.Core.Prism;
 using Issues_Honeys.Views;
+using IssuesHoneys.Core.Interfaces;
 using IssuesHoneys.Modules.Projects;
 using Prism.Ioc;
 using Prism.Modularity;
@@ -33,23 +34,24 @@ namespace Issues_Honeys
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.RegisterSingleton<IApplicationCommands, ApplicationCommands>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
             base.ConfigureModuleCatalog(moduleCatalog);
 
-            moduleCatalog.AddModule<ProjectsModule>();
             moduleCatalog.AddModule<IssuesModule>();
+            moduleCatalog.AddModule<ProjectsModule>();
         }
 
         protected override void ConfigureRegionAdapterMappings(RegionAdapterMappings regionAdapterMappings)
         {
             base.ConfigureRegionAdapterMappings(regionAdapterMappings);
 
+            regionAdapterMappings.RegisterMapping(typeof(RibbonGroupBox), Container.Resolve<RibbonGroupBoxRegionAdapter>());
             regionAdapterMappings.RegisterMapping(typeof(StackPanel), Container.Resolve<StackPanelRegionAdapter>());
-            regionAdapterMappings.RegisterMapping(typeof(Ribbon), Container.Resolve<RibbonRegionAdapter>());
+            //regionAdapterMappings.RegisterMapping(typeof(Ribbon), Container.Resolve<RibbonRegionAdapter>());
         }
     }
 }

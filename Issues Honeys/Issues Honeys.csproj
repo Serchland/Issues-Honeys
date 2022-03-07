@@ -64,6 +64,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Core\Prism\RibbonGroupBoxRegionAdapter.cs" />
     <Compile Include="Core\Prism\RibbonRegionAdapter.cs" />
     <Compile Include="Core\Prism\StackPanelRegionAdapter.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -115,6 +116,5 @@
       <Name>IssuesHoneys.Modules.Projects</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
