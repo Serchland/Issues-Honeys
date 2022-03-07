@@ -50,6 +50,8 @@
                         Margin="2.5"
                         prism:RegionManager.RegionName="{x:Static core:RegionNames.MainContentRegion}">
         </ContentControl>
+        
+        
 
         <!--FooterContent-->
         <ContentControl Grid.Column="0"
