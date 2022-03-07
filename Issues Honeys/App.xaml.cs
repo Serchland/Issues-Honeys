@@ -2,7 +2,7 @@
 using Issues;
 using Issues_Honeys.Core.Prism;
 using Issues_Honeys.Views;
-using IssuesHoneys.Core.Interfaces;
+using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Modules.Projects;
 using Prism.Ioc;
 using Prism.Modularity;
