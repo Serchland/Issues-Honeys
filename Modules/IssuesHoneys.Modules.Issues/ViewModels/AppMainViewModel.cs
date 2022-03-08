@@ -1,4 +1,7 @@
-﻿using IssuesHoneys.Core.NameDefinition;
+﻿using IssuesHoneys.Business;
+using IssuesHoneys.Core.NameDefinition;
+using IssuesHoneys.Core.Types;
+using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -12,13 +15,28 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 {
     public class AppMainViewModel : BindableBase
     {
-        public AppMainViewModel()
+        private IIssueService _isuesService;
+        public AppMainViewModel(IIssueService issueService)
+        {
+            _isuesService = issueService;
+            Initialize();
+        }
+
+        private void Initialize()
         {
             NewLabelViewVisibilitity = Visibility.Collapsed;
+            Issues = _isuesService.GetIssues();
         }
 
         #region "Properties"
-        
+
+        private List<Issue> _issues;
+        public List<Issue> Issues
+        {
+            get { return _issues; }
+            set { SetProperty(ref _issues, value); }
+        }
+
         private Visibility _newLabelViewVisibility;
         public Visibility NewLabelViewVisibilitity
         {

@@ -1,6 +1,8 @@
 ﻿using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Modules.Issues.ViewModels;
 using IssuesHoneys.Modules.Issues.Views;
+using IssuesHoneys.Services;
+using IssuesHoneys.Services.Interfaces;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
@@ -30,6 +32,7 @@ namespace Issues
             containerRegistry.RegisterForNavigation<AppFooter, AppFooterViewModel>(RegisterForNavigation.IssueFooter);
             containerRegistry.RegisterForNavigation<AppMain, AppMainViewModel>(RegisterForNavigation.IssueMain);
 
+            containerRegistry.RegisterSingleton<IIssueService, IssueService>();
         }
     }
 }

@@ -86,9 +86,21 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\IssuesHoneys.Business\IssuesHoneys.Business.csproj">
+      <Project>{b8a75b55-994f-4920-a8e8-dc52482ebf23}</Project>
+      <Name>IssuesHoneys.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\IssuesHoneys.Modules.Core\IssuesHoneys.Core.csproj">
       <Project>{b3645851-0f0d-4de6-93da-cf95fcda5315}</Project>
       <Name>IssuesHoneys.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\IssuesHoneys.Services.Interfaces\IssuesHoneys.Services.Interfaces.csproj">
+      <Project>{712893A3-05FF-4755-A023-24522FB43520}</Project>
+      <Name>IssuesHoneys.Services.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\IssuesHoneys.Services\IssuesHoneys.Services.csproj">
+      <Project>{EB538DD1-B52E-417D-9A2B-305BEBFD63A5}</Project>
+      <Name>IssuesHoneys.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

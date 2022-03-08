@@ -1,4 +1,5 @@
 ﻿using Prism.Mvvm;
+using System;
 using System.Collections.Generic;
 
 namespace IssuesHoneys.Business
@@ -40,8 +41,8 @@ namespace IssuesHoneys.Business
             set { SetProperty(ref _author, value); }
         }
 
-        private List<int> _labels;
-        public List<int> Labels
+        private List<Label> _labels;
+        public List<Label> Labels
         {
             get { return _labels; }
             set { SetProperty(ref _labels, value); }
@@ -122,8 +123,8 @@ namespace IssuesHoneys.Business
             set { SetProperty(ref _description, value); }
         }
 
-        private string _dueDate;
-        public string DueDate
+        private DateTime _dueDate;
+        public DateTime DueDate
         {
             get { return _dueDate; }
             set { SetProperty(ref _dueDate, value); }
