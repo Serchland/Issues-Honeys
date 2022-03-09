@@ -255,7 +255,7 @@
                                 <Image Source="{StaticResource Issues_32_ico}"></Image>
 
                                 <TextBlock Text="{Binding Name}"
-                                           FontWeight="Bold"
+                                           FontWeight="SemiBold"
                                            FontSize="14"
                                            HorizontalAlignment="Center"
                                            TextAlignment="Center"
@@ -271,7 +271,19 @@
                                     </ListBox.ItemsPanel>
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <Button Content="{Binding Path=Name}" VerticalAlignment="Center"></Button>
+                                            <Border BorderThickness="1" 
+                                                    BorderBrush="LightGray" 
+                                                    VerticalAlignment="Center" 
+                                                    Margin="0,8,0,0"
+                                                    Height="18"
+                                                    Width="75"
+                                                    CornerRadius="10">
+                                                <TextBlock Text="{Binding Name}"
+                                                           HorizontalAlignment="Center"
+                                                           TextAlignment="Center"
+                                                           TextWrapping="WrapWithOverflow"
+                                                           FontSize="10" />
+                                            </Border>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                     <!--<ListBoxItem>listbox item 1</ListBoxItem>
