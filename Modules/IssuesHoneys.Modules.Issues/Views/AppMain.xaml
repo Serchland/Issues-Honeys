@@ -7,11 +7,10 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              BorderBrush="{StaticResource MainBorderBrush}"
              BorderThickness="1">
-    <Grid>
+    
+    
+    <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -23,133 +22,156 @@
 
         <Grid Grid.Column="0"
               Grid.Row="0"
-              Grid.ColumnSpan="5"
-              Margin="5">
+              Margin="15">
+
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="700" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0"
+                        Grid.Row="0"
+                        Orientation="Horizontal">
 
-            <Grid Grid.Column="0"
-                  Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+                <Label VerticalAlignment="Center"
+                       Content="Filter:">
+                </Label>
 
-                <Label Grid.Column="0"
-                       Content="Filter:" />
-                <ComboBox Grid.Column="1"
-                          MinWidth="200"
-                          MaxHeight="30" />
-            </Grid>
-
-            <Button Grid.Column="1"
-                    Grid.Row="0"
-                    Background="Transparent"
-                    Content="Labels"
-                    MinWidth="100" />
+                <ComboBox MinWidth="200"
+                          MaxHeight="30">
+                </ComboBox>
+            </StackPanel>
 
             <Button Grid.Column="2"
                     Grid.Row="0"
                     Background="Transparent"
-                    Content="Millestones"
                     MinWidth="100"
-                    Margin="5,0,0,0" />
+                    HorizontalAlignment="Right"
+                    Content="Labels" />
 
             <Button Grid.Column="3"
                     Grid.Row="0"
+                    Background="Transparent"
+                    MinWidth="100"
+                    HorizontalAlignment="Left"
+                    Content="Millestones" />
+
+            <Button Grid.Column="4"
+                    Grid.Row="0"
                     Background="LightGreen"
-                    Content="{x:Static core:Captions.NewLabel}"
+                    Command="{Binding NewLabelVisibilityCommand}"
+                    CommandParameter="{x:Static core:Captions.NewLabel}"
+                    Click="Button_Click"
                     MinWidth="100"
                     HorizontalAlignment="Right"
-                    Command="{Binding NewLabelVisibilityCommand}"
-                    CommandParameter="{x:Static core:Captions.NewLabel}" />
+                    Content="{x:Static core:Captions.NewLabel}">
+            </Button>
         </Grid>
 
-        <Grid x:Name="PART_GridNewLabel"
+        <Grid x:Name="PART_NewLabel"
+              Grid.Column="0"
               Grid.Row="1"
               Grid.ColumnSpan="5"
-              Margin="10,5,10,5"
+              Margin="15"
               Visibility="{Binding NewLabelViewVisibilitity}">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300" />
-                <ColumnDefinition Width="300" />
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="300"></ColumnDefinition>
+                <ColumnDefinition Width="300"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Column="0"
-                  Grid.Row="0">
-                <StackPanel Orientation="Vertical">
-                    <Label Content="Label preview:"
-                           Margin="0,0,0,5" />
-                    <Button Content="{Binding Text, ElementName=PART_TxtLabelName}"
-                            MaxHeight="20"
-                            Width="150"
-                            HorizontalAlignment="Left" />
-                </StackPanel>
-            </Grid>
+            <StackPanel Grid.Column="0"
+                        Grid.Row="0"
+                        Grid.ColumnSpan="1"
+                        Orientation="Horizontal">
+
+                <Label  VerticalAlignment="Center"
+                        Content="Lable preview:">
+                </Label>
+
+                <Border  BorderThickness="1"
+                         BorderBrush="LightGray"
+                         VerticalAlignment="Center"
+                         Height="18"
+                         Width="75"
+                         CornerRadius="10">
+
+                    <TextBlock Text="{Binding Text, ElementName=PART_TxtLabelName}"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center"
+                               TextWrapping="WrapWithOverflow"
+                               FontSize="10" />
+                </Border>
+            </StackPanel>
 
             <Label Grid.Column="0"
                    Grid.Row="1"
-                   Content="Label name" />
+                   Content="Lable name:"></Label>
+
+            <Label Grid.Column="1"
+                   Grid.Row="1"
+                   Content="Description:"></Label>
+
+            <Label Grid.Column="3"
+                   Grid.Row="1"
+                   Content="Color:"></Label>
+
             <TextBox x:Name="PART_TxtLabelName"
                      Grid.Column="0"
                      Grid.Row="2"
                      MaxWidth="300"
                      MinWidth="200"
-                     HorizontalAlignment="Left" />
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top" />
 
-            <Label Grid.Column="1"
-                   Grid.Row="1"
-                   Content="Description" />
             <TextBox Grid.Column="1"
                      Grid.Row="2"
-                     HorizontalAlignment="Left"
                      MaxWidth="300"
-                     MinWidth="200" />
+                     MinWidth="200"
+                     HorizontalAlignment="Left" />
 
-            <Label Grid.Column="2"
-                   Grid.Row="1"
-                   Content="Color" />
-            <Button Grid.Column="2"
+            <Button Grid.Column="3"
                     Grid.Row="2"
-                    Width="50"
-                    HorizontalAlignment="Left" />
+                    Content="CUpd">
+            </Button>
 
-            <TextBox Grid.Column="3"
+            <TextBox Grid.Column="4"
                      Grid.Row="2"
-                     Width="100" />
+                     MaxWidth="200"
+                     MinWidth="100"
+                     HorizontalAlignment="Left" />
 
-            <StackPanel Grid.Column="5"
-                        Grid.Row="2"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Right">
+            <Button Grid.Column="5"
+                    Grid.Row="2"
+                    Content="{x:Static core:Captions.Cancel}"
+                    Command="{Binding NewLabelVisibilityCommand}"
+                    HorizontalAlignment="Right"
+                    CommandParameter="{x:Static core:Captions.Cancel}" />
 
-                <Button Content="{x:Static core:Captions.Cancel}"
-                        Command="{Binding NewLabelVisibilityCommand}"
-                        CommandParameter="{x:Static core:Captions.Cancel}" />
-                <Button Content="{x:Static core:Captions.CreateLabel}"
-                        Margin="5,0,0,0"
-                        Command="{Binding NewLabelVisibilityCommand}"
-                        CommandParameter="{x:Static core:Captions.CreateLabel}" />
-            </StackPanel>
+            <Button Grid.Column="6"
+                    Grid.Row="2"
+                    Content="{x:Static core:Captions.CreateLabel}"
+                    Margin="5,0,0,0"
+                    HorizontalAlignment="Left"
+                    Command="{Binding NewLabelVisibilityCommand}"
+                    CommandParameter="{x:Static core:Captions.CreateLabel}" />
         </Grid>
 
         <Border Grid.Row="2"
@@ -166,15 +188,15 @@
                     <ColumnDefinition Width="200" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                
+
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <CheckBox Grid.Column="0"
                           Grid.Row="0"
-                          Margin="5,0,0,0" 
-                          VerticalAlignment="Center"/>
+                          Margin="5,0,0,0"
+                          VerticalAlignment="Center" />
 
                 <StackPanel Grid.Column="1"
                             Grid.Row="0"
@@ -199,7 +221,7 @@
 
                     <ComboBox Grid.Column="0"
                               MaxHeight="20"
-                              VerticalAlignment="Center"/>
+                              VerticalAlignment="Center" />
 
                     <ComboBox Grid.Column="1"
                               MaxHeight="20"
@@ -224,7 +246,6 @@
                 </Grid>
             </Grid>
         </Border>
-
         <Border Grid.Row="3"
                 Grid.ColumnSpan="5"
                 BorderThickness="1,0,1,1"
