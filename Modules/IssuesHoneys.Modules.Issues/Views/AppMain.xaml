@@ -71,7 +71,8 @@
                     MinWidth="100"
                     HorizontalAlignment="Right"
                     Command="{Binding NewLabelVisibilityCommand}"
-                    CommandParameter="{x:Static core:Captions.NewLabel}" />
+                    CommandParameter="{x:Static core:Captions.NewLabel}"
+                    Click="Button_Click" />
         </Grid>
 
         <Grid x:Name="PART_GridNewLabel"
