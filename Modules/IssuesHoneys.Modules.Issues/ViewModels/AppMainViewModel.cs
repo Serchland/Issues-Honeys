@@ -7,9 +7,11 @@ using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
@@ -24,11 +26,28 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
         private void Initialize()
         {
-            NewLabelViewVisibilitity = Visibility.Collapsed;
+            _newLabelViewVisibility = Visibility.Collapsed;
+            _brush = Brushes.Gray;
             Issues = _isuesService.GetIssues();
         }
 
         #region "Properties"
+        private string _brushString;
+        public string BrushString
+        {
+            get { return _brushString; }
+            set { SetProperty(ref _brushString, value); }
+        }
+
+        private Brush _brush;
+        public Brush Brush
+        {
+            get { return _brush; }
+            set {
+                    BrushString = _brush.ToString();
+                    SetProperty(ref _brush, value); 
+                }
+        }
 
         private List<Issue> _issues;
         public List<Issue> Issues
@@ -46,6 +65,19 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         #endregion
 
         #region "Commands"
+        private DelegateCommand _randomColor;
+        public DelegateCommand RandomColor =>
+            _randomColor ?? (_randomColor = new DelegateCommand(ExecuteRandomColor));
+
+        void ExecuteRandomColor()
+        {
+            Brush result = Brushes.Transparent;
+            Random rnd = new Random();
+            Type brushesType = typeof(Brushes);
+            PropertyInfo[] properties = brushesType.GetProperties();
+            int random = rnd.Next(properties.Length);
+            Brush = (Brush)properties[random].GetValue(null, null);
+        }
 
         private DelegateCommand<string> _newLabelVisibilityCommand;
         public DelegateCommand<string> NewLabelVisibilityCommand =>

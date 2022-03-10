@@ -5,9 +5,9 @@
              xmlns:fluent="urn:fluent-ribbon"
              x:Class="IssuesHoneys.Modules.Issues.Views.AppMain"
              prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
              BorderBrush="{StaticResource MainBorderBrush}"
              BorderThickness="1">
-    
     
     <Grid >
         <Grid.ColumnDefinitions>
@@ -98,7 +98,6 @@
 
             <StackPanel Grid.Column="0"
                         Grid.Row="0"
-                        Grid.ColumnSpan="1"
                         Orientation="Horizontal">
 
                 <Label  VerticalAlignment="Center"
@@ -107,16 +106,19 @@
 
                 <Border  BorderThickness="1"
                          BorderBrush="LightGray"
+                         Background="{Binding Brush}"
                          VerticalAlignment="Center"
                          Height="18"
-                         Width="75"
+                         MinWidth="50"
                          CornerRadius="10">
 
-                    <TextBlock Text="{Binding Text, ElementName=PART_TxtLabelName}"
+                    <TextBlock Text="{Binding Text, ElementName=PART_LabelName, Mode=TwoWay}"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
                                TextAlignment="Center"
+                               Foreground="White"
                                TextWrapping="WrapWithOverflow"
+                               Padding="5,0,5,0"
                                FontSize="10" />
                 </Border>
             </StackPanel>
@@ -133,7 +135,7 @@
                    Grid.Row="1"
                    Content="Color:"></Label>
 
-            <TextBox x:Name="PART_TxtLabelName"
+            <TextBox x:Name="PART_LabelName"
                      Grid.Column="0"
                      Grid.Row="2"
                      MaxWidth="300"
@@ -149,13 +151,21 @@
 
             <Button Grid.Column="3"
                     Grid.Row="2"
-                    Content="CUpd">
+                    Height="30"
+                    Width="30"
+                    BorderThickness="0.5"
+                    Style="{DynamicResource MahApps.Styles.Button.Circle}"
+                    Command="{Binding RandomColor}">
+                <Button.Content>
+                    <icons:VaadinIcons Kind="Refresh"></icons:VaadinIcons>
+                </Button.Content>
             </Button>
 
             <TextBox Grid.Column="4"
                      Grid.Row="2"
                      MaxWidth="200"
                      MinWidth="100"
+                     Text="{Binding BrushString}"
                      HorizontalAlignment="Left" />
 
             <Button Grid.Column="5"
@@ -271,6 +281,7 @@
                             <StackPanel Grid.Column="1"
                                         Grid.Row="0"
                                         Margin="0,0,0,0"
+                                        Grid.ColumnSpan="2"
                                         Orientation="Horizontal">
                                 
                                 <Image Source="{StaticResource Issues_32_ico}"></Image>
@@ -292,26 +303,24 @@
                                     </ListBox.ItemsPanel>
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <Border BorderThickness="1" 
-                                                    BorderBrush="LightGray" 
-                                                    VerticalAlignment="Center" 
+                                            <Border BorderThickness="1"
+                                                    BorderBrush="LightGray"
+                                                    VerticalAlignment="Center"
                                                     Margin="0,8,0,0"
                                                     Height="18"
-                                                    Width="75"
-                                                    CornerRadius="10">
+                                                    MinWidth="50"
+                                                    CornerRadius="10"
+                                                    Background="{Binding Brush}">
                                                 <TextBlock Text="{Binding Name}"
                                                            HorizontalAlignment="Center"
                                                            TextAlignment="Center"
                                                            TextWrapping="WrapWithOverflow"
-                                                           FontSize="10" />
+                                                           Foreground="White"
+                                                           FontSize="10"
+                                                           Padding="5,0,5,0" />
                                             </Border>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
-                                    <!--<ListBoxItem>listbox item 1</ListBoxItem>
-                                    <ListBoxItem>listbox item 2</ListBoxItem>
-                                    <ListBoxItem>listbox item 3</ListBoxItem>
-                                    <ListBoxItem>listbox item 4</ListBoxItem>
-                                    <ListBoxItem>listbox item 5</ListBoxItem>-->
                                 </ListBox>
                             </StackPanel>
                             
@@ -332,4 +341,5 @@
             </ListView>
         </Border>
     </Grid>
+    
 </UserControl>

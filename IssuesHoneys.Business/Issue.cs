@@ -1,6 +1,7 @@
 ﻿using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Windows.Media;
 
 namespace IssuesHoneys.Business
 {
@@ -97,6 +98,13 @@ namespace IssuesHoneys.Business
         {
             get { return _associatedIssues; }
             set { SetProperty(ref _associatedIssues, value); }
+        }
+
+        private Brush _brush;
+        public Brush Brush
+        {
+            get { return _brush; }
+            set { SetProperty(ref _brush, value); }
         }
     }
 
