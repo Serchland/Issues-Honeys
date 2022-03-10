@@ -19,7 +19,7 @@ namespace Issues_Honeys
     {
         protected override Window CreateShell()
         {
-            return Container.Resolve<MainWindow>();
+            return Container.Resolve<Window1>();
         }
 
         protected override void OnInitialized()
