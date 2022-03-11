@@ -10,14 +10,32 @@
         TitleAlignment="Center"
         VerticalAlignment="Center"
         WindowTitleBrush="Orange"
-                 Loaded="MetroWindow_Loaded">
-    
+        Loaded="MetroWindow_Loaded">
+
+    <mah:MetroWindow.IconTemplate>
+        <DataTemplate>
+            <iconPacks:PackIconRPGAwesome Width="{TemplateBinding Width}"
+                                      Height="{TemplateBinding Height}"
+                                      Margin="4"
+                                          Kind="Honeycomb" />
+        </DataTemplate>
+
+    </mah:MetroWindow.IconTemplate>
     <mah:MetroWindow.LeftWindowCommands>
         <mah:WindowCommands>
-            <Button ToolTip="Open up the GitHub site">
-                <iconPacks:Codicons Width="22"
-                                    Height="22"
-                                    Kind="Issues" />
+            <Button Content="Issues">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:Codicons  Width="22"
+                                                 Height="22"
+                                                 Kind="Issues" />
+                            <TextBlock Margin="4 0 0 0"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
             </Button>
         </mah:WindowCommands>
     </mah:MetroWindow.LeftWindowCommands>
@@ -52,48 +70,6 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <!--Buttons-->
-        <!--<Border Grid.Column="0"
-                Grid.Row="0"
-                BorderThickness="1" BorderBrush="LightGray">
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" Margin="10">
-                <Button Content="Issues" MinWidth="75">
-                    <Button.ContentTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Vertical">
-                                <Label VerticalAlignment="Center" HorizontalAlignment="Center">
-                                    <iconPacks:Codicons Width="22"
-                                                        Height="22"
-                                                        Kind="Issues" />
-                                </Label>
-                                
-                                <TextBlock Margin="4 0 0 0"
-                                           VerticalAlignment="Center"
-                                           Text="{Binding}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </Button.ContentTemplate>
-                </Button>
-                <Button Content="Projects" Margin="5,0,0,0" MinWidth="75">
-                    <Button.ContentTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Vertical">
-                                <Label VerticalAlignment="Center" HorizontalAlignment="Center">
-                                    <iconPacks:PackIconMaterial  Width="22"
-                                                                 Height="22"
-                                                                 VerticalAlignment="Center"
-                                                                 Kind="FocusField" />
-                                </Label>
-                                
-                                <TextBlock Margin="4 0 0 0"
-                                           VerticalAlignment="Center"
-                                           Text="{Binding}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </Button.ContentTemplate>
-                </Button>
-            </StackPanel>-->
-
         <Border Grid.Column="0"
                 Grid.Row="0"
                 BorderThickness="1"
@@ -106,10 +82,11 @@
             </StackPanel>
         </Border>
 
-        <Grid Grid.Column="0"
-              Grid.Row="1">
+        <ContentControl Grid.Column="0"
+              Grid.Row="1"
+              prism:RegionManager.RegionName="{x:Static core:RegionNames.MainContentRegion}">
 
-        </Grid>
+        </ContentControl>
 
         <StatusBar Grid.Column="0"
                    Grid.Row="2"
