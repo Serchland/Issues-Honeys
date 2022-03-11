@@ -1,16 +1,49 @@
-﻿<Fluent:RibbonWindow x:Class="Issues_Honeys.Views.MainWindow"
-                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                     xmlns:Fluent="urn:fluent-ribbon"
-                     xmlns:prism="http://prismlibrary.com/"
-                     xmlns:core="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
-                     prism:ViewModelLocator.AutoWireViewModel="True"
-                     Title="{x:Static core:Captions.RibbonWindowTitle}"
-                     Loaded="RibbonWindow_Loaded">
+﻿<mah:MetroWindow x:Class="Issues_Honeys.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:core="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="Issues Honeys"
+        TitleAlignment="Center"
+        VerticalAlignment="Center"
+        WindowTitleBrush="Orange"
+                 Loaded="MetroWindow_Loaded">
+    
+    <mah:MetroWindow.LeftWindowCommands>
+        <mah:WindowCommands>
+            <Button ToolTip="Open up the GitHub site">
+                <iconPacks:Codicons Width="22"
+                                    Height="22"
+                                    Kind="Issues" />
+            </Button>
+        </mah:WindowCommands>
+    </mah:MetroWindow.LeftWindowCommands>
 
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+            <Button Content="Focus">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterial  Width="22"
+                                                         Height="22"
+                                                         Kind="FocusField" />
+                            <TextBlock Margin="4 0 0 0"
+                                       VerticalAlignment="Center"
+                                       Text="{Binding}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+        </mah:WindowCommands>
+        
+    </mah:MetroWindow.RightWindowCommands>
+    
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -19,45 +52,72 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <!--RibbonControl-->
-        <Fluent:Ribbon Grid.Column="0"
-                       Grid.ColumnSpan="2"
-                       Grid.Row="0">
-            <!--Backstage-->
-            <Fluent:Ribbon.Menu>
-                <Fluent:Backstage Header="">
-                    <Fluent:BackstageTabControl>
-                        <Fluent:BackstageTabItem Header="New" />
-                        <Fluent:BackstageTabItem Header="Print" />
-                        <Fluent:Button Header="Blue" />
-                    </Fluent:BackstageTabControl>
-                </Fluent:Backstage>
-            </Fluent:Ribbon.Menu>
+        <!--Buttons-->
+        <!--<Border Grid.Column="0"
+                Grid.Row="0"
+                BorderThickness="1" BorderBrush="LightGray">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" Margin="10">
+                <Button Content="Issues" MinWidth="75">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <Label VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <iconPacks:Codicons Width="22"
+                                                        Height="22"
+                                                        Kind="Issues" />
+                                </Label>
+                                
+                                <TextBlock Margin="4 0 0 0"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+                <Button Content="Projects" Margin="5,0,0,0" MinWidth="75">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <Label VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <iconPacks:PackIconMaterial  Width="22"
+                                                                 Height="22"
+                                                                 VerticalAlignment="Center"
+                                                                 Kind="FocusField" />
+                                </Label>
+                                
+                                <TextBlock Margin="4 0 0 0"
+                                           VerticalAlignment="Center"
+                                           Text="{Binding}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+            </StackPanel>-->
 
-            <Fluent:RibbonTabItem Header="{x:Static core:Captions.FirstRibbonTabItem}">
-                <Fluent:RibbonGroupBox Header="{x:Static core:Captions.FirstRibbonGroupBox}"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       prism:RegionManager.RegionName="{x:Static core:RegionNames.RibbonTabButtonContentRegion}">
+        <Border Grid.Column="0"
+                Grid.Row="0"
+                BorderThickness="1"
+                BorderBrush="LightGray">
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal"
+                        Margin="10"
+                        prism:RegionManager.RegionName="{x:Static core:RegionNames.ButtonContentRegion}">
+            </StackPanel>
+        </Border>
 
-                </Fluent:RibbonGroupBox>
-            </Fluent:RibbonTabItem>
-        </Fluent:Ribbon>
+        <Grid Grid.Column="0"
+              Grid.Row="1">
 
-        <!--MainContent-->
-        <ContentControl Grid.Column="1"
-                        Grid.Row="1"
-                        Margin="2.5"
-                        prism:RegionManager.RegionName="{x:Static core:RegionNames.MainContentRegion}">
-        </ContentControl>
-        
-        
+        </Grid>
 
-        <!--FooterContent-->
-        <ContentControl Grid.Column="0"
-                        Grid.ColumnSpan="2"
-                        Grid.Row="2"
-                        prism:RegionManager.RegionName="{x:Static core:RegionNames.FooterContentRegion}">
-        </ContentControl>
+        <StatusBar Grid.Column="0"
+                   Grid.Row="2"
+                   MinHeight="25"
+                   Background="LightGray">
+            <StatusBarItem>
+                <TextBlock Text="{Binding Message}"></TextBlock>
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
-</Fluent:RibbonWindow>
+</mah:MetroWindow>

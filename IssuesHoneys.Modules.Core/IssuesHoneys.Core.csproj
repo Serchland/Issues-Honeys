@@ -157,7 +157,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Types\Base\AppRibbonTabButtonBase.cs" />
+    <Compile Include="Types\Base\AppButtonBase.cs" />
     <Compile Include="Types\DummyClass.cs" />
     <Compile Include="Types\Interfaces\IApplicationCommands.cs" />
     <Compile Include="NameDefinition\Captions.cs" />

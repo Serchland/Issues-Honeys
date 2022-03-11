@@ -1,5 +1,4 @@
-﻿using Fluent;
-using Issues;
+﻿using Issues;
 using Issues_Honeys.Core.Prism;
 using Issues_Honeys.Views;
 using IssuesHoneys.Core.Types.Interfaces;
@@ -19,7 +18,7 @@ namespace Issues_Honeys
     {
         protected override Window CreateShell()
         {
-            return Container.Resolve<Window1>();
+            return Container.Resolve<MainWindow>();
         }
 
         protected override void OnInitialized()
@@ -49,7 +48,7 @@ namespace Issues_Honeys
         {
             base.ConfigureRegionAdapterMappings(regionAdapterMappings);
 
-            regionAdapterMappings.RegisterMapping(typeof(RibbonGroupBox), Container.Resolve<RibbonGroupBoxRegionAdapter>());
+            //regionAdapterMappings.RegisterMapping(typeof(RibbonGroupBox), Container.Resolve<RibbonGroupBoxRegionAdapter>());
             regionAdapterMappings.RegisterMapping(typeof(StackPanel), Container.Resolve<StackPanelRegionAdapter>());
             //regionAdapterMappings.RegisterMapping(typeof(Ribbon), Container.Resolve<RibbonRegionAdapter>());
         }

@@ -20,14 +20,14 @@ namespace Issues
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            _regionManager.RegisterViewWithRegion(RegionNames.RibbonTabButtonContentRegion, typeof(AppRibbonTabButton));
+            _regionManager.RegisterViewWithRegion(RegionNames.ButtonContentRegion, typeof(AppButton));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             ViewModelLocationProvider.Register<AppFooter, AppFooterViewModel>();
             ViewModelLocationProvider.Register<AppMain, AppMainViewModel>();
-            ViewModelLocationProvider.Register<AppRibbonTabButton, AppRibbonTabViewModel>();
+            ViewModelLocationProvider.Register<AppButton, AppRibbonTabViewModel>();
 
             containerRegistry.RegisterForNavigation<AppFooter, AppFooterViewModel>(RegisterForNavigation.IssueFooter);
             containerRegistry.RegisterForNavigation<AppMain, AppMainViewModel>(RegisterForNavigation.IssueMain);

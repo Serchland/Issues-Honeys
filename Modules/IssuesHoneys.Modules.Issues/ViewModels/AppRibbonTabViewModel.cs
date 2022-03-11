@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class AppRibbonTabViewModel : AppRibbonTabButtonBase
+    public class AppRibbonTabViewModel : AppButtonBase
     {
         public AppRibbonTabViewModel(IApplicationCommands applicationCommand) : base(applicationCommand)
         {

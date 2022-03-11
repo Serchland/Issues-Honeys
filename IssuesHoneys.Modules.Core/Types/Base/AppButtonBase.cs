@@ -4,10 +4,10 @@ using Prism.Mvvm;
 
 namespace IssuesHoneys.Core.Types.Base
 {
-    public class AppRibbonTabButtonBase : BindableBase
+    public class AppButtonBase : BindableBase
     {
         IApplicationCommands _applicationCommands;
-        public AppRibbonTabButtonBase(IApplicationCommands applicationCommands)
+        public AppButtonBase(IApplicationCommands applicationCommands)
         {
             _applicationCommands = applicationCommands;
         }

@@ -25,7 +25,7 @@
     {
         public const string FooterContentRegion = "FooterContentRegion";
         public const string MainContentRegion = "MainContentRegion";
-        public const string RibbonTabButtonContentRegion = "RibbonTabButtonContentRegion";
+        public const string ButtonContentRegion = "ButtonContentRegion";
     }
 
     public static class RegisterForNavigation

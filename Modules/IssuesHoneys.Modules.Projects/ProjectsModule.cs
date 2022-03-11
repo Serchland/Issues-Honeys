@@ -18,14 +18,14 @@ namespace IssuesHoneys.Modules.Projects
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            _regionManager.RegisterViewWithRegion(RegionNames.RibbonTabButtonContentRegion, typeof(AppRibbonTabButton));
+            _regionManager.RegisterViewWithRegion(RegionNames.ButtonContentRegion, typeof(AppButton));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             ViewModelLocationProvider.Register<AppFooter, AppFooterViewModel>();
             ViewModelLocationProvider.Register<AppMain, AppMainViewModel>();
-            ViewModelLocationProvider.Register<AppRibbonTabButton, AppRibbonTabButtonViewModel>();
+            ViewModelLocationProvider.Register<AppButton, AppButtonViewModel>();
 
             containerRegistry.RegisterForNavigation<AppFooter, AppFooterViewModel>(RegisterForNavigation.ProjectFooter);
             containerRegistry.RegisterForNavigation<AppMain, AppMainViewModel>(RegisterForNavigation.ProjectMain);
