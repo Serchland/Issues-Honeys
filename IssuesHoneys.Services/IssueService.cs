@@ -10,6 +10,28 @@ namespace IssuesHoneys.Services
 {
     public class IssueService : BindableBase, IIssueService
     {
+        private static List<Label> _labels;
+
+        public IssueService()
+        {
+            _labels = new List<Label>();
+            Init();
+        }
+
+        private void Init()
+        {
+            _labels.Add(new Label() { AssociatedIssues = "0;1;12", Brush = Brushes.Red, Description = "Something isn't working", Id = 0, Name = "bug" });
+            _labels.Add(new Label() { AssociatedIssues = "3;8", Brush = Brushes.LightBlue, Description = "New feature or request", Id = 1, Name = "enhancement" });
+            _labels.Add(new Label() { AssociatedIssues = "4", Brush = Brushes.Green, Description = "Transition phase", Id = 2, Name = "transition" });
+            _labels.Add(new Label() { AssociatedIssues = "14;15", Brush = Brushes.Purple, Description = "synchronisation phase", Id = 3, Name = "sincro" });
+            _labels.Add(new Label() { AssociatedIssues = "14;15", Brush = Brushes.Gold, Description = "associated to version", Id = 4, Name = "version" });
+        }
+
+        public void CreateLabel(Label newLabel)
+        {
+            _labels.Add(newLabel);
+        }
+
         public List<Issue> GetIssues()
         {
             return IssuesResponse.Issues();
@@ -23,6 +45,11 @@ namespace IssuesHoneys.Services
         public List<Millestone> GetMillestones()
         {
             return IssuesResponse.Millestones();
+        }
+
+        public void CreateLabel()
+        {
+            throw new NotImplementedException();
         }
 
         public class IssuesResponse : BindableBase
@@ -56,7 +83,7 @@ namespace IssuesHoneys.Services
             {
                 List<Label> result = Labels();
 
-                result = (from lb in result
+                result = (from lb in _labels
                             where labelsId.Any(it => it == lb.Id)
                             select lb).ToList();
 
@@ -65,15 +92,7 @@ namespace IssuesHoneys.Services
 
             internal static List<Label> Labels()
             {
-                List<Label> result = new List<Label>();
-
-                result.Add(new Label() {AssociatedIssues = "0;1;12", Brush = Brushes.Red, Description = "Something isn't working", Id = 0, Name = "bug" });
-                result.Add(new Label() { AssociatedIssues = "3;8", Brush = Brushes.LightBlue, Description = "New feature or request", Id = 1, Name = "enhancement" });
-                result.Add(new Label() { AssociatedIssues = "4", Brush = Brushes.Green, Description = "Transition phase", Id = 2, Name = "transition" });
-                result.Add(new Label() { AssociatedIssues = "14;15", Brush = Brushes.Purple, Description = "synchronisation phase", Id = 3, Name = "sincro" });
-                result.Add(new Label() { AssociatedIssues = "14;15", Brush = Brushes.Gold, Description = "associated to version", Id = 4, Name = "version" });
-
-                return result;
+                return _labels;
             }
 
             internal static List<Millestone> Millestones()

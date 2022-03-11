@@ -5,7 +5,9 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:mahHelper="http://metro.mahapps.com/winfx/xaml/controls"
         MinWidth="60"
-        Content="Issues">
+        Content="Issues"
+        Background="#FFF6F8FA"
+        BorderBrush="LightGray">
     
     <!--mahHelper:ControlsHelper.CornerRadius="10"-->
     <Button.ContentTemplate>

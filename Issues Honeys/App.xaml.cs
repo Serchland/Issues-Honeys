@@ -1,4 +1,5 @@
-﻿using Issues;
+﻿using ControlzEx.Theming;
+using Issues;
 using Issues_Honeys.Core.Prism;
 using Issues_Honeys.Views;
 using IssuesHoneys.Core.Types.Interfaces;
@@ -29,6 +30,7 @@ namespace Issues_Honeys
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            //ThemeManager.Current.ChangeTheme(this, "Light.Red");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

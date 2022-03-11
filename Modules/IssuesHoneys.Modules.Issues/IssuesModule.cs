@@ -27,7 +27,7 @@ namespace Issues
         {
             ViewModelLocationProvider.Register<AppFooter, AppFooterViewModel>();
             ViewModelLocationProvider.Register<AppMain, AppMainViewModel>();
-            ViewModelLocationProvider.Register<AppButton, AppRibbonTabViewModel>();
+            ViewModelLocationProvider.Register<AppButton, AppButtonViewModel>();
 
             containerRegistry.RegisterForNavigation<AppFooter, AppFooterViewModel>(RegisterForNavigation.IssueFooter);
             containerRegistry.RegisterForNavigation<AppMain, AppMainViewModel>(RegisterForNavigation.IssueMain);

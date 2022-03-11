@@ -65,7 +65,7 @@
     </Compile>
     <Compile Include="ViewModels\AppFooterViewModel.cs" />
     <Compile Include="ViewModels\AppMainViewModel.cs" />
-    <Compile Include="ViewModels\AppRibbonTabViewModel.cs" />
+    <Compile Include="ViewModels\AppButtonViewModel.cs" />
     <Compile Include="Views\AppButton.xaml.cs">
       <DependentUpon>AppButton.xaml</DependentUpon>
     </Compile>

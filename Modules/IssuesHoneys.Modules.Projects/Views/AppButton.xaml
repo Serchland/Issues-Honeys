@@ -3,7 +3,10 @@
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              MinWidth="60"
-             Content="Projects">
+             Content="Projects"
+             Background="#FFF6F8FA"
+             BorderBrush="LightGray"
+             Margin="5,0,0,0">
 
     <Button.ContentTemplate>
         <DataTemplate>

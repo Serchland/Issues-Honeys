@@ -9,6 +9,7 @@ namespace IssuesHoneys.Services.Interfaces
 {
     public interface IIssueService
     {
+        void CreateLabel();
         List<Label> GetLabels();
         List<Millestone> GetMillestones();
         List<Issue> GetIssues();
