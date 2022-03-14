@@ -87,7 +87,7 @@
                    Grid.Row="0"
                    HorizontalAlignment="Right">
                 <Label.Content>
-                    <icons:VaadinIcons Kind="Refresh"></icons:VaadinIcons>
+                    <icons:PackIconModern Kind="Add"></icons:PackIconModern>
                 </Label.Content>
             </Label>
         </Grid>
