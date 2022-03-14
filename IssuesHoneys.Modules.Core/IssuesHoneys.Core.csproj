@@ -157,7 +157,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Types\Base\AppButtonBase.cs" />
+    <Compile Include="Types\Base\ViewModelBase.cs" />
     <Compile Include="Types\DummyClass.cs" />
     <Compile Include="Types\Interfaces\IApplicationCommands.cs" />
     <Compile Include="NameDefinition\Captions.cs" />
@@ -173,6 +173,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\AppDriveView.xaml.cs">
+      <DependentUpon>AppDriveView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FooterView.xaml.cs">
       <DependentUpon>FooterView.xaml</DependentUpon>
@@ -193,6 +196,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Resources\ResourceDictionary_en.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AppDriveView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

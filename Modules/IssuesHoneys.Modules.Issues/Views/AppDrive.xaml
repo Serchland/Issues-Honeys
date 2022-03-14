@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="IssuesHoneys.Modules.Issues.Views.AppDrive"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:coreViews="clr-namespace:IssuesHoneys.Core.Views;assembly=IssuesHoneys.Core"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:prism="http://prismlibrary.com/">
+    
+    <Grid Margin="15">
+        <coreViews:AppDriveView></coreViews:AppDriveView>
+    </Grid>
+</UserControl>

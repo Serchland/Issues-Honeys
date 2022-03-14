@@ -4,11 +4,11 @@ namespace IssuesHoneys.Core.Types.Interfaces
 {
     public interface IApplicationCommands
     {
-        CompositeCommand NavigationNavigateCommand { get; }
+        CompositeCommand NavigateCommand { get; }
     }
 
     public class ApplicationCommands : IApplicationCommands
     {
-        public CompositeCommand NavigationNavigateCommand { get; } = new CompositeCommand();
+        public CompositeCommand NavigateCommand { get; } = new CompositeCommand();
     }
 }

@@ -9,7 +9,33 @@
 
     <!--Colors-->
     <Brush x:Key="MainBorderBrush">LightGray</Brush>
-    
+
+    <Style x:Key="IconStyle"
+           TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <StackPanel Orientation="Horizontal"
+                                DataContext="{Binding RelativeSource={RelativeSource AncestorType=Button}}">
+                        <Rectangle Width="24"
+                                   Height="24"
+                                   Fill="{Binding Foreground}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Fill"
+                                             Visual="{Binding Tag}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Margin="10 0 10 0"
+                                   VerticalAlignment="Center"
+                                   Text="John Doe"
+                                   FontSize="24"
+                                   FontWeight="Normal"
+                                   FontFamily="Segoe UI Light" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <!--Texts--><!--
     <system:String x:Key="RibbonWindowTitle">Issues Honeys</system:String>
     <system:String x:Key="FirstRibbonTabItem">Home</system:String>

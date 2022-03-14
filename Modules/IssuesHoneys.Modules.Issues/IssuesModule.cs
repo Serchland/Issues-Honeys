@@ -28,10 +28,13 @@ namespace Issues
             ViewModelLocationProvider.Register<AppFooter, AppFooterViewModel>();
             ViewModelLocationProvider.Register<AppMain, AppMainViewModel>();
             ViewModelLocationProvider.Register<AppButton, AppButtonViewModel>();
-            ViewModelLocationProvider.Register<NewIssue, NewIssueViewModel>();
+            ViewModelLocationProvider.Register<AppDrive, AppDriveViewModel>();
+            //ViewModelLocationProvider.Register<AppLabel, AppLabelViewModel>();
 
             containerRegistry.RegisterForNavigation<AppFooter, AppFooterViewModel>(RegisterForNavigation.IssueFooter);
+            containerRegistry.RegisterForNavigation<AppDrive, AppDriveViewModel>(RegisterForNavigation.IssueDrive);
             containerRegistry.RegisterForNavigation<AppMain, AppMainViewModel>(RegisterForNavigation.IssueMain);
+            //containerRegistry.RegisterForNavigation<AppLabel, AppLabelViewModel>(RegisterForNavigation.IssueMain);
             containerRegistry.RegisterForNavigation<NewIssue, NewIssueViewModel>(RegisterForNavigation.NewIssue);
 
             containerRegistry.RegisterSingleton<IIssueService, IssueService>();

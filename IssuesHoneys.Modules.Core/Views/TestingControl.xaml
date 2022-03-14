@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="IssuesHoneys.Core.Views.TestingControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks">
+    <Grid>
+        <Button Style="{StaticResource IconStyle}"
+                Foreground="Green">
+            <Button.Tag>
+                <iconPacks:PackIconRPGAwesome Kind="Honeycomb"
+                                            Width="24"
+                                            Height="24" />
+            </Button.Tag>
+        </Button>
+    </Grid>
+</UserControl>

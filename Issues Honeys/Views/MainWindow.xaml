@@ -21,6 +21,7 @@
         </DataTemplate>
 
     </mah:MetroWindow.IconTemplate>
+    
     <mah:MetroWindow.LeftWindowCommands>
         <mah:WindowCommands>
             <Button Content="Issues">
@@ -39,7 +40,7 @@
             </Button>
         </mah:WindowCommands>
     </mah:MetroWindow.LeftWindowCommands>
-
+    
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
             <Button Content="Focus">
@@ -66,6 +67,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
@@ -83,13 +85,17 @@
         </Border>
 
         <ContentControl Grid.Column="0"
-              Grid.Row="1"
-              prism:RegionManager.RegionName="{x:Static core:RegionNames.MainContentRegion}">
-
+                        Grid.Row="1"
+                        prism:RegionManager.RegionName="{x:Static core:RegionNames.DriveContentRegion}">
+        </ContentControl>
+        
+        <ContentControl Grid.Column="0"
+                        Grid.Row="2"
+                        prism:RegionManager.RegionName="{x:Static core:RegionNames.MainContentRegion}">
         </ContentControl>
 
         <StatusBar Grid.Column="0"
-                   Grid.Row="2"
+                   Grid.Row="3"
                    MinHeight="25"
                    Background="LightGray">
             <StatusBarItem>

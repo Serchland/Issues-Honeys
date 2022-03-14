@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class AppButtonViewModel : AppButtonBase
+    public class AppButtonViewModel : ViewModelBase
     {
         public AppButtonViewModel(IApplicationCommands applicationCommand) : base(applicationCommand)
         {

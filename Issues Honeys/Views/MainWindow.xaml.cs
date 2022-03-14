@@ -19,7 +19,7 @@ namespace Issues_Honeys.Views
 
         private void MetroWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            _applicationCommands.NavigationNavigateCommand.Execute(ModuleNameParams.Issues);
+            _applicationCommands.NavigateCommand.Execute(CommandParameters.Issues);
         }
     }
 }

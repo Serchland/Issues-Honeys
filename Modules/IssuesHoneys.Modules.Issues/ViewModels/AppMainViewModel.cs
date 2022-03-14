@@ -1,6 +1,7 @@
 ﻿using IssuesHoneys.Business;
 using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Core.Types;
+using IssuesHoneys.Core.Types.Base;
 using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
@@ -16,13 +17,11 @@ using System.Windows.Media;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class AppMainViewModel : BindableBase
+    public class AppMainViewModel : ViewModelBase
     {
         private IIssueService _isuesService;
-        private IApplicationCommands _applicationCommands;
-        public AppMainViewModel(IIssueService issueService, IApplicationCommands applicationCommands)
+        public AppMainViewModel(IIssueService issueService, IApplicationCommands applicationsCommands) : base(applicationsCommands)
         {
-            _applicationCommands = applicationCommands;
             _isuesService = issueService;
             Initialize();
         }
@@ -91,22 +90,20 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             if (string.IsNullOrEmpty(param))
                 throw new ArgumentException("param cant be null");
 
-            _applicationCommands.NavigationNavigateCommand.Execute(param);
+            switch (param)
+            {
+                case Captions.Cancel:
+                    NewLabelViewVisibilitity = Visibility.Collapsed;
+                    break;
 
-            //switch (param)
-            //{
-            //    case Captions.Cancel:
-            //        NewLabelViewVisibilitity = Visibility.Collapsed;
-            //        break;
+                case Captions.CreateLabel:
+                    NewLabelViewVisibilitity = Visibility.Collapsed;
+                    break;
 
-            //    case Captions.CreateLabel:
-            //        NewLabelViewVisibilitity = Visibility.Collapsed;
-            //        break;
-
-            //    case Captions.NewIssue:
-            //        NewLabelViewVisibilitity = Visibility.Visible;
-            //        break;
-            //}
+                case Captions.NewIssue:
+                    NewLabelViewVisibilitity = Visibility.Visible;
+                    break;
+            }
         }
         #endregion
     }

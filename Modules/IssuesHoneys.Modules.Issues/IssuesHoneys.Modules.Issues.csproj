@@ -63,15 +63,23 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModels\AppDriveViewModel.cs" />
     <Compile Include="ViewModels\AppFooterViewModel.cs" />
+    <Compile Include="ViewModels\AppLabelViewModel.cs" />
     <Compile Include="ViewModels\AppMainViewModel.cs" />
     <Compile Include="ViewModels\AppButtonViewModel.cs" />
     <Compile Include="ViewModels\NewIssueViewModel.cs" />
     <Compile Include="Views\AppButton.xaml.cs">
       <DependentUpon>AppButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AppDrive.xaml.cs">
+      <DependentUpon>AppDrive.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AppFooter.xaml.cs">
       <DependentUpon>AppFooter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AppLabel.xaml.cs">
+      <DependentUpon>AppLabel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AppMain.xaml.cs">
       <DependentUpon>AppMain.xaml</DependentUpon>
@@ -112,7 +120,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AppDrive.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AppFooter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AppLabel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

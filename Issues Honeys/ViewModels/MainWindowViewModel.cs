@@ -14,7 +14,7 @@ namespace Issues_Honeys.ViewModels
         public MainWindowViewModel(IApplicationCommands applicationCommand, IRegionManager regionManager)
         {
             _regionManager = regionManager;
-            applicationCommand.NavigationNavigateCommand.RegisterCommand(NavigateCommand);
+            applicationCommand.NavigateCommand.RegisterCommand(NavigateCommand);
         }
 
         private DelegateCommand<string> _navigateCommand;
@@ -28,25 +28,27 @@ namespace Issues_Honeys.ViewModels
 
             switch (parameter)
             {
-                case ModuleNameParams.Issues:
+                case CommandParameters.Issues:
                     _regionManager.RequestNavigate(RegionNames.FooterContentRegion, RegisterForNavigation.IssueFooter);
+                    _regionManager.RequestNavigate(RegionNames.DriveContentRegion, RegisterForNavigation.IssueDrive);
                     _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.IssueMain);
 
                     break;
 
-                case ModuleNameParams.Projects:
+                case CommandParameters.Projects:
                     _regionManager.RequestNavigate(RegionNames.FooterContentRegion, RegisterForNavigation.ProjectFooter);
                     _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.ProjectMain);
 
                     break;
 
-                case Captions.NewIssue:
+                case CommandParameters.NewIssue:
                     _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.NewIssue);
 
                     break;
 
                 default:
                     _regionManager.RequestNavigate(RegionNames.FooterContentRegion, RegisterForNavigation.IssueFooter);
+                    _regionManager.RequestNavigate(RegionNames.DriveContentRegion, RegisterForNavigation.IssueDrive);
                     _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.IssueMain);
 
                     break;
