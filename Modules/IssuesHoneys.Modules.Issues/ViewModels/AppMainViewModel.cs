@@ -1,6 +1,7 @@
 ﻿using IssuesHoneys.Business;
 using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Core.Types;
+using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -18,8 +19,10 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
     public class AppMainViewModel : BindableBase
     {
         private IIssueService _isuesService;
-        public AppMainViewModel(IIssueService issueService)
+        private IApplicationCommands _applicationCommands;
+        public AppMainViewModel(IIssueService issueService, IApplicationCommands applicationCommands)
         {
+            _applicationCommands = applicationCommands;
             _isuesService = issueService;
             Initialize();
         }
@@ -88,20 +91,22 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             if (string.IsNullOrEmpty(param))
                 throw new ArgumentException("param cant be null");
 
-            switch (param)
-            {
-                case Captions.Cancel:
-                    NewLabelViewVisibilitity = Visibility.Collapsed;
-                    break;
+            _applicationCommands.NavigationNavigateCommand.Execute(param);
 
-                case Captions.CreateLabel:
-                    NewLabelViewVisibilitity = Visibility.Collapsed;
-                    break;
+            //switch (param)
+            //{
+            //    case Captions.Cancel:
+            //        NewLabelViewVisibilitity = Visibility.Collapsed;
+            //        break;
 
-                case Captions.NewLabel:
-                    NewLabelViewVisibilitity = Visibility.Visible;
-                    break;
-            }
+            //    case Captions.CreateLabel:
+            //        NewLabelViewVisibilitity = Visibility.Collapsed;
+            //        break;
+
+            //    case Captions.NewIssue:
+            //        NewLabelViewVisibilitity = Visibility.Visible;
+            //        break;
+            //}
         }
         #endregion
     }

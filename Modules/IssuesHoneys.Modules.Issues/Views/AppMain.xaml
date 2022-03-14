@@ -24,26 +24,28 @@
               Margin="15,15,15,5">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition  Width="*"></ColumnDefinition>
+                <ColumnDefinition  Width="*"></ColumnDefinition>
+                <ColumnDefinition  Width="*"></ColumnDefinition>
+                <ColumnDefinition  Width="Auto"></ColumnDefinition>
+                <ColumnDefinition  Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Column="0"
+            
+            <DockPanel Grid.Column="0"
                         Grid.Row="0"
-                        Orientation="Horizontal">
+                        Grid.ColumnSpan="2">
 
                 <Label VerticalAlignment="Center"
                        Content="Filter:">
                 </Label>
 
-                <ComboBox MinWidth="200"
-                          MaxHeight="30">
-                </ComboBox>
-            </StackPanel>
+                <ComboBox MaxHeight="30" 
+                          Height="30"
+                          BorderBrush="LightGray"></ComboBox>
+            </DockPanel>
 
             <Button Grid.Column="2"
                     Grid.Row="0"
@@ -54,8 +56,7 @@
 
             <Button Grid.Column="3"
                     Grid.Row="0"
-                    Background="Transparent"
-                    Margin="5,0,0,0"
+                    Background="Transparent"                    
                     MinWidth="100"
                     HorizontalAlignment="Left"
                     Content="Millestones" />
@@ -64,11 +65,12 @@
                     Grid.Row="0"
                     Background="LightGreen"
                     Command="{Binding NewLabelVisibilityCommand}"
-                    CommandParameter="{x:Static core:Captions.NewLabel}"
+                    CommandParameter="{x:Static core:Captions.NewIssue}"
                     Click="Button_Click"
+                    Margin="30,0,0,0"
                     MinWidth="100"
                     HorizontalAlignment="Right"
-                    Content="{x:Static core:Captions.NewLabel}">
+                    Content="{x:Static core:Captions.NewIssue}">
             </Button>
         </Grid>
 

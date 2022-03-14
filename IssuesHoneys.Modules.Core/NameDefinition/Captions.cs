@@ -8,7 +8,7 @@
         public const string FirstRibbonGroupBox = "Items";
         public const string IssuesButtonCaption = "Issues";
         public const string ProjectsButtonCaption = "Project";
-        public const string NewLabel = "New label";
+        public const string NewIssue = "New issue";
         public const string Cancel = "Cancel";
         public const string CreateLabel = "Create label";
 
@@ -32,10 +32,10 @@
     {
         public const string IssueFooter = "IssueFooter";
         public const string IssueMain = "IssueMain";
-        public const string IssueRibbon = "IssueRibbon";
+        public const string NewIssue = "NewIssue";
 
         public const string ProjectFooter = "ProjectFooter";
         public const string ProjectMain = "ProjectMain";
-        public const string ProjectRibbon = "ProjectRibbon";
+        //public const string ProjectRibbon = "ProjectRibbon";
     }
 }
