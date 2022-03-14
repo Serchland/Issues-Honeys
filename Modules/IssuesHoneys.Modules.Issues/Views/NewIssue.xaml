@@ -95,7 +95,7 @@
         <Button Grid.Column="2"
                 Grid.Row="3"
                 Command="{Binding NavigateCommand}"
-                Content="Submint issue"
+                Content="Submit new issue"
                 Margin="5">
         </Button>
         
