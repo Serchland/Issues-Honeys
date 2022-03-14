@@ -40,6 +40,11 @@ namespace Issues_Honeys.ViewModels
 
                     break;
 
+                case Captions.NewIssue:
+                    _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.NewIssue);
+
+                    break;
+
                 default:
                     _regionManager.RequestNavigate(RegionNames.FooterContentRegion, RegisterForNavigation.IssueFooter);
                     _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.IssueMain);
