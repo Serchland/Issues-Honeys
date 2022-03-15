@@ -62,21 +62,21 @@ namespace IssuesHoneys.Core.Types.Base
         private string _totalLabels;
         public string TotalLabels
         {
-            get { return _labels.Count.ToString(); }
+            get { return 12.ToString(); }
             set { SetProperty(ref _totalLabels, value); }
         }
 
         private string _totalMillestones;
         public string TotalMillestones
         {
-            get { return _millestones.Count.ToString(); }
+            get { return 15.ToString(); }
             set { SetProperty(ref _totalMillestones, value); }
         }
 
         private string _totalIssues;
         public string TotalIssues
         {
-            get { return _issues.Count.ToString(); }
+            get { return 21.ToString(); }
             set { SetProperty(ref _totalIssues, value); }
         }
         #endregion

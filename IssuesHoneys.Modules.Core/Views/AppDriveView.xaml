@@ -39,7 +39,7 @@
                 Grid.Row="0"
                 Background="Transparent"
                 MinWidth="100"
-                Content="Labels"
+                Content="{Binding}"
                 BorderBrush="LightGray"
                 HorizontalAlignment="Right">
 
@@ -56,7 +56,7 @@
 
                         <TextBlock Margin="4 0 0 0"
                                    VerticalAlignment="Center"
-                                   Text="{Binding}" />
+                                   Text="Labels" />
 
 
                         <Border BorderThickness="1,1,1,1"

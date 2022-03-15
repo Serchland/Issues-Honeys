@@ -1,17 +1,10 @@
-﻿using IssuesHoneys.Business;
-using IssuesHoneys.Core.NameDefinition;
-using IssuesHoneys.Core.Types;
+﻿using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Core.Types.Base;
 using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
-using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
