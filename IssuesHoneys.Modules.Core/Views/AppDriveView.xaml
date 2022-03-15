@@ -56,7 +56,7 @@
 
                         <TextBlock Margin="4 0 0 0"
                                    VerticalAlignment="Center"
-                                   Text="Labels" />
+                                   Text="{Binding DummyText}" />
 
 
                         <Border BorderThickness="1,1,1,1"
