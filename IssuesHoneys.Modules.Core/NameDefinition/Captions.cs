@@ -1,26 +1,14 @@
 ﻿namespace IssuesHoneys.Core.NameDefinition
 {
-    public static class Captions
-    {
-        //TODO: Move to resource dictionary
-        public const string RibbonWindowTitle = "Issues Honeys";
-        public const string FirstRibbonTabItem = "Home";
-        public const string FirstRibbonGroupBox = "Items";
-        public const string IssuesButtonCaption = "Issues";
-        public const string ProjectsButtonCaption = "Project";
-        public const string NewIssue = "New issue";
-        public const string Cancel = "Cancel";
-        public const string CreateLabel = "Create label";
-
-    }
-
     public static class CommandParameters
     {
         public const string Shell = "Shell";
         public const string Projects = "Projects";
         public const string Issues = "Issues";
         public const string NewIssue = "New issue";
-        public const string Defautl = "Defautl";
+        public const string Defautl = "Default";
+        public const string Cancel = "Cancel";
+        public const string CreateLabel = "CreateLabel";
     }
 
     public static class RegionNames

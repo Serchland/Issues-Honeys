@@ -1,9 +1,6 @@
 ﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:core="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
-             xmlns:coreViews="clr-namespace:IssuesHoneys.Core.Views;assembly=IssuesHoneys.Core"
              x:Class="IssuesHoneys.Modules.Issues.Views.AppMain"
              prism:ViewModelLocator.AutoWireViewModel="True">
     
@@ -54,7 +51,7 @@
                                 Grid.Row="0"
                                 Orientation="Horizontal"
                                 VerticalAlignment="Center">
-                        <Image Source="{StaticResource Issues_32_ico}" />
+                        <!--<Image Source="{StaticResource Issues_32_ico}" />-->
                         <Label Content="8 Open (2 Closed)"
                                VerticalContentAlignment="Center" />
                     </StackPanel>
@@ -130,7 +127,7 @@
                                             Grid.ColumnSpan="2"
                                             Orientation="Horizontal">
 
-                                    <Image Source="{StaticResource Issues_32_ico}"></Image>
+                                    <!--<Image Source="{StaticResource Issues_32_ico}"></Image>-->
 
                                     <TextBlock Text="{Binding Name}"
                                                FontWeight="SemiBold"

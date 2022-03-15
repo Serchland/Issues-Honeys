@@ -1,8 +1,8 @@
 ﻿using IssuesHoneys.Core.NameDefinition;
-using IssuesHoneys.Core.Types.Base;
 using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
+using Prism.Mvvm;
 using System;
 using System.Reflection;
 using System.Windows;
@@ -10,10 +10,10 @@ using System.Windows.Media;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class AppMainViewModel : ViewModelBase
+    public class AppMainViewModel : BindableBase
     {
         private IIssueService _isuesService;
-        public AppMainViewModel(IApplicationCommands applicationsCommands, IIssueService issueService) : base(applicationsCommands, issueService)
+        public AppMainViewModel(IApplicationCommands applicationsCommands, IIssueService issueService) 
         {
             _isuesService = issueService;
             Initialize();
@@ -77,15 +77,15 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
             switch (param)
             {
-                case Captions.Cancel:
+                case CommandParameters.Cancel:
                     NewLabelViewVisibilitity = Visibility.Collapsed;
                     break;
 
-                case Captions.CreateLabel:
+                case CommandParameters.CreateLabel:
                     NewLabelViewVisibilitity = Visibility.Collapsed;
                     break;
 
-                case Captions.NewIssue:
+                case CommandParameters.NewIssue:
                     NewLabelViewVisibilitity = Visibility.Visible;
                     break;
             }

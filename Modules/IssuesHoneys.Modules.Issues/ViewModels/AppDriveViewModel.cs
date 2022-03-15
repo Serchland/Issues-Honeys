@@ -1,21 +1,30 @@
-﻿using IssuesHoneys.Core.Types.Base;
-using IssuesHoneys.Core.Types.Interfaces;
+﻿using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
+using Prism.Commands;
+using Prism.Mvvm;
+using System;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class AppDriveViewModel : ViewModelBase
+    public class AppDriveViewModel : BindableBase
     {
-        public AppDriveViewModel(IApplicationCommands applicationCommands, IIssueService issueService) : base (applicationCommands, issueService)
+        private IApplicationCommands _applicationCommands;
+
+        public AppDriveViewModel(IApplicationCommands applicationCommands) 
         {
-            _dummyText = "LABELS";
+            _applicationCommands = applicationCommands;
         }
 
-        private string _dummyText;
-        public string DummyText
+        private DelegateCommand<string> _navigateCommand;
+        public DelegateCommand<string> NavigateCommand =>
+            _navigateCommand ?? (_navigateCommand = new DelegateCommand<string>(ExecuteNavigateCommand));
+
+        void ExecuteNavigateCommand(string param)
         {
-            get { return _dummyText; }
-            set { SetProperty(ref _dummyText, value); }
+            if (string.IsNullOrEmpty(param))
+                throw new ArgumentNullException("Param cant be null");
+
+            _applicationCommands.NavigateCommand.Execute(param);
         }
     }
 }

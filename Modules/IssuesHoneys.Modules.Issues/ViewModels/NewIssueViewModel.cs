@@ -1,17 +1,11 @@
-﻿using IssuesHoneys.Core.Types.Base;
-using IssuesHoneys.Core.Types.Interfaces;
-using IssuesHoneys.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using IssuesHoneys.Core.Types.Interfaces;
+using Prism.Mvvm;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class NewIssueViewModel : ViewModelBase
+    public class NewIssueViewModel : BindableBase
     {
-        public NewIssueViewModel(IApplicationCommands applicationCommands, IIssueService issuesService) : base(applicationCommands, issuesService)
+        public NewIssueViewModel(IApplicationCommands applicationCommands)
         {
 
         }

@@ -30,9 +30,7 @@ namespace IssuesHoneys.Modules.Projects.ViewModels
 
         void ExecuteTestCommand()
         {
-            DummyClass c = new DummyClass();
-            c.MyDummyProperty = c.MyDummyProperty + 3;
-            MessageBox.Show(c.MyDummyProperty.ToString());
+            MessageBox.Show("TextCommand result");
         }
     }
 }
