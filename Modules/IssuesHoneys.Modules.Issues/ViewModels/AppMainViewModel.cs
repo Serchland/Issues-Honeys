@@ -20,7 +20,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
     public class AppMainViewModel : ViewModelBase
     {
         private IIssueService _isuesService;
-        public AppMainViewModel(IIssueService issueService, IApplicationCommands applicationsCommands) : base(applicationsCommands)
+        public AppMainViewModel(IApplicationCommands applicationsCommands, IIssueService issueService) : base(applicationsCommands, issueService)
         {
             _isuesService = issueService;
             Initialize();
@@ -30,7 +30,6 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         {
             _newLabelViewVisibility = Visibility.Collapsed;
             _brush = Brushes.Gray;
-            Issues = _isuesService.GetIssues();
         }
 
         #region "Properties"
@@ -49,13 +48,6 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
                     BrushString = _brush.ToString();
                     SetProperty(ref _brush, value); 
                 }
-        }
-
-        private List<Issue> _issues;
-        public List<Issue> Issues
-        {
-            get { return _issues; }
-            set { SetProperty(ref _issues, value); }
         }
 
         private Visibility _newLabelViewVisibility;

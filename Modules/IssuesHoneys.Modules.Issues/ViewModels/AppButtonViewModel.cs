@@ -1,6 +1,7 @@
 ﻿using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Core.Types.Base;
 using IssuesHoneys.Core.Types.Interfaces;
+using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -13,7 +14,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 {
     public class AppButtonViewModel : ViewModelBase
     {
-        public AppButtonViewModel(IApplicationCommands applicationCommand) : base(applicationCommand)
+        public AppButtonViewModel(IApplicationCommands applicationCommand, IIssueService issueService) : base(applicationCommand, issueService)
         {
         }
     }
