@@ -67,7 +67,6 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
@@ -86,16 +85,11 @@
 
         <ContentControl Grid.Column="0"
                         Grid.Row="1"
-                        prism:RegionManager.RegionName="{x:Static core:RegionNames.DriveContentRegion}">
-        </ContentControl>
-        
-        <ContentControl Grid.Column="0"
-                        Grid.Row="2"
                         prism:RegionManager.RegionName="{x:Static core:RegionNames.MainContentRegion}">
         </ContentControl>
 
         <StatusBar Grid.Column="0"
-                   Grid.Row="3"
+                   Grid.Row="2"
                    MinHeight="25"
                    Background="LightGray">
             <StatusBarItem>

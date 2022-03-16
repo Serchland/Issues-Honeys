@@ -1,9 +1,11 @@
-﻿using IssuesHoneys.Core.NameDefinition;
+﻿using IssuesHoneys.Business;
+using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
+using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
@@ -12,9 +14,11 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 {
     public class AppMainViewModel : BindableBase
     {
+        private IApplicationCommands _applicationCommands;
         private IIssueService _isuesService;
         public AppMainViewModel(IApplicationCommands applicationsCommands, IIssueService issueService) 
         {
+            _applicationCommands = applicationsCommands;
             _isuesService = issueService;
             Initialize();
         }
@@ -23,9 +27,19 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         {
             _newLabelViewVisibility = Visibility.Collapsed;
             _brush = Brushes.Gray;
+
+            Issues = new ObservableCollection<Issue>(_isuesService.GetIssues());
         }
 
         #region "Properties"
+
+        private ObservableCollection<Issue> _issues;
+        public ObservableCollection<Issue> Issues
+        {
+            get { return _issues; }
+            set { SetProperty(ref _issues, value); }
+        }
+
         private string _brushString;
         public string BrushString
         {
@@ -66,16 +80,28 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             Brush = (Brush)properties[random].GetValue(null, null);
         }
 
+        private DelegateCommand<string> _navigateCommand;
+        public DelegateCommand<string> NavigateCommand =>
+            _navigateCommand ?? (_navigateCommand = new DelegateCommand<string>(ExecuteNavigateCommand));
+
+        void ExecuteNavigateCommand(string parameter)
+        {
+            if (string.IsNullOrEmpty(parameter))
+                throw new ArgumentNullException("parameter cant be null");
+
+            _applicationCommands.NavigateCommand.Execute(parameter);
+        }
+
         private DelegateCommand<string> _newLabelVisibilityCommand;
         public DelegateCommand<string> NewLabelVisibilityCommand =>
             _newLabelVisibilityCommand ?? (_newLabelVisibilityCommand = new DelegateCommand<string>(ExecuteNewLabelVisibilityCommand));
 
-        void ExecuteNewLabelVisibilityCommand(string param)
+        void ExecuteNewLabelVisibilityCommand(string parameter)
         {
-            if (string.IsNullOrEmpty(param))
-                throw new ArgumentException("param cant be null");
+            if (string.IsNullOrEmpty(parameter))
+                throw new ArgumentException("parameter cant be null");
 
-            switch (param)
+            switch (parameter)
             {
                 case CommandParameters.Cancel:
                     NewLabelViewVisibilitity = Visibility.Collapsed;
