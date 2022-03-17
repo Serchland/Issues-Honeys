@@ -64,7 +64,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ViewModels\AppFooterViewModel.cs" />
-    <Compile Include="ViewModels\AppLabelViewModel.cs" />
+    <Compile Include="ViewModels\LabelsViewModel.cs" />
     <Compile Include="ViewModels\IssuesViewModel.cs" />
     <Compile Include="ViewModels\AppButtonViewModel.cs" />
     <Compile Include="ViewModels\NewIssueViewModel.cs" />

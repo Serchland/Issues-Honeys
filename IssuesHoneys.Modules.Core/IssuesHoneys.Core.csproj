@@ -184,8 +184,8 @@
     <Compile Include="Views\ButtonLabels.xaml.cs">
       <DependentUpon>ButtonLabels.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ButtonsMillestones.xaml.cs">
-      <DependentUpon>ButtonsMillestones.xaml</DependentUpon>
+    <Compile Include="Views\ButtonMilestones.xaml.cs">
+      <DependentUpon>ButtonMilestones.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FooterView.xaml.cs">
       <DependentUpon>FooterView.xaml</DependentUpon>
@@ -214,7 +214,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ButtonsMillestones.xaml">
+    <Page Include="Views\ButtonMilestones.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

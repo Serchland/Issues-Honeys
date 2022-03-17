@@ -18,9 +18,9 @@ namespace IssuesHoneys.Core.Views
     /// <summary>
     /// Lógica de interacción para ButtonsMillestones.xaml
     /// </summary>
-    public partial class ButtonsMillestones : Button
+    public partial class ButtonMilestones : Button
     {
-        public ButtonsMillestones()
+        public ButtonMilestones()
         {
             InitializeComponent();
         }

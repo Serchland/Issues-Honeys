@@ -25,14 +25,14 @@ namespace Issues
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            ViewModelLocationProvider.Register<AppButton, AppButtonViewModel>();
             ViewModelLocationProvider.Register<AppFooter, AppFooterViewModel>();
             ViewModelLocationProvider.Register<IssuesView, IssuesViewModel>();
-            ViewModelLocationProvider.Register<AppButton, AppButtonViewModel>();
-            //ViewModelLocationProvider.Register<AppLabel, AppLabelViewModel>();
+            ViewModelLocationProvider.Register<LabelsView, LabelsViewModel>();
 
             containerRegistry.RegisterForNavigation<AppFooter, AppFooterViewModel>(RegisterForNavigation.IssueFooter);
-            containerRegistry.RegisterForNavigation<IssuesView, IssuesViewModel>(RegisterForNavigation.IssueMain);
-            //containerRegistry.RegisterForNavigation<AppLabel, AppLabelViewModel>(RegisterForNavigation.IssueMain);
+            containerRegistry.RegisterForNavigation<IssuesView, IssuesViewModel>(RegisterForNavigation.IssuesMain);
+            containerRegistry.RegisterForNavigation<LabelsView, LabelsViewModel>(RegisterForNavigation.LabelsMain);
             containerRegistry.RegisterForNavigation<NewIssue, NewIssueViewModel>(RegisterForNavigation.NewIssue);
 
             containerRegistry.RegisterSingleton<IIssueService, IssueService>();

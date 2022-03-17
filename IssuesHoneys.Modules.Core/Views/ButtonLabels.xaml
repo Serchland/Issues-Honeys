@@ -2,13 +2,16 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:iconpacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:coreNameDef="clr-namespace:IssuesHoneys.Core.NameDefinition"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         MinWidth="100"
         Style="{DynamicResource MyIconStyle}"
         HorizontalAlignment="Right"
-        Content="{StaticResource ButtonMillestoneCaption}"
-        controls:ControlsHelper.FocusBorderBrush="Orange">
-
+        Content="{StaticResource ButtonLabelCaption}"
+        controls:ControlsHelper.FocusBorderBrush="Orange"
+        Command="{Binding NavigateCommand}"
+        CommandParameter="{x:Static coreNameDef:CommandParameters.Labels}">
+    
     <Button.Tag>
         <iconpacks:PackIconFeatherIcons Width="18"
                                         Height="18"

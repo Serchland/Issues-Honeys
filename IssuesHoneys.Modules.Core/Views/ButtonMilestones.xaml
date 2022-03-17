@@ -1,13 +1,16 @@
-﻿<Button x:Class="IssuesHoneys.Core.Views.ButtonsMillestones"
+﻿<Button x:Class="IssuesHoneys.Core.Views.ButtonMilestones"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:iconpacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:coreNameDef="clr-namespace:IssuesHoneys.Core.NameDefinition"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         MinWidth="100"
         Style="{DynamicResource MyIconStyle}"
         HorizontalAlignment="Right"
         Content="{StaticResource ButtonMillestoneCaption}"
-        controls:ControlsHelper.FocusBorderBrush="Orange">
+        controls:ControlsHelper.FocusBorderBrush="Orange"
+        Command="{Binding NavigateCommans}"
+        CommandParameter="{x:Static coreNameDef:CommandParameters.Milestones}">
 
     <Button.Tag>
         <iconpacks:PackIconUnicons Width="18"

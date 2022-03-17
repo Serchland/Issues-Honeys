@@ -3,20 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:iconpacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:prism="http://prismlibrary.com/"
-             xmlns:core="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
+             xmlns:coreNameDef="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
+             xmlns:coreViews="clr-namespace:IssuesHoneys.Core.Views;assembly=IssuesHoneys.Core"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-
         <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <coreViews:ButtonLabels Grid.Column="0"
+                                    Grid.Row="0"
+                                   >
+            </coreViews:ButtonLabels>
+
+            <coreViews:ButtonMilestones Grid.Column="1"
+                                    Grid.Row="0"
+                                        >
+
+            </coreViews:ButtonMilestones>
+
+        </Grid>
+        
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -134,7 +156,7 @@
                     Content="{StaticResource ButtonCancelCaption}"
                     Command="{Binding NewLabelVisibilityCommand}"
                     HorizontalAlignment="Right"
-                    CommandParameter="{x:Static core:CommandParameters.Cancel}" />
+                    CommandParameter="{x:Static coreNameDef:CommandParameters.Cancel}" />
 
             <Button Grid.Column="6"
                     Grid.Row="2"
@@ -142,7 +164,7 @@
                     Margin="5,0,0,0"
                     HorizontalAlignment="Left"
                     Command="{Binding NewLabelVisibilityCommand}"
-                    CommandParameter="{x:Static core:CommandParameters.CreateLabel}" />
+                    CommandParameter="{x:Static coreNameDef:CommandParameters.CreateLabel}" />
         </Grid>
     </Grid>
     

@@ -30,14 +30,23 @@ namespace Issues_Honeys.ViewModels
             {
                 case CommandParameters.Issues:
                     _regionManager.RequestNavigate(RegionNames.FooterContentRegion, RegisterForNavigation.IssueFooter);
-                    _regionManager.RequestNavigate(RegionNames.DriveContentRegion, RegisterForNavigation.IssueDrive);
-                    _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.IssueMain);
+                    _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.IssuesMain);
 
                     break;
 
                 case CommandParameters.Projects:
                     _regionManager.RequestNavigate(RegionNames.FooterContentRegion, RegisterForNavigation.ProjectFooter);
                     _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.ProjectMain);
+
+                    break;
+
+                case CommandParameters.Labels:
+                    _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.LabelsMain);
+
+                    break;
+
+                case CommandParameters.Milestones:
+                    _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.MilestonesMain);
 
                     break;
 
@@ -48,8 +57,7 @@ namespace Issues_Honeys.ViewModels
 
                 default:
                     _regionManager.RequestNavigate(RegionNames.FooterContentRegion, RegisterForNavigation.IssueFooter);
-                    _regionManager.RequestNavigate(RegionNames.DriveContentRegion, RegisterForNavigation.IssueDrive);
-                    _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.IssueMain);
+                    _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.IssuesMain);
 
                     break;
             }
