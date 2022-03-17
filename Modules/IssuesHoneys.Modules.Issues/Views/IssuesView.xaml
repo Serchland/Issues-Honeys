@@ -3,12 +3,12 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:iconpacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             xmlns:core="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
-             x:Class="IssuesHoneys.Modules.Issues.Views.AppMain"
+             xmlns:coreNameDef="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
+             xmlns:coreViews="clr-namespace:IssuesHoneys.Core.Views;assembly=IssuesHoneys.Core"
+             x:Class="IssuesHoneys.Modules.Issues.Views.IssuesView"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <Grid Margin="15">
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
@@ -41,35 +41,13 @@
                           VerticalAlignment="Center"></ComboBox>
             </DockPanel>
 
-            <Button Grid.Column="2"
-                    Grid.Row="0"
-                    MinWidth="100"
-                    Style="{DynamicResource MyIconStyle}"
-                    HorizontalAlignment="Right"
-                    Content="{StaticResource ButtonLabelCaption}"
-                    controls:ControlsHelper.FocusBorderBrush="Orange">
-                <Button.Tag>
-                    <iconpacks:PackIconFeatherIcons Width="18"
-                                                    Height="18"
-                                                    Kind="Tag"></iconpacks:PackIconFeatherIcons>
-                </Button.Tag>
-                
-            </Button>
+            <coreViews:ButtonLabels Grid.Column="2"
+                                    Grid.Row="0">
+            </coreViews:ButtonLabels>
 
-            <Button Grid.Column="3"
-                    Grid.Row="0"
-                    MinWidth="100"
-                    Style="{DynamicResource MyIconStyle}"
-                    HorizontalAlignment="Left"
-                    Content="{StaticResource ButtonMillestoneCaption}"
-                    controls:ControlsHelper.FocusBorderBrush="Orange">
-                <Button.Tag>
-                    <iconpacks:PackIconUnicons Width="18"
-                                               Height="18"
-                                               Foreground="Gray"
-                                               Kind="SignRight" />
-                </Button.Tag>
-            </Button>
+            <coreViews:ButtonsMillestones Grid.Column="3"
+                                          Grid.Row="0">
+            </coreViews:ButtonsMillestones>
 
             <!--Click="Button_Click"-->
             <Button Grid.Column="4"
@@ -77,7 +55,7 @@
                     BorderBrush="LightGray"
                     Background="LightGreen"
                     Command="{Binding NavigateCommand}"
-                    CommandParameter="{x:Static core:CommandParameters.NewIssue}"
+                    CommandParameter="{x:Static coreNameDef:CommandParameters.NewIssue}"
                     Margin="30,0,0,0"
                     MinWidth="100"
                     HorizontalAlignment="Right"

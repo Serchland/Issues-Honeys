@@ -12,11 +12,11 @@ using System.Windows.Media;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class AppMainViewModel : BindableBase
+    public class IssuesViewModel : BindableBase
     {
         private IApplicationCommands _applicationCommands;
         private IIssueService _isuesService;
-        public AppMainViewModel(IApplicationCommands applicationsCommands, IIssueService issueService) 
+        public IssuesViewModel(IApplicationCommands applicationsCommands, IIssueService issueService) 
         {
             _applicationCommands = applicationsCommands;
             _isuesService = issueService;

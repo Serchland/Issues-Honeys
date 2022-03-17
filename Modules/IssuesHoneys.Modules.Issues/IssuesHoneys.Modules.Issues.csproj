@@ -65,7 +65,7 @@
     </Compile>
     <Compile Include="ViewModels\AppFooterViewModel.cs" />
     <Compile Include="ViewModels\AppLabelViewModel.cs" />
-    <Compile Include="ViewModels\AppMainViewModel.cs" />
+    <Compile Include="ViewModels\IssuesViewModel.cs" />
     <Compile Include="ViewModels\AppButtonViewModel.cs" />
     <Compile Include="ViewModels\NewIssueViewModel.cs" />
     <Compile Include="Views\AppButton.xaml.cs">
@@ -74,11 +74,11 @@
     <Compile Include="Views\AppFooter.xaml.cs">
       <DependentUpon>AppFooter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AppLabel.xaml.cs">
-      <DependentUpon>AppLabel.xaml</DependentUpon>
+    <Compile Include="Views\LabelsView.xaml.cs">
+      <DependentUpon>LabelsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AppMain.xaml.cs">
-      <DependentUpon>AppMain.xaml</DependentUpon>
+    <Compile Include="Views\IssuesView.xaml.cs">
+      <DependentUpon>IssuesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NewIssue.xaml.cs">
       <DependentUpon>NewIssue.xaml</DependentUpon>
@@ -120,11 +120,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AppLabel.xaml">
+    <Page Include="Views\LabelsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AppMain.xaml">
+    <Page Include="Views\IssuesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

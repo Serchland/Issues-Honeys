@@ -3,11 +3,11 @@
 namespace IssuesHoneys.Core.Views
 {
     /// <summary>
-    /// Lógica de interacción para AppMain.xaml
+    /// Lógica de interacción para ButtonLabels.xaml
     /// </summary>
-    public partial class AppDriveView : UserControl
+    public partial class ButtonLabels : Button
     {
-        public AppDriveView()
+        public ButtonLabels()
         {
             InitializeComponent();
         }

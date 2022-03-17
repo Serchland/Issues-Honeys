@@ -5,9 +5,9 @@ namespace IssuesHoneys.Modules.Issues.Views
     /// <summary>
     /// Lógica de interacción para AppMain.xaml
     /// </summary>
-    public partial class AppMain : UserControl
+    public partial class IssuesView : UserControl
     {
-        public AppMain()
+        public IssuesView()
         {
             InitializeComponent();
         }
