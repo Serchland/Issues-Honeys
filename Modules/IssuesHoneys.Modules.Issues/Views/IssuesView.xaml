@@ -63,17 +63,11 @@
                     controls:ControlsHelper.FocusBorderBrush="Orange">
             </Button>
         </Grid>
-        
-        <Grid Grid.Column="0" Grid.Row="1">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
 
-            <Grid Grid.Column="0"
-                  Grid.Row="0"
+        <Grid Grid.Column="0"
+              Grid.Row="1">
+
+            <Grid Grid.Row="0"
                   Margin="0">
 
                 <Grid.ColumnDefinitions>
@@ -112,6 +106,12 @@
                                     Orientation="Horizontal"
                                     VerticalAlignment="Center">
 
+                            <Label VerticalContentAlignment="Center">
+                                <iconpacks:Codicons Width="18"
+                                                    Height="18"
+                                                    Kind="Issues" />
+                            </Label>
+
                             <Label Content="8 Open (2 Closed)"
                                    VerticalContentAlignment="Center" />
                         </StackPanel>
@@ -129,26 +129,21 @@
                             </Grid.ColumnDefinitions>
 
                             <ComboBox Grid.Column="0"
-                                   
                                       VerticalAlignment="Center" />
 
                             <ComboBox Grid.Column="1"
-                                  
                                       Margin="5,0,0,0"
                                       VerticalAlignment="Center" />
 
                             <ComboBox Grid.Column="2"
-                                    
                                       Margin="5,0,0,0"
                                       VerticalAlignment="Center" />
 
                             <ComboBox Grid.Column="3"
-                     
                                       Margin="5,0,0,0"
                                       VerticalAlignment="Center" />
 
                             <ComboBox Grid.Column="4"
-                                      
                                       Margin="5,0,0,0"
                                       VerticalAlignment="Center" />
 
@@ -156,16 +151,17 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Row="1"
-                        Grid.ColumnSpan="5"
-                        BorderThickness="0.5"
-                        BorderBrush="{StaticResource MainBorderBrush}"
-                        Margin="5,0,5,5">
+                <ListView x:Name="PART_ListIssues"
+                          Grid.Row="1"
+                          Grid.ColumnSpan="5"
+                          BorderThickness="1 0 1 1"
+                          BorderBrush="{StaticResource MainBorderBrush}"
+                          Margin="5,0,5,5"
+                          ItemsSource="{Binding Issues}">
 
-                    <ListView x:Name="PART_ListIssues"
-                              ItemsSource="{Binding Issues}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="0.5">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -183,11 +179,14 @@
 
                                     <StackPanel Grid.Column="1"
                                                 Grid.Row="0"
-                                                Margin="0,0,0,0"
                                                 Grid.ColumnSpan="2"
                                                 Orientation="Horizontal">
 
-                                        <!--<Image Source="{StaticResource Issues_32_ico}"></Image>-->
+                                        <Label VerticalContentAlignment="Center">
+                                            <iconpacks:Codicons Width="18"
+                                                                Height="18"
+                                                                Kind="Issues" />
+                                        </Label>
 
                                         <TextBlock Text="{Binding Name}"
                                                    FontWeight="SemiBold"
@@ -199,11 +198,13 @@
 
                                         <ListBox ItemsSource="{Binding Labels}"
                                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
                                             <ListBox.ItemsPanel>
                                                 <ItemsPanelTemplate>
-                                                    <WrapPanel IsItemsHost="True" />
+                                                    <WrapPanel IsItemsHost="True"></WrapPanel>
                                                 </ItemsPanelTemplate>
                                             </ListBox.ItemsPanel>
+
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate>
                                                     <Border BorderThickness="1"
@@ -214,19 +215,20 @@
                                                             MinWidth="50"
                                                             CornerRadius="10"
                                                             Background="{Binding Brush}">
+
                                                         <TextBlock Text="{Binding Name}"
                                                                    HorizontalAlignment="Center"
                                                                    TextAlignment="Center"
                                                                    TextWrapping="WrapWithOverflow"
                                                                    Foreground="White"
                                                                    FontSize="10"
-                                                                   Padding="5,0,5,0" />
+                                                                   Padding="5,0,5,0">
+                                                        </TextBlock>
                                                     </Border>
                                                 </DataTemplate>
                                             </ListBox.ItemTemplate>
                                         </ListBox>
                                     </StackPanel>
-
 
                                     <StackPanel Grid.Column="1"
                                                 Grid.Row="1"
@@ -239,13 +241,11 @@
                                         <TextBlock Text="{Binding Description}" />
                                     </StackPanel>
                                 </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Border>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </Grid>
         </Grid>
-        
-        
     </Grid>
 </UserControl>
