@@ -244,6 +244,22 @@
                             </Border>
                         </DataTemplate>
                     </ListView.ItemTemplate>
+
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="BorderThickness"
+                                    Value="0,0,0,0.5" />
+                            <Setter Property="BorderBrush"
+                                    Value="{StaticResource MainBorderBrush}" />
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected"
+                                         Value="True">
+                                    <Setter Property="Foreground"
+                                            Value="White" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
                 </ListView>
             </Grid>
         </Grid>
