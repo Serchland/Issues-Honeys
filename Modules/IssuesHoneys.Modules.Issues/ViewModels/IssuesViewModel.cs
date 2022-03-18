@@ -40,6 +40,13 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             set { SetProperty(ref _issues, value); }
         }
 
+        private Issue _selectedItem;
+        public Issue SelectedItem
+        {
+            get { return _selectedItem; }
+            set { SetProperty(ref _selectedItem, value); }
+        }
+
         private string _brushString;
         public string BrushString
         {

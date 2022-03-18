@@ -62,9 +62,8 @@
         </Setter>
     </Style>
     <!-- Texts
-    <system:String x:Key="RibbonWindowTitle">Issues Honeys</system:String>
-    <system:String x:Key="FirstRibbonTabItem">Home</system:String>
-    <system:String x:Key="FirstRibbonGroupBox">Items</system:String>
-    <system:String x:Key="IssuesButtonCaption">Issues</system:String>
-    <system:String x:Key="ProjectsButtonCaption">Project</system:String>-->
+    <system:String x:Key="RibbonWindowTitle">Issues Honeys</system:String> -->
+    
+    <!--Converters-->
+
 </ResourceDictionary>

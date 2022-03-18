@@ -5,8 +5,13 @@
              xmlns:iconpacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:coreNameDef="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
              xmlns:coreViews="clr-namespace:IssuesHoneys.Core.Views;assembly=IssuesHoneys.Core"
+             xmlns:converters="clr-namespace:IssuesHoneys.Modules.Issues.Views.Converters"
              x:Class="IssuesHoneys.Modules.Issues.Views.IssuesView"
              prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <UserControl.Resources>
+        <converters:StateColorConverter x:Key="StateColorConverterKey"></converters:StateColorConverter>
+    </UserControl.Resources>
 
     <Grid Margin="15">
         <Grid.ColumnDefinitions>
@@ -70,6 +75,7 @@
             <Grid Grid.Row="0"
                   Margin="0">
 
+                
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
@@ -157,12 +163,13 @@
                           BorderThickness="1 0 1 1"
                           BorderBrush="{StaticResource MainBorderBrush}"
                           Margin="5,0,5,5"
+                          SelectedItem="{Binding SelectedItem}"
                           ItemsSource="{Binding Issues}">
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Border BorderThickness="0.5">
-                                <Grid>
+                                <Grid x:Name="PART_GridItemTemplate">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -182,7 +189,8 @@
                                                 Grid.ColumnSpan="2"
                                                 Orientation="Horizontal">
 
-                                        <Label VerticalContentAlignment="Center">
+                                        <Label VerticalContentAlignment="Center"
+                                               Foreground="{Binding Path=State, Converter={StaticResource StateColorConverterKey}}">
                                             <iconpacks:Codicons Width="18"
                                                                 Height="18"
                                                                 Kind="Issues" />
@@ -197,36 +205,58 @@
                                                    Padding="0,8,10,0" />
 
                                         <ListBox ItemsSource="{Binding Labels}"
+                                                 Background="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=Background}"
                                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
                                             <ListBox.ItemsPanel>
                                                 <ItemsPanelTemplate>
-                                                    <WrapPanel IsItemsHost="True"></WrapPanel>
+                                                    <WrapPanel IsItemsHost="True"
+                                                               x:Name="ListBox_Wrap"></WrapPanel>
                                                 </ItemsPanelTemplate>
                                             </ListBox.ItemsPanel>
 
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate>
                                                     <Border BorderThickness="1"
-                                                            BorderBrush="LightGray"
-                                                            VerticalAlignment="Center"
-                                                            Margin="0,8,0,0"
-                                                            Height="18"
-                                                            MinWidth="50"
-                                                            CornerRadius="10"
-                                                            Background="{Binding Brush}">
+                                                                BorderBrush="LightGray"
+                                                                VerticalAlignment="Center"
+                                                                Margin="0,8,0,0"
+                                                                Height="18"
+                                                                MinWidth="50"
+                                                                CornerRadius="10"
+                                                                Background="{Binding Brush}">
 
-                                                        <TextBlock Text="{Binding Name}"
-                                                                   HorizontalAlignment="Center"
-                                                                   TextAlignment="Center"
-                                                                   TextWrapping="WrapWithOverflow"
-                                                                   Foreground="White"
-                                                                   FontSize="10"
-                                                                   Padding="5,0,5,0">
-                                                        </TextBlock>
-                                                    </Border>
+                                                            <TextBlock Text="{Binding Name}"
+                                                                       HorizontalAlignment="Center"
+                                                                       TextAlignment="Center"
+                                                                       TextWrapping="WrapWithOverflow"
+                                                                       Foreground="White"
+                                                                       FontSize="10"
+                                                                       Padding="5,0,5,0">
+                                                            </TextBlock>
+                                                        </Border>
+                                        
                                                 </DataTemplate>
+
+                                                
                                             </ListBox.ItemTemplate>
+
+                                            <ListBox.ItemContainerStyle>
+                                                <Style TargetType="ListBoxItem">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsSelected"
+                                                                 Value="true">
+                                                            <Setter Property="Background"
+                                                                    Value="Transparent" />
+                                                        </Trigger>
+                                                        <Trigger Property="IsMouseOver"
+                                                                 Value="true">
+                                                            <Setter Property="Background"
+                                                                    Value="Transparent" />
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ListBox.ItemContainerStyle>
                                         </ListBox>
                                     </StackPanel>
 
@@ -242,6 +272,8 @@
                                     </StackPanel>
                                 </Grid>
                             </Border>
+
+
                         </DataTemplate>
                     </ListView.ItemTemplate>
 
@@ -251,14 +283,17 @@
                                     Value="0,0,0,0.5" />
                             <Setter Property="BorderBrush"
                                     Value="{StaticResource MainBorderBrush}" />
+
                             <Style.Triggers>
-                                <Trigger Property="IsSelected"
+                                <Trigger Property="IsMouseOver"
                                          Value="True">
-                                    <Setter Property="Foreground"
-                                            Value="White" />
+                                    <Setter Property="Background"
+                                            Value="Transparent" />
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
+
+                       
                     </ListView.ItemContainerStyle>
                 </ListView>
             </Grid>
