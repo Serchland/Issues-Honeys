@@ -27,15 +27,15 @@
 
         <Setter Property="BorderBrush"
                 Value="LightGray"></Setter>
-        
+
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal"
                                 DataContext="{Binding RelativeSource={RelativeSource AncestorType=Button}}">
 
-                        <Rectangle Fill="{Binding Foreground}" 
-                                   Height="18" 
+                        <Rectangle Fill="{Binding Foreground}"
+                                   Height="18"
                                    Width="18"
                                    Margin="5 0 0 0"
                                    VerticalAlignment="Center">
@@ -61,6 +61,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
     <!-- Texts
     <system:String x:Key="RibbonWindowTitle">Issues Honeys</system:String> -->
     
