@@ -168,8 +168,12 @@
                           ItemsSource="{Binding Issues}">
 
                     <ListView.ItemContainerStyle>
-                        
                         <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="BorderThickness"
+                                    Value="0,0,0,0.5" />
+                            <Setter Property="BorderBrush"
+                                    Value="LightGray"/>
+                            
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type ListViewItem}">
@@ -223,7 +227,7 @@
                                                         Value="#3D26A0DA" />
                                                 <Setter Property="BorderBrush"
                                                         TargetName="Bd"
-                                                        Value="#FF26A0DA" />
+                                                        Value="#3D26A0DA" />
                                             </MultiTrigger>
                                             <Trigger Property="IsEnabled"
                                                      Value="False">
@@ -235,7 +239,6 @@
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
-
                         </Style>
                     </ListView.ItemContainerStyle>
 
@@ -255,7 +258,10 @@
 
                                     <CheckBox Grid.Column="0"
                                               Grid.Row="0"
-                                              VerticalAlignment="Center"></CheckBox>
+                                              VerticalAlignment="Center"
+                                              IsChecked="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=IsSelected}">
+                                        
+                                    </CheckBox>
 
                                     <StackPanel Grid.Column="1"
                                                 Grid.Row="0"
