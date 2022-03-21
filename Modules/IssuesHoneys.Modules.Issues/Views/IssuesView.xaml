@@ -410,13 +410,14 @@
                                         <TextBlock Text="{Binding CrtnDate, StringFormat=opened on {0:dddd, MMMM dd}}" />
                                         <TextBlock Text=" "></TextBlock>
                                         <TextBlock Text="{Binding Author, StringFormat=by {0}}" />
-                                        <TextBlock Text=" "></TextBlock>
+                                        <TextBlock Text="  "></TextBlock>
                                         <Label Foreground="Gray" Padding="0 0 0 10">
                                             <iconpacks:PackIconUnicons Width="16"
                                                                        Height="16"
                                                                        Kind="SignRight">
                                             </iconpacks:PackIconUnicons>
                                         </Label>
+                                        <TextBlock Text="Sprint" />
                                     </StackPanel>
                                 </Grid>
                             </Border>

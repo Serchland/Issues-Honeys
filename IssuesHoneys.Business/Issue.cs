@@ -64,8 +64,8 @@ namespace IssuesHoneys.Business
             set { SetProperty(ref _projects, value); }
         }
 
-        private List<int> _millestones;
-        public List<int> Millestones
+        private List<Millestone> _millestones;
+        public List<Millestone> Millestones
         {
             get { return _millestones; }
             set { SetProperty(ref _millestones, value); }
