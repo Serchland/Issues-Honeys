@@ -28,6 +28,13 @@ namespace IssuesHoneys.Business
             set { SetProperty(ref _description, value); }
         }
 
+        private DateTime _crtnDate;
+        public DateTime CrtnDate
+        {
+            get { return _crtnDate; }
+            set { SetProperty(ref _crtnDate, value); }
+        }
+
         private State _state;
         public State State
         {
@@ -41,6 +48,7 @@ namespace IssuesHoneys.Business
             get { return _author; }
             set { SetProperty(ref _author, value); }
         }
+
 
         private List<Label> _labels;
         public List<Label> Labels

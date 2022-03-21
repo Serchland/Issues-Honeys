@@ -262,7 +262,6 @@
                                               Grid.Row="0"
                                               VerticalAlignment="Center"
                                               IsChecked="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=IsSelected}">
-                                        
                                     </CheckBox>
 
                                     <StackPanel Grid.Column="1"
@@ -403,11 +402,21 @@
                                                 Grid.Row="1"
                                                 Grid.RowSpan="2"
                                                 Orientation="Horizontal"
-                                                Margin="35,0,0,0"
+                                                Margin="10 0 0 0"
                                                 VerticalAlignment="Top">
 
-                                        <TextBlock Text="{Binding Id}" />
-                                        <TextBlock Text="{Binding Description}" />
+                                        <TextBlock Text="{Binding Id, StringFormat=#{0}}" />
+                                        <TextBlock Text=" "></TextBlock>
+                                        <TextBlock Text="{Binding CrtnDate, StringFormat=opened on {0:dddd, MMMM dd}}" />
+                                        <TextBlock Text=" "></TextBlock>
+                                        <TextBlock Text="{Binding Author, StringFormat=by {0}}" />
+                                        <TextBlock Text=" "></TextBlock>
+                                        <Label Foreground="Gray" Padding="0 0 0 10">
+                                            <iconpacks:PackIconUnicons Width="16"
+                                                                       Height="16"
+                                                                       Kind="SignRight">
+                                            </iconpacks:PackIconUnicons>
+                                        </Label>
                                     </StackPanel>
                                 </Grid>
                             </Border>
