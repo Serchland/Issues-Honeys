@@ -49,11 +49,13 @@
             </DockPanel>
 
             <coreViews:ButtonLabels Grid.Column="2"
-                                    Grid.Row="0">
+                                    Grid.Row="0"
+                                    MinWidth="145">
             </coreViews:ButtonLabels>
 
             <coreViews:ButtonMilestones Grid.Column="3"
-                                        Grid.Row="0">
+                                        Grid.Row="0"
+                                        MinWidth="145">
             </coreViews:ButtonMilestones>
 
             <!--Click="Button_Click"-->
@@ -198,7 +200,7 @@
                                                         Value="Transparent" />
                                                 <Setter Property="BorderBrush"
                                                         TargetName="Bd"
-                                                        Value="Transparent" />
+                                                        Value="LightGray" />
                                             </MultiTrigger>
 
                                             <MultiTrigger>
@@ -328,21 +330,70 @@
 
                                             <ListBox.ItemContainerStyle>
                                                 <Style TargetType="ListBoxItem">
-                                                    <Style.Triggers>
-                                                        <Trigger Property="IsSelected"
-                                                                 Value="true">
-                                                            <Setter Property="Background"
-                                                                    Value="Transparent" />
-
-                                                            <Setter Property="BorderBrush"
-                                                                    Value="Transparent"></Setter>
-                                                        </Trigger>
-                                                        <Trigger Property="IsMouseOver"
-                                                                 Value="true">
-                                                            <Setter Property="Background"
-                                                                    Value="Transparent" />
-                                                        </Trigger>
-                                                    </Style.Triggers>
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                                                <Border x:Name="Bd"
+                                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                                        Background="{TemplateBinding Background}"
+                                                                        Padding="{TemplateBinding Padding}"
+                                                                        SnapsToDevicePixels="true">
+                                                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <MultiTrigger>
+                                                                        <MultiTrigger.Conditions>
+                                                                            <Condition Property="IsMouseOver"
+                                                                                       Value="True" />
+                                                                        </MultiTrigger.Conditions>
+                                                                        <Setter Property="Background"
+                                                                                TargetName="Bd"
+                                                                                Value="Transparent" />
+                                                                        <Setter Property="BorderBrush"
+                                                                                TargetName="Bd"
+                                                                                Value="Transparent" />
+                                                                    </MultiTrigger>
+                                                                    <MultiTrigger>
+                                                                        <MultiTrigger.Conditions>
+                                                                            <Condition Property="Selector.IsSelectionActive"
+                                                                                       Value="False" />
+                                                                            <Condition Property="IsSelected"
+                                                                                       Value="True" />
+                                                                        </MultiTrigger.Conditions>
+                                                                        <Setter Property="Background"
+                                                                                TargetName="Bd"
+                                                                                Value="Transparent" />
+                                                                        <Setter Property="BorderBrush"
+                                                                                TargetName="Bd"
+                                                                                Value="Transparent" />
+                                                                    </MultiTrigger>
+                                                                    <MultiTrigger>
+                                                                        <MultiTrigger.Conditions>
+                                                                            <Condition Property="Selector.IsSelectionActive"
+                                                                                       Value="True" />
+                                                                            <Condition Property="IsSelected"
+                                                                                       Value="True" />
+                                                                        </MultiTrigger.Conditions>
+                                                                        <Setter Property="Background"
+                                                                                TargetName="Bd"
+                                                                                Value="Transparent" />
+                                                                        <Setter Property="BorderBrush"
+                                                                                TargetName="Bd"
+                                                                                Value="Transparent" />
+                                                                    </MultiTrigger>
+                                                                    <Trigger Property="IsEnabled"
+                                                                             Value="False">
+                                                                        <Setter Property="TextElement.Foreground"
+                                                                                TargetName="Bd"
+                                                                                Value="Transparent" />
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
                                                 </Style>
                                             </ListBox.ItemContainerStyle>
                                         </ListBox>
