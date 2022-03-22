@@ -21,7 +21,6 @@
            TargetType="{x:Type Button}"
            BasedOn="{StaticResource MahApps.Styles.Button}">
 
-
         <Setter Property="Background"
                 Value="Transparent"></Setter>
 
@@ -54,12 +53,26 @@
                                 BorderBrush="LightGray"
                                 CornerRadius="50">
                             <Label BorderThickness="1"
-                                   Content="10" />
+                                   Content="{Binding Path=DataContext.Total}" />
                         </Border>
                     </StackPanel>
                 </DataTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style TargetType="ToolTip">
+        <Setter Property="BorderBrush"
+                Value="Orange" />
+        <Setter Property="Background"
+                Value="White"></Setter>
+        <Setter Property="ToolTipService.ShowDuration"
+                Value="2147483647"></Setter>
+    </Style>
+
+    <Style TargetType="TextBlock">
+        <Setter Property="ToolTipService.ShowDuration"
+                Value="2147483647"></Setter>
     </Style>
 
     <!-- Texts

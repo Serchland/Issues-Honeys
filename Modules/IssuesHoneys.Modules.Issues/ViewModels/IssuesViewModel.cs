@@ -28,10 +28,17 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             _newLabelViewVisibility = Visibility.Collapsed;
             _brush = Brushes.Gray;
 
+            _total = "15";
             Issues = new ObservableCollection<Issue>(_isuesService.GetIssues());
         }
 
         #region "Properties"
+        private string _total;
+        public string Total
+        {
+            get { return _total; }
+            set { SetProperty(ref _total, value); }
+        }
 
         private ObservableCollection<Issue> _issues;
         public ObservableCollection<Issue> Issues

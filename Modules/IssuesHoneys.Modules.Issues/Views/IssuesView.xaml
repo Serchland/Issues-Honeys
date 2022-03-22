@@ -282,7 +282,48 @@
                                                    HorizontalAlignment="Center"
                                                    TextAlignment="Center"
                                                    TextWrapping="WrapWithOverflow"
-                                                   Padding="0,8,10,0" />
+                                                   Padding="0,8,10,0">
+                                            <TextBlock.ToolTip>
+                                        
+                                                <Grid Margin="10" Background="White">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"></RowDefinition>
+                                                        <RowDefinition Height="Auto"></RowDefinition>
+                                                        <RowDefinition Height="Auto"></RowDefinition>
+                                                    </Grid.RowDefinitions>
+                                                    <TextBlock Grid.Row="0" 
+                                                               Text="{Binding CrtnDate, StringFormat=on {0:D}}" 
+                                                               FontSize="10"
+                                                               HorizontalAlignment="Left"
+                                                               Margin="0 0 0 10"></TextBlock>
+
+                                                    <StackPanel Grid.Row="1"
+                                                                Orientation="Horizontal">
+
+                                                        <TextBlock Text="{Binding Id, StringFormat=#{0}}"
+                                                                   FontSize="14"></TextBlock>
+                                                        <TextBlock Text=" "></TextBlock>
+                                                        <TextBlock Text="{Binding Name}" 
+                                                                   FontWeight="SemiBold"
+                                                                   FontSize="14"></TextBlock>
+                                                        
+                                                    </StackPanel>
+                                                    <Viewbox Grid.Row="2" 
+                                                             Margin="0 10 0 0"
+                                                             HorizontalAlignment="Left">
+                                                        <StackPanel Orientation="Vertical"
+                                                                    MinWidth="500">
+                                                            <TextBlock HorizontalAlignment="Left"
+                                                                       FontSize="14"
+                                                                       TextWrapping="Wrap"
+                                                                       Foreground="Black"
+                                                                       Text="{Binding Description}" />
+                                                        </StackPanel>
+                                                    </Viewbox>
+                                                </Grid>
+                                                
+                                            </TextBlock.ToolTip>
+                                        </TextBlock>
 
                                         <ListBox ItemsSource="{Binding Labels}"
                                                  Background="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=Background}"
@@ -312,7 +353,9 @@
                                                                    TextWrapping="WrapWithOverflow"
                                                                    Foreground="White"
                                                                    FontSize="10"
-                                                                   Padding="5,0,5,0">
+                                                                   Padding="5,0,5,0"
+                                                                   Height="Auto"
+                                                                   Name="PART_txtBlockName">
                                                         </TextBlock>
                                                     </Border>
 
@@ -329,6 +372,10 @@
 
                                             <ListBox.ItemContainerStyle>
                                                 <Style TargetType="ListBoxItem">
+                                                    <Setter Property="Margin"
+                                                            Value="0"></Setter>
+                                                    <Setter Property="Padding"
+                                                            Value="0"></Setter>
                                                     <Setter Property="Template">
                                                         <Setter.Value>
                                                             <ControlTemplate TargetType="{x:Type ListBoxItem}">
@@ -355,40 +402,6 @@
                                                                                 TargetName="Bd"
                                                                                 Value="Transparent" />
                                                                     </MultiTrigger>
-                                                                    <MultiTrigger>
-                                                                        <MultiTrigger.Conditions>
-                                                                            <Condition Property="Selector.IsSelectionActive"
-                                                                                       Value="False" />
-                                                                            <Condition Property="IsSelected"
-                                                                                       Value="True" />
-                                                                        </MultiTrigger.Conditions>
-                                                                        <Setter Property="Background"
-                                                                                TargetName="Bd"
-                                                                                Value="Transparent" />
-                                                                        <Setter Property="BorderBrush"
-                                                                                TargetName="Bd"
-                                                                                Value="Transparent" />
-                                                                    </MultiTrigger>
-                                                                    <MultiTrigger>
-                                                                        <MultiTrigger.Conditions>
-                                                                            <Condition Property="Selector.IsSelectionActive"
-                                                                                       Value="True" />
-                                                                            <Condition Property="IsSelected"
-                                                                                       Value="True" />
-                                                                        </MultiTrigger.Conditions>
-                                                                        <Setter Property="Background"
-                                                                                TargetName="Bd"
-                                                                                Value="Transparent" />
-                                                                        <Setter Property="BorderBrush"
-                                                                                TargetName="Bd"
-                                                                                Value="Transparent" />
-                                                                    </MultiTrigger>
-                                                                    <Trigger Property="IsEnabled"
-                                                                             Value="False">
-                                                                        <Setter Property="TextElement.Foreground"
-                                                                                TargetName="Bd"
-                                                                                Value="Transparent" />
-                                                                    </Trigger>
                                                                 </ControlTemplate.Triggers>
                                                             </ControlTemplate>
                                                         </Setter.Value>
@@ -407,7 +420,7 @@
 
                                         <TextBlock Text="{Binding Id, StringFormat=#{0}}" />
                                         <TextBlock Text=" "></TextBlock>
-                                        <TextBlock Text="{Binding CrtnDate, StringFormat=opened on {0:dddd, MMMM dd}}" />
+                                        <TextBlock Text="{Binding CrtnDate, StringFormat=opened on {0:D}}" />
                                         <TextBlock Text=" "></TextBlock>
                                         <TextBlock Text="{Binding Author, StringFormat=by {0}}" />
                                         <TextBlock Text="  "></TextBlock>
@@ -417,7 +430,64 @@
                                                                        Kind="SignRight">
                                             </iconpacks:PackIconUnicons>
                                         </Label>
-                                        <TextBlock Text="Sprint" />
+
+                                        <ListBox ItemsSource="{Binding Millestones}"
+                                                 Background="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=Background}"
+                                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                            
+                                            <ListBox.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel IsItemsHost="True"></WrapPanel>
+                                                </ItemsPanelTemplate>
+                                            </ListBox.ItemsPanel>
+
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}" Background="Transparent"></TextBlock>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+
+                                            <ListBox.ItemContainerStyle>
+                                                <Style TargetType="ListBoxItem">
+                                                    <Setter Property="Margin"
+                                                            Value="5 0 0 0"></Setter>
+                                                    <Setter Property="BorderThickness"
+                                                            Value="0"></Setter>
+                                                    <Setter Property="Padding"
+                                                            Value="0"></Setter>
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                                                <Border x:Name="Bd"
+                                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                                        Background="{TemplateBinding Background}"
+                                                                        Padding="{TemplateBinding Padding}"
+                                                                        SnapsToDevicePixels="true">
+                                                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <MultiTrigger>
+                                                                        <MultiTrigger.Conditions>
+                                                                            <Condition Property="IsMouseOver"
+                                                                                       Value="True" />
+                                                                        </MultiTrigger.Conditions>
+                                                                        <Setter Property="Background"
+                                                                                TargetName="Bd"
+                                                                                Value="Transparent" />
+                                                                        <Setter Property="BorderBrush"
+                                                                                TargetName="Bd"
+                                                                                Value="Transparent" />
+                                                                    </MultiTrigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </ListBox.ItemContainerStyle>
+                                        </ListBox>
                                     </StackPanel>
                                 </Grid>
                             </Border>
