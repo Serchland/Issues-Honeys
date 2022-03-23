@@ -6,11 +6,13 @@
              xmlns:coreNameDef="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
              xmlns:coreViews="clr-namespace:IssuesHoneys.Core.Views;assembly=IssuesHoneys.Core"
              xmlns:converters="clr-namespace:IssuesHoneys.Modules.Issues.Views.Converters"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              x:Class="IssuesHoneys.Modules.Issues.Views.IssuesView"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <UserControl.Resources>
         <converters:StateColorConverter x:Key="StateColorConverterKey"></converters:StateColorConverter>
+        <converters:IconMilestoneVisibilityConverter x:Key="IconMilestoneVisibilityConverterKey"></converters:IconMilestoneVisibilityConverter>
     </UserControl.Resources>
 
     <Grid x:Name="grid"
@@ -428,17 +430,25 @@
                                         <TextBlock Text=" "></TextBlock>
                                         <TextBlock Text="{Binding Author, StringFormat=by {0}}" />
                                         <TextBlock Text="  "></TextBlock>
-                                        <Label Foreground="Gray" Padding="0 0 0 10">
+                                        <Label Foreground="Gray"
+                                               Padding="0 0 0 10"
+                                               Visibility="{Binding Milestones, Converter={StaticResource IconMilestoneVisibilityConverterKey}}">
                                             <iconpacks:PackIconUnicons Width="16"
                                                                        Height="16"
                                                                        Kind="SignRight">
                                             </iconpacks:PackIconUnicons>
                                         </Label>
 
-                                        <ListBox ItemsSource="{Binding Millestones}"
+                                        <ListBox ItemsSource="{Binding Milestones}"
                                                  Background="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=Background}"
                                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                             
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="SelectionChanged">
+                                                    <prism:InvokeCommandAction Command="{Binding TestCommand}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+
                                             <ListBox.ItemsPanel>
                                                 <ItemsPanelTemplate>
                                                     <WrapPanel IsItemsHost="True"></WrapPanel>

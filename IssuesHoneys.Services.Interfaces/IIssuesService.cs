@@ -11,7 +11,7 @@ namespace IssuesHoneys.Services.Interfaces
     {
         void CreateLabel();
         List<Label> GetLabels();
-        List<Millestone> GetMillestones();
+        List<Milestone> GetMillestones();
         List<Issue> GetIssues();
     }
 }

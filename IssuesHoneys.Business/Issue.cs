@@ -64,11 +64,11 @@ namespace IssuesHoneys.Business
             set { SetProperty(ref _projects, value); }
         }
 
-        private List<Millestone> _millestones;
-        public List<Millestone> Millestones
+        private List<Milestone> _milestones;
+        public List<Milestone> Milestones
         {
-            get { return _millestones; }
-            set { SetProperty(ref _millestones, value); }
+            get { return _milestones; }
+            set { SetProperty(ref _milestones, value); }
         }
     }
 
@@ -116,7 +116,7 @@ namespace IssuesHoneys.Business
         }
     }
 
-    public class Millestone : BindableBase
+    public class Milestone : BindableBase
     {
         private int _id;
         public int Id

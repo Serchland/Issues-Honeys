@@ -88,6 +88,15 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         #endregion
 
         #region "Commands"
+        private DelegateCommand _testCommand;
+        public DelegateCommand TestCommand =>
+            _testCommand ?? (_testCommand = new DelegateCommand(ExecuteTestCommand));
+
+        void ExecuteTestCommand()
+        {
+            int i = 0;
+        }
+
         private DelegateCommand _randomColor;
         public DelegateCommand RandomColor =>
             _randomColor ?? (_randomColor = new DelegateCommand(ExecuteRandomColor));

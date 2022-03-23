@@ -6,7 +6,7 @@
     <!--Icons-->
     <!--<BitmapImage x:Key="Issues_128_ico" UriSource="Images/Issues_128.ico" />-->
     <system:String x:Key="ButtonLabelCaption">LABELS</system:String>
-    <system:String x:Key="ButtonMillestoneCaption">MILLESTONES</system:String>
+    <system:String x:Key="ButtonMillestoneCaption">MILESTONES</system:String>
     <system:String x:Key="ButtonNewIssueCaption">NEW ISSUE</system:String>
     <system:String x:Key="ButtonCancelCaption">CANCEL</system:String>
     <system:String x:Key="ButtonCreateLabelCaption">CREATE LABEL</system:String>

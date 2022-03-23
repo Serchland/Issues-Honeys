@@ -11,12 +11,12 @@ namespace IssuesHoneys.Services
     public class IssueService : BindableBase, IIssueService
     {
         private static List<Label> _labels;
-        private static List<Millestone> _millestones;
+        private static List<Milestone> _millestones;
 
         public IssueService()
         {
             _labels = new List<Label>();
-            _millestones = new List<Millestone>();
+            _millestones = new List<Milestone>();
             Init();
         }
 
@@ -28,9 +28,9 @@ namespace IssuesHoneys.Services
             _labels.Add(new Label() { AssociatedIssues = "14;15", Brush = Brushes.Purple, Description = "synchronisation phase", Id = 3, Name = "sincro" });
             _labels.Add(new Label() { AssociatedIssues = "14;15", Brush = Brushes.Gold, Description = "associated to version", Id = 4, Name = "version" });
 
-            _millestones.Add(new Millestone() { Description = "PRO V1.12", DueDate = new DateTime(2022, 6, 11), Id = 0, Name = "PRO" });
-            _millestones.Add(new Millestone() { Description = "Send PRE", DueDate = new DateTime(2022, 5, 20), Id = 1, Name = "PRE" });
-            _millestones.Add(new Millestone() { Description = "Send FOR", DueDate = new DateTime(2022, 4, 20), Id = 2, Name = "FOR" });
+            _millestones.Add(new Milestone() { Description = "PRO V1.12", DueDate = new DateTime(2022, 6, 11), Id = 0, Name = "PRO" });
+            _millestones.Add(new Milestone() { Description = "Send PRE", DueDate = new DateTime(2022, 5, 20), Id = 1, Name = "PRE" });
+            _millestones.Add(new Milestone() { Description = "Send FOR", DueDate = new DateTime(2022, 4, 20), Id = 2, Name = "FOR" });
 
         }
 
@@ -49,7 +49,7 @@ namespace IssuesHoneys.Services
             return IssuesResponse.Labels();
         }
 
-        public List<Millestone> GetMillestones()
+        public List<Milestone> GetMillestones()
         {
             return IssuesResponse.Millestones();
         }
@@ -65,22 +65,22 @@ namespace IssuesHoneys.Services
             {
                 List<Issue> result = new List<Issue>();
 
-                result.Add(new Issue() { Id = 0, Author = "99ID9878", Description = " Permitir generación de elementos iguales 7 dígitos", CrtnDate = new DateTime(2022, 1, 11), Labels = GetLabels(new List<int>() { 0, 1, 2, 3, 4 }), Millestones = GetMillestones(new List<int>() { 1, 2}), Name = "CAPC 5855459", Projects = null, State = State.IsClosed });
-                result.Add(new Issue() { Id = 1, Author = "99ID9878", Description = " Se requiere incializar la aplicacción desde distintos orígenes", CrtnDate = new DateTime(2022, 1, 15), Labels = null, Millestones = null, Name = "CAPC 9998857", Projects = null, State = State.IsOpen });
-                result.Add(new Issue() { Id = 2, Author = "99ID9878", Description = " Permitir idiomas en y es", CrtnDate = new DateTime(2022, 2, 01), Labels = GetLabels(new List<int>() { 0, 1 }), Millestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 9998857", Projects = null, State = State.IsOpen });
-                result.Add(new Issue() { Id = 3, Author = "99ID9878", Description = " Conectar con aplicaciones de terceros", CrtnDate = new DateTime(2022, 2, 07), Labels = GetLabels(new List<int>() { 0, 1 }), Millestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 8524587", Projects = null, State = State.IsClosed });
-                result.Add(new Issue() { Id = 4, Author = "99ID9878", Description = " Permitir incluir ficheros xml", CrtnDate = new DateTime(2022, 2, 09), Labels = GetLabels(new List<int>() { 0, 1 }), Millestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 998778", Projects = null, State = State.IsOpen });
-                result.Add(new Issue() { Id = 5, Author = "99ID5664", Description = " Cambiar la firma para recibir una lista de ints en lugar en un int", CrtnDate = new DateTime(2022, 2, 13), Labels = GetLabels(new List<int>() { 0 }), Millestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 12112254", Projects = null, State = State.IsOpen });
-                result.Add(new Issue() { Id = 6, Author = "99ID5664", Description = " Creación de nueva aplicación para gestión de elementos", CrtnDate = new DateTime(2022, 2, 15), Labels = GetLabels(new List<int>() { 0 }), Millestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 12118855", Projects = null, State = State.IsOpen });
-                result.Add(new Issue() { Id = 7, Author = "99ID5664", Description = " Nueva funcionalidad para permitir agregar cambios", CrtnDate = new DateTime(2022, 2, 19), Labels = GetLabels(new List<int>() { 2, 4 }), Millestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 9658632", Projects = null, State = State.IsClosed });
-                result.Add(new Issue() { Id = 8, Author = "99ID1122", Description = " Actualización de documentos", CrtnDate = new DateTime(2022, 2, 23), Labels = GetLabels(new List<int>() { 0, 1 }), Millestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 175365242112254", Projects = null, State = State.IsClosed });
-                result.Add(new Issue() { Id = 9, Author = "99ID1122", Description = " Permitir extensiones .jpg, .xml y .bmp", CrtnDate = new DateTime(2022, 2, 24), Labels = GetLabels(new List<int>() { 0, 1 }), Millestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 9512546", Projects = null, State = State.IsOpen });
-                result.Add(new Issue() { Id = 10, Author = "99ID1122", Description = " Nueva funcionalidad que permita chatear entre usuarios", CrtnDate = new DateTime(2022, 2, 24), Labels = GetLabels(new List<int>() { 1 }), Millestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 95689896", Projects = null, State = State.IsOpen });
-                result.Add(new Issue() { Id = 11, Author = "99ID1122", Description = " Mejorar el sistema de seguridad", CrtnDate = new DateTime(2022, 1, 27), Labels = GetLabels(new List<int>() { 0, 1, 4 }), Millestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 9371582", Projects = null, State = State.IsClosed });
-                result.Add(new Issue() { Id = 12, Author = "99ID1122", Description = " Revisión tiempo de llamadas entre entidades", CrtnDate = new DateTime(2022, 2, 28), Labels = GetLabels(new List<int>() { 0, 2, 4 }), Millestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 998855110", Projects = null, State = State.IsOpen });
-                result.Add(new Issue() { Id = 13, Author = "99ID95456", Description = " Incidencia recibida de PRO", CrtnDate = new DateTime(2022, 2, 8), Labels = GetLabels(new List<int>() { 0, 1 }), Millestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 1112546", Projects = null, State = State.IsOpen });
-                result.Add(new Issue() { Id = 14, Author = "99ID95456", Description = " Generación de elementos en formato binario", CrtnDate = new DateTime(2022, 3, 1), Labels = GetLabels(new List<int>() { 0, 1 }), Millestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 2254586", Projects = null, State = State.IsClosed });
-                result.Add(new Issue() { Id = 15, Author = "99ID95456", Description = " Generación de elementos en formato json", CrtnDate = new DateTime(2022, 3, 4), Labels = GetLabels(new List<int>() { 0, 1 }), Millestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 6383566", Projects = null, State = State.IsOpen });
+                result.Add(new Issue() { Id = 0, Author = "99ID9878", Description = " Permitir generación de elementos iguales 7 dígitos", CrtnDate = new DateTime(2022, 1, 11), Labels = GetLabels(new List<int>() { 0, 1, 2, 3, 4 }), Milestones = GetMillestones(new List<int>() { 1, 2}), Name = "CAPC 5855459", Projects = null, State = State.IsClosed });
+                result.Add(new Issue() { Id = 1, Author = "99ID9878", Description = " Se requiere incializar la aplicacción desde distintos orígenes", CrtnDate = new DateTime(2022, 1, 15), Labels = null, Milestones = null, Name = "CAPC 9998857", Projects = null, State = State.IsOpen });
+                result.Add(new Issue() { Id = 2, Author = "99ID9878", Description = " Permitir idiomas en y es", CrtnDate = new DateTime(2022, 2, 01), Labels = GetLabels(new List<int>() { 0, 1 }), Milestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 9998857", Projects = null, State = State.IsOpen });
+                result.Add(new Issue() { Id = 3, Author = "99ID9878", Description = " Conectar con aplicaciones de terceros", CrtnDate = new DateTime(2022, 2, 07), Labels = GetLabels(new List<int>() { 0, 1 }), Milestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 8524587", Projects = null, State = State.IsClosed });
+                result.Add(new Issue() { Id = 4, Author = "99ID9878", Description = " Permitir incluir ficheros xml", CrtnDate = new DateTime(2022, 2, 09), Labels = GetLabels(new List<int>() { 0, 1 }), Milestones = GetMillestones(new List<int>() { 3 }), Name = "CAPC 998778", Projects = null, State = State.IsOpen });
+                result.Add(new Issue() { Id = 5, Author = "99ID5664", Description = " Cambiar la firma para recibir una lista de ints en lugar en un int", CrtnDate = new DateTime(2022, 2, 13), Labels = GetLabels(new List<int>() { 0 }), Milestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 12112254", Projects = null, State = State.IsOpen });
+                result.Add(new Issue() { Id = 6, Author = "99ID5664", Description = " Creación de nueva aplicación para gestión de elementos", CrtnDate = new DateTime(2022, 2, 15), Labels = GetLabels(new List<int>() { 0 }), Milestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 12118855", Projects = null, State = State.IsOpen });
+                result.Add(new Issue() { Id = 7, Author = "99ID5664", Description = " Nueva funcionalidad para permitir agregar cambios", CrtnDate = new DateTime(2022, 2, 19), Labels = GetLabels(new List<int>() { 2, 4 }), Milestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 9658632", Projects = null, State = State.IsClosed });
+                result.Add(new Issue() { Id = 8, Author = "99ID1122", Description = " Actualización de documentos", CrtnDate = new DateTime(2022, 2, 23), Labels = GetLabels(new List<int>() { 0, 1 }), Milestones = GetMillestones(new List<int>() { 1, 2 }), Name = "CAPC 175365242112254", Projects = null, State = State.IsClosed });
+                result.Add(new Issue() { Id = 9, Author = "99ID1122", Description = " Permitir extensiones .jpg, .xml y .bmp", CrtnDate = new DateTime(2022, 2, 24), Labels = GetLabels(new List<int>() { 0, 1 }), Milestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 9512546", Projects = null, State = State.IsOpen });
+                result.Add(new Issue() { Id = 10, Author = "99ID1122", Description = " Nueva funcionalidad que permita chatear entre usuarios", CrtnDate = new DateTime(2022, 2, 24), Labels = GetLabels(new List<int>() { 1 }), Milestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 95689896", Projects = null, State = State.IsOpen });
+                result.Add(new Issue() { Id = 11, Author = "99ID1122", Description = " Mejorar el sistema de seguridad", CrtnDate = new DateTime(2022, 1, 27), Labels = GetLabels(new List<int>() { 0, 1, 4 }), Milestones = GetMillestones(new List<int>() { 2, 1 }), Name = "CAPC 9371582", Projects = null, State = State.IsClosed });
+                result.Add(new Issue() { Id = 12, Author = "99ID1122", Description = " Revisión tiempo de llamadas entre entidades", CrtnDate = new DateTime(2022, 2, 28), Labels = GetLabels(new List<int>() { 0, 2, 4 }), Milestones = null, Name = "CAPC 998855110", Projects = null, State = State.IsOpen });
+                result.Add(new Issue() { Id = 13, Author = "99ID95456", Description = " Incidencia recibida de PRO", CrtnDate = new DateTime(2022, 2, 8), Labels = GetLabels(new List<int>() { 0, 1 }), Milestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 1112546", Projects = null, State = State.IsOpen });
+                result.Add(new Issue() { Id = 14, Author = "99ID95456", Description = " Generación de elementos en formato binario", CrtnDate = new DateTime(2022, 3, 1), Labels = GetLabels(new List<int>() { 0, 1 }), Milestones = GetMillestones(new List<int>() { 2, 3 }), Name = "CAPC 2254586", Projects = null, State = State.IsClosed });
+                result.Add(new Issue() { Id = 15, Author = "99ID95456", Description = " Generación de elementos en formato json", CrtnDate = new DateTime(2022, 3, 4), Labels = GetLabels(new List<int>() { 0, 1 }), Milestones = GetMillestones(new List<int>() { 1 }), Name = "CAPC 6383566", Projects = null, State = State.IsOpen });
 
 
                 return result;
@@ -102,9 +102,9 @@ namespace IssuesHoneys.Services
                 return _labels;
             }
 
-            internal static List<Millestone> GetMillestones(List<int> millestonesId)
+            internal static List<Milestone> GetMillestones(List<int> millestonesId)
             {
-                List<Millestone> result = Millestones();
+                List<Milestone> result = Millestones();
 
                 result = (from ml in _millestones
                           where millestonesId.Any(it => it == ml.Id)
@@ -113,7 +113,7 @@ namespace IssuesHoneys.Services
                 return result;
             }
 
-            internal static List<Millestone> Millestones()
+            internal static List<Milestone> Millestones()
             {
                 return _millestones;
             }
