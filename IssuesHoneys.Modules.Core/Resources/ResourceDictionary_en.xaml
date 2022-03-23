@@ -48,12 +48,16 @@
                                     VerticalAlignment="Center"
                                     Text="{Binding Path=Content}" />
 
-                        <Border BorderThickness="1,1,1,1"
-                                Margin="0,0,5,0"
+                        <Border x:Name="circularBorder"
+                                BorderThickness="1"
                                 BorderBrush="LightGray"
-                                CornerRadius="50">
+                                CornerRadius="{Binding Path=ActualHeight, ElementName=circularBorder}"
+                                Width="{Binding Path=ActualHeight, ElementName=circularBorder}">
                             <Label BorderThickness="1"
-                                   Content="{Binding Path=DataContext.Total}" />
+                                   Padding="0"
+                                   VerticalContentAlignment="Center"
+                                   HorizontalContentAlignment="Center"
+                                   Content="{Binding Path=TotalItems}" />
                         </Border>
                     </StackPanel>
                 </DataTemplate>

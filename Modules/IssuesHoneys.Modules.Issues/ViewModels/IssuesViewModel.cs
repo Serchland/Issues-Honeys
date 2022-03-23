@@ -28,16 +28,24 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             _newLabelViewVisibility = Visibility.Collapsed;
             _brush = Brushes.Gray;
 
-            _total = "15";
+            _totalLabels = _isuesService.GetLabels().Count.ToString();
+            _totalMilestones = _isuesService.GetMillestones().Count.ToString();
             Issues = new ObservableCollection<Issue>(_isuesService.GetIssues());
         }
 
         #region "Properties"
-        private string _total;
-        public string Total
+        private string _totalLabels;
+        public string TotalLabels
         {
-            get { return _total; }
-            set { SetProperty(ref _total, value); }
+            get { return _totalLabels; }
+            set { SetProperty(ref _totalLabels, value); }
+        }
+
+        private string _totalMilestones;
+        public string TotalMilestones
+        {
+            get { return _totalMilestones; }
+            set { SetProperty(ref _totalMilestones, value); }
         }
 
         private ObservableCollection<Issue> _issues;
