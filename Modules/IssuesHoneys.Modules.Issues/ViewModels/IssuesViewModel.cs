@@ -8,6 +8,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
@@ -88,13 +89,17 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         #endregion
 
         #region "Commands"
-        private DelegateCommand _testCommand;
-        public DelegateCommand TestCommand =>
-            _testCommand ?? (_testCommand = new DelegateCommand(ExecuteTestCommand));
+        private DelegateCommand<SelectionChangedEventArgs> _testCommand;
+        public DelegateCommand<SelectionChangedEventArgs> TestCommand =>
+            _testCommand ?? (_testCommand = new DelegateCommand<SelectionChangedEventArgs>(ExecuteTestCommand));
 
-        void ExecuteTestCommand()
+        void ExecuteTestCommand(SelectionChangedEventArgs args)
         {
-            int i = 0;
+            //SERCH00: I don't know how I'm going to sail yet
+            if (args == null)
+                throw new ArgumentNullException("args cant be null");
+
+            _applicationCommands.NavigateCommand.Execute(((Milestone)args.AddedItems[0]).Name);
         }
 
         private DelegateCommand _randomColor;

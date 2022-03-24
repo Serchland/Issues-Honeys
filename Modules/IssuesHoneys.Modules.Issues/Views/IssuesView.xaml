@@ -143,8 +143,47 @@
                                 <ColumnDefinition Width="150" />
                             </Grid.ColumnDefinitions>
 
-                            <ComboBox Grid.Column="0"
-                                      VerticalAlignment="Center" />
+                            <ComboBox Grid.Column="0" x:Name="ComboAuthor" ItemsSource="{Binding Labels}"
+                                      VerticalAlignment="Center"
+                                      controls:TextBoxHelper.AutoWatermark="True"
+                                      controls:TextBoxHelper.Watermark="Author"
+                                      controls:TextBoxHelper.WatermarkAlignment="Right"
+                                      Background="Transparent"
+                                      BorderBrush="Transparent">
+                                <ComboBox.Style>
+                                    <Style TargetType="ComboBox" BasedOn="{StaticResource MahApps.Styles.ComboBox}">
+                                        <Setter Property="Foreground"
+                                                Value="Black"></Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver"
+                                                     Value="True">
+                                                <Setter Property="Background"
+                                                        Value="Transparent" />
+                                                <Setter Property="BorderBrush"
+                                                        Value="Transparent" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ComboBox.Style>
+
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="ComboBoxItem">
+                                        <Setter Property="ContentTemplate">
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <DockPanel LastChildFill="False" Background="Orange">
+                                                        <ContentControl Content="{Binding Name}"
+                                                                        DockPanel.Dock="Left" />
+                                                        <ContentControl Content="{Binding Value}"
+                                                                        DockPanel.Dock="Right" />
+                                                    </DockPanel>
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                                
+                            </ComboBox>
 
                             <ComboBox Grid.Column="1"
                                       Margin="5,0,0,0"
@@ -442,10 +481,11 @@
                                         <ListBox ItemsSource="{Binding Milestones}"
                                                  Background="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=Background}"
                                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                                            
+
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="SelectionChanged">
-                                                    <prism:InvokeCommandAction Command="{Binding TestCommand}" />
+                                                    <prism:InvokeCommandAction Command="{Binding DataContext.TestCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                               CommandParameter="{Binding SelectedItem}"/>
                                                 </i:EventTrigger>
                                             </i:Interaction.Triggers>
 
