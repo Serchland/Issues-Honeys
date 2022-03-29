@@ -95,7 +95,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
         void ExecuteTestCommand(SelectionChangedEventArgs args)
         {
-            //SERCH00: I don't know how I'm going to sail yet
+            //SERCH00: I don't know how I'm going to navigate yet
             if (args == null)
                 throw new ArgumentNullException("args cant be null");
 
