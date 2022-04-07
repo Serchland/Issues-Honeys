@@ -202,10 +202,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\issues_32.ico" />
-    <Resource Include="Resources\Images\projects_32.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="Resources\ResourceDictionary_en.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -222,12 +218,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\projects_128.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\issues_128.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IssuesHoneys.Business\IssuesHoneys.Business.csproj">
