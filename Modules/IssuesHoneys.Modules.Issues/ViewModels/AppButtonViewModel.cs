@@ -7,17 +7,23 @@ using System;
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
     public class AppButtonViewModel : BindableBase
-    {       
-        public AppButtonViewModel()
+    {
+        private IApplicationCommands _applicationCommands;
+        public AppButtonViewModel(IApplicationCommands applicationCommands)
         {
-            _total = "15";
+            _applicationCommands = applicationCommands;
         }
 
-        private string _total;
-        public string Total
+        private DelegateCommand<string> _navigateCommand;
+        public DelegateCommand<string> NavigateCommand =>
+            _navigateCommand ?? (_navigateCommand = new DelegateCommand<string>(ExecuteNavigateCommand));
+
+        void ExecuteNavigateCommand(string parameter)
         {
-            get { return _total; }
-            set { SetProperty(ref _total, value); }
+            if (string.IsNullOrEmpty(parameter))
+                throw new ArgumentNullException("parameter cant be null");
+
+            _applicationCommands.NavigateCommand.Execute(parameter);
         }
     }
 }

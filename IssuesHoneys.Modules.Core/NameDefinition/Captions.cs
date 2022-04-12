@@ -3,7 +3,7 @@
     public static class CommandParameters
     {
         public const string Cancel = "Cancel";
-        public const string CreateLabel = "CreateLabel";
+        public const string NewLabel = "NewLabel";
         public const string Defautl = "Default";
         public const string Issues = "Issues";
         public const string Labels = "Labels";

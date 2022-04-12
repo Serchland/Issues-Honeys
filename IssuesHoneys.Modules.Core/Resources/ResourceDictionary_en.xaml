@@ -8,16 +8,19 @@
     <system:String x:Key="ButtonLabelCaption">LABELS</system:String>
     <system:String x:Key="ButtonMillestoneCaption">MILESTONES</system:String>
     <system:String x:Key="ButtonNewIssueCaption">NEW ISSUE</system:String>
+    <system:String x:Key="ButtonNewLabelCaption">NEW LABEL</system:String>
     <system:String x:Key="ButtonCancelCaption">CANCEL</system:String>
     <system:String x:Key="ButtonCreateLabelCaption">CREATE LABEL</system:String>
     <system:String x:Key="ButtonSubmitNewIssueCaption">SUBMIT NEW ISSUE</system:String>
+    <system:String x:Key="LabelSearchCaption">Search:</system:String>
+    <system:String x:Key="WaterMarkSearchCaption">Search all labels</system:String>
     
 
     <!--Colors-->
     <Brush x:Key="MainBorderBrush">LightGray</Brush>
 
     <!--Styles-->
-    <Style x:Key="MyIconStyle"
+    <Style x:Key="MyIconTotalStyle"
            TargetType="{x:Type Button}"
            BasedOn="{StaticResource MahApps.Styles.Button}">
 
@@ -59,6 +62,42 @@
                                    HorizontalContentAlignment="Center"
                                    Content="{Binding Path=TotalItems}" />
                         </Border>
+                    </StackPanel>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="MyIconStyle"
+           TargetType="{x:Type Button}"
+           BasedOn="{StaticResource MahApps.Styles.Button}">
+
+        <Setter Property="Background"
+                Value="Transparent"></Setter>
+
+        <Setter Property="BorderBrush"
+                Value="LightGray"></Setter>
+
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal"
+                                DataContext="{Binding RelativeSource={RelativeSource AncestorType=Button}}">
+
+                        <Rectangle Fill="{Binding Foreground}"
+                                   Height="18"
+                                   Width="18"
+                                   Margin="5 0 0 0"
+                                   VerticalAlignment="Center">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Stretch="Fill"
+                                             Visual="{Binding Tag}" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+
+                        <TextBlock  Margin="5 0 5 0"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding Path=Content}" />
                     </StackPanel>
                 </DataTemplate>
             </Setter.Value>
