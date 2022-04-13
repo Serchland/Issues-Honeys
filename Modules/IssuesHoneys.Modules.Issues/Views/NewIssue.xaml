@@ -58,12 +58,29 @@
                 <TabControl Grid.Column="0"
                             Grid.Row="1">
                     <TabItem Header="Write">
-                        <RichTextBox x:Name="RichTextBox_Issue"></RichTextBox>
+                        <!--<RichTextBox x:Name="RichTextBox_Issue"></RichTextBox>-->
+                        <TextBox
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                            TextWrapping="Wrap"
+                            AcceptsReturn="True"
+                            Margin="5" 
+                            Text="{Binding IssueTextView, UpdateSourceTrigger=PropertyChanged}"
+                            VerticalScrollBarVisibility="Auto"/>
                     </TabItem>
                     <TabItem x:Name="got"
                              Header="Preview"
                              GotFocus="got_GotFocus">
-                        <mdxam:MarkdownScrollViewer xml:space="preserve"></mdxam:MarkdownScrollViewer>
+                        <Border BorderBrush="Black">
+                        <mdxam:MarkdownScrollViewer
+                            Grid.Row="1" Grid.Column="1"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                            Margin="5"
+                            MarkdownStyle="{StaticResource DocumentStyleGithubLike}"
+                            Markdown="{Binding IssueTextView}">
+                        </mdxam:MarkdownScrollViewer>
+                        </Border>
                     </TabItem>
                 </TabControl>
 
