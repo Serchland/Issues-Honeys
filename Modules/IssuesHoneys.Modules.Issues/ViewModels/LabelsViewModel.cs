@@ -26,8 +26,9 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
         private void Initialize()
         {
-            Labels = new ObservableCollection<Label>(_isuesService.GetLabels());
+            _labels = new ObservableCollection<Label>(_isuesService.GetLabels());
             _newLabelViewVisibility = Visibility.Collapsed;
+            _totalLabels = _labels.Count.ToString();
             _brush = Brushes.Gray;
         }
 
@@ -55,6 +56,13 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
                 BrushString = _brush.ToString();
                 SetProperty(ref _brush, value);
             }
+        }
+
+        private string _totalLabels;
+        public string TotalLabels
+        {
+            get { return _totalLabels; }
+            set { SetProperty(ref _totalLabels, value); }
         }
 
         private Visibility _newLabelViewVisibility;

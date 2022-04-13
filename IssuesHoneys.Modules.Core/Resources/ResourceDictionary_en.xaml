@@ -14,7 +14,22 @@
     <system:String x:Key="ButtonSubmitNewIssueCaption">SUBMIT NEW ISSUE</system:String>
     <system:String x:Key="LabelSearchCaption">Search:</system:String>
     <system:String x:Key="WaterMarkSearchCaption">Search all labels</system:String>
-    
+
+    <system:String x:Key="Indent1">
+    # Header1
+    ## Header2
+
+    * depth 1-1
+        * depth 2-1
+        * depth 2-2
+    * depth 1-2
+    ## Table
+    |col1|col2|
+    |----|----|
+    |val1|val2|
+    </system:String>
+
+
 
     <!--Colors-->
     <Brush x:Key="MainBorderBrush">LightGray</Brush>

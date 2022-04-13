@@ -72,6 +72,7 @@
 
             <Button Grid.Column="3"
                     Grid.Row="0"
+                    Margin="0,0,5,0"
                     BorderBrush="LightGray"
                     Background="LightGreen"
                     HorizontalAlignment="Right"
@@ -226,11 +227,16 @@
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0"
+                    <StackPanel Grid.Column="0"
                                Grid.Row="0"
                                Margin="5,0,0,0"
-                               VerticalAlignment="Center" 
-                               Content="9 Labels"/>
+                               Orientation="Horizontal"
+                               VerticalAlignment="Center" >
+                        
+                        <Label Content="{Binding TotalLabels}"/>
+                        <Label Content="labels" Padding="0,5,5,5"/>
+                    </StackPanel>
+                        
 
                         <Label Grid.Column="1"
                                Grid.Row="0"

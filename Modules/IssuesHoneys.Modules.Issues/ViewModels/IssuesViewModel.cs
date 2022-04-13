@@ -32,6 +32,8 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         }
 
         #region "Properties"
+       
+
         private string _totalLabels;
         public string TotalLabels
         {
