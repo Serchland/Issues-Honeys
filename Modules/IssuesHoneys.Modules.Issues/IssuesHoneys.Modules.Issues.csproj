@@ -75,6 +75,8 @@
       <DependentUpon>AppFooter.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Converters\IconMilestoneVisibilityConverter.cs" />
+    <Compile Include="Views\Converters\MarkDownConverter.cs" />
+    <Compile Include="Views\Converters\RGBConverter.cs" />
     <Compile Include="Views\Converters\StateColorConverter.cs" />
     <Compile Include="Views\LabelsView.xaml.cs">
       <DependentUpon>LabelsView.xaml</DependentUpon>

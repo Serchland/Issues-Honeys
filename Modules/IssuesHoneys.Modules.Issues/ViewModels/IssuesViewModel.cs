@@ -1,15 +1,11 @@
 ﻿using IssuesHoneys.Business;
-using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Collections.ObjectModel;
-using System.Reflection;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {

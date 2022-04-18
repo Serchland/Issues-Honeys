@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace IssuesHoneys.Modules.Issues.Views.Converters
 {
-    public class StateColorConverter : IValueConverter
+    internal class StateColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
