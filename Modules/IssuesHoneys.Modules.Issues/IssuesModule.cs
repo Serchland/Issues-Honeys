@@ -33,6 +33,7 @@ namespace Issues
             containerRegistry.RegisterForNavigation<AppFooter, AppFooterViewModel>(RegisterForNavigation.IssueFooter);
             containerRegistry.RegisterForNavigation<IssuesView, IssuesViewModel>(RegisterForNavigation.IssuesMain);
             containerRegistry.RegisterForNavigation<LabelsView, LabelsViewModel>(RegisterForNavigation.LabelsMain);
+            containerRegistry.RegisterForNavigation<MilestonesView, MilestonesViewModel>(RegisterForNavigation.MilestonesMain);
             containerRegistry.RegisterForNavigation<NewIssue, NewIssueViewModel>(RegisterForNavigation.NewIssue);
 
             containerRegistry.RegisterSingleton<IIssueService, IssueService>();

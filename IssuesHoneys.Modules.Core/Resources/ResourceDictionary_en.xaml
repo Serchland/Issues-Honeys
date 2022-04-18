@@ -9,11 +9,13 @@
     <system:String x:Key="ButtonMillestoneCaption">MILESTONES</system:String>
     <system:String x:Key="ButtonNewIssueCaption">NEW ISSUE</system:String>
     <system:String x:Key="ButtonNewLabelCaption">NEW LABEL</system:String>
+    <system:String x:Key="ButtonNewMilestoneCaption">NEW MILESTONE</system:String>
     <system:String x:Key="ButtonCancelCaption">CANCEL</system:String>
     <system:String x:Key="ButtonCreateLabelCaption">CREATE LABEL</system:String>
     <system:String x:Key="ButtonSubmitNewIssueCaption">SUBMIT NEW ISSUE</system:String>
-    <system:String x:Key="LabelSearchCaption">Search:</system:String>
-    <system:String x:Key="WaterMarkSearchCaption">Search all labels</system:String>
+    <system:String x:Key="SearchCaption">Search:</system:String>
+    <system:String x:Key="WaterMarkSearchLabelsCaption">Search all labels</system:String>
+    <system:String x:Key="WaterMarkSearchMilestonesCaption">Search all milestones</system:String>
 
     <system:String x:Key="Indent1">
     # Header1
@@ -71,6 +73,7 @@
                                 BorderBrush="LightGray"
                                 CornerRadius="{Binding Path=ActualHeight, ElementName=circularBorder}"
                                 Width="{Binding Path=ActualHeight, ElementName=circularBorder}">
+                            
                             <Label BorderThickness="1"
                                    Padding="0"
                                    VerticalContentAlignment="Center"

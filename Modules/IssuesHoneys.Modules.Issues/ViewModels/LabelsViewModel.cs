@@ -74,6 +74,18 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         #endregion
 
         #region "Commands"
+        private DelegateCommand<string> _navigateCommand;
+        public DelegateCommand<string> NavigateCommand =>
+            _navigateCommand ?? (_navigateCommand = new DelegateCommand<string>(ExecuteNavigateCommand));
+
+        void ExecuteNavigateCommand(string parameter)
+        {
+            if (string.IsNullOrEmpty(parameter))
+                throw new ArgumentNullException("parameter cant be null");
+
+            _applicationCommands.NavigateCommand.Execute(parameter);
+        }
+
         private DelegateCommand<string> _newLabelVisibilityCommand;
         public DelegateCommand<string> NewLabelVisibilityCommand =>
             _newLabelVisibilityCommand ?? (_newLabelVisibilityCommand = new DelegateCommand<string>(ExecuteNewLabelVisibilityCommand));

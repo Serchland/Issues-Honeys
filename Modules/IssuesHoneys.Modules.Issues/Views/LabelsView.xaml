@@ -30,6 +30,9 @@
             <Button Grid.Column="0" Grid.Row="0" Height="32" VerticalAlignment="Top"
                     Content="{StaticResource ButtonLabelCaption}"
                     MinWidth="145"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="{x:Static coreNameDef:CommandParameters.Labels}"
+                    Loaded="Button_Loaded"  
                     controls:ControlsHelper.FocusBorderBrush="Orange"
                     Style="{DynamicResource MyIconStyle}">
                 <Button.Tag>
@@ -43,6 +46,8 @@
             <Button Grid.Column="1" Grid.Row="0" Height="32" VerticalAlignment="Top"
                     Content="{StaticResource ButtonMillestoneCaption}"
                     MinWidth="145"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="{x:Static coreNameDef:CommandParameters.Milestones}"
                     controls:ControlsHelper.FocusBorderBrush="Orange"
                     Style="{DynamicResource MyIconStyle}">
                 <Button.Tag>
@@ -58,10 +63,10 @@
                        Margin="5,0,0,0">
 
                 <Label VerticalAlignment="Center"
-                       Content="{StaticResource LabelSearchCaption}">
+                       Content="{StaticResource SearchCaption}">
                 </Label>
 
-                <TextBox controls:TextBoxHelper.Watermark="{StaticResource WaterMarkSearchCaption}" 
+                <TextBox controls:TextBoxHelper.Watermark="{StaticResource WaterMarkSearchLabelsCaption}" 
                          controls:TextBoxHelper.ClearTextButton="True"
                          MaxWidth="300"
                          MinWidth="200"

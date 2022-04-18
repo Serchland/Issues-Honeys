@@ -9,7 +9,7 @@
         HorizontalAlignment="Right"
         Content="{StaticResource ButtonMillestoneCaption}"
         controls:ControlsHelper.FocusBorderBrush="Orange"
-        Command="{Binding NavigateCommans}"
+        Command="{Binding NavigateCommand}"
         CommandParameter="{x:Static coreNameDef:CommandParameters.Milestones}">
 
     <Button.Tag>

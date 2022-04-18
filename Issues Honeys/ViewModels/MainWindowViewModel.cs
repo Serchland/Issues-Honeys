@@ -24,7 +24,7 @@ namespace Issues_Honeys.ViewModels
 
         void ExecuteNavigateCommand(string parameter)
         {
-            //SERCH00: only for test pourpoposes: string res = Application.Current.FindResource("WaterMarkSearchCaption").ToString();
+            //SERCH00: only for test pourpoposes: string res = Application.Current.FindResource("WaterMarkSearchLabelsCaption").ToString();
             if (string.IsNullOrEmpty(parameter))
                 throw new ArgumentNullException("Parameter cant be null");
 

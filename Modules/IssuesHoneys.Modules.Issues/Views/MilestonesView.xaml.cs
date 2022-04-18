@@ -3,11 +3,11 @@
 namespace IssuesHoneys.Modules.Issues.Views
 {
     /// <summary>
-    /// Lógica de interacción para AppLabel.xaml
+    /// Lógica de interacción para Milestone.xaml
     /// </summary>
-    public partial class LabelsView : UserControl
+    public partial class MilestonesView : UserControl
     {
-        public LabelsView()
+        public MilestonesView()
         {
             InitializeComponent();
         }
