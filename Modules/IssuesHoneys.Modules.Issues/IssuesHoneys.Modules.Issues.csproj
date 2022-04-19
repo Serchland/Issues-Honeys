@@ -69,6 +69,7 @@
     <Compile Include="ViewModels\AppButtonViewModel.cs" />
     <Compile Include="ViewModels\MilestonesViewModel.cs" />
     <Compile Include="ViewModels\NewIssueViewModel.cs" />
+    <Compile Include="ViewModels\NewMilestoneViewModel.cs" />
     <Compile Include="Views\AppButton.xaml.cs">
       <DependentUpon>AppButton.xaml</DependentUpon>
     </Compile>
@@ -90,6 +91,9 @@
     </Compile>
     <Compile Include="Views\NewIssue.xaml.cs">
       <DependentUpon>NewIssue.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewMilestone.xaml.cs">
+      <DependentUpon>NewMilestone.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -141,6 +145,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NewIssue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewMilestone.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

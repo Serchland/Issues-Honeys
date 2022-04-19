@@ -71,7 +71,7 @@
                     Background="LightGreen"
                     Command="{Binding NavigateCommand}"
                     CommandParameter="{x:Static coreNameDef:CommandParameters.NewIssue}"
-                    Margin="30,0,0,0"
+                    Margin="30,0,5,0"
                     MinWidth="100"
                     HorizontalAlignment="Right"
                     Content="{StaticResource ButtonNewIssueCaption}"
@@ -97,9 +97,9 @@
                         BorderThickness="1"
                         BorderBrush="{StaticResource MainBorderBrush}"
                         Margin="5,5,5,0"
+                        
                         Background="WhiteSmoke">
-
-                    <Grid>
+                    <Grid MinHeight="40">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
@@ -107,17 +107,13 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
                         <CheckBox Grid.Column="0"
-                                  Grid.Row="0"
+                                  
                                   Margin="5,0,0,0"
                                   VerticalAlignment="Center" />
 
                         <StackPanel Grid.Column="1"
-                                    Grid.Row="0"
+                        
                                     Orientation="Horizontal"
                                     VerticalAlignment="Center">
 
@@ -230,7 +226,7 @@
                                                 Background="{TemplateBinding Background}"
                                                 Padding="{TemplateBinding Padding}"
                                                 SnapsToDevicePixels="true">
-                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                            <ContentPresenter HorizontalAlignment="Stretch"
                                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                                         </Border>
@@ -296,6 +292,7 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                                         <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"
@@ -543,6 +540,16 @@
                                             </ListBox.ItemContainerStyle>
                                         </ListBox>
                                     </StackPanel>
+
+                                    <StackPanel Grid.Column="2" HorizontalAlignment="Right"
+                                           Grid.RowSpan="2" VerticalAlignment="Center"
+                                           Margin="0,0,20,0" Orientation="Horizontal">
+                                        <Label >
+                                            <iconpacks:PackIconCodicons Kind="Comment" />
+                                        </Label>
+                                        <Label Content="4" Padding="0,2,0,0"></Label>
+                                    </StackPanel>
+                                    
                                 </Grid>
                             </Border>
                         </DataTemplate>

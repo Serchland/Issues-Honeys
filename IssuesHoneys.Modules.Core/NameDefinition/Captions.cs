@@ -11,6 +11,7 @@
         public const string Projects = "Projects";
         public const string Shell = "Shell";
         public const string NewIssue = "New issue";
+        public const string NewMilestone = "New Milestone";
     }
 
     public static class RegionNames
@@ -27,6 +28,7 @@
         public const string LabelsMain = "LabelsMain";
         public const string MilestonesMain = "MilestonesMain";
         public const string NewIssue = "NewIssue";
+        public const string NewMilestone = "New Milestone";
 
         public const string ProjectFooter = "ProjectFooter";
         public const string ProjectMain = "ProjectMain";
