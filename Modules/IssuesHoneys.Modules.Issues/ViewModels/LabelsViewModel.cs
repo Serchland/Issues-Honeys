@@ -16,7 +16,6 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
     {
         private IApplicationCommands _applicationCommands;
         private IIssueService _isuesService;
-        
         public LabelsViewModel(IApplicationCommands applicationsCommands, IIssueService issueService)
         {
             _applicationCommands = applicationsCommands;

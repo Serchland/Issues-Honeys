@@ -27,8 +27,12 @@ namespace IssuesHoneys.Modules.Projects
             ViewModelLocationProvider.Register<AppMain, AppMainViewModel>();
             ViewModelLocationProvider.Register<AppButton, AppButtonViewModel>();
 
+            ViewModelLocationProvider.Register<PrismUserControl, PrismUserControlViewModel>();
+
             containerRegistry.RegisterForNavigation<AppFooter, AppFooterViewModel>(RegisterForNavigation.ProjectFooter);
             containerRegistry.RegisterForNavigation<AppMain, AppMainViewModel>(RegisterForNavigation.ProjectMain);
+
+            containerRegistry.RegisterForNavigation<PrismUserControl, PrismUserControlViewModel>("DemoNavigate");
         }
     }
 }

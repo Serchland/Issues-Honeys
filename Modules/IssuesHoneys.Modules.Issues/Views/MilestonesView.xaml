@@ -79,15 +79,13 @@
                     BorderBrush="LightGray"
                     Background="LightGreen"
                     HorizontalAlignment="Right"
-                    
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="{x:Static coreNameDef:CommandParameters.NewMilestone}"
                     MinWidth="100"
                     Content="{StaticResource ButtonNewMilestoneCaption}"
                     controls:ControlsHelper.FocusBorderBrush="Orange">
             </Button>
 
-            <!--SERCH00: What the heck!
-            Command="{Binding NavigateCommand}"
-                    CommandParameter="{x:Static coreNameDef:CommandParameters.NewMilestone}"-->
         </Grid>
 
         <Border Grid.Row="1"
@@ -234,7 +232,7 @@
                                        Padding="5,0,5,0"
                                        Height="Auto"
                                        Name="PART_txtBlockName">
-                                </Label>
+                            </Label>
 
                             <StackPanel Grid.Column="0" Grid.Row="1"
                                        VerticalAlignment="Center" Orientation="Horizontal">
@@ -242,7 +240,7 @@
                                     <iconpacks:PackIconFeatherIcons Kind="AlertTriangle" />
                                 </Label>
                                 <Label Content="Past due by about 2 month" FontWeight="SemiBold"></Label>
-                                
+
                                 <Label Foreground="Gray">
                                     <iconpacks:PackIconMaterialDesign Kind="AccessTime" />
                                 </Label>
@@ -256,7 +254,7 @@
                                          HorizontalAlignment="Stretch"
                                          Value="15"  Background="Orange"
                                                        Foreground="LightGreen">
-                                
+
                             </controls:MetroProgressBar>
 
                             <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal"
@@ -272,12 +270,10 @@
                                 <Label Content="Close"></Label>
                                 <Label Content="Delete" Foreground="Red"></Label>
                             </StackPanel>
-
                         </Grid>
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
         </ListView>
     </Grid>
 </UserControl>

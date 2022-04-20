@@ -3,7 +3,7 @@
 namespace IssuesHoneys.Modules.Issues.Views
 {
     /// <summary>
-    /// Lógica de interacción para NewMilestone.xaml
+    /// Interaction logic for PrismUserControl
     /// </summary>
     public partial class NewMilestone : UserControl
     {

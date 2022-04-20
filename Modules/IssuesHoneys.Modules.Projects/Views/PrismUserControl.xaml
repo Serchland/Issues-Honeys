@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="IssuesHoneys.Modules.Issues.Views.NewMilestone"
+﻿<UserControl x:Class="IssuesHoneys.Modules.Projects.Views.PrismUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
-        <Label Content="Under Construction" FontSize="50"></Label>
+        <Label Content="MyDemoNavigate"></Label> 
     </Grid>
 </UserControl>

@@ -62,6 +62,7 @@ namespace Issues_Honeys.ViewModels
 
                     break;
 
+                    
                 default:
                     _regionManager.RequestNavigate(RegionNames.FooterContentRegion, RegisterForNavigation.IssueFooter);
                     _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.IssuesMain);
