@@ -8,7 +8,6 @@ using System.Collections.ObjectModel;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-
     public class MilestonesViewModel : BindableBase
     {
         IApplicationCommands _applicationCommands;

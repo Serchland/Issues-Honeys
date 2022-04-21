@@ -1,4 +1,5 @@
 ﻿using IssuesHoneys.Core.Types;
+using IssuesHoneys.Core.Types.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -12,25 +13,31 @@ namespace IssuesHoneys.Modules.Projects.ViewModels
 {
     public class AppMainViewModel : BindableBase
     {
-        public AppMainViewModel()
+        IApplicationCommands _applicationsCommands;
+        public AppMainViewModel(IApplicationCommands applicationsCommands)
         {
             Message = "Projects Main under construction";
+            _applicationsCommands = applicationsCommands;
         }
 
+        #region "Properties"
         private string _message;
         public string Message
         {
             get { return _message; }
             set { SetProperty(ref _message, value); }
         }
+        #endregion
 
-        private DelegateCommand _testCommand;
-        public DelegateCommand TestCommand =>
-            _testCommand ?? (_testCommand = new DelegateCommand(ExecuteTestCommand));
+        #region "Commands"
+        private DelegateCommand<string> _navigateCommand;
+        public DelegateCommand<string> NavigateCommand =>
+            _navigateCommand ?? (_navigateCommand = new DelegateCommand<string>(ExecuteNavigateCommand));
 
-        void ExecuteTestCommand()
+        void ExecuteNavigateCommand(string parameter)
         {
-            MessageBox.Show("TextCommand result");
+            _applicationsCommands.NavigateCommand.Execute(parameter);
         }
+        #endregion
     }
 }

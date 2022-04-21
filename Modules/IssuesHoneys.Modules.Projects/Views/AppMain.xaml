@@ -7,17 +7,14 @@
              BorderThickness="1">
 
     <Grid>
-        <!--<Grid.RowDefinitions>
+        <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        
-        <TextBlock Grid.Row="0"
-            Text="{Binding Message}"
-                   FontSize="72" MinHeight="30"></TextBlock>-->
 
-        <Button Content=""
-                Command="{Binding TestCommand}"
-                Style="{DynamicResource MahApps.Styles.Button.Circle}"></Button>
+        <Button Content="Navigate"
+                Command="{Binding NavigateCommand}"
+                CommandParameter="DemoNavigate"></Button>
+        <Label Grid.Row="1" Content="{Binding Message}" FontSize="50"></Label>
     </Grid>
 </UserControl>

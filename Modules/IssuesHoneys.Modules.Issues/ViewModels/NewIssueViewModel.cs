@@ -10,7 +10,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 {
     public class NewIssueViewModel : BindableBase
     {
-        IApplicationCommands _applicationCommand;
+        readonly IApplicationCommands _applicationCommand;
         public NewIssueViewModel(IApplicationCommands applicationCommands)
         {
             _applicationCommand = applicationCommands;
