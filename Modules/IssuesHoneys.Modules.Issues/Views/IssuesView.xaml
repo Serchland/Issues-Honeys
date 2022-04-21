@@ -61,7 +61,7 @@
             <coreViews:ButtonMilestones Grid.Column="3"
                                         Grid.Row="0"
                                         MinWidth="145"
-                                        coreViews:ButtonLabels.TotalItems="{Binding TotalMilestones}">
+                                        coreViews:ButtonMilestones.TotalItems="{Binding TotalMilestones}">
             </coreViews:ButtonMilestones>
 
             <!--Click="Button_Click"-->

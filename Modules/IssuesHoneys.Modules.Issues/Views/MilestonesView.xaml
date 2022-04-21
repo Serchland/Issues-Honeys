@@ -79,7 +79,8 @@
                     BorderBrush="LightGray"
                     Background="LightGreen"
                     HorizontalAlignment="Right"
-                    
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="{x:Static coreNameDef:CommandParameters.NewMilestone}"
                     MinWidth="100"
                     Content="{StaticResource ButtonNewMilestoneCaption}"
                     controls:ControlsHelper.FocusBorderBrush="Orange">
