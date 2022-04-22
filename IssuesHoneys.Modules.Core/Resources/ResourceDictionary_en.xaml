@@ -16,6 +16,7 @@
     <system:String x:Key="SearchCaption">Search:</system:String>
     <system:String x:Key="WaterMarkSearchLabelsCaption">Search all labels</system:String>
     <system:String x:Key="WaterMarkSearchMilestonesCaption">Search all milestones</system:String>
+    <system:String x:Key="LabelNewMilestone">New milestone</system:String>
 
     <system:String x:Key="Indent1">
     # Header1

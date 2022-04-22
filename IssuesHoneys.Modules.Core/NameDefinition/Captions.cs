@@ -12,6 +12,7 @@
         public const string Shell = "Shell";
         public const string NewIssue = "NewIssue";
         public const string NewMilestone = "NewMilestone";
+        public const string CreateMilestone = "CreateMilestone";
     }
 
     public static class RegionNames

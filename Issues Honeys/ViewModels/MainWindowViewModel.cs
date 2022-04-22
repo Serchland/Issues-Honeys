@@ -4,7 +4,6 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
-using System.Windows;
 
 namespace Issues_Honeys.ViewModels
 {
@@ -48,6 +47,7 @@ namespace Issues_Honeys.ViewModels
                     break;
 
                 case CommandParameters.Milestones:
+                case CommandParameters.CreateMilestone:
                     _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.MilestonesMain);
 
                     break;
@@ -62,7 +62,6 @@ namespace Issues_Honeys.ViewModels
 
                     break;
 
-                    
                 default:
                     _regionManager.RequestNavigate(RegionNames.FooterContentRegion, RegisterForNavigation.IssueFooter);
                     _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.IssuesMain);

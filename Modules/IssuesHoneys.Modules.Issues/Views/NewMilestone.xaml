@@ -2,8 +2,50 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:coreNameDef="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <Grid>
-        <Label Content="Under Construction" FontSize="50"></Label>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <Label Content="{StaticResource LabelNewMilestone}" FontSize="25"></Label>
+            <Separator></Separator>
+            <Label Content="Create a new milestone to help organize your issues." FontSize="10" Foreground="Gray"></Label>
+            <Label Content="Title" FontWeight="SemiBold" FontSize="16"></Label>
+            <TextBox controls:TextBoxHelper.Watermark="Title" BorderBrush="Gray" BorderThickness="0.5"></TextBox>
+            <Label Content="Due date (optional)" FontWeight="SemiBold" ></Label>
+            <TextBox controls:TextBoxHelper.Watermark="dd/mm/aa" BorderBrush="Gray" BorderThickness="0.5"></TextBox>
+            
+        </StackPanel>
+
+        <Label Content="Description:" Grid.Row="1" Margin="0,5,0,0" FontWeight="SemiBold" ></Label>
+        <TextBox AcceptsReturn="True"                  
+                 VerticalAlignment="Stretch"
+                 HorizontalAlignment="Stretch"
+                 HorizontalScrollBarVisibility="Auto"
+                 VerticalScrollBarVisibility="Auto"
+                 Grid.Row="2">
+        </TextBox>
+        
+        <Button Grid.Row="4"
+                    
+                    Margin="5"
+                    BorderBrush="LightGray"
+                    Background="LightGreen"
+                    HorizontalAlignment="Right"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="{x:Static coreNameDef:CommandParameters.CreateMilestone}"
+                    MinWidth="100"
+                    Content="Create milestone"
+                    
+                    controls:ControlsHelper.FocusBorderBrush="Orange">
+        </Button>
     </Grid>
 </UserControl>
