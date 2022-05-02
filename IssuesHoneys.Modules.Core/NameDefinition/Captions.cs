@@ -3,16 +3,16 @@
     public static class CommandParameters
     {
         public const string Cancel = "Cancel";
-        public const string NewLabel = "NewLabel";
+        public const string CreateMilestone = "CreateMilestone";
         public const string Defautl = "Default";
         public const string Issues = "Issues";
         public const string Labels = "Labels";
         public const string Milestones = "Milestones";
+        public const string NewIssue = "NewIssue";
+        public const string NewLabel = "NewLabel";
+        public const string NewMilestone = "NewMilestone";
         public const string Projects = "Projects";
         public const string Shell = "Shell";
-        public const string NewIssue = "NewIssue";
-        public const string NewMilestone = "NewMilestone";
-        public const string CreateMilestone = "CreateMilestone";
     }
 
     public static class RegionNames
@@ -30,7 +30,6 @@
         public const string MilestonesMain = "MilestonesMain";
         public const string NewIssue = "NewIssue";
         public const string NewMilestone = "NewMilestone";
-
         public const string ProjectFooter = "ProjectFooter";
         public const string ProjectMain = "ProjectMain";
     }
