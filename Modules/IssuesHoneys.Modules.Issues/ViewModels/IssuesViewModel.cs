@@ -70,7 +70,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             if (args == null)
                 throw new ArgumentNullException("args cant be null");
 
-            _applicationCommands.NavigateCommand.Execute(((Milestone)args.AddedItems[0]).Name);
+            _applicationCommands.NavigateCommand.Execute(((Milestone)args.AddedItems[0]).Title);
         }
 
         private DelegateCommand<string> _navigateCommand;

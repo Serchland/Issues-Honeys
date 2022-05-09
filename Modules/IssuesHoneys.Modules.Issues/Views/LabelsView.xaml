@@ -125,7 +125,7 @@
 
                 <Border  BorderThickness="1"
                          BorderBrush="LightGray"
-                         Background="{Binding Brush}"
+                         Background="{Binding Color}"
                          VerticalAlignment="Center"
                          Height="18"
                          MinWidth="50"

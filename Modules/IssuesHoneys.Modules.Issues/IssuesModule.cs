@@ -40,7 +40,7 @@ namespace Issues
             containerRegistry.RegisterForNavigation<NewIssue, NewIssueViewModel>(RegisterForNavigation.NewIssue);
             containerRegistry.RegisterForNavigation<NewMilestone, NewMilestoneViewModel>(RegisterForNavigation.NewMilestone);
 
-            containerRegistry.RegisterSingleton<IIssueService, IssueService>();
+            containerRegistry.RegisterSingleton<IIssueService, IssueDummyService>();
         }
     }
 }

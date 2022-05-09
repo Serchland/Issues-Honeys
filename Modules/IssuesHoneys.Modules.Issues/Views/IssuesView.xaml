@@ -318,7 +318,7 @@
                                                                 Kind="Issues" />
                                         </Label>
 
-                                        <TextBlock Text="{Binding Name}"
+                                        <TextBlock Text="{Binding Title}"
                                                    FontWeight="SemiBold"
                                                    FontSize="14"
                                                    HorizontalAlignment="Center"
@@ -345,7 +345,7 @@
                                                         <TextBlock Text="{Binding Id, StringFormat=#{0}}"
                                                                    FontSize="14"></TextBlock>
                                                         <TextBlock Text=" "></TextBlock>
-                                                        <TextBlock Text="{Binding Name}" 
+                                                        <TextBlock Text="{Binding Title}" 
                                                                    FontWeight="SemiBold"
                                                                    FontSize="14"></TextBlock>
                                                         
@@ -359,7 +359,7 @@
                                                                        FontSize="14"
                                                                        TextWrapping="Wrap"
                                                                        Foreground="Black"
-                                                                       Text="{Binding Description}" />
+                                                                       Text="{Binding Body}" />
                                                         </StackPanel>
                                                     </Viewbox>
                                                 </Grid>
@@ -386,7 +386,7 @@
                                                             Height="18"
                                                             MinWidth="50"
                                                             CornerRadius="10"
-                                                            Background="{Binding Brush}"
+                                                            Background="{Binding Color}"
                                                             x:Name="PART_ItemBorder">
 
                                                         <TextBlock Text="{Binding Name}"
@@ -494,7 +494,7 @@
 
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate>
-                                                    <TextBlock Text="{Binding Name}" Background="Transparent"></TextBlock>
+                                                    <TextBlock Text="{Binding Title}" Background="Transparent"></TextBlock>
                                                 </DataTemplate>
                                             </ListBox.ItemTemplate>
 

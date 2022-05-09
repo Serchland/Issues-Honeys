@@ -14,18 +14,11 @@ namespace IssuesHoneys.Business
             set { SetProperty(ref _id, value); }
         }
 
-        private string _name;
-        public string Name
+        private string _number;
+        public string Number
         {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
-        }
-
-        private string _description;
-        public string Description
-        {
-            get { return _description; }
-            set { SetProperty(ref _description, value); }
+            get { return _number; }
+            set { SetProperty(ref _number, value); }
         }
 
         private DateTime _crtnDate;
@@ -35,6 +28,34 @@ namespace IssuesHoneys.Business
             set { SetProperty(ref _crtnDate, value); }
         }
 
+        private string _crtnUser;
+        public string CrtnUser
+        {
+            get { return _crtnUser; }
+            set { SetProperty(ref _crtnUser, value); }
+        }
+
+        private string _title;
+        public string Title
+        {
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
+        }
+
+        private string _body;
+        public string Body
+        {
+            get { return _body; }
+            set { SetProperty(ref _body, value); }
+        }
+
+        private DateTime _lastUpdDate;
+        public DateTime LastUpdDate
+        {
+            get { return _lastUpdDate; }
+            set { SetProperty(ref _lastUpdDate, value); }
+        }
+
         private State _state;
         public State State
         {
@@ -42,13 +63,33 @@ namespace IssuesHoneys.Business
             set { SetProperty(ref _state, value); }
         }
 
-        private string _author;
-        public string Author
+        private int _totalComments;
+        public int TotalComments
         {
-            get { return _author; }
-            set { SetProperty(ref _author, value); }
+            get { return _totalComments; }
+            set { SetProperty(ref _totalComments, value); }
         }
 
+        private int _closedBy;
+        public int ClosedBy
+        {
+            get { return _closedBy; }
+            set { SetProperty(ref _closedBy, value); }
+        }
+
+        private DateTime _closedDate;
+        public DateTime ClosedDate
+        {
+            get { return _closedDate; }
+            set { SetProperty(ref _closedDate, value); }
+        }
+
+        private List<int> _assignees;
+        public List<int> Assignees
+        {
+            get { return _assignees; }
+            set { SetProperty(ref _assignees, value); }
+        }
 
         private List<Label> _labels;
         public List<Label> Labels
@@ -101,18 +142,11 @@ namespace IssuesHoneys.Business
             set { SetProperty(ref _description, value); }
         }
 
-        private string _associatedIssues;
-        public string AssociatedIssues
+        private Brush _color;
+        public Brush Color
         {
-            get { return _associatedIssues; }
-            set { SetProperty(ref _associatedIssues, value); }
-        }
-
-        private Brush _brush;
-        public Brush Brush
-        {
-            get { return _brush; }
-            set { SetProperty(ref _brush, value); }
+            get { return _color; }
+            set { SetProperty(ref _color, value); }
         }
     }
 
@@ -125,11 +159,18 @@ namespace IssuesHoneys.Business
             set { SetProperty(ref _id, value); }
         }
 
-        private string _name;
-        public string Name
+        private string _number;
+        public string Number
         {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
+            get { return _number; }
+            set { SetProperty(ref _number, value); }
+        }
+
+        private string _title;
+        public string Title
+        {
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
         }
 
         private string _description;
@@ -144,6 +185,27 @@ namespace IssuesHoneys.Business
         {
             get { return _dueDate; }
             set { SetProperty(ref _dueDate, value); }
+        }
+
+        private State _state;
+        public State State
+        {
+            get { return _state; }
+            set { SetProperty(ref _state, value); }
+        }
+
+        private DateTime _crtnDate;
+        public DateTime CrtnDate
+        {
+            get { return _crtnDate; }
+            set { SetProperty(ref _crtnDate, value); }
+        }
+
+        private string _crtnUser;
+        public string CrtnUser
+        {
+            get { return _crtnUser; }
+            set { SetProperty(ref _crtnUser, value); }
         }
     }
 }
