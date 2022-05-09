@@ -2,11 +2,15 @@
 using IssuesHoneys.Modules.Issues.ViewModels;
 using IssuesHoneys.Modules.Issues.Views;
 using IssuesHoneys.Services;
+using IssuesHoneys.Services.Dummies;
 using IssuesHoneys.Services.Interfaces;
+using IssuesHoneys.Services.SQL;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Regions;
+using System;
+using System.Configuration;
 
 namespace Issues
 {
@@ -40,7 +44,13 @@ namespace Issues
             containerRegistry.RegisterForNavigation<NewIssue, NewIssueViewModel>(RegisterForNavigation.NewIssue);
             containerRegistry.RegisterForNavigation<NewMilestone, NewMilestoneViewModel>(RegisterForNavigation.NewMilestone);
 
-            containerRegistry.RegisterSingleton<IIssueService, IssueDummyService>();
+            var appSettings = ConfigurationManager.AppSettings;
+            string result = appSettings[AppSettings.UseDummyService] ?? throw new ConfigurationErrorsException("Error reading app settings");
+            
+            if (Convert.ToBoolean(result))
+                containerRegistry.RegisterSingleton<IIssueService, IssueDummyService>();
+            else
+                containerRegistry.RegisterSingleton<IIssueService, IssueSQLService>();
         }
     }
 }

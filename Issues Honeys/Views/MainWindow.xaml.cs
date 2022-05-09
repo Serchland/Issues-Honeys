@@ -25,7 +25,7 @@ namespace Issues_Honeys.Views
             _applicationCommands.NavigateCommand.Execute(CommandParameters.Issues);
 
             //SERCH00: Only for test pourposes
-            ReadConfig();
+            //ReadConfig();
         }
 
         private void ReadConfig()

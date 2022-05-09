@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Media;
 
-namespace IssuesHoneys.Services
+namespace IssuesHoneys.Services.Dummies
 {
     public class IssueDummyService : BindableBase, IIssueService
     {

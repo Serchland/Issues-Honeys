@@ -55,7 +55,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IssueDummyService.cs" />
+    <Compile Include="Dummies\IssueDummyService.cs" />
+    <Compile Include="SQL\Converters\SQLConverters.cs" />
+    <Compile Include="SQL\IssueSQLService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -148,6 +148,20 @@ namespace IssuesHoneys.Business
             get { return _color; }
             set { SetProperty(ref _color, value); }
         }
+
+        private DateTime _crtnDate;
+        public DateTime CrtnDate
+        {
+            get { return _crtnDate; }
+            set { SetProperty(ref _crtnDate, value); }
+        }
+
+        private string _crtnUser;
+        public string CrtnUser
+        {
+            get { return _crtnUser; }
+            set { SetProperty(ref _crtnUser, value); }
+        }
     }
 
     public class Milestone : BindableBase
