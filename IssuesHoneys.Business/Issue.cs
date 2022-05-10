@@ -5,6 +5,7 @@ using System.Windows.Media;
 
 namespace IssuesHoneys.Business
 {
+    #region "ISSUE"
     public class Issue : BindableBase
     {
         private int _id;
@@ -84,18 +85,18 @@ namespace IssuesHoneys.Business
             set { SetProperty(ref _closedDate, value); }
         }
 
-        private List<int> _assignees;
-        public List<int> Assignees
-        {
-            get { return _assignees; }
-            set { SetProperty(ref _assignees, value); }
-        }
-
         private List<Label> _labels;
         public List<Label> Labels
         {
             get { return _labels; }
             set { SetProperty(ref _labels, value); }
+        }
+
+        private List<User> _assignees;
+        public List<User> Assignees
+        {
+            get { return _assignees; }
+            set { SetProperty(ref _assignees, value); }
         }
 
         private List<int> _projects;
@@ -112,13 +113,9 @@ namespace IssuesHoneys.Business
             set { SetProperty(ref _milestones, value); }
         }
     }
+    #endregion
 
-    public enum State
-    {
-        IsOpen,
-        IsClosed
-    }
-
+    #region "LABEL"
     public class Label : BindableBase
     {
         private int _id;
@@ -163,7 +160,9 @@ namespace IssuesHoneys.Business
             set { SetProperty(ref _crtnUser, value); }
         }
     }
+    #endregion
 
+    #region "MILESTONE"
     public class Milestone : BindableBase
     {
         private int _id;
@@ -221,5 +220,51 @@ namespace IssuesHoneys.Business
             get { return _crtnUser; }
             set { SetProperty(ref _crtnUser, value); }
         }
+    }
+    #endregion
+
+    #region "USER"
+    public class User : BindableBase
+    {
+        private int _id;
+        public int Id
+        {
+            get { return _id; }
+            set { SetProperty(ref _id, value); }
+        }
+
+        private string _name;
+        public string Name
+        {
+            get { return _name; }
+            set { SetProperty(ref _name, value); }
+        }
+
+        private string _surName;
+        public string SurName
+        {
+            get { return _surName; }
+            set { SetProperty(ref _surName, value); }
+        }
+
+        private string _gu;
+        public string Gu
+        {
+            get { return _gu; }
+            set { SetProperty(ref _gu, value); }
+        }
+
+        private DateTime _crtnDate;
+        public DateTime CrtnDate
+        {
+            get { return _crtnDate; }
+            set { SetProperty(ref _crtnDate, value); }
+        }
+    }
+        #endregion
+        public enum State
+    {
+        IsOpen,
+        IsClosed
     }
 }

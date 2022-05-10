@@ -361,7 +361,7 @@
                                 MinWidth="50"
                                 MaxWidth="85"
                                 CornerRadius="10"
-                                Background="{Binding Brush}"
+                                Background="{Binding Color}"
                                 x:Name="PART_ItemBorder">
 
                                 <TextBlock Text="{Binding Name}"

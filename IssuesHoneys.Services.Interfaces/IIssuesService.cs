@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IssuesHoneys.Services.Interfaces
 {
-    public interface IIssueService
+    public interface IIssueService 
     {
         void CreateLabel();
         List<Label> GetLabels();
