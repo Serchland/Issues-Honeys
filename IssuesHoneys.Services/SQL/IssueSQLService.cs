@@ -16,11 +16,17 @@ namespace IssuesHoneys.Services.SQL
         private List<Milestone> _milestones = null;
         private List<User> _users = null;
 
+        /// <summary>
+        /// Create a label in the sql model. Implementation of IIssueService.CreateLabel
+        /// </summary>
         public void CreateLabel()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Obtain issues from the sql model. Implementation of IIssueService.GetIssues
+        /// </summary>
         public List<Issue> GetIssues()
         {
             _iisues = new List<Issue>();
@@ -43,6 +49,9 @@ namespace IssuesHoneys.Services.SQL
             return _iisues;
         }
 
+        /// <summary>
+        /// Obtain labels from the sql model. Implementation of IIssueService.GetLabels
+        /// </summary>
         public List<Label> GetLabels()
         {
             //SERCH00: Assess whether it is necessary to have the values in memory
@@ -69,6 +78,9 @@ namespace IssuesHoneys.Services.SQL
             return _labels;
         }
 
+        /// <summary>
+        /// Obtain milestones from the sql model. Implementation of IIssueService.GetMillestones
+        /// </summary>
         public List<Milestone> GetMillestones()
         {
             //SERCH00: Assess whether it is necessary to have the values in memory
@@ -95,6 +107,9 @@ namespace IssuesHoneys.Services.SQL
             return _milestones;
         }
 
+        /// <summary>
+        /// Obtain users from the sql model. Implementation of IIssueService.GetUsers
+        /// </summary>
         public List<User> GetUsers()
         {
             //SERCH00: Assess whether it is necessary to have the values in memory
