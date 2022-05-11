@@ -1,4 +1,5 @@
 ﻿using IssuesHoneys.BusinessTypes;
+using IssuesHoneys.Core.Base;
 using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
@@ -8,13 +9,11 @@ using System.Collections.ObjectModel;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class MilestonesViewModel : BindableBase
+    public class MilestonesViewModel : ViewModelBase
     {
-        IApplicationCommands _applicationCommands;
         IIssueService _issueService;
-        public MilestonesViewModel(IApplicationCommands applicationCommands, IIssueService issueService)
+        public MilestonesViewModel(IApplicationCommands applicationCommands, IIssueService issueService) : base(applicationCommands)
         {
-            _applicationCommands = applicationCommands;
             _issueService = issueService;
             Initialize();
         }
@@ -38,20 +37,6 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         {
             get { return _totalMilestones; }
             set { SetProperty(ref _totalMilestones, value); }
-        }
-        #endregion
-
-        #region "Commands"
-        private DelegateCommand<string> _navigateCommand;
-        public DelegateCommand<string> NavigateCommand =>
-            _navigateCommand ?? (_navigateCommand = new DelegateCommand<string>(ExecuteNavigateCommand));
-
-        void ExecuteNavigateCommand(string parameter)
-        {
-            if (string.IsNullOrEmpty(parameter))
-                throw new ArgumentNullException("parameter cant be null");
-
-            _applicationCommands.NavigateCommand.Execute(parameter);
         }
         #endregion
     }

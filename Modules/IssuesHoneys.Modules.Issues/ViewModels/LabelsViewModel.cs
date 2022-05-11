@@ -1,4 +1,5 @@
 ﻿using IssuesHoneys.BusinessTypes;
+using IssuesHoneys.Core.Base;
 using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
@@ -12,13 +13,11 @@ using System.Windows.Media;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class LabelsViewModel : BindableBase
+    public class LabelsViewModel : ViewModelBase
     {
-        private IApplicationCommands _applicationCommands;
         private IIssueService _isuesService;
-        public LabelsViewModel(IApplicationCommands applicationsCommands, IIssueService issueService)
+        public LabelsViewModel(IApplicationCommands applicationsCommands, IIssueService issueService) : base (applicationsCommands)
         {
-            _applicationCommands = applicationsCommands;
             _isuesService = issueService;
             Initialize();
         }
@@ -73,18 +72,6 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         #endregion
 
         #region "Commands"
-        private DelegateCommand<string> _navigateCommand;
-        public DelegateCommand<string> NavigateCommand =>
-            _navigateCommand ?? (_navigateCommand = new DelegateCommand<string>(ExecuteNavigateCommand));
-
-        void ExecuteNavigateCommand(string parameter)
-        {
-            if (string.IsNullOrEmpty(parameter))
-                throw new ArgumentNullException("parameter cant be null");
-
-            _applicationCommands.NavigateCommand.Execute(parameter);
-        }
-
         private DelegateCommand<string> _newLabelVisibilityCommand;
         public DelegateCommand<string> NewLabelVisibilityCommand =>
             _newLabelVisibilityCommand ?? (_newLabelVisibilityCommand = new DelegateCommand<string>(ExecuteNewLabelVisibilityCommand));

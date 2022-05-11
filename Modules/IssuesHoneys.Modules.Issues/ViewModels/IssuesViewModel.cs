@@ -1,4 +1,5 @@
 ﻿using IssuesHoneys.BusinessTypes;
+using IssuesHoneys.Core.Base;
 using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
@@ -9,13 +10,11 @@ using System.Windows.Controls;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class IssuesViewModel : BindableBase
+    public class IssuesViewModel : ViewModelBase
     {
-        private IApplicationCommands _applicationCommands;
         private IIssueService _isuesService;
-        public IssuesViewModel(IApplicationCommands applicationsCommands, IIssueService issueService) 
+        public IssuesViewModel(IApplicationCommands applicationsCommands, IIssueService issueService) : base(applicationsCommands)
         {
-            _applicationCommands = applicationsCommands;
             _isuesService = issueService;
             Initialize();
         }
@@ -57,35 +56,6 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             get { return _selectedItem; }
             set { SetProperty(ref _selectedItem, value); }
         }
-        #endregion
-
-        #region "Commands"
-        private DelegateCommand<SelectionChangedEventArgs> _testCommand;
-        public DelegateCommand<SelectionChangedEventArgs> TestCommand =>
-            _testCommand ?? (_testCommand = new DelegateCommand<SelectionChangedEventArgs>(ExecuteTestCommand));
-
-        void ExecuteTestCommand(SelectionChangedEventArgs args)
-        {
-            //SERCH00: I don't know how I'm going to navigate yet
-            if (args == null)
-                throw new ArgumentNullException("args cant be null");
-
-            _applicationCommands.NavigateCommand.Execute(((Milestone)args.AddedItems[0]).Title);
-        }
-
-        private DelegateCommand<string> _navigateCommand;
-        public DelegateCommand<string> NavigateCommand =>
-            _navigateCommand ?? (_navigateCommand = new DelegateCommand<string>(ExecuteNavigateCommand));
-
-        void ExecuteNavigateCommand(string parameter)
-        {
-            if (string.IsNullOrEmpty(parameter))
-                throw new ArgumentNullException("parameter cant be null");
-
-            _applicationCommands.NavigateCommand.Execute(parameter);
-        }
-
-       
         #endregion
     }
 }

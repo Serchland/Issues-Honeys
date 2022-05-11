@@ -1,5 +1,4 @@
-﻿using ControlzEx.Theming;
-using Issues;
+﻿using Issues;
 using Issues_Honeys.Core.Prism;
 using Issues_Honeys.Views;
 using IssuesHoneys.Core.Types.Interfaces;

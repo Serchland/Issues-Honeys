@@ -1,4 +1,5 @@
-﻿using IssuesHoneys.Core.Types.Interfaces;
+﻿using IssuesHoneys.Core.Base;
+using IssuesHoneys.Core.Types.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -8,12 +9,10 @@ using System.Windows;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class NewIssueViewModel : BindableBase
+    public class NewIssueViewModel : ViewModelBase
     {
-        readonly IApplicationCommands _applicationCommand;
-        public NewIssueViewModel(IApplicationCommands applicationCommands)
+        public NewIssueViewModel(IApplicationCommands applicationCommands) : base(applicationCommands)
         {
-            _applicationCommand = applicationCommands;
             _issueTextView = @"**Describe the bug**
 A clear and concise description of what the bug is.
 
@@ -117,32 +116,6 @@ Add any other context about the problem here.
         public byte BackgroundBlue
         {
             get { return _backgroundBlue; }
-        }
-        #endregion
-
-        #region "Commands"
-        private DelegateCommand<string> _navigateCommand;
-        public DelegateCommand<string> NavigateCommand =>
-            _navigateCommand ?? (_navigateCommand = new DelegateCommand<string>(ExecuteNavigateCommand));
-
-        void ExecuteNavigateCommand(string parameter)
-        {
-            if (string.IsNullOrEmpty(parameter))
-                throw new ArgumentNullException("parameter cant be null");
-
-            _applicationCommand.NavigateCommand.Execute(parameter);
-        }
-
-        private DelegateCommand<string> _dummyCommand;
-        public DelegateCommand<string> DummyCommand =>
-            _dummyCommand ?? (_dummyCommand = new DelegateCommand<string>(ExecuteDummyCommand));
-
-        void ExecuteDummyCommand(string parameter)
-        {
-            if (string.IsNullOrEmpty(parameter))
-                throw new ArgumentNullException("parameter cant be null");
-
-            MessageBox.Show(String.Format("{0} {1}", parameter, "Settings"));
         }
         #endregion
     }

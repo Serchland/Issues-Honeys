@@ -1,4 +1,5 @@
-﻿using IssuesHoneys.Core.Types.Interfaces;
+﻿using IssuesHoneys.Core.Base;
+using IssuesHoneys.Core.Types.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -7,26 +8,10 @@ using System.Linq;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class NewMilestoneViewModel : BindableBase
+    public class NewMilestoneViewModel : ViewModelBase
     {
-        IApplicationCommands _applicationCommands;
-        public NewMilestoneViewModel(IApplicationCommands applicationCommands)
+        public NewMilestoneViewModel(IApplicationCommands applicationCommands) : base(applicationCommands)
         {
-            _applicationCommands = applicationCommands;
         }
-
-        #region "Commands"
-        private DelegateCommand<string> _navigateCommand;
-        public DelegateCommand<string> NavigateCommand =>
-            _navigateCommand ?? (_navigateCommand = new DelegateCommand<string>(ExecuteNavigateCommand));
-
-        void ExecuteNavigateCommand(string parameter)
-        {
-            if (string.IsNullOrEmpty(parameter))
-                throw new ArgumentNullException("parameter cant be null");
-
-            _applicationCommands.NavigateCommand.Execute(parameter);
-        }
-        #endregion
     }
 }
