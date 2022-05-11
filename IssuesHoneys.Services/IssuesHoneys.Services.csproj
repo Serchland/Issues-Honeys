@@ -56,6 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dummies\IssueDummyService.cs" />
+    <Compile Include="NameDefinition\Captions.cs" />
+    <Compile Include="SQL\Converters.cs" />
     <Compile Include="SQL\IssueSQLService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -72,5 +74,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
