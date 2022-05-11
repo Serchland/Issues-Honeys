@@ -2,6 +2,9 @@
 
 namespace IssuesHoneys.Core.Types.Interfaces
 {
+    /// <summary>
+    /// PRISM commands used by the application
+    /// </summary>
     public interface IApplicationCommands
     {
         CompositeCommand NavigateCommand { get; }

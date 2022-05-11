@@ -1,4 +1,4 @@
-﻿using IssuesHoneys.Business;
+﻿using IssuesHoneys.BusinessTypes;
 using IssuesHoneys.Services.Interfaces;
 using Prism.Mvvm;
 using System;
@@ -8,6 +8,9 @@ using System.Windows.Media;
 
 namespace IssuesHoneys.Services.Dummies
 {
+    /// <summary>
+    /// Dummy functionality should only be used for development or demonstration purposes.
+    /// </summary>
     public class IssueDummyService : BindableBase, IIssueService
     {
         private static List<Label> _labels;
@@ -31,35 +34,56 @@ namespace IssuesHoneys.Services.Dummies
             _millestones.Add(new Milestone() { Description = "PRO V1.12", DueDate = new DateTime(2022, 6, 11), Id = 0, Title = "PRO" });
             _millestones.Add(new Milestone() { Description = "Send PRE", DueDate = new DateTime(2022, 5, 20), Id = 1, Title = "PRE" });
             _millestones.Add(new Milestone() { Description = "Send FOR", DueDate = new DateTime(2022, 4, 20), Id = 2, Title = "FOR" });
-
         }
 
+        /// <summary>
+        /// Create a LABEL in the sql model. Implementation of IIssueService.CreateLabel
+        /// </summary>
+        /// <param name="newLabel"></param>
         public void CreateLabel(Label newLabel)
         {
             _labels.Add(newLabel);
         }
 
+        /// <summary>
+        /// Obtain ISSUES from the sql model. Implementation of IIssueService.GetIssues
+        /// </summary>
         public List<Issue> GetIssues()
         {
             return IssuesResponse.Issues();
         }
 
+        /// <summary>
+        /// Obtain LABELS from the SQL model. Implementation of IIssueService.GetLabels
+        /// </summary>
+        /// <returns>List<Label></returns>
         public List<Label> GetLabels()
         {
             return IssuesResponse.Labels();
         }
 
+        /// <summary>
+        /// Obtain MILESTONES from the SQL model. Implementation of IIssueService.GetMillestones
+        /// </summary>
+        /// <returns>List<Milestone></returns>
         public List<Milestone> GetMillestones()
         {
             return IssuesResponse.Millestones();
         }
 
-        public void CreateLabel()
+        /// <summary>
+        /// Obtain USERS from the SQL model. Implementation of IIssueService.GetUsers
+        /// </summary>
+        /// <returns>List<User></returns>
+        public List<User> GetUsers()
         {
             throw new NotImplementedException();
         }
 
-        public class IssuesResponse : BindableBase
+        /// <summary>
+        /// Dummies responses uses by IssueDummyService
+        /// </summary>
+        internal class IssuesResponse : BindableBase
         {
             internal static List<Issue> Issues()
             {

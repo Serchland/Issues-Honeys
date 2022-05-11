@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace IssuesHoneys.Business
+namespace IssuesHoneys.BusinessTypes
 {
+    /// <summary>
+    /// Extension methods used by the application
+    /// </summary>
     public static class Extensions
     {
-        public static Brush ToBrush(this string HexColorString)
-        {
-            return (Brush)new BrushConverter().ConvertFromString(HexColorString);   
-        }
-
+        /// <summary>
+        /// Allows to fill in the types list<T> in the ISSUE object
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="listObject"></param>
+        /// <param name="loadedObject"></param>
+        /// <param name="reader"></param>
+        /// <param name="issue"></param>
         public static void FillOutIssueList<T>(this List<T> listObject, List<T> loadedObject, object reader, ref Issue issue)
         {
             string ids = Convert.ToString(reader);
@@ -52,6 +55,16 @@ namespace IssuesHoneys.Business
                 }
 
             }
+        }
+
+        /// <summary>
+        /// Converts a colour in hexadecimal format to Brush
+        /// </summary>
+        /// <param name="HexColorString"></param>
+        /// <returns>Brush</returns>
+        public static Brush ToBrush(this string HexColorString)
+        {
+            return (Brush)new BrushConverter().ConvertFromString(HexColorString);
         }
     }
 }

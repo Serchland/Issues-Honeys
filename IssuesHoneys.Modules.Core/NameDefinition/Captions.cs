@@ -1,9 +1,11 @@
 ﻿namespace IssuesHoneys.Core.NameDefinition
 {
+    /// <summary>
+    /// Avoid magic strings.
+    /// </summary>
     public static class AppSettings
     {
         public const string UseDummyService = "UseDummyService";
-        public const string HONEYSCONTEXT = "HONEYSCONTEXT";
     }
 
     public static class CommandParameters

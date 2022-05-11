@@ -1,4 +1,4 @@
-﻿using IssuesHoneys.Business;
+﻿using IssuesHoneys.BusinessTypes;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -17,7 +17,7 @@ namespace IssuesHoneys.Services.SQL
         /// <param name="labels">Labels obtained from the model to cross-reference data</param>
         /// <param name="users">Users obtained from the model to cross-reference data</param>
         /// <param name="milestones">Milestones obtained from the model to cross-reference data</param>
-        /// <returns></returns>
+        /// <returns>Issue</returns>
         internal static Issue SQLIssueConverter(SqlDataReader reader, ref List<Label> labels, ref List<User> users, ref List<Milestone> milestones)
         {
             Issue result = new Issue();
@@ -50,7 +50,7 @@ namespace IssuesHoneys.Services.SQL
         /// Converts the results obtained from the model to the type of data expected by the application.
         /// </summary>
         /// <param name="reader">Reader with datas</param>
-        /// <returns></returns>
+        /// <returns>Label</returns>
         internal static Label SQLLabelConverter(SqlDataReader reader)
         {
             Label result = new Label();
@@ -70,7 +70,7 @@ namespace IssuesHoneys.Services.SQL
         /// Converts the results obtained from the model to the type of data expected by the application.
         /// </summary>
         /// <param name="reader">Reader with datas</param>
-        /// <returns></returns>
+        /// <returns>Milestone</returns>
         internal static Milestone SQLMilestoneConverter(SqlDataReader reader)
         {
             Milestone result = new Milestone();
@@ -91,7 +91,7 @@ namespace IssuesHoneys.Services.SQL
         /// Converts the results obtained from the model to the type of data expected by the application.
         /// </summary>
         /// <param name="reader">Reader with datas</param>
-        /// <returns></returns>
+        /// <returns>User</returns>
         internal static User SQLUserConverter(SqlDataReader reader)
         {
             User result = new User();

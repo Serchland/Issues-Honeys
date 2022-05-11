@@ -1,4 +1,4 @@
-﻿using IssuesHoneys.Business;
+﻿using IssuesHoneys.BusinessTypes;
 using IssuesHoneys.Services.Interfaces;
 using IssuesHoneys.Services.NameDefinition;
 using Prism.Mvvm;
@@ -9,6 +9,9 @@ using System.Data.SqlClient;
 
 namespace IssuesHoneys.Services.SQL
 {
+    /// <summary>
+    /// Redirects the implemented functionality to the SQL model
+    /// </summary>
     public class IssueSQLService : BindableBase, IIssueService
     {
         private List<Issue> _iisues = null;
@@ -17,15 +20,16 @@ namespace IssuesHoneys.Services.SQL
         private List<User> _users = null;
 
         /// <summary>
-        /// Create a label in the sql model. Implementation of IIssueService.CreateLabel
+        /// Create a LABEL in the sql model. Implementation of IIssueService.CreateLabel
         /// </summary>
-        public void CreateLabel()
+        /// <param name="newLabel"></param>
+        public void CreateLabel(Label newLabel)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Obtain issues from the sql model. Implementation of IIssueService.GetIssues
+        /// Obtain ISSUES from the sql model. Implementation of IIssueService.GetIssues
         /// </summary>
         public List<Issue> GetIssues()
         {
@@ -50,8 +54,9 @@ namespace IssuesHoneys.Services.SQL
         }
 
         /// <summary>
-        /// Obtain labels from the sql model. Implementation of IIssueService.GetLabels
+        /// Obtain LABELS from the SQL model. Implementation of IIssueService.GetLabels
         /// </summary>
+        /// <returns>List<Label></returns>
         public List<Label> GetLabels()
         {
             //SERCH00: Assess whether it is necessary to have the values in memory
@@ -79,8 +84,9 @@ namespace IssuesHoneys.Services.SQL
         }
 
         /// <summary>
-        /// Obtain milestones from the sql model. Implementation of IIssueService.GetMillestones
+        /// Obtain MILESTONES from the SQL model. Implementation of IIssueService.GetMillestones
         /// </summary>
+        /// <returns>List<Milestone></returns>
         public List<Milestone> GetMillestones()
         {
             //SERCH00: Assess whether it is necessary to have the values in memory
@@ -108,8 +114,9 @@ namespace IssuesHoneys.Services.SQL
         }
 
         /// <summary>
-        /// Obtain users from the sql model. Implementation of IIssueService.GetUsers
+        /// Obtain USERS from the SQL model. Implementation of IIssueService.GetUsers
         /// </summary>
+        /// <returns>List<User></returns>
         public List<User> GetUsers()
         {
             //SERCH00: Assess whether it is necessary to have the values in memory

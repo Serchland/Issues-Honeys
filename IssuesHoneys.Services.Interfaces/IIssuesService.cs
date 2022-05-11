@@ -1,4 +1,4 @@
-﻿using IssuesHoneys.Business;
+﻿using IssuesHoneys.BusinessTypes;
 using System.Collections.Generic;
 
 namespace IssuesHoneys.Services.Interfaces
@@ -9,32 +9,32 @@ namespace IssuesHoneys.Services.Interfaces
     public interface IIssueService 
     {
         /// <summary>
-        /// Method used to create a new label in the model
+        /// Method used to create a new LABEL in the model
         /// </summary>
-        void CreateLabel();
+        void CreateLabel(Label newLabel);
 
         /// <summary>
-        /// Method used to obtain the issues from the model
+        /// Method used to obtain the ISSUES from the model
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List<Issue></returns>
         List<Issue> GetIssues();
 
         /// <summary>
-        /// Method used to obtain the labels from the model
+        /// Method used to obtain the LABELS from the model
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List<Label></returns>
         List<Label> GetLabels();
 
         /// <summary>
-        /// Method used to obtain the milestones from the model
+        /// Method used to obtain the MILESTONES from the model
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List<Milestone></returns>
         List<Milestone> GetMillestones();
 
         /// <summary>
-        /// Method used to obtain the users from the model
+        /// Method used to obtain the USERS from the model
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List<User></returns>
         List<User> GetUsers();
     }
 }

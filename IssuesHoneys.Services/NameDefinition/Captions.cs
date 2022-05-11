@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace IssuesHoneys.Services.NameDefinition
 {
+    /// <summary>
+    /// Avoid magic strings.
+    /// </summary>
     internal class Captions
     {
         internal static class AppSettings
