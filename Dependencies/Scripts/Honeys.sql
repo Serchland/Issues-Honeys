@@ -186,7 +186,7 @@ IF Object_id('[issues].[ISSUES]') IS NOT NULL
            [NUMBER]              INT NOT NULL,
            [Pk_IssueTracking_Id] INT IDENTITY (1, 1) NOT NULL,
            [PROJECTS]            VARCHAR(50) NULL,
-           [STATE]               INT NOT NULL CONSTRAINT [DF_ISSUES_STATE] DEFAULT 0,
+           [STATE]               INT NOT NULL CONSTRAINT [DF_ISSUES_STATE] DEFAULT 1,
            [TITLE]               VARCHAR(50) NOT NULL,
            [TOTALCOMMENTS] AS
            [issues].[Function_TotalComments]([Pk_IssueTracking_Id]),
@@ -214,7 +214,7 @@ ELSE
            [NUMBER]              INT NOT NULL,
            [Pk_IssueTracking_Id] INT IDENTITY (1, 1) NOT NULL,
            [PROJECTS]            VARCHAR(50) NULL,
-           [STATE]               INT NOT NULL CONSTRAINT [DF_ISSUES_STATE] DEFAULT 0,
+           [STATE]               INT NOT NULL CONSTRAINT [DF_ISSUES_STATE] DEFAULT 1,
            [TITLE]               VARCHAR(50) NOT NULL,
            [TOTALCOMMENTS] AS
            [issues].[Function_TotalComments]([Pk_IssueTracking_Id]),
@@ -559,7 +559,7 @@ INSERT INTO [issues].[issues]
 VALUES      (
 				'1;2', 'Allow adding xml files', NULL, NULL,
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				1, '1', GETDATE(), NULL, 1, NULL, 0, 'SART899876'
+				1, '1', GETDATE(), NULL, 1, NULL, 1, 'SART899876'
 			)
            
 GO
@@ -582,7 +582,7 @@ INSERT INTO [issues].[issues]
 VALUES      (
 				'3', 'Create DARK Theme', NULL, NULL,
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				1, '1', GETDATE(), NULL, 1, NULL, 0, 'INTG876432'
+				1, '1', GETDATE(), NULL, 1, NULL, 1, 'INTG876432'
 			)
 
 GO
