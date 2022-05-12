@@ -36,7 +36,7 @@ namespace IssuesHoneys.Services.SQL
             _iisues = new List<Issue>();
             var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
 
-            string queryString = "SELECT * FROM ISSUES;";
+            string queryString = "SELECT * FROM [HONEYS].[issues].[ISSUES];";
             using (var connection = new SqlConnection(connectionString))
             {
                 var command = new SqlCommand(queryString, connection);
@@ -65,7 +65,7 @@ namespace IssuesHoneys.Services.SQL
                 _labels = new List<Label>();
                 var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
 
-                string queryString = "SELECT * FROM LABELS;";
+                string queryString = "SELECT * FROM [HONEYS].[issues].[LABELS];";
                 using (var connection = new SqlConnection(connectionString))
                 {
                     var command = new SqlCommand(queryString, connection);
@@ -95,7 +95,7 @@ namespace IssuesHoneys.Services.SQL
                 _milestones = new List<Milestone>();
                 var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
 
-                string queryString = "SELECT * FROM MILESTONES;";
+                string queryString = "SELECT * FROM [HONEYS].[issues].[MILESTONES];";
                 using (var connection = new SqlConnection(connectionString))
                 {
                     var command = new SqlCommand(queryString, connection);
@@ -125,7 +125,7 @@ namespace IssuesHoneys.Services.SQL
                 _users = new List<User>();
                 var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
 
-                string queryString = "SELECT * FROM USERS;";
+                string queryString = "SELECT * FROM [HONEYS].[issues].[USERS];";
                 using (var connection = new SqlConnection(connectionString))
                 {
                     var command = new SqlCommand(queryString, connection);

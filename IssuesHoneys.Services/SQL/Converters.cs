@@ -20,29 +20,46 @@ namespace IssuesHoneys.Services.SQL
         /// <returns>Issue</returns>
         internal static Issue SQLIssueConverter(SqlDataReader reader, ref List<Label> labels, ref List<User> users, ref List<Milestone> milestones)
         {
+            //[ASSIGNEES]           VARCHAR(50) NULL,
+            //[BODY]                VARCHAR(max) NOT NULL,
+            //[CLOSEDBY]            INT NULL,
+            //[CLOSEDDAY]           DATETIME NULL,
+            //[CRTNDATE]            DATETIME NOT NULL,
+            //[CRTNUSER]            INT NOT NULL,
+            //[LABELS]              VARCHAR(50) NOT NULL,
+            //[LASTUPD]             DATETIME NULL,
+            //[MILESTONES]          VARCHAR(50) NULL,
+            //[NUMBER]              INT NOT NULL,
+            //[Pk_IssueTracking_Id] INT IDENTITY(1, 1) NOT NULL,
+            //[PROJECTS]            VARCHAR(50) NULL,
+            //[STATE]               INT NOT NULL CONSTRAINT[DF_ISSUES_STATE] DEFAULT 0,
+            //[TITLE]               VARCHAR(50) NOT NULL,
+            //[TOTALCOMMENTS] AS [issues].[Function_TotalComments]([Pk_IssueTracking_Id]),
+            //CONSTRAINT[PK_IssueDetailsTracking_Id] PRIMARY KEY CLUSTERED([Pk_IssueTracking_Id] ASC)
+
             Issue result = new Issue();
+            int idx = 0;
 
-            //Id - Number - CrtnUser, Title, Body, ClosedBy, Labels, Assignees, Milestones, Comments, CrtnDate, ClosedDay, LastUpdate, Projects, State, TotalComments
-            result.Id = Convert.ToInt32(reader[0]);
-            result.Number = Convert.ToString(reader[1]);
-            result.CrtnUser = Convert.ToString(reader[2]);
-            result.Title = Convert.ToString(reader[3]);
-            result.Body = Convert.ToString(reader[4]);
-            //result.ClosedBy = Convert.ToInt32(reader[5]);
-            result.Labels.FillOutIssueList<Label>(labels, reader[6], ref result);
-            result.Assignees.FillOutIssueList<User>(users, reader[7], ref result);
-            result.Milestones.FillOutIssueList<Milestone>(milestones, reader[8], ref result);
-            result.TotalComments = Convert.ToInt32(reader[9]);
-            result.CrtnDate = Convert.ToDateTime(reader[10]);
-            //SERCH00: Check null value
-            //result.ClosedDate = Convert.ToDateTime(reader[11]);
-            //SERCH00: Check null value
-            //result.LastUpdDate = Convert.ToDateTime(reader[12]);
-            //SERCH00: Pending to implemet
-            //result.Projects
-            result.State = (State)Convert.ToInt32(reader[14]);
-            result.TotalComments = Convert.ToInt32(reader[15]);
-
+            result.Assignees.FillOutIssueList<User>(users, reader[idx++], ref result);
+            result.Body = Convert.ToString(reader[idx++]);
+            //result.ClosedBy = Convert.ToInt32(index++]);
+            idx++;
+            //result.ClosedDate = Convert.ToDateTime(reader[3]);
+            idx++;
+            result.CrtnDate = Convert.ToDateTime(reader[idx++]);
+            result.CrtnUser = Convert.ToString(reader[idx++]);
+            result.Labels.FillOutIssueList<Label>(labels, reader[idx++], ref result);
+            //result.LastUpdDate = Convert.ToDateTime(reader[7]);
+            idx++;
+            result.Milestones.FillOutIssueList<Milestone>(milestones, reader[idx++], ref result);
+            result.Number = Convert.ToString(reader[idx++]);
+            result.Id= Convert.ToInt32(reader[idx++]);
+            //result.Projects.FillOutIssueList<Project>(labels, reader[11], ref result);
+            idx++;
+            result.State = (State)Convert.ToInt32(reader[idx++]);
+            result.Title = Convert.ToString(reader[idx++]);
+            result.TotalComments = Convert.ToInt32(reader[idx++]);
+            
             return result;
         }
 
@@ -53,15 +70,22 @@ namespace IssuesHoneys.Services.SQL
         /// <returns>Label</returns>
         internal static Label SQLLabelConverter(SqlDataReader reader)
         {
+            //[DESCRIPTION]         VARCHAR(50) NOT NULL,
+            //[COLOR]               VARCHAR(50) NOT NULL,
+            //[CRTNDATE]            VARCHAR(50) NOT NULL,
+            //[CRTNUSER]            INT NOT NULL,
+            //[Pk_LabelTracking_Id] INT IDENTITY(1, 1) NOT NULL,
+            //[NAME]                VARCHAR(50) NOT NULL,
+            //CONSTRAINT[PK_LabelTracking_Id] PRIMARY KEY CLUSTERED([Pk_LabelTracking_Id] ASC)
+            
             Label result = new Label();
+            int idx = 0;
 
-            //Id - Name - Color - Description - CrtnUser - CtnDate
-            result.Id = Convert.ToInt32(reader[0]);
-            result.Name = Convert.ToString(reader[1]);
-            result.Color = Convert.ToString(reader[2]).ToBrush();
-            result.Description = Convert.ToString(reader[3]);
-            result.CrtnUser = Convert.ToString(reader[4]);
-            result.CrtnDate = Convert.ToDateTime(reader[5]);
+            result.Description = Convert.ToString(reader[idx++]);
+            result.Color = Convert.ToString(reader[idx++]).ToBrush();
+            result.CrtnDate = Convert.ToDateTime(reader[idx++]);
+            result.CrtnUser = Convert.ToString(reader[idx++]);
+            result.Name = Convert.ToString(reader[idx++]);
 
             return result;
         }
@@ -73,17 +97,26 @@ namespace IssuesHoneys.Services.SQL
         /// <returns>Milestone</returns>
         internal static Milestone SQLMilestoneConverter(SqlDataReader reader)
         {
+            //[CRTNDATE]                   VARCHAR(50) NOT NULL,
+            //[CRTNUSER]                   INT NOT NULL,
+            //[DESCRIPTION]                VARCHAR(50) NOT NULL,
+            //[NUMBER]                     INT NOT NULL,
+            //[Pk_MilestoneTracking_Id]    INT IDENTITY NOT NULL,
+            //[STATE]                      INT NOT NULL,
+            //[TITLE]                      VARCHAR(50) NOT NULL,
+            //CONSTRAINT[PK_MilestoneTracking_Id] PRIMARY KEY CLUSTERED([PK_MilestoneTracking_Id] ASC)
+            
             Milestone result = new Milestone();
+            int idx = 0;
 
-            //Id - Number - State - Title - Description - CrtnUser - CrtnDate
-            result.Id = Convert.ToInt32(reader[0]);
-            result.Number = Convert.ToString(reader[1]);
-            result.State = (State)Enum.Parse(typeof(State), reader[2].ToString());
-            result.Title = Convert.ToString(reader[3]);
-            result.Description = Convert.ToString(reader[4]);
-            result.CrtnUser = Convert.ToString(reader[5]);
-            result.CrtnDate = Convert.ToDateTime(reader[6]);
-
+            result.CrtnDate = Convert.ToDateTime(reader[idx++]);
+            result.CrtnUser = Convert.ToString(reader[idx++]);
+            result.Description = Convert.ToString(reader[idx++]);
+            result.Number = Convert.ToString(reader[idx++]);
+            result.Id = Convert.ToInt32(reader[idx++]);
+            result.State = (State)Enum.Parse(typeof(State), reader[idx++].ToString());
+            result.Title = Convert.ToString(reader[idx++]);
+           
             return result;
         }
 
@@ -94,15 +127,21 @@ namespace IssuesHoneys.Services.SQL
         /// <returns>User</returns>
         internal static User SQLUserConverter(SqlDataReader reader)
         {
+            //[CRTNDATE]           DATETIME NOT NULL,
+            //[GU]                 VARCHAR(50) NOT NULL,
+            //[NAME]               VARCHAR(50) NOT NULL,
+            //[PK_Usertracking_Id] INT IDENTITY(1, 1) NOT NULL,
+            //[SURNAME]            VARCHAR(50) NULL,
+            //CONSTRAINT[PK_UserTracking_Id] PRIMARY KEY CLUSTERED([PK_Usertracking_Id] ASC)
+
             User result = new User();
+            int idx = 0;
 
-            //Id - Name - Surname - Gu - CtnDate
-            result.Id = Convert.ToInt32(reader[0]);
-            result.Name = Convert.ToString(reader[1]);
-            result.SurName = Convert.ToString(reader[2]);
-            result.Gu = Convert.ToString(reader[3]);
-            result.CrtnDate = Convert.ToDateTime(reader[4]);
-
+            result.CrtnDate = Convert.ToDateTime(reader[idx++]);
+            result.Gu = Convert.ToString(reader[idx++]);
+            result.Name = Convert.ToString(reader[idx++]);
+            result.SurName = Convert.ToString(reader[idx++]);
+           
             return result;
         }
     }

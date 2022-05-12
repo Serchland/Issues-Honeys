@@ -1,9 +1,30 @@
 USE [HONEYS]
+
+go
+
+-- **************************************
+-- **************************************
+--				[CREATE SHEMA]
+-- **************************************
+-- **************************************
+IF NOT EXISTS (SELECT * FROM   sys.schemas WHERE  NAME = 'issues')
+  BEGIN
+      SELECT 'SCHEMA [issues] not EXITS. Creating'
+      EXEC('CREATE SCHEMA issues')
+  END
+ELSE
+  BEGIN
+      SELECT 'SCHEMA [issues] EXITS'
+  END;
+
 GO
 
--- SERCH00: UNDER REVISON
----- ************************************** [FUNCTION_TOTALCOMMENTS]
+---- SERCH00: UNDER REVISON
+------ ************************************** [FUNCTION_TOTALCOMMENTS]
 --IF OBJECT_ID('FUNCTION_TOTALCOMMENTS') IS NOT NULL 
+--CREATE FUNCTION [issues].[FUNCTION_TOTALCOMMENTS] (@Id int)  
+--RETURNS int
+--AS  
 --BEGIN  
 --    DECLARE @Count int;
 --    SELECT @Count = COUNT(@Id)
@@ -14,516 +35,594 @@ GO
 --ELSE BEGIN
 --SELECT 'FUNCTION FUNCTION_TOTALCOMMENTS NOT EXISTS'
 --END;
+-- **************************************
+-- **************************************
+--				[USERS]
+-- **************************************
+-- **************************************
+IF Object_id('[issues].[USERS]') IS NOT NULL
+  BEGIN
+      DROP TABLE [issues].[USERS];
+      CREATE TABLE [issues].[USERS]
+        (
+           [CRTNDATE]           DATETIME NOT NULL,
+           [GU]                 VARCHAR(50) NOT NULL,
+           [NAME]               VARCHAR(50) NOT NULL,
+           [PK_Usertracking_Id] INT IDENTITY (1, 1) NOT NULL,
+           [SURNAME]            VARCHAR(50) NULL,
+           CONSTRAINT [PK_UserTracking_Id] PRIMARY KEY CLUSTERED (
+           [PK_Usertracking_Id]
+           ASC)
+        );
 
--- ************************************** [USERS]
-IF OBJECT_ID('USERS') IS NOT NULL 
-BEGIN
-DROP TABLE USERS;
-CREATE TABLE [USERS]
-(
- [PK_UserTracking_Id] int IDENTITY (1, 1) NOT NULL ,
- [NAME]               varchar(50) NOT NULL ,
- [SURNAME]            varchar(50) NULL ,
- [GU]                 varchar(50) NOT NULL ,
- [CRTNDATE]           datetime NOT NULL ,
+      SELECT 'TABLE [issues].[USERS] REGENERATED'
+  END
+ELSE
+  BEGIN
+      SELECT 'USERS NOT EXISTS... CREATING TABLE'
+      CREATE TABLE [issues].[USERS]
+        (
+           [CRTNDATE]           DATETIME NOT NULL,
+           [GU]                 VARCHAR(50) NOT NULL,
+           [NAME]               VARCHAR(50) NOT NULL,
+           [PK_Usertracking_Id] INT IDENTITY (1, 1) NOT NULL,
+           [SURNAME]            VARCHAR(50) NULL,
+           CONSTRAINT [PK_UserTracking_Id] PRIMARY KEY CLUSTERED (
+           [PK_Usertracking_Id]
+           ASC)
+        );
 
+      SELECT 'TABLE [issues].[USERS] CREATED'
+  END;
 
- CONSTRAINT [PK_UserTracking_Id] PRIMARY KEY CLUSTERED ([PK_UserTracking_Id] ASC)
-);
+-- **************************************
+-- **************************************
+--				[LABELS]
+-- **************************************
+-- **************************************
+IF Object_id('[issues].[LABELS]') IS NOT NULL
+  BEGIN
+      DROP TABLE [issues].[LABELS];
+      CREATE TABLE [issues].[LABELS]
+        (
+           [DESCRIPTION]         VARCHAR(50) NOT NULL,
+           [COLOR]               VARCHAR(50) NOT NULL,
+           [CRTNDATE]            DATETIME NOT NULL,
+           [CRTNUSER]            INT NOT NULL,
+           [Pk_LabelTracking_Id] INT IDENTITY (1, 1) NOT NULL,
+           [NAME]                VARCHAR(50) NOT NULL,
+           CONSTRAINT [PK_LabelTracking_Id] PRIMARY KEY CLUSTERED (
+           [Pk_LabelTracking_Id] 
+		   ASC)
+        );
 
-END
-ELSE BEGIN
-SELECT 'USERS NOT EXISTS'
-END;
+      SELECT 'TABLE [issues].[LABELS] REGENERATED'
+  END
+ELSE
+  BEGIN
+      SELECT 'TABLE [issues].[LABELS] NOT EXISTS... CREATING TABLE'
+      CREATE TABLE [issues].[LABELS]
+        (
+           [DESCRIPTION]         VARCHAR(50) NOT NULL,
+           [COLOR]               VARCHAR(50) NOT NULL,
+           [CRTNDATE]            DATETIME NOT NULL,
+           [CRTNUSER]            INT NOT NULL,
+           [Pk_LabelTracking_Id] INT IDENTITY (1, 1) NOT NULL,
+           [NAME]                VARCHAR(50) NOT NULL,
+           CONSTRAINT [PK_LabelTracking_Id] PRIMARY KEY CLUSTERED (
+           [Pk_LabelTracking_Id] 
+		   ASC)
+        );
 
--- ************************************** [LABELS]
-IF OBJECT_ID('LABELS') IS NOT NULL 
-BEGIN
-DROP TABLE [LABELS];
-CREATE TABLE [LABELS]
-(
- [PK_LabelTracking_Id] int IDENTITY (1, 1) NOT NULL ,
- [NAME]                      varchar(50) NOT NULL ,
- [COLOR]                     varchar(50) NOT NULL ,
- [DESCRIPTION]               varchar(50) NOT NULL ,
- [CRTNUSER]                  int NOT NULL ,
- [CRTNDATE]                  varchar(50) NOT NULL ,
+      SELECT 'TABLE [issues].[LABELS] CREATED'
+  END;
 
+-- **************************************
+-- **************************************
+--				[MILESTONES]
+-- **************************************
+-- **************************************
+IF Object_id('[issues].[MILESTONES]') IS NOT NULL
+  BEGIN
+      DROP TABLE [issues].[MILESTONES];
+      CREATE TABLE [issues].[MILESTONES]
+        (
+           [CRTNDATE]                DATETIME NOT NULL,
+           [CRTNUSER]                INT NOT NULL,
+           [DESCRIPTION]             VARCHAR(50) NOT NULL,
+           [NUMBER]                  INT NOT NULL,
+           [Pk_MilestoneTracking_Id] INT IDENTITY NOT NULL,
+           [STATE]                   INT NOT NULL,
+           [TITLE]                   VARCHAR(50) NOT NULL,
+           CONSTRAINT [PK_MilestoneTracking_Id] PRIMARY KEY CLUSTERED (
+           [PK_MilestoneTracking_Id] 
+		   ASC)
+        );
 
- CONSTRAINT [PK_LabelTracking_Id] PRIMARY KEY CLUSTERED ([PK_LabelTracking_Id] ASC)
-);
+      SELECT 'TABLE [issues].[MILESTONES] REGENERATED'
+  END
+ELSE
+  BEGIN
+      SELECT 'TABLE [issues].[MILESTONES] NOT EXISTS... CREATING TABLE'
+      CREATE TABLE [issues].[MILESTONES]
+        (
+           [CRTNDATE]                DATETIME NOT NULL,
+           [CRTNUSER]                INT NOT NULL,
+           [DESCRIPTION]             VARCHAR(50) NOT NULL,
+           [NUMBER]                  INT NOT NULL,
+           [Pk_MilestoneTracking_Id] INT IDENTITY NOT NULL,
+           [STATE]                   INT NOT NULL,
+           [TITLE]                   VARCHAR(50) NOT NULL,
+           CONSTRAINT [PK_MilestoneTracking_Id] PRIMARY KEY CLUSTERED (
+           [PK_MilestoneTracking_Id] 
+		   ASC)
+        );
 
-END
-ELSE BEGIN
-SELECT 'TABLE [LABELS] NOT EXISTS'
-END;
+      SELECT 'TABLE [issues].[MILESTONES] CREATED'
+  END;
 
--- ************************************** [MILESTONES]
-IF OBJECT_ID('MILESTONES') IS NOT NULL 
-BEGIN
-DROP TABLE [MILESTONES];
-CREATE TABLE [MILESTONES]
-(
- [PK_MilestoneTracking_Id] int IDENTITY NOT NULL ,
- [NUMBER]                  int NOT NULL ,
- [STATE]                   int NOT NULL ,
- [TITLE]                   varchar(50) NOT NULL ,
- [DESCRIPTION]             varchar(50) NOT NULL ,
- [CRTNUSER]                int NOT NULL ,
- [CRTNDATE]                varchar(50) NOT NULL ,
+-- **************************************
+-- **************************************
+--				[ISSUES]
+-- **************************************
+-- **************************************
+IF Object_id('[issues].[ISSUES]') IS NOT NULL
+  BEGIN
+      ALTER TABLE [issues].[issuedetails]
+      DROP CONSTRAINT [FK_IssueTracking_Id]
+      DROP TABLE [issues].[issues]
 
+      CREATE TABLE [issues].[ISSUES]
+        (
+           [ASSIGNEES]           VARCHAR(50) NULL,
+           [BODY]                VARCHAR(max) NOT NULL,
+           [CLOSEDBY]            INT NULL,
+           [CLOSEDDAY]           DATETIME NULL,
+           [CRTNDATE]            DATETIME NOT NULL,
+           [CRTNUSER]            INT NOT NULL,
+           [LABELS]              VARCHAR(50) NOT NULL,
+           [LASTUPD]	         DATETIME NULL,
+           [MILESTONES]          VARCHAR(50) NULL,
+           [NUMBER]              INT NOT NULL,
+           [Pk_IssueTracking_Id] INT IDENTITY (1, 1) NOT NULL,
+           [PROJECTS]            VARCHAR(50) NULL,
+           [STATE]               INT NOT NULL CONSTRAINT [DF_ISSUES_STATE] DEFAULT 0,
+           [TITLE]               VARCHAR(50) NOT NULL,
+           [TOTALCOMMENTS] AS
+           [issues].[Function_TotalComments]([Pk_IssueTracking_Id]),
+           CONSTRAINT [PK_IssueDetailsTracking_Id] PRIMARY KEY CLUSTERED (
+           [Pk_IssueTracking_Id] ASC)
+        );
 
- CONSTRAINT [PK_MilestoneTracking_Id] PRIMARY KEY CLUSTERED ([PK_MilestoneTracking_Id] ASC)
-);
+      SELECT 'TABLE [issues].[ISSUES] REGENERATED'
+  END
+ELSE
+  BEGIN
+      SELECT '[issues].[ISSUES] TABLE NOT EXIST... CREATING TABLE'
 
-END
-ELSE BEGIN
-SELECT 'TABLE [MILESTONES] NOT EXISTS'
-END;
+      CREATE TABLE [issues].[ISSUES]
+        (
+           [ASSIGNEES]           VARCHAR(50) NULL,
+           [BODY]                VARCHAR(max) NOT NULL,
+           [CLOSEDBY]            INT NULL,
+           [CLOSEDDAY]           DATETIME NULL,
+           [CRTNDATE]            DATETIME NOT NULL,
+           [CRTNUSER]            INT NOT NULL,
+           [LABELS]              VARCHAR(50) NOT NULL,
+           [LASTUPD]	         DATETIME NULL,
+           [MILESTONES]          VARCHAR(50) NULL,
+           [NUMBER]              INT NOT NULL,
+           [Pk_IssueTracking_Id] INT IDENTITY (1, 1) NOT NULL,
+           [PROJECTS]            VARCHAR(50) NULL,
+           [STATE]               INT NOT NULL CONSTRAINT [DF_ISSUES_STATE] DEFAULT 0,
+           [TITLE]               VARCHAR(50) NOT NULL,
+           [TOTALCOMMENTS] AS
+           [issues].[Function_TotalComments]([Pk_IssueTracking_Id]),
+           CONSTRAINT [PK_IssueDetailsTracking_Id] PRIMARY KEY CLUSTERED (
+           [Pk_IssueTracking_Id] ASC)
+        );
 
+      SELECT 'TABLE [issues].[ISSUES] CREATED'
+  END;
 
--- ************************************** [ISSUES]
-IF OBJECT_ID('ISSUES') IS NOT NULL 
-BEGIN
+-- **************************************
+-- **************************************
+--				[ISSUESDETAILS]
+-- **************************************
+-- **************************************
+IF Object_id('[issues].[ISSUEDETAILS]') IS NOT NULL
+  BEGIN
+      ALTER TABLE [issues].[USERCOMMENTS]
+      DROP CONSTRAINT Fk_IssueDetailTracking_Id;
+      DROP TABLE [issues].[ISSUEDETAILS];
 
-ALTER TABLE [ISSUEDETAILS] DROP CONSTRAINT [FK_IssueTracking_Id]
+      CREATE TABLE [issues].[ISSUEDETAILS]
+        (
+           [ACTION]                    INT NOT NULL,
+           [CRTNDATE]                  DATETIME NOT NULL,
+           [Fk_IssueTracking_Id]       INT NOT NULL,
+           [Pk_IssueDetailTracking_Id] INT IDENTITY (1, 1) NOT NULL,
+           [USERID]                    INT NOT NULL,
+           
+		   CONSTRAINT [PK_IssueDetailTracking_Id] PRIMARY KEY CLUSTERED (
+		   [PK_IssueDetailTracking_Id] ASC),
+           
+		   CONSTRAINT [FK_IssueTracking_Id] FOREIGN KEY ([FK_IssueTracking_Id])
+           REFERENCES [issues].[ISSUES]([Pk_IssueTracking_Id])
+        );
 
-DROP TABLE [ISSUES]
-CREATE TABLE [ISSUES]
-(
- [PK_IssueTracking_Id]       int IDENTITY (1, 1) NOT NULL ,
- [NUMBER]                    int NOT NULL ,
- [CTRNUSER]                  int NOT NULL ,
- [TITLE]                     varchar(50) NOT NULL ,
- [BODY]                      varchar(max) NOT NULL ,
- [CLOSEDBY]                  int NULL ,
- [LABELS]                    varchar(50) NOT NULL ,
- [ASSIGNEES]                 varchar(50) NULL ,
- [MILESTONES]                varchar(50) NULL ,
- [COMMENTS]                  int NULL ,
- [CRTNDATE]                  datetime NOT NULL ,
- [CLOSEDDAY]                 datetime NULL ,
- [LASTUPDDATE]               datetime NULL ,
- [PROJECTS]                  varchar(50) NULL ,
- [STATE]                     int NOT NULL CONSTRAINT [DF_ISSUES_STATE] DEFAULT 0 ,
- [TOTALCOMMENTS]             AS [dbo].[FUNCTION_TOTALCOMMENTS]([PK_IssueTracking_Id]),
+      SELECT 'TABLE [issues].[ISSUEDETAILS] REGENERATED'
+  END
+ELSE
+  BEGIN
+      SELECT 'TABLE [issues].[ISSUEDETAILS] NOT EXIST... CREATING TABLE'
 
+      CREATE TABLE [issues].[ISSUEDETAILS]
+        (
+            [ACTION]                    INT NOT NULL,
+			[CRTNDATE]                  DATETIME NOT NULL,
+			[Fk_IssueTracking_Id]       INT NOT NULL,
+			[Pk_IssueDetailTracking_Id] INT IDENTITY (1, 1) NOT NULL,
+			[USERID]                    INT NOT NULL,
+           
+		   CONSTRAINT [PK_IssueDetailTracking_Id] PRIMARY KEY CLUSTERED (
+		   [PK_IssueDetailTracking_Id] ASC),
+           
+		   CONSTRAINT [FK_IssueTracking_Id] FOREIGN KEY ([FK_IssueTracking_Id])
+           REFERENCES [issues].[ISSUES]([Pk_IssueTracking_Id])
+        );
 
- CONSTRAINT [PK_IssueDetailsTracking_Id] PRIMARY KEY CLUSTERED ([PK_IssueTracking_Id] ASC)
-);
-END
-ELSE BEGIN
-SELECT '[ISSUES] TABLE NOT EXIST'
-END;
+      SELECT 'TABLE [issues].[ISSUEDETAILS] CREATED'
+  END
 
---************************************** [ISSUEDETAILS]
-IF OBJECT_ID('ISSUEDETAILS') IS NOT NULL
-BEGIN
+-- **************************************
+-- **************************************
+--				[USERCOMMENTS]
+-- **************************************
+-- **************************************
+IF Object_id('[issues].[USERCOMMENTS]') IS NOT NULL
+  BEGIN
+      DROP TABLE [issues].[USERCOMMENTS];
 
-ALTER TABLE USERCOMMENTS
-DROP CONSTRAINT FK_IssueDetailTracking_Id;
+      CREATE TABLE [issues].[USERCOMMENTS]
+        (
+           [COMMENT]                   VARCHAR(max) NOT NULL,
+           [Fk_IssueDetailTracking_Id] INT NOT NULL,
+           [Pk_CommentTracking_Id]     INT IDENTITY (1, 1) NOT NULL,
 
-DROP TABLE [ISSUEDETAILS];
-CREATE TABLE [ISSUEDETAILS]
-(
- [PK_IssueDetailTracking_Id] int IDENTITY (1, 1) NOT NULL ,
- [FK_IssueTracking_Id]   int NOT NULL ,
- [USERID]                    int NOT NULL ,
- [ACTION]                    int NOT NULL ,
- [CRTNDATE]                  datetime NOT NULL ,
+           CONSTRAINT [PK_CommentTracking_Id] PRIMARY KEY CLUSTERED (
+           [Pk_CommentTracking_Id] ASC),
+           CONSTRAINT [FK_IssueDetailTracking_Id] FOREIGN KEY (
+           [Fk_IssueDetailTracking_Id]) REFERENCES
+           [issues].[ISSUEDETAILS]([Pk_IssueDetailTracking_Id])
+        );
 
- CONSTRAINT [PK_IssueDetailTracking_Id] PRIMARY KEY CLUSTERED ([PK_IssueDetailTracking_Id] ASC),
- CONSTRAINT [FK_IssueTracking_Id] FOREIGN KEY ([FK_Issuetracking_Id]) REFERENCES [ISSUES]([PK_IssueTracking_Id])
-);
+      SELECT 'TABLE [issues].[USERCOMMENTS] REGENERATED'
+  END
+ELSE
+  BEGIN
+      SELECT 'TABLE [issues].[USERCOMMENTS] NOT EXIST... CREATING TABLE'
 
-END 
-ELSE BEGIN 
-SELECT 'TABLE [ISSUEDETAILS] NOT EXIST'
-END;
+      CREATE TABLE [issues].[USERCOMMENTS]
+        (
+           [COMMENT]                   VARCHAR(max) NOT NULL,
+           [Fk_IssueDetailTracking_Id] INT NOT NULL,
+           [Pk_CommentTracking_Id]     INT IDENTITY (1, 1) NOT NULL,
 
--- ************************************** [USERCOMMENTS]
-IF OBJECT_ID('USERCOMMENTS') IS NOT NULL
-BEGIN
-DROP TABLE [USERCOMMENTS];
-CREATE TABLE [USERCOMMENTS]
-(
- [PK_CommentTracking_Id]     int IDENTITY (1, 1) NOT NULL ,
- [comment]                   varchar(max) NOT NULL ,
- [FK_IssueDetailTracking_Id] int NOT NULL ,
+           CONSTRAINT [PK_CommentTracking_Id] PRIMARY KEY CLUSTERED (
+           [Pk_CommentTracking_Id] ASC),
+           CONSTRAINT [FK_IssueDetailTracking_Id] FOREIGN KEY (
+           [Fk_IssueDetailTracking_Id]) REFERENCES
+           [issues].[ISSUEDETAILS]([Pk_IssueDetailTracking_Id])
+        );
 
-
- CONSTRAINT [PK_CommentTracking_Id] PRIMARY KEY CLUSTERED ([PK_CommentTracking_Id] ASC),
- CONSTRAINT [FK_IssueDetailTracking_Id] FOREIGN KEY ([FK_IssueDetailTracking_Id])  REFERENCES [ISSUEDETAILS]([PK_IssueDetailTracking_Id])
-);
-END
-
-ELSE BEGIN
-SELECT 'TABLE [USERCOMMENTS] NOT EXIST'
-END
+      SELECT 'TABLE [issues].[USERCOMMENTS] CREATED'
+  END
 
 --************************************** 
 --************************************** 
 --************************************** 
-
--- POPULATE SECTION
-
+--			POPULATE SECTION
 --************************************** 
 --************************************** 
 --************************************** 
-
-
 --************************************** POPULATE USERS
-INSERT INTO [USERS]
-           ([NAME]
-           ,[SURNAME]
-           ,[GU]
-           ,[CRTNDATE])
-     VALUES
-           ('Brian',
-		    'J. Kidwell',
-			'222-70',
-			GETDATE())
+INSERT INTO [issues].[USERS]
+            (
+				[CRTNDATE],
+				[GU],
+				[NAME],
+				[SURNAME])
+
+VALUES      (
+				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
+				'99GU9889', 'Brian', 'J. Kidwell'
+			)
+
+go
+
+
+INSERT INTO [issues].[USERS]
+            (
+				[CRTNDATE],
+				[GU],
+				[NAME],
+				[SURNAME])
+VALUES      (
+				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
+				'99GU9889', 'Cora', 'L. Richards'
+			)
+
 GO
 
-INSERT INTO [USERS]
-           ([NAME]
-           ,[SURNAME]
-           ,[GU]
-           ,[CRTNDATE])
-     VALUES
-           ('Cora',
-		    'L. Richards',
-			'756-01',
-			GETDATE())
+INSERT INTO [issues].[USERS]
+            (
+				[CRTNDATE],
+				[GU],
+				[NAME],
+				[SURNAME])
+VALUES      (
+				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
+				'99GU9889', 'Richard', 'L. Swink'
+			)
+
 GO
 
-INSERT INTO [USERS]
-           ([NAME]
-           ,[SURNAME]
-           ,[GU]
-           ,[CRTNDATE])
-     VALUES
-           ('Richard',
-		    'L. Swink',
-			'574-10',
-			GETDATE())
+INSERT INTO [issues].[USERS]
+            (
+				[CRTNDATE],
+				[GU],
+				[NAME],
+				[SURNAME])
+VALUES      (
+				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
+				'99GU9889', 'Karen', 'A. McNally'
+			)
+
 GO
 
-INSERT INTO [USERS]
-           ([NAME]
-           ,[SURNAME]
-           ,[GU]
-           ,[CRTNDATE])
-     VALUES
-           ('Karen',
-		    'A. McNally',
-			'618-54',
-			GETDATE())
+INSERT INTO [issues].[USERS]
+            (
+				[CRTNDATE],
+				[GU],
+				[NAME],
+				[SURNAME])
+VALUES      
+			(
+				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
+				'Ricky', 'S. Morey', 'A. McNally'
+			)
 GO
 
-INSERT INTO [USERS]
-           ([NAME]
-           ,[SURNAME]
-           ,[GU]
-           ,[CRTNDATE])
-     VALUES
-           ('Ricky',
-		    'S. Morey',
-			'314-03',
-			GETDATE())
+INSERT INTO [issues].[USERS]
+            (
+				[CRTNDATE],
+				[GU],
+				[NAME],
+				[SURNAME])
+VALUES      
+			(
+				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
+				'Eleanor', 'K. Olmstead', 'A. McNally'
+			)
+
 GO
 
-INSERT INTO [USERS]
-           ([NAME]
-           ,[SURNAME]
-           ,[GU]
-           ,[CRTNDATE])
-     VALUES
-           ('Eleanor',
-		    'K. Olmstead',
-			'155-58',
-			GETDATE())
-GO
+SELECT 'DUMMY USERS ADDED'
 
+GO
 
 --************************************** POPULATE LABELS
-INSERT INTO [LABELS]
-           ([NAME]
-           ,[COLOR]
-           ,[DESCRIPTION]
-           ,[CRTNUSER]
-           ,[CRTNDATE])
-     VALUES
-           ('bug',
-		    '#FFFF0000',
-			'Something isnt working',
-			1,
-			GETDATE())
-GO
-INSERT INTO [LABELS]
-           ([NAME]
-           ,[COLOR]
-           ,[DESCRIPTION]
-           ,[CRTNUSER]
-           ,[CRTNDATE])
-     VALUES
-           ('enhancement',
-		    '#FFADD8E6',
-			'New feature or request',
-			1,
-			GETDATE())
+INSERT INTO [issues].[LABELS]
+            (
+				[DESCRIPTION],
+				[COLOR],
+				[CRTNDATE],
+				[CRTNUSER],
+				[NAME])
+VALUES      (
+				'Something isnt working', '#FFFF0000', 
+				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
+				1, 'bug'
+			)
+
 GO
 
-INSERT INTO [LABELS]
-           ([NAME]
-           ,[COLOR]
-           ,[DESCRIPTION]
-           ,[CRTNUSER]
-           ,[CRTNDATE])
-     VALUES
-           ('question',
-		    '#FFFFC0CB',
-			'Further information is requested',
-			1,
-			GETDATE())
+INSERT INTO [issues].[LABELS]
+            (
+				[DESCRIPTION],
+				[COLOR],
+				[CRTNDATE],
+				[CRTNUSER],
+				[NAME])
+VALUES      (
+				'New feature or request', '#FFADD8E6',
+				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
+				1, 'enhancement'
+			)
+
 GO
 
-INSERT INTO [LABELS]
-           ([NAME]
-           ,[COLOR]
-           ,[DESCRIPTION]
-           ,[CRTNUSER]
-           ,[CRTNDATE])
-     VALUES
-           ('documentation',
-		    '#FF08000',
-			'Improvements or additions to documentation',
-			1,
-			GETDATE())
+INSERT INTO [issues].[LABELS]
+            (
+				[DESCRIPTION],
+				[COLOR],
+				[CRTNDATE],
+				[CRTNUSER],
+				[NAME])
+VALUES      (
+				'Further information is requested', '#FFFFC0CB',
+				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
+				1, 'question'
+			)
+
 GO
 
-INSERT INTO [LABELS]
-           ([NAME]
-           ,[COLOR]
-           ,[DESCRIPTION]
-           ,[CRTNUSER]
-           ,[CRTNDATE])
-     VALUES
-           ('duplicate',
-		    '#FFFFD700',
-			'This issue already exists',
-			1,
-			GETDATE())
+INSERT INTO [issues].[LABELS]
+            (
+				[DESCRIPTION],
+				[COLOR],
+				[CRTNDATE],
+				[CRTNUSER],
+				[NAME])
+VALUES      (
+				'This issue already exists', '#FFFFD700',
+				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
+				1, 'duplicate'
+			)
+
 GO
 
-INSERT INTO [LABELS]
-           ([NAME]
-           ,[COLOR]
-           ,[DESCRIPTION]
-           ,[CRTNUSER]
-           ,[CRTNDATE])
-     VALUES
-           ('help wanted',
-		    '#FF008000',
-			'Extra attention is needed',
-			1,
-			GETDATE())
+INSERT INTO [issues].[LABELS]
+            (
+				[DESCRIPTION],
+				[COLOR],
+				[CRTNDATE],
+				[CRTNUSER],
+				[NAME])
+VALUES      (
+				'Extra attention is needed', '#FF008000',
+				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
+				1, 'help wanted'
+			)
+
 GO
 
-INSERT INTO [LABELS]
-           ([NAME]
-           ,[COLOR]
-           ,[DESCRIPTION]
-           ,[CRTNUSER]
-           ,[CRTNDATE])
-     VALUES
-           ('invalid',
-		    '#FFF5F5DC',
-			'This doesnt seem right',
-			1,
-			GETDATE())
+SELECT 'DUMMY LABELS ADDED'
+
 GO
 
 --************************************** POPULATE MILESTONES
-INSERT INTO [MILESTONES]
-           ([NUMBER]
-           ,[STATE]
-           ,[TITLE]
-           ,[DESCRIPTION]
-           ,[CRTNUSER]
-           ,[CRTNDATE])
-     VALUES
-           (1,
-			0,
-            'SEND PRO V1.12',
-            'SENDPRO',
-            3,
-            GETDATE())
+INSERT INTO [issues].[MILESTONES]
+            (
+				[CRTNDATE],
+				[CRTNUSER],
+				[DESCRIPTION],
+				[NUMBER],
+				[STATE],
+				[TITLE])
+VALUES      (
+				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
+				2, 'SEND PRO V1.12', 0, 0, 'SENDPRO'
+            )
+
 GO
 
-INSERT INTO [dbo].[MILESTONES]
-           ([NUMBER]
-           ,[STATE]
-           ,[TITLE]
-           ,[DESCRIPTION]
-           ,[CRTNUSER]
-           ,[CRTNDATE])
-     VALUES
-           (1,
-			0,
-            'SEND PRE V1.12',
-            'SEND PRE',
-            3,
-            GETDATE())
+INSERT INTO [issues].[MILESTONES]
+            (
+				[CRTNDATE],
+				[CRTNUSER],
+				[DESCRIPTION],
+				[NUMBER],
+				[STATE],
+				[TITLE])
+VALUES      (
+				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
+				3, 'SEND PRE V1.12', 0, 0, 'SEND PRE'
+            )
+
 GO
 
-INSERT INTO [dbo].[MILESTONES]
-           ([NUMBER]
-           ,[STATE]
-           ,[TITLE]
-           ,[DESCRIPTION]
-           ,[CRTNUSER]
-           ,[CRTNDATE])
-     VALUES
-           (1,
-			0,
-            'SEND FOR V1.12',
-            'SEND FOR',
-            3,
-            GETDATE())
+INSERT INTO [issues].[MILESTONES]
+            (
+				[CRTNDATE],
+				[CRTNUSER],
+				[DESCRIPTION],
+				[NUMBER],
+				[STATE],
+				[TITLE])
+VALUES      (
+				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
+				4, 'SEND FOR V1.12', 0, 0, 'SEND FOR'
+            )
+
 GO
+
+SELECT 'DUMMY MILESTONES ADDED'
 
 --************************************** POPULATE ISSUES
-INSERT INTO [ISSUES]
-           ([NUMBER]
-           ,[CTRNUSER]
-           ,[TITLE]
-           ,[BODY]
-           ,[CLOSEDBY]
-           ,[LABELS]
-           ,[ASSIGNEES]
-           ,[MILESTONES]
-           ,[COMMENTS]
-           ,[CRTNDATE]
-           ,[CLOSEDDAY]
-           ,[LASTUPDDATE]
-           ,[PROJECTS])
-     VALUES
-           (1,
-            3,
-            'IS51742',
-            'Allow adding xml files',
-            NULL,
-            '1;2',
-            '4',
-            NULL,
-            2,
-            GETDATE(),
-            NULL,
-            NULL,
-            1)
+INSERT INTO [issues].[issues]
+            (
+				[ASSIGNEES],
+				[BODY],
+				[CLOSEDBY],
+				[CLOSEDDAY],
+				[CRTNDATE],
+				[CRTNUSER],
+				[LABELS],
+				[LASTUPD],
+				[MILESTONES],
+				[NUMBER],
+				[PROJECTS],
+				[STATE],
+				[TITLE])
+VALUES      (
+				'1;2', 'Allow adding xml files', NULL, NULL,
+				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
+				1, '1', GETDATE(), NULL, 1, NULL, 0, 'SART899876'
+			)
+           
 GO
 
+INSERT INTO [issues].[issues]
+            (
+				[ASSIGNEES],
+				[BODY],
+				[CLOSEDBY],
+				[CLOSEDDAY],
+				[CRTNDATE],
+				[CRTNUSER],
+				[LABELS],
+				[LASTUPD],
+				[MILESTONES],
+				[NUMBER],
+				[PROJECTS],
+				[STATE],
+				[TITLE])
+VALUES      (
+				'3', 'Create DARK Theme', NULL, NULL,
+				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
+				1, '1', GETDATE(), NULL, 1, NULL, 0, 'INTG876432'
+			)
 
-INSERT INTO [ISSUES]
-           ([NUMBER]
-           ,[CTRNUSER]
-           ,[TITLE]
-           ,[BODY]
-           ,[CLOSEDBY]
-           ,[LABELS]
-           ,[ASSIGNEES]
-           ,[MILESTONES]
-           ,[COMMENTS]
-           ,[CRTNDATE]
-           ,[CLOSEDDAY]
-           ,[LASTUPDDATE]
-           ,[PROJECTS])
-     VALUES
-           (2,
-            5,
-            'IS98893',
-            'Create DARK Theme',
-            NULL,
-            '3',
-            '2',
-            NULL,
-            1,
-            GETDATE(),
-            NULL,
-            NULL,
-            1)
 GO
 
-INSERT INTO [ISSUES]
-           ([NUMBER]
-           ,[CTRNUSER]
-           ,[TITLE]
-           ,[BODY]
-           ,[CLOSEDBY]
-           ,[LABELS]
-           ,[ASSIGNEES]
-           ,[MILESTONES]
-           ,[COMMENTS]
-           ,[CRTNDATE]
-           ,[CLOSEDDAY]
-           ,[LASTUPDDATE]
-           ,[PROJECTS])
-     VALUES
-           (2,
-            5,
-            'IS88876',
-            'Create LIGHT Theme',
-            NULL,
-            '2',
-            '4',
-            NULL,
-            1,
-            GETDATE(),
-            NULL,
-            NULL,
-            1)
+INSERT INTO [issues].[issues]
+            (
+				[ASSIGNEES],
+				[BODY],
+				[CLOSEDBY],
+				[CLOSEDDAY],
+				[CRTNDATE],
+				[CRTNUSER],
+				[LABELS],
+				[LASTUPD],
+				[MILESTONES],
+				[NUMBER],
+				[PROJECTS],
+				[STATE],
+				[TITLE])
+VALUES      (
+				'5', 'Allow only one instance of the application', NULL, NULL,
+				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
+				1, '1', GETDATE(), NULL, 1, NULL, 0, 'FSDI118764'
+			)
+
 GO
 
-INSERT INTO [ISSUES]
-           ([NUMBER]
-           ,[CTRNUSER]
-           ,[TITLE]
-           ,[BODY]
-           ,[CLOSEDBY]
-           ,[LABELS]
-           ,[ASSIGNEES]
-           ,[MILESTONES]
-           ,[COMMENTS]
-           ,[CRTNDATE]
-           ,[CLOSEDDAY]
-           ,[LASTUPDDATE]
-           ,[PROJECTS])
-     VALUES
-           (2,
-            5,
-            'IS12453',
-            'Allow only one instance of the application',
-            NULL,
-            '2',
-            '2',
-            NULL,
-            1,
-            GETDATE(),
-            NULL,
-            NULL,
-            1)
-GO
+SELECT 'DUMMY ISSUES ADDED'
 
 --************************************** POPULATE ISSUEDETAILS
-INSERT INTO [dbo].[ISSUEDETAILS]
-           ([FK_IssueTracking_Id]
-           ,[USERID]
-           ,[ACTION]
-           ,[CRTNDATE])
-     VALUES
-           (1,
-            1,
-            1,
-            GETDATE())
+INSERT INTO [issues].[issuedetails]
+            (
+				[ACTION],
+				[CRTNDATE],
+				[Fk_IssueTracking_Id],
+				[USERID])
+VALUES      (
+				1, GETDATE(), 1, 1
+			)
+
 GO
+
+SELECT 'DUMMY ISSUES DETAILS ADDED'
