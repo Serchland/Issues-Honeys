@@ -2,11 +2,7 @@
 using IssuesHoneys.Core.Base;
 using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
-using Prism.Commands;
-using Prism.Mvvm;
-using System;
 using System.Collections.ObjectModel;
-using System.Windows.Controls;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {

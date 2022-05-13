@@ -16,7 +16,6 @@ namespace IssuesHoneys.Modules.Issues.Views.Converters
             else
                 result = Brushes.Green;
 
-            
             return result;
         }
 

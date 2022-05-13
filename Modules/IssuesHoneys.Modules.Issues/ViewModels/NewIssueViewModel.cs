@@ -1,11 +1,7 @@
 ﻿using IssuesHoneys.Core.Base;
 using IssuesHoneys.Core.Types.Interfaces;
-using Prism.Commands;
-using Prism.Mvvm;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {

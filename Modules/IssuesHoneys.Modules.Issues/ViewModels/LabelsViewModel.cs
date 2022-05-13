@@ -4,7 +4,6 @@ using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
-using Prism.Mvvm;
 using System;
 using System.Collections.ObjectModel;
 using System.Reflection;
