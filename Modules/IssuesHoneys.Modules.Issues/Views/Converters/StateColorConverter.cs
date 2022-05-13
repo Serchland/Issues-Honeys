@@ -12,9 +12,9 @@ namespace IssuesHoneys.Modules.Issues.Views.Converters
         {
             Brush result;
             if ((State)value == State.IsOpen)
-                result = Brushes.Red;
-            else
                 result = Brushes.Green;
+            else
+                result = Brushes.Red;
 
             return result;
         }
