@@ -10,6 +10,7 @@
 
     public static class CommandParameters
     {
+        public const string Assignes = "Assignes";
         public const string Cancel = "Cancel";
         public const string CreateMilestone = "CreateMilestone";
         public const string Defautl = "Default";

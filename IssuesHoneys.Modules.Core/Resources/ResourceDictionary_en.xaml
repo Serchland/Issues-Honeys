@@ -5,18 +5,35 @@
 
     <!--Icons-->
     <!--<BitmapImage x:Key="Issues_128_ico" UriSource="Images/Issues_128.ico" />-->
+    
+    <!--CAPTIONS-->
+    <system:String x:Key="ButtonCancelCaption">CANCEL</system:String>
+    <system:String x:Key="ButtonCreateLabelCaption">CREATE LABEL</system:String>
+    <system:String x:Key="ButtonCreateMilestone">CREATE MILESTONE</system:String>
     <system:String x:Key="ButtonLabelCaption">LABELS</system:String>
     <system:String x:Key="ButtonMillestoneCaption">MILESTONES</system:String>
     <system:String x:Key="ButtonNewIssueCaption">NEW ISSUE</system:String>
     <system:String x:Key="ButtonNewLabelCaption">NEW LABEL</system:String>
     <system:String x:Key="ButtonNewMilestoneCaption">NEW MILESTONE</system:String>
-    <system:String x:Key="ButtonCancelCaption">CANCEL</system:String>
-    <system:String x:Key="ButtonCreateLabelCaption">CREATE LABEL</system:String>
     <system:String x:Key="ButtonSubmitNewIssueCaption">SUBMIT NEW ISSUE</system:String>
-    <system:String x:Key="SearchCaption">Search:</system:String>
+
+    <system:String x:Key="LabelAssignes">Assignes</system:String>
+    <system:String x:Key="LabelCreateANewMilestoneToHelpOrganizeYourIssues">Create a new milestone to help organize your issues.</system:String>
+    <system:String x:Key="LabelDescribeTheIssueInDetailHere">Describe the issue in detail here:</system:String>
+    <system:String x:Key="LabelDescription">Description:</system:String>
+    <system:String x:Key="LabelDueDate">Due date (optional)</system:String>
+    <system:String x:Key="LabelIssueBugreport">Issue: Bug report</system:String>
+    <system:String x:Key="LabelMilestone">Milestone</system:String>
+    <system:String x:Key="LabelNewMilestone">New milestone</system:String>
+    <system:String x:Key="LabelProjects">Projects</system:String>
+    <system:String x:Key="LabelSearchCaption">Search:</system:String>
+    <system:String x:Key="LabelStylingWithMarkdownIsSupported">Styling with Markdown is supported.</system:String>
+    <system:String x:Key="LabelTitle">Title</system:String>
+
+    <system:String x:Key="WaterMarkddmmaa">dd/mm/aa</system:String>
     <system:String x:Key="WaterMarkSearchLabelsCaption">Search all labels</system:String>
     <system:String x:Key="WaterMarkSearchMilestonesCaption">Search all milestones</system:String>
-    <system:String x:Key="LabelNewMilestone">New milestone</system:String>
+    
 
     <system:String x:Key="Indent1">
     # Header1
