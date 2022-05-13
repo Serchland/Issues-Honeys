@@ -89,7 +89,7 @@ namespace IssuesHoneys.Services.Dummies
             {
                 List<Issue> result = new List<Issue>();
 
-                result.Add(new Issue() { Id = 0, CrtnUser = "99ID9878", Body = " Permitir generación de elementos iguales 7 dígitos", CrtnDate = new DateTime(2022, 1, 11), Labels = GetLabels(new List<int>() { 0, 1, 2, 3, 4 }), Milestones = GetMillestones(new List<int>() { 1, 2}), Title = "CAPC 5855459", Projects = null, State = State.IsClosed });
+                result.Add(new Issue() { Id = 0, CrtnUser = "99ID9878", Body = " Permitir generación de elementos iguales 7 dígitos", CrtnDate = new DateTime(2022, 1, 11), Labels = GetLabels(new List<int>() { 0, 1, 2, 3, 4 }), Milestones = GetMillestones(new List<int>() { 1, 2}), Title = "CAPC 5855459", Projects = null, State = State.IsClosed, TotalComments=5 });
                 result.Add(new Issue() { Id = 1, CrtnUser = "99ID9878", Body = " Se requiere incializar la aplicacción desde distintos orígenes", CrtnDate = new DateTime(2022, 1, 15), Labels = null, Milestones = null, Title = "CAPC 9998857", Projects = null, State = State.IsOpen });
                 result.Add(new Issue() { Id = 2, CrtnUser = "99ID9878", Body = " Permitir idiomas en y es", CrtnDate = new DateTime(2022, 2, 01), Labels = GetLabels(new List<int>() { 0, 1 }), Milestones = GetMillestones(new List<int>() { 1 }), Title = "CAPC 9998857", Projects = null, State = State.IsOpen });
                 result.Add(new Issue() { Id = 3, CrtnUser = "99ID9878", Body = " Conectar con aplicaciones de terceros", CrtnDate = new DateTime(2022, 2, 07), Labels = GetLabels(new List<int>() { 0, 1 }), Milestones = GetMillestones(new List<int>() { 1 }), Title = "CAPC 8524587", Projects = null, State = State.IsClosed });
