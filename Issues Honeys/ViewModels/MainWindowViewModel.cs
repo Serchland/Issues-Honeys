@@ -15,6 +15,15 @@ namespace Issues_Honeys.ViewModels
         {
             _regionManager = regionManager;
             applicationCommand.NavigateCommand.RegisterCommand(NavigateCommand);
+
+            _buttonContentRegionHeight = 73;
+        }
+
+        private double _buttonContentRegionHeight;
+        public double ButtonContentRegionHeight
+        {
+            get { return _buttonContentRegionHeight; }
+            set { SetProperty(ref _buttonContentRegionHeight, value); }
         }
 
         private DelegateCommand<string> _navigateCommand;
@@ -30,16 +39,18 @@ namespace Issues_Honeys.ViewModels
 
             switch (parameter)
             {
+                case CommandParameters.Comments:
+                    _regionManager.RequestNavigate(RegionNames.FooterContentRegion, RegisterForNavigation.IssueFooter);
+                    _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.IssueComments);
+
+                    ButtonContentRegionHeight = 0;
+                    break;
+
                 case CommandParameters.Issues:
                     _regionManager.RequestNavigate(RegionNames.FooterContentRegion, RegisterForNavigation.IssueFooter);
                     _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.IssuesMain);
 
-                    break;
-
-                case CommandParameters.Projects:
-                    _regionManager.RequestNavigate(RegionNames.FooterContentRegion, RegisterForNavigation.ProjectFooter);
-                    _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.ProjectMain);
-
+                    ButtonContentRegionHeight = 73;
                     break;
 
                 case CommandParameters.Labels:
@@ -60,6 +71,12 @@ namespace Issues_Honeys.ViewModels
 
                 case CommandParameters.NewMilestone:
                     _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.NewMilestone);
+
+                    break;
+
+                case CommandParameters.Projects:
+                    _regionManager.RequestNavigate(RegionNames.FooterContentRegion, RegisterForNavigation.ProjectFooter);
+                    _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.ProjectMain);
 
                     break;
 

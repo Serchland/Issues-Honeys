@@ -190,6 +190,27 @@ namespace IssuesHoneys.BusinessTypes
         }
 
         /// <summary>
+        /// Color of the LABEL. Used to set the background colour of the LABEL
+        /// </summary>
+        private Brush _color;
+        public Brush Color
+        {
+            get { return _color; }
+            set { SetProperty(ref _color, value); }
+        }
+
+        /// <summary>
+        /// LABEL description
+        /// </summary>
+        private string _description;
+        public string Description
+        {
+            get { return _description; }
+            set { SetProperty(ref _description, value); }
+        }
+
+        
+        /// <summary>
         /// LABEL identifier
         /// </summary>
         private int _id;
@@ -209,27 +230,12 @@ namespace IssuesHoneys.BusinessTypes
             set { SetProperty(ref _name, value); }
         }
 
-        /// <summary>
-        /// LABEL description
-        /// </summary>
-        private string _description;
-        public string Description
+        private int _totalIssuesWithLabel;
+        public int TotalIssuesWithLabel
         {
-            get { return _description; }
-            set { SetProperty(ref _description, value); }
+            get { return _totalIssuesWithLabel; }
+            set { _totalIssuesWithLabel = value; }
         }
-
-        /// <summary>
-        /// Color of the LABEL. Used to set the background colour of the LABEL
-        /// </summary>
-        private Brush _color;
-        public Brush Color
-        {
-            get { return _color; }
-            set { SetProperty(ref _color, value); }
-        }
-
-       
     }
     #endregion
 

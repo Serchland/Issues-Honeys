@@ -26,7 +26,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             _labels = new ObservableCollection<Label>(_isuesService.GetLabels());
             _newLabelViewVisibility = Visibility.Collapsed;
             _totalLabels = _labels.Count.ToString();
-            _brush = Brushes.Gray;
+            _color = Brushes.Gray;
         }
 
         #region "Properties"
@@ -44,14 +44,14 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             set { SetProperty(ref _brushString, value); }
         }
 
-        private Brush _brush;
-        public Brush Brush
+        private Brush _color;
+        public Brush Color
         {
-            get { return _brush; }
+            get { return _color; }
             set
             {
-                BrushString = _brush.ToString();
-                SetProperty(ref _brush, value);
+                BrushString = _color.ToString();
+                SetProperty(ref _color, value);
             }
         }
 
@@ -103,7 +103,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             Type brushesType = typeof(Brushes);
             PropertyInfo[] properties = brushesType.GetProperties();
             int random = rnd.Next(properties.Length);
-            Brush = (Brush)properties[random].GetValue(null, null);
+            Color = (Brush)properties[random].GetValue(null, null);
         }
 
         private DelegateCommand<string> _cancelCommand;

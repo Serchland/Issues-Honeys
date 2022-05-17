@@ -12,6 +12,7 @@
     {
         public const string Assignes = "Assignes";
         public const string Cancel = "Cancel";
+        public const string Comments = "Comments";
         public const string CreateMilestone = "CreateMilestone";
         public const string Defautl = "Default";
         public const string Issues = "Issues";
@@ -33,6 +34,7 @@
 
     public static class RegisterForNavigation
     {
+        public const string IssueComments = "IssueComments";
         public const string IssueFooter = "IssueFooter";
         public const string IssuesMain = "IssuesMain";
         public const string LabelsMain = "LabelsMain";

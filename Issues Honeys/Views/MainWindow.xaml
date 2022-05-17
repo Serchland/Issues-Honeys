@@ -24,7 +24,8 @@
     
     <mah:MetroWindow.LeftWindowCommands>
         <mah:WindowCommands>
-            <Button Content="Issues">
+            <Button Content="Issues" Command="{Binding NavigateCommand}" 
+                    CommandParameter="{x:Static core:CommandParameters.Issues}">
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -71,7 +72,8 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Border Grid.Column="0"
+        <Border Height="{Binding ButtonContentRegionHeight}"
+                Grid.Column="0"
                 Grid.Row="0"
                 BorderThickness="1"
                 BorderBrush="LightGray">

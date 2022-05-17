@@ -378,11 +378,12 @@
                                         VerticalAlignment="Center"
                                        Padding="0,5,0,0"></Label>
 
-                                <Label Grid.Column="2" Content="x open Issues"
+                                <Label Grid.Column="2" Content="{Binding TotalIssuesWithLabel, StringFormat=Total ISSUES with this label{0:D}}"
                                         VerticalAlignment="Center"
                                        Padding="0,5,0,0"></Label>
 
                                 <Label Content="Edit" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center"></Label>
+                                
                                 <Label Content="Delete" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Center"
                                        Foreground="Red"></Label>
                             </Grid>

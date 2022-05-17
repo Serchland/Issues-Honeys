@@ -1,4 +1,5 @@
 ﻿using IssuesHoneys.BusinessTypes;
+using IssuesHoneys.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -10,6 +11,8 @@ namespace IssuesHoneys.Services.SQL
     /// </summary>
     internal static class Converters
     {
+        internal static IIssueService IssueService { get; set; }
+
         /// <summary>
         /// Converts the results obtained from the model to the type of data expected by the application.
         /// </summary>
@@ -77,7 +80,8 @@ namespace IssuesHoneys.Services.SQL
             //[Pk_LabelTracking_Id] INT IDENTITY(1, 1) NOT NULL,
             //[NAME]                VARCHAR(50) NOT NULL,
             //CONSTRAINT[PK_LabelTracking_Id] PRIMARY KEY CLUSTERED([Pk_LabelTracking_Id] ASC)
-            
+
+            int labelTrackingId = 0;
             Label result = new Label();
             int idx = 0;
 
@@ -85,11 +89,12 @@ namespace IssuesHoneys.Services.SQL
             result.Color = Convert.ToString(reader[idx++]).ToBrush();
             result.CrtnDate = Convert.ToDateTime(reader[idx++]);
             result.CrtnUser = Convert.ToString(reader[idx++]);
+            labelTrackingId = Convert.ToInt32(reader[idx++]);
             result.Name = Convert.ToString(reader[idx++]);
-
+            result.TotalIssuesWithLabel = result.GetTotalIssuesWithLabel(labelTrackingId, IssueService);
             return result;
         }
-
+        
         /// <summary>
         /// Converts the results obtained from the model to the type of data expected by the application.
         /// </summary>

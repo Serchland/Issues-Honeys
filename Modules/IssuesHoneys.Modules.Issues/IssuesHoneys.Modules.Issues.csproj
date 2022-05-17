@@ -64,6 +64,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ViewModels\AppFooterViewModel.cs" />
+    <Compile Include="ViewModels\IssueCommentsViewModel.cs" />
     <Compile Include="ViewModels\LabelsViewModel.cs" />
     <Compile Include="ViewModels\IssuesViewModel.cs" />
     <Compile Include="ViewModels\AppButtonViewModel.cs" />
@@ -81,6 +82,9 @@
     <Compile Include="Views\Converters\MarkDownConverter.cs" />
     <Compile Include="Views\Converters\RGBConverter.cs" />
     <Compile Include="Views\Converters\StateColorConverter.cs" />
+    <Compile Include="Views\IssueCommentsView.xaml.cs">
+      <DependentUpon>IssueCommentsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LabelsView.xaml.cs">
       <DependentUpon>LabelsView.xaml</DependentUpon>
     </Compile>
@@ -130,6 +134,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AppFooter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\IssueCommentsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

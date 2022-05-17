@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dummies\IssueDummyService.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="NameDefinition\Captions.cs" />
     <Compile Include="SQL\Converters.cs" />
     <Compile Include="SQL\IssueSQLService.cs" />

@@ -36,5 +36,13 @@ namespace IssuesHoneys.Services.Interfaces
         /// </summary>
         /// <returns>List<User></returns>
         List<User> GetUsers();
+
+
+        /// <summary>
+        ///  Method used to obtain the total number of ISSUES containing the LABEL identifier passed as a parameter.
+        /// </summary>
+        /// <param name="labelID"></param>
+        /// <returns></returns>
+        int GetIssuesWithLabelId(int labelID);
     }
 }

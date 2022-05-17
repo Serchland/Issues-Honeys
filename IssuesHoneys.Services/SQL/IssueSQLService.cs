@@ -35,8 +35,8 @@ namespace IssuesHoneys.Services.SQL
         {
             _iisues = new List<Issue>();
             var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
+            var queryString = "SELECT * FROM [HONEYS].[issues].[ISSUES];";
 
-            string queryString = "SELECT * FROM [HONEYS].[issues].[ISSUES];";
             using (var connection = new SqlConnection(connectionString))
             {
                 var command = new SqlCommand(queryString, connection);
@@ -53,6 +53,22 @@ namespace IssuesHoneys.Services.SQL
             return _iisues;
         }
 
+        public int GetIssuesWithLabelId(int labelID)
+        {
+            int result = 0;
+            var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
+            var queryString = "SELECT COUNT(Pk_IssueTracking_ID) FROM issues.ISSUES WHERE ASSIGNEES LIKE '%" + labelID.ToString() + "%'";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                result = Convert.ToInt32(command.ExecuteScalar());
+            };
+
+            return result;
+        }
+
         /// <summary>
         /// Obtain LABELS from the SQL model. Implementation of IIssueService.GetLabels
         /// </summary>
@@ -64,8 +80,10 @@ namespace IssuesHoneys.Services.SQL
             {
                 _labels = new List<Label>();
                 var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
+                var queryString = "SELECT * FROM [HONEYS].[issues].[LABELS];";
 
-                string queryString = "SELECT * FROM [HONEYS].[issues].[LABELS];";
+                Converters.IssueService = this;
+
                 using (var connection = new SqlConnection(connectionString))
                 {
                     var command = new SqlCommand(queryString, connection);
@@ -79,7 +97,8 @@ namespace IssuesHoneys.Services.SQL
                     }
                 };
             }
-            
+
+            Converters.IssueService = null;
             return _labels;
         }
 
@@ -94,8 +113,8 @@ namespace IssuesHoneys.Services.SQL
             {
                 _milestones = new List<Milestone>();
                 var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
+                var queryString = "SELECT * FROM [HONEYS].[issues].[MILESTONES];";
 
-                string queryString = "SELECT * FROM [HONEYS].[issues].[MILESTONES];";
                 using (var connection = new SqlConnection(connectionString))
                 {
                     var command = new SqlCommand(queryString, connection);
@@ -124,8 +143,8 @@ namespace IssuesHoneys.Services.SQL
             {
                 _users = new List<User>();
                 var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
+                var queryString = "SELECT * FROM [HONEYS].[issues].[USERS];";
 
-                string queryString = "SELECT * FROM [HONEYS].[issues].[USERS];";
                 using (var connection = new SqlConnection(connectionString))
                 {
                     var command = new SqlCommand(queryString, connection);

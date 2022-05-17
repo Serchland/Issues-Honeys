@@ -80,6 +80,11 @@ namespace IssuesHoneys.Services.Dummies
             throw new NotImplementedException();
         }
 
+        public int GetIssuesWithLabelId(int labelID)
+        {
+            return 10;
+        }
+
         /// <summary>
         /// Dummies responses uses by IssueDummyService
         /// </summary>

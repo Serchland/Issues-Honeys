@@ -2,7 +2,12 @@
 using IssuesHoneys.Core.Base;
 using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
+using Prism.Commands;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
@@ -22,6 +27,15 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             Issues = new ObservableCollection<Issue>(_isuesService.GetIssues());
         }
 
+        private DelegateCommand<SelectionChangedEventArgs> _testCommand;
+        public DelegateCommand<SelectionChangedEventArgs> TestCommand =>
+            _testCommand ?? (_testCommand = new DelegateCommand<SelectionChangedEventArgs>(ExecuteTestCommand));
+
+        void ExecuteTestCommand(SelectionChangedEventArgs param)
+        {
+            object[] list = (object[])param.AddedItems;
+            MessageBox.Show("Navigate to Milestone " + (list[0] as Milestone).Title);
+        }
         #region "Properties"
        
 
