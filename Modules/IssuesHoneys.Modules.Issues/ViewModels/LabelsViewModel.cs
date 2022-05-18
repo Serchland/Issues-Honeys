@@ -24,9 +24,9 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         private void Initialize()
         {
             _labels = new ObservableCollection<Label>(_isuesService.GetLabels());
+            _newLabel = new Label(Brushes.Gray);
             _newLabelViewVisibility = Visibility.Collapsed;
             _totalLabels = _labels.Count.ToString();
-            _color = Brushes.Gray;
         }
 
         #region "Properties"
@@ -37,22 +37,13 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             set { SetProperty(ref _labels, value); }
         }
 
-        private string _brushString;
-        public string BrushString
+        private Label _newLabel;
+        public Label NewLabel
         {
-            get { return _brushString; }
-            set { SetProperty(ref _brushString, value); }
-        }
-
-        private Brush _color;
-        public Brush Color
-        {
-            get { return _color; }
+            get
+            { return _newLabel;}
             set
-            {
-                BrushString = _color.ToString();
-                SetProperty(ref _color, value);
-            }
+            { SetProperty(ref _newLabel, value);}
         }
 
         private string _totalLabels;
@@ -71,6 +62,21 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         #endregion
 
         #region "Commands"
+
+        private DelegateCommand _createLabelCommand;
+        public DelegateCommand CreateLabelCommand =>
+            _createLabelCommand ?? (_createLabelCommand = new DelegateCommand(ExecuteCreateLabelCommand));
+
+        void ExecuteCreateLabelCommand()
+        {
+            if (_newLabel == null)
+                throw new ArgumentException("parameter cant be null");
+
+            _isuesService.CreateLabel(NewLabel);
+            Labels.Add(NewLabel);
+            NewLabelViewVisibilitity = Visibility.Collapsed;
+        }
+
         private DelegateCommand<string> _newLabelVisibilityCommand;
         public DelegateCommand<string> NewLabelVisibilityCommand =>
             _newLabelVisibilityCommand ?? (_newLabelVisibilityCommand = new DelegateCommand<string>(ExecuteNewLabelVisibilityCommand));
@@ -103,14 +109,14 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             Type brushesType = typeof(Brushes);
             PropertyInfo[] properties = brushesType.GetProperties();
             int random = rnd.Next(properties.Length);
-            Color = (Brush)properties[random].GetValue(null, null);
+            _newLabel.Color = (Brush)properties[random].GetValue(null, null);
         }
 
         private DelegateCommand<string> _cancelCommand;
         public DelegateCommand<string> CancelCommand =>
-            _cancelCommand ?? (_cancelCommand = new DelegateCommand<string>(ExecuteCommandName));
+            _cancelCommand ?? (_cancelCommand = new DelegateCommand<string>(ExecuteCancelCommand));
 
-        void ExecuteCommandName(string parameter)
+        void ExecuteCancelCommand(string parameter)
         {
 
         }

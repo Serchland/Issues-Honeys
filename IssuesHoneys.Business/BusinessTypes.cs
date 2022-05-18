@@ -169,6 +169,23 @@ namespace IssuesHoneys.BusinessTypes
     /// </summary>
     public class Label : BindableBase
     {
+        public Label()
+        {
+
+        }
+        public Label(Brush color)
+        {
+            _color = color;
+            _brushString = color.ToString();
+        }
+
+        private string _brushString;
+        public string BrushString
+        {
+            get { return _brushString; }
+            set { SetProperty(ref _brushString, value); }
+        }
+
         /// <summary>
         /// Date on which the LABEL was created
         /// </summary>
@@ -196,7 +213,11 @@ namespace IssuesHoneys.BusinessTypes
         public Brush Color
         {
             get { return _color; }
-            set { SetProperty(ref _color, value); }
+            set 
+            {   
+                SetProperty(ref _color, value);
+                BrushString = _color.ToString();
+            }
         }
 
         /// <summary>

@@ -559,7 +559,7 @@ INSERT INTO [issues].[issues]
 VALUES      (
 				'1;2', 'Allow adding xml files', NULL, NULL,
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				1, '1', GETDATE(), NULL, 1, NULL, 1, 'SART899876'
+				1, '1', GETDATE(), '1;2', 1, NULL, 1, 'SART899876'
 			)
            
 GO

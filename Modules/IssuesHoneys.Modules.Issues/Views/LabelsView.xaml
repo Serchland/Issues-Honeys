@@ -124,7 +124,7 @@
 
                 <Border  BorderThickness="1"
                          BorderBrush="LightGray"
-                         Background="{Binding Color}"
+                         Background="{Binding NewLabel.Color}"
                          VerticalAlignment="Center"
                          Height="18"
                          MinWidth="50"
@@ -153,19 +153,22 @@
                    Grid.Row="1"
                    Content="Color:" Grid.ColumnSpan="2" Margin="0,0,0.333,0"></Label>
 
-            <TextBox x:Name="PART_LabelName"
+            <TextBox HorizontalAlignment="Left"
                      Grid.Column="0"
+                     Grid.ColumnSpan="2" 
                      Grid.Row="2"
                      MaxWidth="300"
                      MinWidth="200"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Top" Grid.ColumnSpan="2" />
-
+                     Text="{Binding NewLabel.Name}"
+                     VerticalAlignment="Top" 
+                     x:Name="PART_LabelName"/>
+            
             <TextBox Grid.Column="2"
                      Grid.Row="2"
+                     HorizontalAlignment="Left"
                      MaxWidth="300"
                      MinWidth="200"
-                     HorizontalAlignment="Left" />
+                     Text="{Binding NewLabel.Description}"/>
 
             <StackPanel Orientation="Horizontal" Grid.Column="3"
                     Grid.Row="2">
@@ -183,7 +186,7 @@
                 <TextBox MaxWidth="200"
                      MinWidth="100"
                      Margin="5,0,0,0"
-                     Text="{Binding BrushString}"
+                     Text="{Binding NewLabel.BrushString}"
                      HorizontalAlignment="Left" Grid.ColumnSpan="2" />
             </StackPanel>
             
@@ -200,8 +203,7 @@
                     Content="{StaticResource ButtonCreateLabelCaption}"
                     Margin="4.667,0,0,0"
                     HorizontalAlignment="Left"
-                    Command="{Binding NewLabelVisibilityCommand}"
-                    CommandParameter="{x:Static coreNameDef:CommandParameters.NewLabel}" 
+                    Command="{Binding CreateLabelCommand}"
                     controls:ControlsHelper.FocusBorderBrush="Orange"/>
         </Grid>
 

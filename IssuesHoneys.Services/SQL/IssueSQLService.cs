@@ -25,7 +25,37 @@ namespace IssuesHoneys.Services.SQL
         /// <param name="newLabel"></param>
         public void CreateLabel(Label newLabel)
         {
-            throw new NotImplementedException();
+            var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
+
+            var description = newLabel.Description;
+            var color = newLabel.Color;
+            var crtnDate = DateTime.Now;
+            var crtnUser = 1;
+            var name = newLabel.Name;
+
+            var queryString = $@"                                    
+                                    INSERT INTO [issues].[LABELS]
+                                        ([DESCRIPTION]
+                                        ,[COLOR]
+                                        ,[CRTNDATE]
+                                        ,[CRTNUSER]
+                                        ,[NAME])
+                                    VALUES
+                                        ('{description}'
+                                        ,'{color}'
+                                        ,'{crtnDate}'
+                                        ,{crtnUser}
+                                        ,'{name}')
+                               ";
+
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                command.ExecuteScalar();
+            };
+
         }
 
         /// <summary>
