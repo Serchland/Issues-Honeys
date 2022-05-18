@@ -22,6 +22,8 @@
     <system:String x:Key="LabelDescribeTheIssueInDetailHere">Describe the issue in detail here:</system:String>
     <system:String x:Key="LabelDescription">Description:</system:String>
     <system:String x:Key="LabelDueDate">Due date (optional)</system:String>
+    <system:String x:Key="LabelDelete">Delete</system:String>
+    <system:String x:Key="LabelEdit">Edit</system:String>
     <system:String x:Key="LabelIssueBugreport">Issue: Bug report</system:String>
     <system:String x:Key="LabelMilestone">Milestone</system:String>
     <system:String x:Key="LabelNewMilestone">New milestone</system:String>
