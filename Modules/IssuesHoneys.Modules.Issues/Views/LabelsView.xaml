@@ -5,6 +5,7 @@
              xmlns:prism="http://prismlibrary.com/"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:coreNameDef="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
+             xmlns:coreViews="clr-namespace:IssuesHoneys.Core.Views;assembly=IssuesHoneys.Core"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <Grid Margin="15">
@@ -89,7 +90,48 @@
 
         </Grid>
 
-        <Grid x:Name="PART_NewLabel"
+        <Grid Grid.Column="0"
+                            Grid.Row="1"
+                            Grid.ColumnSpan="5"
+                            Margin="15"
+                            Visibility="{Binding NewLabelViewVisibilitity}"
+                            x:Name="PART_NewLabel">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0"
+                        Orientation="Horizontal" Grid.ColumnSpan="2">
+
+                <Label  VerticalAlignment="Center"
+                        Content="Lable preview:">
+                </Label>
+
+                <Border  BorderThickness="1"
+                         BorderBrush="LightGray"
+                         Background="{Binding NewLabel.Color}"
+                         VerticalAlignment="Center"
+                         Height="18"
+                         MinWidth="50"
+                         CornerRadius="10">
+
+                    <TextBlock Text="{Binding Text, ElementName=PART_LabelName, Mode=TwoWay}"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center"
+                               Foreground="White"
+                               TextWrapping="WrapWithOverflow"
+                               Padding="5,0,5,0"
+                               FontSize="10" />
+                </Border>
+            </StackPanel>
+            
+            <coreViews:NewLabel Grid.Row="1" Loaded="NewLabel_Loaded"></coreViews:NewLabel>
+        </Grid>
+       
+        <!--<Grid x:Name="PART_NewLabel"
               Grid.Column="0"
               Grid.Row="1"
               Grid.ColumnSpan="5"
@@ -205,7 +247,7 @@
                     HorizontalAlignment="Left"
                     Command="{Binding CreateLabelCommand}"
                     controls:ControlsHelper.FocusBorderBrush="Orange"/>
-        </Grid>
+        </Grid>-->
 
         <Grid Grid.Column="0"
               Grid.Row="2" >

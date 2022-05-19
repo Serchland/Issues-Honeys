@@ -17,5 +17,10 @@ namespace IssuesHoneys.Modules.Issues.Views
             Button button = sender as Button;
             button.Focus();
         }
+
+        private void NewLabel_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 }
