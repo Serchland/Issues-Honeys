@@ -30,6 +30,9 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         }
 
         #region "Properties"
+
+        
+
         private ObservableCollection<Label> _labels;
         public ObservableCollection<Label> Labels
         {
@@ -44,6 +47,15 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             { return _newLabel;}
             set
             { SetProperty(ref _newLabel, value);}
+        }
+
+        private Label _selectedLabel;
+        public Label SelectedLabel
+        {
+            get
+            { return _selectedLabel; }
+            set
+            { SetProperty(ref _selectedLabel, value);}
         }
 
         private string _totalLabels;
@@ -121,6 +133,15 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         void ExecuteCancelCommand(string parameter)
         {
 
+        }
+
+        private DelegateCommand _isEdditingCommand;
+        public DelegateCommand IsEdditingCommand =>
+            _isEdditingCommand ?? (_isEdditingCommand = new DelegateCommand(ExecuteIsEdditingCommand));
+
+        void ExecuteIsEdditingCommand()
+        {
+            SelectedLabel.IsEdditing = true;
         }
         #endregion
     }

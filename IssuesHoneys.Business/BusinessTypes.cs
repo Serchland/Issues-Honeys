@@ -257,6 +257,18 @@ namespace IssuesHoneys.BusinessTypes
             get { return _totalIssuesWithLabel; }
             set { _totalIssuesWithLabel = value; }
         }
+
+        /// <summary>
+        /// Extended property
+        /// </summary>
+        private bool _isEdditing;
+        public bool IsEdditing
+        {
+            get
+            { return _isEdditing; }
+            set
+            { SetProperty(ref _isEdditing, value); }
+        }
     }
     #endregion
 

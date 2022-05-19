@@ -6,9 +6,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:coreNameDef="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
              xmlns:coreViews="clr-namespace:IssuesHoneys.Core.Views;assembly=IssuesHoneys.Core"
+             xmlns:local="clr-namespace:IssuesHoneys.Modules.Issues.Views.Selectors"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
+    <UserControl.Resources>
+        <ResourceDictionary Source="/IssuesHoneys.Modules.Issues;component/Views/Templates/LabelSelectedItemTemplates.xaml"></ResourceDictionary>
+    </UserControl.Resources>
+
     <Grid Margin="15">
+        <Grid.Resources>
+            <local:SelectedItemSelector x:Key="SelectedItemSelectorKey"></local:SelectedItemSelector>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -102,8 +110,10 @@
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0"
-                        Orientation="Horizontal" Grid.ColumnSpan="2">
+            <StackPanel Grid.ColumnSpan="2"
+                        Grid.Row="0"
+                        Margin="15,0,0,0"
+                        Orientation="Horizontal" >
 
                 <Label  VerticalAlignment="Center"
                         Content="Lable preview:">
@@ -131,124 +141,6 @@
             <coreViews:NewLabel Grid.Row="1" Loaded="NewLabel_Loaded"></coreViews:NewLabel>
         </Grid>
        
-        <!--<Grid x:Name="PART_NewLabel"
-              Grid.Column="0"
-              Grid.Row="1"
-              Grid.ColumnSpan="5"
-              Margin="15"
-              Visibility="{Binding NewLabelViewVisibilitity}">
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="17.539"></ColumnDefinition>
-                <ColumnDefinition Width="282.461"/>
-                <ColumnDefinition Width="300"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition />
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-
-            <StackPanel Grid.Column="0"
-                        Grid.Row="0"
-                        Orientation="Horizontal" Grid.ColumnSpan="2">
-
-                <Label  VerticalAlignment="Center"
-                        Content="Lable preview:">
-                </Label>
-
-                <Border  BorderThickness="1"
-                         BorderBrush="LightGray"
-                         Background="{Binding NewLabel.Color}"
-                         VerticalAlignment="Center"
-                         Height="18"
-                         MinWidth="50"
-                         CornerRadius="10">
-
-                    <TextBlock Text="{Binding Text, ElementName=PART_LabelName, Mode=TwoWay}"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               TextAlignment="Center"
-                               Foreground="White"
-                               TextWrapping="WrapWithOverflow"
-                               Padding="5,0,5,0"
-                               FontSize="10" />
-                </Border>
-            </StackPanel>
-
-            <Label Grid.Column="0"
-                   Grid.Row="1"
-                   Content="Lable name:" Grid.ColumnSpan="2"></Label>
-
-            <Label Grid.Column="2"
-                   Grid.Row="1"
-                   Content="Description:"></Label>
-
-            <Label Grid.Column="3"
-                   Grid.Row="1"
-                   Content="Color:" Grid.ColumnSpan="2" Margin="0,0,0.333,0"></Label>
-
-            <TextBox HorizontalAlignment="Left"
-                     Grid.Column="0"
-                     Grid.ColumnSpan="2" 
-                     Grid.Row="2"
-                     MaxWidth="300"
-                     MinWidth="200"
-                     Text="{Binding NewLabel.Name}"
-                     VerticalAlignment="Top" 
-                     x:Name="PART_LabelName"/>
-            
-            <TextBox Grid.Column="2"
-                     Grid.Row="2"
-                     HorizontalAlignment="Left"
-                     MaxWidth="300"
-                     MinWidth="200"
-                     Text="{Binding NewLabel.Description}"/>
-
-            <StackPanel Orientation="Horizontal" Grid.Column="3"
-                    Grid.Row="2">
-
-                <Button Height="30"
-                    Width="30"
-                    BorderThickness="0.5"
-                    Style="{DynamicResource MahApps.Styles.Button.Circle}"
-                    Command="{Binding RandomColor}" Grid.ColumnSpan="2">
-                    <Button.Content>
-                        <iconpacks:VaadinIcons Kind="Refresh"></iconpacks:VaadinIcons>
-                    </Button.Content>
-                </Button>
-
-                <TextBox MaxWidth="200"
-                     MinWidth="100"
-                     Margin="5,0,0,0"
-                     Text="{Binding NewLabel.BrushString}"
-                     HorizontalAlignment="Left" Grid.ColumnSpan="2" />
-            </StackPanel>
-            
-            <Button Grid.Column="5"
-                    Grid.Row="2"
-                    Content="{StaticResource ButtonCancelCaption}"
-                    Command="{Binding NewLabelVisibilityCommand}"
-                    HorizontalAlignment="Right"
-                    CommandParameter="{x:Static coreNameDef:CommandParameters.Cancel}" Grid.ColumnSpan="2" Margin="0,0,0.333,0" 
-                    controls:ControlsHelper.FocusBorderBrush="Orange"/>
-
-            <Button Grid.Column="7"
-                    Grid.Row="2"
-                    Content="{StaticResource ButtonCreateLabelCaption}"
-                    Margin="4.667,0,0,0"
-                    HorizontalAlignment="Left"
-                    Command="{Binding CreateLabelCommand}"
-                    controls:ControlsHelper.FocusBorderBrush="Orange"/>
-        </Grid>-->
-
         <Grid Grid.Column="0"
               Grid.Row="2" >
             <Grid.ColumnDefinitions>
@@ -306,8 +198,12 @@
                           BorderThickness="1 0 1 1"
                           BorderBrush="{StaticResource MainBorderBrush}"
                           ItemsSource="{Binding Labels}"
-                          Margin="5,0,5,5">
-                <ListView.ItemContainerStyle>
+                          ItemTemplateSelector="{StaticResource SelectedItemSelectorKey}"
+                          SelectedItem="{Binding SelectedLabel}"
+                          Margin="5,0,5,5"
+                          x:Name="PART_LabelsListView">
+                
+                    <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="BorderThickness"
                                     Value="0,0,0,0.5" />
@@ -340,6 +236,7 @@
                                             <Setter Property="BorderBrush"
                                                         TargetName="Bd"
                                                         Value="LightGray" />
+                                            <Setter Property="IsSelected" Value="True"></Setter>
                                         </MultiTrigger>
 
                                         <MultiTrigger>
@@ -368,8 +265,10 @@
                                                         Value="#3D26A0DA" />
                                             <Setter Property="BorderBrush"
                                                         TargetName="Bd"
-                                                        Value="#3D26A0DA" />
+                                                        Value=
+                                                    "#3D26A0DA" />
                                         </MultiTrigger>
+
                                         <Trigger Property="IsEnabled"
                                                      Value="False">
                                             <Setter Property="TextElement.Foreground"
@@ -380,281 +279,20 @@
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
+
+                        <Setter Property="ContentTemplate" Value="{StaticResource SelectedItemTemplate}" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsEdditing}" Value="True">
+                                <Setter Property="ContentTemplate" Value="{StaticResource SelectedItemEditTemplate}" />
+                            </DataTrigger>
+                        </Style.Triggers>
                     </Style>
+                        
+                        
                 </ListView.ItemContainerStyle>
                     
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderThickness="0.5">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" MinWidth="200"></ColumnDefinition>
-                                    <ColumnDefinition Width="Auto" MinWidth="300"></ColumnDefinition>
-                                    <ColumnDefinition Width="*" MinWidth="300"></ColumnDefinition>
-                                    <ColumnDefinition Width="Auto" ></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                </Grid.RowDefinitions>
+                 
 
-                                <Border Grid.Column="0"
-                                        Grid.Row="0"
-                                        BorderThickness="0.5"
-                                        BorderBrush="LightGray"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        Margin="0,8,0,0"
-                                        Height="18"
-                                        MinWidth="50"
-                                        MaxWidth="85"
-                                        CornerRadius="10"
-                                        Background="{Binding Color}"
-                                        x:Name="PART_ItemBorder">   
-
-                                    <TextBlock Text="{Binding Name}"
-                                       HorizontalAlignment="Center"
-                                       TextAlignment="Center"
-                                       TextWrapping="WrapWithOverflow"
-                                       Foreground="White"
-                                       FontSize="10"
-                                       Padding="5,0,5,0"
-                                       Height="Auto"
-                                       Name="PART_txtBlockName">
-                                    </TextBlock>
-                                </Border>
-                                
-                                <Label Content="{Binding Description}"
-                                       Grid.Column="1"
-                                       Grid.Row="0"
-                                       VerticalAlignment="Center"
-                                       Padding="0,5,0,0"></Label>
-
-                                <TextBlock Grid.Column="2"
-                                           Grid.Row="0"
-                                           Padding="0,5,0,0"
-                                           Text="{Binding TotalIssuesWithLabel, StringFormat= 'Total ISSUES with this label: \{0\}'}"
-                                           VerticalAlignment="Center">
-                                </TextBlock>
-
-                                <DockPanel Grid.Column="3"
-                                           Grid.Row="0"
-                                           Grid.RowSpan="2">
-                                    <TextBlock HorizontalAlignment="Right" 
-                                               Margin="0,0,10,0"
-                                               Text="{StaticResource TextBlockEdit}"
-                                               VerticalAlignment="Center">
-                                        <TextBlock.Style>
-                                            <Style TargetType="TextBlock">
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Foreground" Value="Blue"></Setter>
-                                                        <Setter Property="TextDecorations" Value="Underline"></Setter>
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBlock.Style>
-
-                                        <TextBlock.InputBindings>
-                                            <MouseBinding Command="{Binding ElementName=PART_NewLabel, Path=DataContext.NavigateCommand}" 
-                                                          CommandParameter="{x:Static coreNameDef:CommandParameters.Comments}"
-                                                          MouseAction="LeftClick" >
-                                            </MouseBinding>
-                                        </TextBlock.InputBindings>
-                                    </TextBlock>
-
-                                    <TextBlock Foreground="Red"
-                                               HorizontalAlignment="Right" 
-                                               Text="{StaticResource TextBlockDelete}" 
-                                               VerticalAlignment="Center">
-                                        <TextBlock.Style>
-                                            <Style TargetType="TextBlock">
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="TextDecorations" Value="Underline"></Setter>
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBlock.Style>
-                                    </TextBlock>
-                                    
-                                    
-                                </DockPanel>
-
-                                <Grid 
-              Grid.Column="0"
-              Grid.Row="1"
-              Grid.ColumnSpan="5"
-              Margin="15"
-              Visibility="{Binding NewLabelViewVisibilitity}">
-
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="17.539"></ColumnDefinition>
-                                        <ColumnDefinition Width="282.461"/>
-                                        <ColumnDefinition Width="300"></ColumnDefinition>
-                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                        <ColumnDefinition />
-                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"></RowDefinition>
-                                        <RowDefinition Height="Auto"></RowDefinition>
-                                        <RowDefinition Height="Auto"></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                    </Grid.RowDefinitions>
-
-                                    <Border Grid.Column="0"
-                                        Grid.Row="0"
-                                        BorderThickness="0.5"
-                                        BorderBrush="LightGray"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        Margin="0,8,0,0"
-                                        Height="18"
-                                        MinWidth="50"
-                                        MaxWidth="85"
-                                        CornerRadius="10"
-                                        Background="{Binding Color}">
-
-                                        <TextBlock Text="{Binding Name}"
-                                       HorizontalAlignment="Center"
-                                       TextAlignment="Center"
-                                       TextWrapping="WrapWithOverflow"
-                                       Foreground="White"
-                                       FontSize="10"
-                                       Padding="5,0,5,0"
-                                       Height="Auto">
-                                        </TextBlock>
-                                    </Border>
-
-                                    <Label Grid.Column="0"
-                   Grid.Row="1"
-                   Content="Lable name:" Grid.ColumnSpan="2"></Label>
-
-                                    <Label Grid.Column="2"
-                   Grid.Row="1"
-                   Content="Description:"></Label>
-
-                                    <Label Grid.Column="3"
-                   Grid.Row="1"
-                   Content="Color:" Grid.ColumnSpan="2" Margin="0,0,0.333,0"></Label>
-
-                                    <TextBox HorizontalAlignment="Left"
-                     Grid.Column="0"
-                     Grid.ColumnSpan="2" 
-                     Grid.Row="2"
-                     MaxWidth="300"
-                     MinWidth="200"
-                     Text="{Binding NewLabel.Name}"
-                     VerticalAlignment="Top" 
-                     x:Name="PART_LabelName"/>
-
-                                    <TextBox Grid.Column="2"
-                     Grid.Row="2"
-                     HorizontalAlignment="Left"
-                     MaxWidth="300"
-                     MinWidth="200"
-                     Text="{Binding NewLabel.Description}"/>
-
-                                    <StackPanel Orientation="Horizontal" Grid.Column="3"
-                    Grid.Row="2">
-
-                                        <Button Height="30"
-                    Width="30"
-                    BorderThickness="0.5"
-                    Style="{DynamicResource MahApps.Styles.Button.Circle}"
-                    Command="{Binding RandomColor}" Grid.ColumnSpan="2">
-                                            <Button.Content>
-                                                <iconpacks:VaadinIcons Kind="Refresh"></iconpacks:VaadinIcons>
-                                            </Button.Content>
-                                        </Button>
-
-                                        <TextBox MaxWidth="200"
-                     MinWidth="100"
-                     Margin="5,0,0,0"
-                     Text="{Binding NewLabel.BrushString}"
-                     HorizontalAlignment="Left" Grid.ColumnSpan="2" />
-                                    </StackPanel>
-
-                                    <Button Grid.Column="5"
-                    Grid.Row="2"
-                    Content="{StaticResource ButtonCancelCaption}"
-                    Command="{Binding NewLabelVisibilityCommand}"
-                    HorizontalAlignment="Right"
-                    CommandParameter="{x:Static coreNameDef:CommandParameters.Cancel}" Grid.ColumnSpan="2" Margin="0,0,0.333,0" 
-                    controls:ControlsHelper.FocusBorderBrush="Orange"/>
-
-                                    <Button Grid.Column="7"
-                    Grid.Row="2"
-                    Content="{StaticResource ButtonCreateLabelCaption}"
-                    Margin="4.667,0,0,0"
-                    HorizontalAlignment="Left"
-                    Command="{Binding CreateLabelCommand}"
-                    controls:ControlsHelper.FocusBorderBrush="Orange"/>
-                                </Grid>
-
-                                <!--<Grid Grid.Column="0"
-                                      Grid.ColumnSpan="4"
-                                      Grid.Row="1"
-                                      Margin="10">
-                                    
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="200"></ColumnDefinition>
-                                        <ColumnDefinition Width="200"></ColumnDefinition>
-                                        <ColumnDefinition Width="200"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"></RowDefinition>
-                                        <RowDefinition Height="Auto"></RowDefinition>
-                                    </Grid.RowDefinitions>
-
-                                    <Label  Content="Lable name:"
-                                            Grid.Column="0"
-                                            Grid.Row="0"
-                                            HorizontalAlignment="Left">
-                                    </Label>
-                                    <Label Content="Description:"
-                                           Grid.Column="1"
-                                           Grid.Row="0"
-                                           HorizontalAlignment="Left">
-                                    </Label>
-
-                                    <Label Content="Color:" 
-                                           Grid.Column="2"
-                                           Grid.Row="0"
-                                           HorizontalAlignment="Left">
-                                    </Label>
-
-                                    <TextBox HorizontalAlignment="Left"
-                                             Grid.Column="0"
-                                             Grid.Row="1"
-                                             MaxWidth="300"
-                                             MinWidth="125"
-                                             Text="{Binding Name}"
-                                             VerticalAlignment="Top" />
-
-                                    <TextBox Grid.Column="1"
-                                             Grid.Row="1"
-                                             HorizontalAlignment="Left"
-                                             MaxWidth="300"
-                                             MinWidth="125"
-                                             Text="{Binding Description}"/>
-
-                                    <TextBox Grid.Column="2"
-                                             Grid.Row="1"
-                                             HorizontalAlignment="Left"
-                                             MaxWidth="300"
-                                             MinWidth="125"
-                                             Text="{Binding BrushString}"/>
-                                </Grid>-->
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-                
                 </ListView>
       
      </Grid>
