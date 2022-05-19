@@ -59,6 +59,8 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             get { return _newLabelViewVisibility; }
             set { SetProperty(ref _newLabelViewVisibility, value); }
         }
+
+
         #endregion
 
         #region "Commands"
