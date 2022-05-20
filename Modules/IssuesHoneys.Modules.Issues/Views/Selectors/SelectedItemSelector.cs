@@ -12,8 +12,6 @@ namespace IssuesHoneys.Modules.Issues.Views.Selectors
 
             if (element != null && item != null && item is Task)
             {
-                //Task taskitem = item as Task;
-
                 //if (taskitem.Priority == 1)
                 //    return
                 //        element.FindResource("importantTaskTemplate") as DataTemplate;

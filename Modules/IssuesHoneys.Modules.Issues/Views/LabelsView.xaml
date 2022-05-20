@@ -202,8 +202,8 @@
                           SelectedItem="{Binding SelectedLabel}"
                           Margin="5,0,5,5"
                           x:Name="PART_LabelsListView">
-                
-                    <ListView.ItemContainerStyle>
+
+                <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="BorderThickness"
                                     Value="0,0,0,0.5" />
@@ -220,7 +220,6 @@
                                                 Padding="{TemplateBinding Padding}"
                                                 SnapsToDevicePixels="true">
                                         <ContentPresenter HorizontalAlignment="Stretch"
-                                                          MinHeight="50"
                                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                                     </Border>
@@ -236,7 +235,6 @@
                                             <Setter Property="BorderBrush"
                                                         TargetName="Bd"
                                                         Value="LightGray" />
-                                            <Setter Property="IsSelected" Value="True"></Setter>
                                         </MultiTrigger>
 
                                         <MultiTrigger>
@@ -265,10 +263,8 @@
                                                         Value="#3D26A0DA" />
                                             <Setter Property="BorderBrush"
                                                         TargetName="Bd"
-                                                        Value=
-                                                    "#3D26A0DA" />
+                                                        Value="#3D26A0DA" />
                                         </MultiTrigger>
-
                                         <Trigger Property="IsEnabled"
                                                      Value="False">
                                             <Setter Property="TextElement.Foreground"
@@ -281,19 +277,17 @@
                         </Setter>
 
                         <Setter Property="ContentTemplate" Value="{StaticResource SelectedItemTemplate}" />
+
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsEdditing}" Value="True">
                                 <Setter Property="ContentTemplate" Value="{StaticResource SelectedItemEditTemplate}" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                        
-                        
                 </ListView.ItemContainerStyle>
-                    
-                 
 
-                </ListView>
+                
+            </ListView>
       
      </Grid>
 

@@ -5,7 +5,7 @@
                     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
 
     <DataTemplate x:Key="SelectedItemTemplate">
-            <Border BorderThickness="0.5">
+            <Border BorderThickness="0.5" Height="50">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" MinWidth="200"></ColumnDefinition>
