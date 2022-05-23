@@ -269,6 +269,7 @@ namespace IssuesHoneys.BusinessTypes
             set
             { SetProperty(ref _isEdditing, value); }
         }
+
     }
     #endregion
 

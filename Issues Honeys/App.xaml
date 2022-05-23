@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.Shared.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Mdxaml;component/Markdown.Style.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/IssuesHoneys.Core;Component/Resources/ResourceDictionary_en.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/IssuesHoneys.Core;Component/Resources/StylesDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -49,6 +49,19 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             { SetProperty(ref _newLabel, value);}
         }
 
+        private Label _mouseEnterLabel;
+        public Label MouserEnterLabel
+        {
+            get
+            {
+                return _mouseEnterLabel;
+            }
+            set
+            {
+                SetProperty(ref _mouseEnterLabel, value);
+            }
+        }
+
         private Label _selectedLabel;
         public Label SelectedLabel
         {
@@ -141,6 +154,9 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
         void ExecuteIsEdditingCommand()
         {
+            if (SelectedLabel == null)
+                SelectedLabel = MouserEnterLabel;
+            
             SelectedLabel.IsEdditing = true;
         }
         #endregion

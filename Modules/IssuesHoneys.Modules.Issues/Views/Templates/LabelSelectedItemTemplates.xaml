@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:iconpacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                     xmlns:coreNameDef="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
+                    xmlns:coreViews="clr-namespace:IssuesHoneys.Core.Views;assembly=IssuesHoneys.Core"
                     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
 
     <DataTemplate x:Key="SelectedItemTemplate">
@@ -102,9 +103,47 @@
         </DataTemplate>
 
     <DataTemplate x:Key="SelectedItemEditTemplate">
-        <StackPanel>
-            <TextBlock Text="{Binding Data}" />
-            <Rectangle Fill="Blue" Height="10" Width="10"/>
-        </StackPanel>
+        <Border BorderThickness="0.5" Height="50">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="200"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto" MinWidth="300"></ColumnDefinition>
+                    <ColumnDefinition Width="*" MinWidth="300"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto" ></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Column="0"
+                                        Grid.Row="0"
+                                        BorderThickness="0.5"
+                                        BorderBrush="LightGray"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        Margin="0,8,0,0"
+                                        Height="18"
+                                        MinWidth="50"
+                                        MaxWidth="85"
+                                        CornerRadius="10"
+                                        Background="{Binding Color}"
+                                        x:Name="PART_ItemBorder">
+
+                    <TextBlock Text="{Binding Name}"
+                                       HorizontalAlignment="Center"
+                                       TextAlignment="Center"
+                                       TextWrapping="WrapWithOverflow"
+                                       Foreground="White"
+                                       FontSize="10"
+                                       Padding="5,0,5,0"
+                                       Height="Auto"
+                                       Name="PART_txtBlockName">
+                    </TextBlock>
+                </Border>
+
+                <coreViews:NewLabel Grid.Row="1"></coreViews:NewLabel>
+            </Grid>
+        </Border>
     </DataTemplate>
 </ResourceDictionary>

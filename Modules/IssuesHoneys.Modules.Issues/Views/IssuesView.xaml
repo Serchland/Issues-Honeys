@@ -283,6 +283,7 @@
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
+
                         </Style>
                     </ListView.ItemContainerStyle>
 
