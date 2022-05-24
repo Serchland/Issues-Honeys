@@ -2,6 +2,8 @@
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
+using System.ComponentModel;
+using System.Windows;
 
 namespace IssuesHoneys.Core.Base
 {
@@ -11,6 +13,13 @@ namespace IssuesHoneys.Core.Base
         public ViewModelBase(IApplicationCommands applicationCommands)
         {
             _applicationCommands = applicationCommands;
+            _argumentExceptionMessage = Application.Current.Resources["AppMessageArgumentException"].ToString();
+        }
+
+        private string _argumentExceptionMessage;
+        public  string ArgumentExceptionMessage
+        {
+            get { return _argumentExceptionMessage; }
         }
 
         private DelegateCommand<string> _navigateCommand;
@@ -20,9 +29,14 @@ namespace IssuesHoneys.Core.Base
         void ExecuteNavigateCommand(string parameter)
         {
             if (string.IsNullOrEmpty(parameter))
-                throw new ArgumentNullException("parameter cant be null");
+                throw new ArgumentNullException(ArgumentExceptionMessage);
 
             _applicationCommands.NavigateCommand.Execute(parameter);
+        }
+
+        protected override void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+            base.OnPropertyChanged(args);
         }
     }
 }

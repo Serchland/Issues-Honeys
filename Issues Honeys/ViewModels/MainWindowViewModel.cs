@@ -1,4 +1,5 @@
-﻿using IssuesHoneys.Core.NameDefinition;
+﻿using IssuesHoneys.Core.Base;
+using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Core.Types.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -7,14 +8,14 @@ using System;
 
 namespace Issues_Honeys.ViewModels
 {
-    public class MainWindowViewModel : BindableBase
+    public class MainWindowViewModel : ViewModelBase
     {
         IRegionManager _regionManager;
 
-        public MainWindowViewModel(IApplicationCommands applicationCommand, IRegionManager regionManager)
+        public MainWindowViewModel(IApplicationCommands applicationCommands, IRegionManager regionManager) : base(applicationCommands)
         {
             _regionManager = regionManager;
-            applicationCommand.NavigateCommand.RegisterCommand(NavigateCommand);
+            applicationCommands.NavigateCommand.RegisterCommand(NavigateCommand);
 
             _buttonContentRegionHeight = 73;
         }
@@ -35,7 +36,7 @@ namespace Issues_Honeys.ViewModels
             //SERCH00: only for test pourpoposes:
             //string res = Application.Current.FindResource("WaterMarkSearchLabelsCaption").ToString();
             if (string.IsNullOrEmpty(parameter))
-                throw new ArgumentNullException("Parameter cant be null");
+                throw new ArgumentNullException(ArgumentExceptionMessage);
 
             switch (parameter)
             {

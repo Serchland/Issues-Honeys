@@ -7,6 +7,8 @@
     <!--<BitmapImage x:Key="Issues_128_ico" UriSource="Images/Issues_128.ico" />-->
     
     <!--CAPTIONS-->
+    <system:String x:Key="AppMessageArgumentException">parameter cant be null</system:String>
+    
     <system:String x:Key="ButtonCancelCaption">CANCEL</system:String>
     <system:String x:Key="ButtonCreateLabelCaption">CREATE LABEL</system:String>
     <system:String x:Key="ButtonCreateMilestone">CREATE MILESTONE</system:String>

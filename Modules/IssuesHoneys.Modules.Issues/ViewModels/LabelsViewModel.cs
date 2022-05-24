@@ -101,7 +101,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         void ExecuteCreateLabelCommand()
         {
             if (_newLabel == null)
-                throw new ArgumentException("parameter cant be null");
+                throw new ArgumentException(ArgumentExceptionMessage);
 
             _isuesService.CreateLabel(NewLabel);
             Labels.Add(NewLabel);
@@ -115,7 +115,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         void ExecuteNewLabelVisibilityCommand(string parameter)
         {
             if (string.IsNullOrEmpty(parameter))
-                throw new ArgumentException("parameter cant be null");
+                throw new ArgumentException(ArgumentExceptionMessage);
 
             switch (parameter)
             {
@@ -137,7 +137,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         private void ExecuteRandomColorCommand(string parameter)
         {
             if (string.IsNullOrEmpty(parameter))
-                throw new ArgumentNullException("parameter cant be null");
+                throw new ArgumentNullException(ArgumentExceptionMessage);
 
             Brush result = Brushes.Transparent;
             Random rnd = new Random();

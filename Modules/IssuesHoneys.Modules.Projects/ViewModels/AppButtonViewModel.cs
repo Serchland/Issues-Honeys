@@ -1,30 +1,31 @@
-﻿using IssuesHoneys.Core.Types.Interfaces;
+﻿using IssuesHoneys.Core.Base;
+using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
 using System;
 
 namespace IssuesHoneys.Modules.Projects.ViewModels
 {
-    public class AppButtonViewModel
+    public class AppButtonViewModel : ViewModelBase
     {
         private IApplicationCommands _applicationCommands;
-        public AppButtonViewModel(IApplicationCommands applicationCommands)
+        public AppButtonViewModel(IApplicationCommands applicationCommands) : base(applicationCommands)
         {
             _applicationCommands = applicationCommands;
         }
 
-        #region "Commands"
-        private DelegateCommand<string> _navigateCommand;
-        public DelegateCommand<string> NavigateCommand =>
-            _navigateCommand ?? (_navigateCommand = new DelegateCommand<string>(ExecuteNavigateCommand));
+        //#region "Commands"
+        //private DelegateCommand<string> _navigateCommand;
+        //public DelegateCommand<string> NavigateCommand =>
+        //    _navigateCommand ?? (_navigateCommand = new DelegateCommand<string>(ExecuteNavigateCommand));
 
-        void ExecuteNavigateCommand(string parameter)
-        {
-            if (string.IsNullOrEmpty(parameter))
-                throw new ArgumentNullException("parameter cant be null");
+        //void ExecuteNavigateCommand(string parameter)
+        //{
+        //    if (string.IsNullOrEmpty(parameter))
+        //        throw new ArgumentNullException(ArgumentExceptionMessage);
 
-            _applicationCommands.NavigateCommand.Execute(parameter);
-        }
-        #endregion
+        //    _applicationCommands.NavigateCommand.Execute(parameter);
+        //}
+        //#endregion
     }
 }
