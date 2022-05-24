@@ -16,6 +16,7 @@
     <system:String x:Key="ButtonNewLabelCaption">NEW LABEL</system:String>
     <system:String x:Key="ButtonNewMilestoneCaption">NEW MILESTONE</system:String>
     <system:String x:Key="ButtonSubmitNewIssueCaption">SUBMIT NEW ISSUE</system:String>
+    <system:String x:Key="ButtonUpdateLabelCaption">UPDATE LABEL</system:String>
 
     <system:String x:Key="LabelAssignes">Assignes</system:String>
     <system:String x:Key="LabelCreateANewMilestoneToHelpOrganizeYourIssues">Create a new milestone to help organize your issues.</system:String>

@@ -2,6 +2,7 @@
 using System;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace IssuesHoneys.Modules.Issues.Views
 {
@@ -15,16 +16,13 @@ namespace IssuesHoneys.Modules.Issues.Views
             InitializeComponent();
         }
 
-        private void PART_LabelsListViewItem_MouseEnter(object sender, MouseEventArgs e)
+        private void PART_LabelsListViewItem_MouseDown(object sender, MouseEventArgs e)
         {
-            //SERCH00: Does the trick, but it is improvable 
-            var context = this.DataContext as LabelsViewModel;
-            
-            if (context.SelectedLabel == null)
+            if (e.OriginalSource is TextBlock)
             {
-                var item = e.OriginalSource as ListViewItem;
-                context.MouserEnterLabel = (BusinessTypes.Label)item.Content;
-                item.MouseEnter -= new MouseEventHandler(PART_LabelsListViewItem_MouseEnter);
+                var context = this.DataContext as LabelsViewModel;
+                var item = e.OriginalSource as TextBlock;
+                context.SelectedLabel = item.DataContext as BusinessTypes.Label;
             }
         }
 

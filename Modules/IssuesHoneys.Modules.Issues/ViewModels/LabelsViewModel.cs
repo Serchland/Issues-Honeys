@@ -49,18 +49,18 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             { SetProperty(ref _newLabel, value);}
         }
 
-        private Label _mouseEnterLabel;
-        public Label MouserEnterLabel
-        {
-            get
-            {
-                return _mouseEnterLabel;
-            }
-            set
-            {
-                SetProperty(ref _mouseEnterLabel, value);
-            }
-        }
+        //private Label _mouseEnterLabel;
+        //public Label MouserEnterLabel
+        //{
+        //    get
+        //    {
+        //        return _mouseEnterLabel;
+        //    }
+        //    set
+        //    {
+        //        SetProperty(ref _mouseEnterLabel, value);
+        //    }
+        //}
 
         private Label _selectedLabel;
         public Label SelectedLabel
@@ -68,7 +68,11 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             get
             { return _selectedLabel; }
             set
-            { SetProperty(ref _selectedLabel, value);}
+            {
+                if (_selectedLabel != null)
+                    _selectedLabel.IsEdditing = false;
+                SetProperty(ref _selectedLabel, value);
+            }
         }
 
         private string _totalLabels;
@@ -120,23 +124,31 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
                     break;
 
                 case CommandParameters.NewLabel:
+                    NewLabel = new Label(Brushes.Gray);
                     NewLabelViewVisibilitity = Visibility.Visible;
                     break;
             }
         }
 
-        private DelegateCommand _randomColor;
-        public DelegateCommand RandomColor =>
-            _randomColor ?? (_randomColor = new DelegateCommand(ExecuteRandomColor));
+        private DelegateCommand<string> _randomColor;
+        public DelegateCommand<string> RandomColorCommand =>
+            _randomColor ?? (_randomColor = new DelegateCommand<string>(ExecuteRandomColorCommand));
 
-        private void ExecuteRandomColor()
+        private void ExecuteRandomColorCommand(string parameter)
         {
+            if (string.IsNullOrEmpty(parameter))
+                throw new ArgumentNullException("parameter cant be null");
+
             Brush result = Brushes.Transparent;
             Random rnd = new Random();
             Type brushesType = typeof(Brushes);
             PropertyInfo[] properties = brushesType.GetProperties();
             int random = rnd.Next(properties.Length);
-            _newLabel.Color = (Brush)properties[random].GetValue(null, null);
+
+            if (parameter == CommandParameters.Create)
+                NewLabel.Color = (Brush)properties[random].GetValue(null, null);
+            else
+                SelectedLabel.Color = (Brush)properties[random].GetValue(null, null);
         }
 
         private DelegateCommand<string> _cancelCommand;
@@ -154,9 +166,6 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
         void ExecuteIsEdditingCommand()
         {
-            if (SelectedLabel == null)
-                SelectedLabel = MouserEnterLabel;
-            
             SelectedLabel.IsEdditing = true;
         }
         #endregion

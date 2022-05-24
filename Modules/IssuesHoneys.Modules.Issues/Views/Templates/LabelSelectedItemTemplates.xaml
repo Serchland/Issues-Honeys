@@ -103,7 +103,7 @@
         </DataTemplate>
 
     <DataTemplate x:Key="SelectedItemEditTemplate">
-        <Border BorderThickness="0.5" Height="50">
+        <Border BorderThickness="0.5">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" MinWidth="200"></ColumnDefinition>
@@ -113,7 +113,7 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
                 <Border Grid.Column="0"
@@ -142,7 +142,8 @@
                     </TextBlock>
                 </Border>
 
-                <coreViews:NewLabel Grid.Row="1"></coreViews:NewLabel>
+                <coreViews:EditLabel Grid.Row="1" Grid.ColumnSpan="4"
+                                    Margin="0 0 0 10"></coreViews:EditLabel>
             </Grid>
         </Border>
     </DataTemplate>

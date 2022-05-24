@@ -13,6 +13,7 @@
         public const string Assignes = "Assignes";
         public const string Cancel = "Cancel";
         public const string Comments = "Comments";
+        public const string Create = "Create";
         public const string CreateMilestone = "CreateMilestone";
         public const string Defautl = "Default";
         public const string Issues = "Issues";
@@ -23,6 +24,7 @@
         public const string NewMilestone = "NewMilestone";
         public const string Projects = "Projects";
         public const string Shell = "Shell";
+        public const string Update = "Update";
     }
 
     public static class RegionNames

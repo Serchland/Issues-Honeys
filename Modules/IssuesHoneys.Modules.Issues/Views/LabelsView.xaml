@@ -125,7 +125,7 @@
                          MinWidth="50"
                          CornerRadius="10">
 
-                    <TextBlock Text="{Binding Text, ElementName=PART_LabelName, Mode=TwoWay}"
+                    <TextBlock Text="{Binding NewLabel.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
                                TextAlignment="Center"
@@ -134,9 +134,11 @@
                                Padding="5,0,5,0"
                                FontSize="10" />
                 </Border>
+
+               
             </StackPanel>
-            
-            
+
+            <coreViews:NewLabel  Grid.Row="1"></coreViews:NewLabel>
         </Grid>
        
         <Grid Grid.Column="0"
@@ -207,6 +209,9 @@
                         <Setter Property="BorderBrush"
                                     Value="LightGray"/>
 
+                        <Setter Property="IsSelected"
+                                    Value="{Binding IsSelected}"/>
+
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type ListViewItem}">
@@ -221,7 +226,7 @@
                                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                                     </Border>
                                     <ControlTemplate.Triggers>
-                                        <MultiTrigger>
+                                        <!--<MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver"
                                                                Value="True" />
@@ -234,7 +239,7 @@
                                             <Setter Property="BorderBrush"
                                                         TargetName="Bd"
                                                         Value="LightGray" />
-                                        </MultiTrigger>
+                                        </MultiTrigger>-->
 
                                         <!--<MultiTrigger>
                                             <MultiTrigger.Conditions>
@@ -248,9 +253,9 @@
                                                         TargetName="Bd"
                                                         Value="#FFDADADA" />
                                         </MultiTrigger>-->
-                                        <MultiTrigger>
+                                        
+                                        <!--<MultiTrigger>
                                             <MultiTrigger.Conditions>
-                                                
                                                 <Condition Property="IsSelected"
                                                                Value="True" />
                                             </MultiTrigger.Conditions>
@@ -260,7 +265,7 @@
                                             <Setter Property="BorderBrush"
                                                         TargetName="Bd"
                                                         Value="#3D26A0DA" />
-                                        </MultiTrigger>
+                                        </MultiTrigger>-->
                                         
                                         <Trigger Property="IsEnabled"
                                                      Value="False">
@@ -275,13 +280,45 @@
 
                         <Setter Property="ContentTemplate" Value="{StaticResource SelectedItemTemplate}" />
 
-                        <EventSetter Event="MouseEnter" Handler="PART_LabelsListViewItem_MouseEnter" />
-                        
+                        <EventSetter Event="PreviewMouseDown" Handler="PART_LabelsListViewItem_MouseDown" />
+
                         <Style.Triggers>
+                            <!--<MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsEdditing}" Value="True" />
+                                    <Condition Binding="{Binding IsSelected}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Background" Value="Red" />
+                            </MultiDataTrigger>-->
+
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsEdditing}" Value="False" />
+                                    <Condition Binding="{Binding IsSelected}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Background"
+                                                        Value="#3D26A0DA" />
+                                <Setter Property="BorderBrush"
+                                                        Value="#3D26A0DA" />
+                            </MultiDataTrigger>
+
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsEdditing}" Value="True" />
+                                    <Condition Binding="{Binding IsSelected}" Value="True" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="BorderBrush" Value="#3D26A0DA" />
+                            </MultiDataTrigger>
+
                             <DataTrigger Binding="{Binding IsEdditing}" Value="True">
                                 <Setter Property="ContentTemplate" Value="{StaticResource SelectedItemEditTemplate}" />
                             </DataTrigger>
+
                         </Style.Triggers>
+
+
+                        
                     </Style>
                 </ListView.ItemContainerStyle>
 

@@ -270,6 +270,17 @@ namespace IssuesHoneys.BusinessTypes
             { SetProperty(ref _isEdditing, value); }
         }
 
+        /// <summary>
+        /// Extended property
+        /// </summary>
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get
+            { return _isSelected; }
+            set
+            { SetProperty(ref _isSelected, value); }
+        }
     }
     #endregion
 

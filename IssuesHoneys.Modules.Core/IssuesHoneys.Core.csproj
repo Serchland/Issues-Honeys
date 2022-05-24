@@ -188,6 +188,9 @@
     <Compile Include="Views\ButtonMilestones.xaml.cs">
       <DependentUpon>ButtonMilestones.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EditLabel.xaml.cs">
+      <DependentUpon>EditLabel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FooterView.xaml.cs">
       <DependentUpon>FooterView.xaml</DependentUpon>
     </Compile>
@@ -219,6 +222,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ButtonMilestones.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditLabel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
