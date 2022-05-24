@@ -62,9 +62,10 @@
                                            Grid.Row="0"
                                            Grid.RowSpan="2">
                     <TextBlock HorizontalAlignment="Right" 
-                                               Margin="0,0,10,0"
-                                               Text="{StaticResource TextBlockEdit}"
-                                               VerticalAlignment="Center">
+                               x:Name="PART_TextBlocklEdit"
+                               Margin="0,0,10,0"
+                               Text="{StaticResource TextBlockEdit}"
+                               VerticalAlignment="Center">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
                                 <Style.Triggers>

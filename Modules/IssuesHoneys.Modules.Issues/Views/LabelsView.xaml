@@ -226,46 +226,6 @@
                                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                                     </Border>
                                     <ControlTemplate.Triggers>
-                                        <!--<MultiTrigger>
-                                            <MultiTrigger.Conditions>
-                                                <Condition Property="IsMouseOver"
-                                                               Value="True" />
-                                                <Condition Property="IsSelected"
-                                                               Value="True" />
-                                            </MultiTrigger.Conditions>
-                                            <Setter Property="Background"
-                                                        TargetName="Bd"
-                                                        Value="red" />
-                                            <Setter Property="BorderBrush"
-                                                        TargetName="Bd"
-                                                        Value="LightGray" />
-                                        </MultiTrigger>-->
-
-                                        <!--<MultiTrigger>
-                                            <MultiTrigger.Conditions>
-                                                <Condition Property="IsSelected"
-                                                               Value="True" />
-                                            </MultiTrigger.Conditions>
-                                            <Setter Property="Background"
-                                                        TargetName="Bd"
-                                                        Value="#3DDADADA" />
-                                            <Setter Property="BorderBrush"
-                                                        TargetName="Bd"
-                                                        Value="#FFDADADA" />
-                                        </MultiTrigger>-->
-                                        
-                                        <!--<MultiTrigger>
-                                            <MultiTrigger.Conditions>
-                                                <Condition Property="IsSelected"
-                                                               Value="True" />
-                                            </MultiTrigger.Conditions>
-                                            <Setter Property="Background"
-                                                        TargetName="Bd"
-                                                        Value="#3D26A0DA" />
-                                            <Setter Property="BorderBrush"
-                                                        TargetName="Bd"
-                                                        Value="#3D26A0DA" />
-                                        </MultiTrigger>-->
                                         
                                         <Trigger Property="IsEnabled"
                                                      Value="False">
@@ -282,15 +242,10 @@
 
                         <EventSetter Event="PreviewMouseDown" Handler="PART_LabelsListViewItem_MouseDown" />
 
-                        <Style.Triggers>
-                            <!--<MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding IsEdditing}" Value="True" />
-                                    <Condition Binding="{Binding IsSelected}" Value="True" />
-                                </MultiDataTrigger.Conditions>
-                                <Setter Property="Background" Value="Red" />
-                            </MultiDataTrigger>-->
+                        <EventSetter Event="Selected" Handler="PART_LabelsListViewItem_Selected" />
 
+                        <Style.Triggers>
+                           
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
                                     <Condition Binding="{Binding IsEdditing}" Value="False" />

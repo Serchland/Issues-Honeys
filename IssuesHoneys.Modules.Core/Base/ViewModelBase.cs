@@ -17,7 +17,7 @@ namespace IssuesHoneys.Core.Base
         }
 
         private string _argumentExceptionMessage;
-        public  string ArgumentExceptionMessage
+        public string  ArgumentExceptionMessage
         {
             get { return _argumentExceptionMessage; }
         }
@@ -33,10 +33,6 @@ namespace IssuesHoneys.Core.Base
 
             _applicationCommands.NavigateCommand.Execute(parameter);
         }
-
-        protected override void OnPropertyChanged(PropertyChangedEventArgs args)
-        {
-            base.OnPropertyChanged(args);
-        }
+        
     }
 }

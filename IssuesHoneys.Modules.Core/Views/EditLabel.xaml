@@ -80,16 +80,20 @@
                     HorizontalAlignment="Right">
             <Button 
                     Content="{StaticResource ButtonCancelCaption}"
-                    Command="{Binding NewLabelVisibilityCommand}"
+                    Command="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type ListView}}, Path=DataContext.CancelCommand}"
+                
                     MaxWidth="90"
-                    CommandParameter="{x:Static coreNameDef:CommandParameters.Cancel}" Grid.ColumnSpan="2" Margin="0,0,0.333,0" 
+                    Grid.ColumnSpan="2" Margin="0,0,0.333,0" 
                     controls:ControlsHelper.FocusBorderBrush="Orange"/>
 
             <Button 
                     Content="{StaticResource ButtonUpdateLabelCaption}"
                     Margin="10,0,0,0"
                     MaxWidth="90"
-                    Command="{Binding CreateLabelCommand}"
+                    Command="{Binding RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type ListView}}, Path=DataContext.UpdateCommand}"
+                    
                     controls:ControlsHelper.FocusBorderBrush="Orange"/>
         </StackPanel>
 

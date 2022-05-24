@@ -31,8 +31,6 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
         #region "Properties"
 
-        
-
         private ObservableCollection<Label> _labels;
         public ObservableCollection<Label> Labels
         {
@@ -49,28 +47,27 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             { SetProperty(ref _newLabel, value);}
         }
 
-        //private Label _mouseEnterLabel;
-        //public Label MouserEnterLabel
-        //{
-        //    get
-        //    {
-        //        return _mouseEnterLabel;
-        //    }
-        //    set
-        //    {
-        //        SetProperty(ref _mouseEnterLabel, value);
-        //    }
-        //}
+        private Label _selectedOriginalLabel;
+        public Label SelectedOriginalLabel
+        {
+            get
+            { return _selectedOriginalLabel; }
+            set
+            { SetProperty(ref _selectedOriginalLabel, value); }
+        }
 
         private Label _selectedLabel;
         public Label SelectedLabel
         {
             get
-            { return _selectedLabel; }
+            {
+                return _selectedLabel; 
+            }
             set
             {
                 if (_selectedLabel != null)
                     _selectedLabel.IsEdditing = false;
+
                 SetProperty(ref _selectedLabel, value);
             }
         }
@@ -88,8 +85,6 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             get { return _newLabelViewVisibility; }
             set { SetProperty(ref _newLabelViewVisibility, value); }
         }
-
-
         #endregion
 
         #region "Commands"
@@ -106,6 +101,15 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             _isuesService.CreateLabel(NewLabel);
             Labels.Add(NewLabel);
             NewLabelViewVisibilitity = Visibility.Collapsed;
+        }
+
+        private DelegateCommand _updateLabelCommand;
+        public DelegateCommand UpdateCommand =>
+            _updateLabelCommand ?? (_updateLabelCommand = new DelegateCommand(ExecuteUpdateLabelCommand));
+
+        void ExecuteUpdateLabelCommand()
+        {
+            //if (SelectedOrignalLabel)
         }
 
         private DelegateCommand<string> _newLabelVisibilityCommand;
@@ -151,13 +155,14 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
                 SelectedLabel.Color = (Brush)properties[random].GetValue(null, null);
         }
 
-        private DelegateCommand<string> _cancelCommand;
-        public DelegateCommand<string> CancelCommand =>
-            _cancelCommand ?? (_cancelCommand = new DelegateCommand<string>(ExecuteCancelCommand));
+        private DelegateCommand _cancelCommand;
+        public DelegateCommand CancelCommand =>
+            _cancelCommand ?? (_cancelCommand = new DelegateCommand(ExecuteCancelCommand));
 
-        void ExecuteCancelCommand(string parameter)
+        void ExecuteCancelCommand()
         {
-
+            SelectedLabel.IsEdditing = false;
+            //SelectedLabel = SelectedOriginalLabel;
         }
 
         private DelegateCommand _isEdditingCommand;

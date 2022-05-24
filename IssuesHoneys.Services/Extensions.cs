@@ -55,7 +55,6 @@ namespace IssuesHoneys.BusinessTypes
 
                     issue.Assignees.AddRange(usersFound);
                 }
-
             }
         }
 
