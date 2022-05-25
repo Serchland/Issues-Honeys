@@ -167,6 +167,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\ViewModelBase.cs" />
+    <Compile Include="Types\Abstracts\BindableBase.cs" />
+    <Compile Include="Types\BusinessTypes\BusinessTypes.cs" />
+    <Compile Include="Types\EventsArgs\PropertyChangedExtendedEventArgs.cs" />
+    <Compile Include="Types\Interfaces\INotifyPropertyChangedEnhanced.cs" />
     <Compile Include="Types\Interfaces\IApplicationCommands.cs" />
     <Compile Include="NameDefinition\Captions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -237,16 +241,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\IssuesHoneys.Business\IssuesHoneys.Business.csproj">
-      <Project>{B8A75B55-994F-4920-A8E8-DC52482EBF23}</Project>
-      <Name>IssuesHoneys.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IssuesHoneys.Services.Interfaces\IssuesHoneys.Services.Interfaces.csproj">
-      <Project>{712893A3-05FF-4755-A023-24522FB43520}</Project>
-      <Name>IssuesHoneys.Services.Interfaces</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

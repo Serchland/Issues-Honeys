@@ -47,14 +47,14 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             { SetProperty(ref _newLabel, value);}
         }
 
-        private Label _selectedOriginalLabel;
-        public Label SelectedOriginalLabel
-        {
-            get
-            { return _selectedOriginalLabel; }
-            set
-            { SetProperty(ref _selectedOriginalLabel, value); }
-        }
+        //private Label _selectedOriginalLabel;
+        //public Label SelectedOriginalLabel
+        //{
+        //    get
+        //    { return _selectedOriginalLabel; }
+        //    set
+        //    { SetProperty(ref _selectedOriginalLabel, value); }
+        //}
 
         private Label _selectedLabel;
         public Label SelectedLabel
@@ -67,6 +67,9 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             {
                 if (_selectedLabel != null)
                     _selectedLabel.IsEdditing = false;
+
+                //if (SelectedOriginalLabel == null)
+                //    SelectedOriginalLabel = _selectedLabel;
 
                 SetProperty(ref _selectedLabel, value);
             }
@@ -109,6 +112,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
         void ExecuteUpdateLabelCommand()
         {
+            //SelectedOriginalLabel = null;
             //if (SelectedOrignalLabel)
         }
 
@@ -161,6 +165,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
         void ExecuteCancelCommand()
         {
+            //SelectedOriginalLabel = null;
             SelectedLabel.IsEdditing = false;
             //SelectedLabel = SelectedOriginalLabel;
         }

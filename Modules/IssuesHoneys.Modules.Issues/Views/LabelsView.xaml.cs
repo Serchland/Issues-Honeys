@@ -30,10 +30,10 @@ namespace IssuesHoneys.Modules.Issues.Views
 
         private void PART_LabelsListViewItem_Selected(object sender, RoutedEventArgs e)
         {
-            var context = this.DataContext as LabelsViewModel;
-            var item = e.OriginalSource as ListViewItem;
+            //var context = this.DataContext as LabelsViewModel;
+            //var item = e.OriginalSource as ListViewItem;
 
-            context.SelectedOriginalLabel = item.DataContext as BusinessTypes.Label;
+            //context.SelectedOriginalLabel = item.DataContext as BusinessTypes.Label;
             //context.SelectedOriginalLabel = item.OriginalLabelValueClone<ListViewItem>;
         }
         private void Button_Loaded(object sender, System.Windows.RoutedEventArgs e)

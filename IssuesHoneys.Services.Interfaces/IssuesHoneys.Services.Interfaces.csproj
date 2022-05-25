@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IssuesHoneys.Business\IssuesHoneys.Business.csproj">
-      <Project>{b8a75b55-994f-4920-a8e8-dc52482ebf23}</Project>
+      <Project>{B8A75B55-994F-4920-A8E8-DC52482EBF23}</Project>
       <Name>IssuesHoneys.Business</Name>
     </ProjectReference>
   </ItemGroup>
