@@ -1,13 +1,6 @@
-﻿using IssuesHoneys.Core.Types;
-using IssuesHoneys.Core.Types.Interfaces;
+﻿using IssuesHoneys.Core.Types.Interfaces;
+using IssuesHoneys.Extended.MyPrism.Mvvm;
 using Prism.Commands;
-using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace IssuesHoneys.Modules.Projects.ViewModels
 {

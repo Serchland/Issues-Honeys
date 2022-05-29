@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EB538DD1-B52E-417D-9A2B-305BEBFD63A5}</ProjectGuid>
+    <ProjectGuid>{F9A3A182-B3CE-4124-8F97-0FA6D101AA20}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IssuesHoneys.Services</RootNamespace>
-    <AssemblyName>IssuesHoneys.Services</AssemblyName>
+    <RootNamespace>IssuesHoneys.Extended</RootNamespace>
+    <AssemblyName>IssuesHoneys.Extended</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -55,30 +55,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dummies\IssueDummyService.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="NameDefinition\Captions.cs" />
-    <Compile Include="SQL\Converters.cs" />
-    <Compile Include="SQL\IssueSQLService.cs" />
+    <Compile Include="MyPrism\EventArgs\PropertyChangedExtendedEventArgs.cs" />
+    <Compile Include="MyPrism\Interfaces\INotifyPropertyChangedEnhanced.cs" />
+    <Compile Include="MyPrism\Mvvm\BindeableBase.cs" />
+    <Compile Include="MyPrism\Mvvm\PrismBindeableBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\IssuesHoneys.Business\IssuesHoneys.Business.csproj">
-      <Project>{b8a75b55-994f-4920-a8e8-dc52482ebf23}</Project>
-      <Name>IssuesHoneys.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IssuesHoneys.Extended\IssuesHoneys.Extended.csproj">
-      <Project>{f9a3a182-b3ce-4124-8f97-0fa6d101aa20}</Project>
-      <Name>IssuesHoneys.Extended</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IssuesHoneys.Services.Interfaces\IssuesHoneys.Services.Interfaces.csproj">
-      <Project>{712893a3-05ff-4755-a023-24522fb43520}</Project>
-      <Name>IssuesHoneys.Services.Interfaces</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,6 +1,6 @@
-﻿using IssuesHoneys.Core.Types.Abstracts;
-using IssuesHoneys.Core.Types.EventsArgs;
-using IssuesHoneys.Core.Types.Interfaces;
+﻿using IssuesHoneys.Core.Types.Interfaces;
+using IssuesHoneys.Extended.MyPrism.EventArgs;
+using IssuesHoneys.Extended.MyPrism.Mvvm;
 using Prism.Commands;
 using System;
 using System.Windows;

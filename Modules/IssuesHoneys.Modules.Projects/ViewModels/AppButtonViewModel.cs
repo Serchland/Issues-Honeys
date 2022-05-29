@@ -1,8 +1,5 @@
 ﻿using IssuesHoneys.Core.Base;
 using IssuesHoneys.Core.Types.Interfaces;
-using IssuesHoneys.Services.Interfaces;
-using Prism.Commands;
-using System;
 
 namespace IssuesHoneys.Modules.Projects.ViewModels
 {

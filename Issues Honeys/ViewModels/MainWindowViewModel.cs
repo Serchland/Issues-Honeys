@@ -2,7 +2,6 @@
 using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Core.Types.Interfaces;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Regions;
 using System;
 

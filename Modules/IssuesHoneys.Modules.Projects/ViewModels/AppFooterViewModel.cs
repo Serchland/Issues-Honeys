@@ -1,4 +1,6 @@
-﻿using Prism.Mvvm;
+﻿
+
+using IssuesHoneys.Extended.MyPrism.Mvvm;
 
 namespace IssuesHoneys.Modules.Projects.ViewModels
 {

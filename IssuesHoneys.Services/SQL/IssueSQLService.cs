@@ -1,7 +1,7 @@
 ﻿using IssuesHoneys.BusinessTypes;
+using IssuesHoneys.Extended.MyPrism.Mvvm;
 using IssuesHoneys.Services.Interfaces;
 using IssuesHoneys.Services.NameDefinition;
-using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
