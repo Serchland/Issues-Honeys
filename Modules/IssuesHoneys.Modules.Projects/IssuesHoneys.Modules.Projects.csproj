@@ -94,10 +94,6 @@
       <Project>{b8a75b55-994f-4920-a8e8-dc52482ebf23}</Project>
       <Name>IssuesHoneys.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\IssuesHoneys.Extended\IssuesHoneys.Extended.csproj">
-      <Project>{f9a3a182-b3ce-4124-8f97-0fa6d101aa20}</Project>
-      <Name>IssuesHoneys.Extended</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\IssuesHoneys.Modules.Core\IssuesHoneys.Core.csproj">
       <Project>{b3645851-0f0d-4de6-93da-cf95fcda5315}</Project>
       <Name>IssuesHoneys.Core</Name>

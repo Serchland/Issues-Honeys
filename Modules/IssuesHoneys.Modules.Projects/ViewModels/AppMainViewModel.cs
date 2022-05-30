@@ -1,6 +1,6 @@
 ﻿using IssuesHoneys.Core.Types.Interfaces;
-using IssuesHoneys.Extended.MyPrism.Mvvm;
 using Prism.Commands;
+using Prism.Mvvm;
 
 namespace IssuesHoneys.Modules.Projects.ViewModels
 {

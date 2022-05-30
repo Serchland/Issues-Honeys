@@ -1,4 +1,4 @@
-﻿using IssuesHoneys.Extended.MyPrism.Mvvm;
+﻿using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Windows.Media;
@@ -167,7 +167,7 @@ namespace IssuesHoneys.BusinessTypes
     /// <summary>
     /// Class used to represent a LABEL
     /// </summary>
-    public class Label : BindableBase
+    public class Label : BindableBase, ICloneable
     {
         public Label()
         {
@@ -230,7 +230,6 @@ namespace IssuesHoneys.BusinessTypes
             set { SetProperty(ref _description, value); }
         }
 
-        
         /// <summary>
         /// LABEL identifier
         /// </summary>
@@ -280,6 +279,19 @@ namespace IssuesHoneys.BusinessTypes
             { return _isSelected; }
             set
             { SetProperty(ref _isSelected, value); }
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+
+        public void GetOldValue(Label oldValue)
+        {
+            this.Name = oldValue.Name;
+            this.Description = oldValue.Description;
+            this.BrushString = oldValue.Color.ToString();
+            this.Color = oldValue.Color;
         }
     }
     #endregion

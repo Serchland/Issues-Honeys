@@ -1,7 +1,6 @@
 ﻿using IssuesHoneys.Core.Types.Interfaces;
-using IssuesHoneys.Extended.MyPrism.EventArgs;
-using IssuesHoneys.Extended.MyPrism.Mvvm;
 using Prism.Commands;
+using Prism.Mvvm;
 using System;
 using System.Windows;
 
@@ -9,13 +8,11 @@ namespace IssuesHoneys.Core.Base
 {
     public class ViewModelBase : BindableBase
     {
-        private object _oldValue;
         private IApplicationCommands _applicationCommands;
         public ViewModelBase(IApplicationCommands applicationCommands)
         {
             _applicationCommands = applicationCommands;
             _argumentExceptionMessage = Application.Current.Resources["AppMessageArgumentException"].ToString();
-            PropertyChanged += OnPropertyChanged;
         }
 
         #region "Properties"
@@ -39,11 +36,5 @@ namespace IssuesHoneys.Core.Base
             _applicationCommands.NavigateCommand.Execute(parameter);
         }
         #endregion
-
-        private void OnPropertyChanged(object sender, PropertyChangedExtendedEventArgs e)
-        {
-            _oldValue = e.OldValue;
-        }
-
     }
 }

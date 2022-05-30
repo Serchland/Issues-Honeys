@@ -113,10 +113,6 @@
     <PackageReference Include="Prism.Unity" Version="8.1.97" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IssuesHoneys.Extended\IssuesHoneys.Extended.csproj">
-      <Project>{f9a3a182-b3ce-4124-8f97-0fa6d101aa20}</Project>
-      <Name>IssuesHoneys.Extended</Name>
-    </ProjectReference>
     <ProjectReference Include="..\IssuesHoneys.Modules.Core\IssuesHoneys.Core.csproj">
       <Project>{b3645851-0f0d-4de6-93da-cf95fcda5315}</Project>
       <Name>IssuesHoneys.Core</Name>
