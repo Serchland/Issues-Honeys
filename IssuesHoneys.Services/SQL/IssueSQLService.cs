@@ -87,7 +87,7 @@ namespace IssuesHoneys.Services.SQL
         {
             int result = 0;
             var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
-            var queryString = "SELECT COUNT(Pk_IssueTracking_ID) FROM issues.ISSUES WHERE ASSIGNEES LIKE '%" + labelID.ToString() + "%'";
+            var queryString = "SELECT COUNT(ID) FROM issues.ISSUES WHERE ASSIGNEES LIKE '%" + labelID.ToString() + "%'";
 
             using (var connection = new SqlConnection(connectionString))
             {

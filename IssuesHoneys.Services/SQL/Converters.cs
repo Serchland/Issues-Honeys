@@ -73,15 +73,14 @@ namespace IssuesHoneys.Services.SQL
         /// <returns>Label</returns>
         internal static Label SQLLabelConverter(SqlDataReader reader)
         {
-            //[DESCRIPTION]         VARCHAR(50) NOT NULL,
-            //[COLOR]               VARCHAR(50) NOT NULL,
-            //[CRTNDATE]            VARCHAR(50) NOT NULL,
-            //[CRTNUSER]            INT NOT NULL,
-            //[Pk_LabelTracking_Id] INT IDENTITY(1, 1) NOT NULL,
+            //[DESCRIPTION] VARCHAR(50) NOT NULL,
+            //[COLOR]       VARCHAR(50) NOT NULL,
+            //[CRTNDATE]    DATETIME NOT NULL,
+            //[Fk_CRTNUSER] INT NOT NULL,
+            //[ID] INT IDENTITY(1, 1) NOT NULL,
             //[NAME]                VARCHAR(50) NOT NULL,
-            //CONSTRAINT[PK_LabelTracking_Id] PRIMARY KEY CLUSTERED([Pk_LabelTracking_Id] ASC)
 
-            int labelTrackingId = 0;
+            int labelId = 0;
             Label result = new Label();
             int idx = 0;
 
@@ -89,9 +88,9 @@ namespace IssuesHoneys.Services.SQL
             result.Color = Convert.ToString(reader[idx++]).ToBrush();
             result.CrtnDate = Convert.ToDateTime(reader[idx++]);
             result.CrtnUser = Convert.ToString(reader[idx++]);
-            labelTrackingId = Convert.ToInt32(reader[idx++]);
+            labelId = Convert.ToInt32(reader[idx++]);
             result.Name = Convert.ToString(reader[idx++]);
-            result.TotalIssuesWithLabel = result.GetTotalIssuesWithLabel(labelTrackingId, IssueService);
+            result.TotalIssuesWithLabel = result.GetTotalIssuesWithLabel(labelId, IssueService);
             return result;
         }
         
