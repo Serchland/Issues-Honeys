@@ -68,6 +68,9 @@ IF Object_id('[issues].[USERS]') IS NOT NULL
       ALTER TABLE [issues].[LABELSTOISSUES]
 	  DROP CONSTRAINT [Fk_LabelsToIssues_User_Id]
 
+	  ALTER TABLE [issues].[MILESTONESTOISSUES]
+	  DROP CONSTRAINT [Fk_MilestonesToIssues_User_Id]
+
       DROP TABLE [issues].[USERS];
       CREATE TABLE [issues].[USERS]
         (
@@ -168,6 +171,9 @@ ELSE
 -- **************************************
 IF Object_id('[issues].[MILESTONES]') IS NOT NULL
   BEGIN
+	ALTER TABLE [issues].[MILESTONESTOISSUES]
+	DROP CONSTRAINT [Fk_LabelsToIssues_Milestones_Id]
+
       DROP TABLE [issues].[MILESTONES];
       CREATE TABLE [issues].[MILESTONES]
         (
@@ -227,6 +233,9 @@ IF Object_id('[issues].[ISSUES]') IS NOT NULL
 
 	  ALTER TABLE [issues].[USERSTOISSUES]
 	  DROP CONSTRAINT [FK_UsersToIssues_Issue_Id]
+
+	  ALTER TABLE [issues].[MILESTONESTOISSUES]
+	  DROP CONSTRAINT [Fk_MilestonesToIssues_Issues_Id]
 
       DROP TABLE [issues].[issues]
 
@@ -543,7 +552,70 @@ ELSE
       SELECT 'TABLE [issues].[LABELSTOISSUES] CREATED'
   END
 
-  
+-- **************************************
+-- **************************************
+--				[MILESTONESTOISSUES]
+-- **************************************
+-- **************************************
+  IF Object_id('[issues].[MILESTONESTOISSUES]') IS NOT NULL
+  BEGIN
+	  DROP TABLE [issues].[MILESTONESTOISSUES];
+      CREATE TABLE [issues].[MILESTONESTOISSUES](
+			[CRTNDATE] [datetime] NOT NULL,
+			[Fk_CRTNUSER] [int] NOT NULL,
+			[Fk_MILESTONE] [int] NOT NULL,
+			[Fk_ISSUE] [int] NOT NULL,
+			[ID] [int] IDENTITY(1,1) NOT NULL,
+			[ISACTIVE] [bit] NOT NULL,
+
+			CONSTRAINT [PK_MilestonesToIsues_Id] PRIMARY KEY CLUSTERED (
+			[ID] 
+			ASC),
+
+			CONSTRAINT [Fk_MilestonesToIssues_User_Id] FOREIGN KEY ([Fk_CRTNUSER])
+			REFERENCES [issues].[USERS]([ID]),
+
+			CONSTRAINT [Fk_MilestonesToIssues_Milestone_Id] FOREIGN KEY ([Fk_MILESTONE])
+			REFERENCES [issues].[MILESTONES]([ID]),
+
+			CONSTRAINT [Fk_MilestonesToIssues_Issues_Id] FOREIGN KEY ([Fk_ISSUE])
+			REFERENCES [issues].[ISSUES]([ID]),
+	 )
+
+	 WITH (DATA_COMPRESSION = PAGE);
+
+      SELECT 'TABLE [issues].[MILESTONESTOISSUES] REGENERATED'
+  END
+ELSE
+  BEGIN
+      SELECT 'TABLE [issues].[MILESTONESTOISSUES] NOT EXIST... CREATING TABLE'
+
+          CREATE TABLE [issues].[MILESTONESTOISSUES](
+			[CRTNDATE] [datetime] NOT NULL,
+			[Fk_CRTNUSER] [int] NOT NULL,
+			[Fk_MILESTONE] [int] NOT NULL,
+			[Fk_ISSUE] [int] NOT NULL,
+			[ID] [int] IDENTITY(1,1) NOT NULL,
+			[ISACTIVE] [bit] NOT NULL,
+
+			CONSTRAINT [PK_MilestonesToIsues_Id] PRIMARY KEY CLUSTERED (
+			[ID] 
+			ASC),
+
+			CONSTRAINT [Fk_MilestonesToIssues_User_Id] FOREIGN KEY ([Fk_CRTNUSER])
+			REFERENCES [issues].[USERS]([ID]),
+
+			CONSTRAINT [Fk_MilestonesToIssues_Milestone_Id] FOREIGN KEY ([Fk_MILESTONE])
+			REFERENCES [issues].[MILESTONES]([ID]),
+
+			CONSTRAINT [Fk_MilestonesToIssues_Issues_Id] FOREIGN KEY ([Fk_ISSUE])
+			REFERENCES [issues].[ISSUES]([ID]),
+	 )
+
+	 WITH (DATA_COMPRESSION = PAGE);
+
+      SELECT 'TABLE [issues].[MILESTONESTOISSUES] CREATED'
+  END
 
 --************************************** 
 --************************************** 
@@ -1053,3 +1125,59 @@ INSERT INTO [issues].[LABELSTOISSUES]
            ,1)
 GO
 SELECT 'DUMMY LABELS TO ISSUES ADDED'
+
+----************************************** POPULATE LABELSTOISSUES
+INSERT INTO [issues].[MILESTONESTOISSUES]
+           ([CRTNDATE]
+           ,[Fk_CRTNUSER]
+           ,[Fk_MILESTONE]
+           ,[Fk_ISSUE]
+           ,[ISACTIVE])
+     VALUES
+           (GETDATE()
+           ,1
+           ,1
+           ,1
+           ,1)
+
+INSERT INTO [issues].[MILESTONESTOISSUES]
+           ([CRTNDATE]
+           ,[Fk_CRTNUSER]
+           ,[Fk_MILESTONE]
+           ,[Fk_ISSUE]
+           ,[ISACTIVE])
+VALUES
+           (GETDATE()
+           ,1
+           ,1
+           ,2
+           ,1)
+
+INSERT INTO [issues].[MILESTONESTOISSUES]
+           ([CRTNDATE]
+           ,[Fk_CRTNUSER]
+           ,[Fk_MILESTONE]
+           ,[Fk_ISSUE]
+           ,[ISACTIVE])
+VALUES
+           (GETDATE()
+           ,1
+           ,2
+           ,3
+           ,1)
+
+INSERT INTO [issues].[MILESTONESTOISSUES]
+           ([CRTNDATE]
+           ,[Fk_CRTNUSER]
+           ,[Fk_MILESTONE]
+           ,[Fk_ISSUE]
+           ,[ISACTIVE])
+VALUES
+           (GETDATE()
+           ,1
+           ,3
+           ,4
+           ,1)
+
+
+SELECT 'DUMMY MILESTONES TO ISSUES ADDED'
