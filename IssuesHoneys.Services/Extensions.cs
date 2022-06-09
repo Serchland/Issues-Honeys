@@ -11,6 +11,13 @@ namespace IssuesHoneys.BusinessTypes
     /// </summary>
     public static class Extensions
     {
+        public static void FillOutAssigneeList<T>(this List<T> listObject, ref Issue issue, IIssueService issueService, int issueId)
+        {
+            if (issue.Assignees == null)
+                issue.Assignees = new List<User>();
+
+            issue.Assignees.AddRange(issueService.GetAssignedUsersToIssue(issueId));
+        }
 
         /// <summary>
         /// Allows to fill in the types list<T> in the ISSUE object
@@ -56,6 +63,12 @@ namespace IssuesHoneys.BusinessTypes
                     issue.Assignees.AddRange(usersFound);
                 }
             }
+        }
+
+
+        public static List<User> GetAssignedUsersToIssue<T>(this List<T> listObject, IIssueService issueService, int issueId)
+        {
+            return issueService.GetAssignedUsersToIssue(issueId);
         }
 
         /// <summary>

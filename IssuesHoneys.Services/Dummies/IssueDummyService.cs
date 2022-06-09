@@ -85,6 +85,11 @@ namespace IssuesHoneys.Services.Dummies
             return 10;
         }
 
+        public List<User> GetAssignedUsersToIssue(int issueId)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Dummies responses uses by IssueDummyService
         /// </summary>

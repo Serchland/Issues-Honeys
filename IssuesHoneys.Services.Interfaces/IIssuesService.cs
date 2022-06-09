@@ -14,6 +14,13 @@ namespace IssuesHoneys.Services.Interfaces
         void CreateLabel(Label newLabel);
 
         /// <summary>
+        /// Gets the users assigned to the ISSUE
+        /// </summary>
+        /// <param name="issueId"></param>
+        /// <returns></returns>
+        List<User> GetAssignedUsersToIssue(int issueId);
+
+        /// <summary>
         /// Method used to obtain the ISSUES from the model
         /// </summary>
         /// <returns>List<Issue></returns>

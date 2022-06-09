@@ -11,6 +11,15 @@ namespace IssuesHoneys.Services.SQL
     /// </summary>
     internal static class Converters
     {
+        //private T GetValue<T>(SqlDataReader sqlDataReader, object type)
+        //{
+
+        //    switch (type.GetType())
+        //    {
+                
+        //    }
+
+        //}
         internal static IIssueService IssueService { get; set; }
 
         /// <summary>
@@ -21,48 +30,43 @@ namespace IssuesHoneys.Services.SQL
         /// <param name="users">Users obtained from the model to cross-reference data</param>
         /// <param name="milestones">Milestones obtained from the model to cross-reference data</param>
         /// <returns>Issue</returns>
-        internal static Issue SQLIssueConverter(SqlDataReader reader, ref List<Label> labels, ref List<User> users, ref List<Milestone> milestones)
+        internal static Issue SQLIssueConverter(SqlDataReader reader, ref List<Label> labels, ref List<User> users, ref List<Milestone> milestones, IIssueService issueService)
         {
-            //[ASSIGNEES]           VARCHAR(50) NULL,
-            //[BODY]                VARCHAR(max) NOT NULL,
-            //[CLOSEDBY]            INT NULL,
-            //[CLOSEDDAY]           DATETIME NULL,
-            //[CRTNDATE]            DATETIME NOT NULL,
-            //[CRTNUSER]            INT NOT NULL,
-            //[LABELS]              VARCHAR(50) NOT NULL,
-            //[LASTUPD]             DATETIME NULL,
-            //[MILESTONES]          VARCHAR(50) NULL,
-            //[NUMBER]              INT NOT NULL,
-            //[Pk_IssueTracking_Id] INT IDENTITY(1, 1) NOT NULL,
-            //[PROJECTS]            VARCHAR(50) NULL,
-            //[STATE]               INT NOT NULL CONSTRAINT[DF_ISSUES_STATE] DEFAULT 0,
-            //[TITLE]               VARCHAR(50) NOT NULL,
-            //[TOTALCOMMENTS] AS [issues].[Function_TotalComments]([Pk_IssueTracking_Id]),
-            //CONSTRAINT[PK_IssueDetailsTracking_Id] PRIMARY KEY CLUSTERED([Pk_IssueTracking_Id] ASC)
+            //[BODY] [varchar](max)NOT NULL,
+	        //[Fk_CLOSEDBY] [int] NULL,
+	        //[CLOSEDDAY] [datetime] NULL,
+	        //[CRTNDATE] [datetime] NOT NULL,
+            //[Fk_CRTNUSER] [int] NOT NULL,
+            //[ID] [int] IDENTITY(1, 1) NOT NULL,
+            //[LASTUPD] [datetime] NULL,
+	        //[MILESTONES] [varchar](50) NULL,
+	        //[NUMBER] [int] NOT NULL,
+            //[PROJECTS] [varchar](50) NULL,
+	        //[STATE] [int] NOT NULL,
+            //[TITLE] [varchar](50) NOT NULL,
+            //[TOTALCOMMENTS]  AS([issues].[Function_TotalComments]([ID])),
 
             Issue result = new Issue();
             int idx = 0;
+            int issueId = 5;
 
-            result.Assignees.FillOutIssueList<User>(users, reader[idx++], ref result);
+            result.Assignees.FillOutAssigneeList<User>(ref result, issueService, Convert.ToInt32(reader[issueId]));
             result.Body = Convert.ToString(reader[idx++]);
-            //result.ClosedBy = Convert.ToInt32(index++]);
-            idx++;
-            //result.ClosedDate = Convert.ToDateTime(reader[3]);
-            idx++;
+            result.ClosedBy = Convert.ToInt32(reader[idx++]);
+            result.ClosedDate = Convert.ToDateTime(reader[idx++]);
             result.CrtnDate = Convert.ToDateTime(reader[idx++]);
             result.CrtnUser = Convert.ToString(reader[idx++]);
-            result.Labels.FillOutIssueList<Label>(labels, reader[idx++], ref result);
-            //result.LastUpdDate = Convert.ToDateTime(reader[7]);
+            result.Id = Convert.ToInt32(reader[idx++]);
+            result.LastUpdDate = Convert.ToDateTime(reader[idx++]);
+            //result.Milestones.FillOutIssueList<Milestone>(milestones, reader[idx++], ref result);
             idx++;
-            result.Milestones.FillOutIssueList<Milestone>(milestones, reader[idx++], ref result);
             result.Number = Convert.ToString(reader[idx++]);
-            result.Id= Convert.ToInt32(reader[idx++]);
             //result.Projects.FillOutIssueList<Project>(labels, reader[11], ref result);
             idx++;
             result.State = (State)Convert.ToInt32(reader[idx++]);
             result.Title = Convert.ToString(reader[idx++]);
             result.TotalComments = Convert.ToInt32(reader[idx++]);
-            
+           
             return result;
         }
 
@@ -73,12 +77,12 @@ namespace IssuesHoneys.Services.SQL
         /// <returns>Label</returns>
         internal static Label SQLLabelConverter(SqlDataReader reader)
         {
-            //[DESCRIPTION] VARCHAR(50) NOT NULL,
-            //[COLOR]       VARCHAR(50) NOT NULL,
-            //[CRTNDATE]    DATETIME NOT NULL,
-            //[Fk_CRTNUSER] INT NOT NULL,
-            //[ID] INT IDENTITY(1, 1) NOT NULL,
-            //[NAME]                VARCHAR(50) NOT NULL,
+            //[DESCRIPTION] [varchar](50) NOT NULL,
+            //[COLOR] [varchar](50) NOT NULL,
+            //[CRTNDATE] [datetime] NOT NULL,
+            //[Fk_CRTNUSER] [int] NOT NULL,
+            //[ID] [int] IDENTITY(1, 1) NOT NULL,
+            //[NAME] [varchar](50) NOT NULL,
 
             int labelId = 0;
             Label result = new Label();
@@ -101,23 +105,22 @@ namespace IssuesHoneys.Services.SQL
         /// <returns>Milestone</returns>
         internal static Milestone SQLMilestoneConverter(SqlDataReader reader)
         {
-            //[CRTNDATE]                   VARCHAR(50) NOT NULL,
-            //[CRTNUSER]                   INT NOT NULL,
-            //[DESCRIPTION]                VARCHAR(50) NOT NULL,
-            //[NUMBER]                     INT NOT NULL,
-            //[Pk_MilestoneTracking_Id]    INT IDENTITY NOT NULL,
-            //[STATE]                      INT NOT NULL,
-            //[TITLE]                      VARCHAR(50) NOT NULL,
-            //CONSTRAINT[PK_MilestoneTracking_Id] PRIMARY KEY CLUSTERED([PK_MilestoneTracking_Id] ASC)
-            
-            Milestone result = new Milestone();
+            //[CRTNDATE] [datetime] NOT NULL,
+            //[DESCRIPTION] [varchar](50) NOT NULL,
+            //[Fk_CRTNUSER] [int] NOT NULL,
+            //[ID] [int] IDENTITY(1, 1) NOT NULL,
+            //[NUMBER] [int] NOT NULL,
+            //[STATE] [int] NOT NULL,
+            //[TITLE] [varchar](50) NOT NULL,
+
+             Milestone result = new Milestone();
             int idx = 0;
 
             result.CrtnDate = Convert.ToDateTime(reader[idx++]);
-            result.CrtnUser = Convert.ToString(reader[idx++]);
             result.Description = Convert.ToString(reader[idx++]);
-            result.Number = Convert.ToString(reader[idx++]);
+            result.CrtnUser = Convert.ToString(reader[idx++]);
             result.Id = Convert.ToInt32(reader[idx++]);
+            result.Number = Convert.ToString(reader[idx++]);
             result.State = (State)Enum.Parse(typeof(State), reader[idx++].ToString());
             result.Title = Convert.ToString(reader[idx++]);
            

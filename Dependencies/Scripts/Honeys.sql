@@ -172,7 +172,7 @@ ELSE
 IF Object_id('[issues].[MILESTONES]') IS NOT NULL
   BEGIN
 	ALTER TABLE [issues].[MILESTONESTOISSUES]
-	DROP CONSTRAINT [Fk_LabelsToIssues_Milestones_Id]
+	DROP CONSTRAINT [Fk_MilestonesToIssues_Milestone_Id]
 
       DROP TABLE [issues].[MILESTONES];
       CREATE TABLE [issues].[MILESTONES]

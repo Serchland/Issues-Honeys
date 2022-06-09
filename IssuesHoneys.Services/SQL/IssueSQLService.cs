@@ -14,6 +14,7 @@ namespace IssuesHoneys.Services.SQL
     /// </summary>
     public class IssueSQLService : BindableBase, IIssueService
     {
+        private List<User> _assigneeUsers = null;
         private List<Issue> _iisues = null;
         private List<Label> _labels = null;
         private List<Milestone> _milestones = null;
@@ -59,6 +60,34 @@ namespace IssuesHoneys.Services.SQL
         }
 
         /// <summary>
+        /// Gets users assigned to ISSUE. Implementation of IIssueService.GetIssues
+        /// </summary>
+        public List<User> GetAssignedUsersToIssue(int issueId)
+        {
+            _assigneeUsers = new List<User>();
+
+            _iisues = new List<Issue>();
+            var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
+            var queryString = "SELECT * FROM [HONEYS].[issues].[USERS] WHERE ID IN " +
+                "(SELECT Fk_USERASSIGNEE FROM [HONEYS].[issues].[USERSTOISSUES] WHERE Fk_ISSUE = " +  issueId + ")";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _assigneeUsers.Add(Converters.SQLUserConverter(reader));
+                    }
+                }
+            };
+
+            return _assigneeUsers;
+        }
+
+        /// <summary>
         /// Obtain ISSUES from the sql model. Implementation of IIssueService.GetIssues
         /// </summary>
         public List<Issue> GetIssues()
@@ -75,7 +104,7 @@ namespace IssuesHoneys.Services.SQL
                 {
                     while (reader.Read())
                     {
-                        _iisues.Add(Converters.SQLIssueConverter(reader, ref _labels, ref _users, ref _milestones));
+                        _iisues.Add(Converters.SQLIssueConverter(reader, ref _labels, ref _users, ref _milestones, this));
                     }
                 }
             };
@@ -87,7 +116,7 @@ namespace IssuesHoneys.Services.SQL
         {
             int result = 0;
             var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
-            var queryString = "SELECT COUNT(ID) FROM issues.ISSUES WHERE ASSIGNEES LIKE '%" + labelID.ToString() + "%'";
+            var queryString = "SELECT COUNT(ID) FROM issues.LABELSTOISSUES WHERE FK_LABEL =" + labelID.ToString() + "";
 
             using (var connection = new SqlConnection(connectionString))
             {
