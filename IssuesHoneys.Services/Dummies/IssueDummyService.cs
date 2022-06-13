@@ -90,6 +90,16 @@ namespace IssuesHoneys.Services.Dummies
             throw new NotImplementedException();
         }
 
+        public List<Milestone> GetAssignedMilestonesToIssue(int issueId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Label> GetAssignedLabelsToIssue(int issueId)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Dummies responses uses by IssueDummyService
         /// </summary>

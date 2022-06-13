@@ -34,6 +34,24 @@ GO
 --ELSE BEGIN
 --SELECT 'FUNCTION FUNCTION_TOTALCOMMENTS NOT EXISTS'
 --END;
+
+
+IF EXISTS(SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[issues].[COUNTBY1]') AND type = 'SO')
+	BEGIN
+		DROP SEQUENCE [issues].[COUNTBY1];
+		SELECT 'SEQUENCE COUNTBY1 DELETE'
+	END;
+
+CREATE SEQUENCE [issues].[COUNTBY1]
+    AS [bigint]
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE  3;
+
+	SELECT 'SEQUENCE COUNTBY1 CREATE'
+
 -- **************************************
 -- **************************************
 --				[USERS]
@@ -613,70 +631,70 @@ ELSE
       SELECT 'TABLE [issues].[MILESTONESTOISSUES] CREATED'
   END
 
-  -- **************************************
--- **************************************
---				[PROJECTSTOISSUES]
--- **************************************
--- **************************************
-  IF Object_id('[issues].[PROJECTSTOISSUES]') IS NOT NULL
-  BEGIN
-	  DROP TABLE [issues].[PROJECTSTOISSUES];
-      CREATE TABLE [issues].[PROJECTSTOISSUES](
-			[CRTNDATE] [datetime] NOT NULL,
-			[Fk_CRTNUSER] [int] NOT NULL,
-			[Fk_PROJECTS] [int] NOT NULL,
-			[Fk_ISSUE] [int] NOT NULL,
-			[ID] [int] IDENTITY(1,1) NOT NULL,
-			[ISACTIVE] [bit] NOT NULL,
+------ **************************************
+------ **************************************
+------				[PROJECTSTOISSUES]
+------ **************************************
+------ **************************************
+----  IF Object_id('[issues].[PROJECTSTOISSUES]') IS NOT NULL
+----  BEGIN
+----	  DROP TABLE [issues].[PROJECTSTOISSUES];
+----      CREATE TABLE [issues].[PROJECTSTOISSUES](
+----			[CRTNDATE] [datetime] NOT NULL,
+----			[Fk_CRTNUSER] [int] NOT NULL,
+----			[Fk_PROJECTS] [int] NOT NULL,
+----			[Fk_ISSUE] [int] NOT NULL,
+----			[ID] [int] IDENTITY(1,1) NOT NULL,
+----			[ISACTIVE] [bit] NOT NULL,
 
-			CONSTRAINT [PK_MilestonesToIsues_Id] PRIMARY KEY CLUSTERED (
-			[ID] 
-			ASC),
+----			CONSTRAINT [PK_MilestonesToIsues_Id] PRIMARY KEY CLUSTERED (
+----			[ID] 
+----			ASC),
 
-			CONSTRAINT [Fk_ProjcetsToIssues_User_Id] FOREIGN KEY ([Fk_CRTNUSER])
-			REFERENCES [issues].[USERS]([ID]),
+----			CONSTRAINT [Fk_ProjcetsToIssues_User_Id] FOREIGN KEY ([Fk_CRTNUSER])
+----			REFERENCES [issues].[USERS]([ID]),
 
-			CONSTRAINT [Fk_ProjcetsToIssues_Projects_Id] FOREIGN KEY ([Fk_PROJECTS])
-			REFERENCES [issues].[MILESTONES]([ID]),
+----			CONSTRAINT [Fk_ProjcetsToIssues_Projects_Id] FOREIGN KEY ([Fk_PROJECTS])
+----			REFERENCES [issues].[MILESTONES]([ID]),
 
-			CONSTRAINT [Fk_ProjcetsToIssues_Issues_Id] FOREIGN KEY ([Fk_ISSUE])
-			REFERENCES [issues].[ISSUES]([ID]),
-	 )
+----			CONSTRAINT [Fk_ProjcetsToIssues_Issues_Id] FOREIGN KEY ([Fk_ISSUE])
+----			REFERENCES [issues].[ISSUES]([ID]),
+----	 )
 
-	 WITH (DATA_COMPRESSION = PAGE);
+----	 WITH (DATA_COMPRESSION = PAGE);
 
-      SELECT 'TABLE [issues].[PROJECTSTOISSUES] REGENERATED'
-  END
-ELSE
-  BEGIN
-      SELECT 'TABLE [issues].[PROJECTSTOISSUES] NOT EXIST... CREATING TABLE'
+----      SELECT 'TABLE [issues].[PROJECTSTOISSUES] REGENERATED'
+----  END
+----ELSE
+----  BEGIN
+----      SELECT 'TABLE [issues].[PROJECTSTOISSUES] NOT EXIST... CREATING TABLE'
 
-          CREATE TABLE [issues].[PROJECTSTOISSUES](
-			[CRTNDATE] [datetime] NOT NULL,
-			[Fk_CRTNUSER] [int] NOT NULL,
-			[Fk_PROJECTS] [int] NOT NULL,
-			[Fk_ISSUE] [int] NOT NULL,
-			[ID] [int] IDENTITY(1,1) NOT NULL,
-			[ISACTIVE] [bit] NOT NULL,
+----          CREATE TABLE [issues].[PROJECTSTOISSUES](
+----			[CRTNDATE] [datetime] NOT NULL,
+----			[Fk_CRTNUSER] [int] NOT NULL,
+----			[Fk_PROJECTS] [int] NOT NULL,
+----			[Fk_ISSUE] [int] NOT NULL,
+----			[ID] [int] IDENTITY(1,1) NOT NULL,
+----			[ISACTIVE] [bit] NOT NULL,
 
-			CONSTRAINT [PK_MilestonesToIsues_Id] PRIMARY KEY CLUSTERED (
-			[ID] 
-			ASC),
+----			CONSTRAINT [PK_MilestonesToIsues_Id] PRIMARY KEY CLUSTERED (
+----			[ID] 
+----			ASC),
 
-			CONSTRAINT [Fk_ProjcetsToIssues_User_Id] FOREIGN KEY ([Fk_CRTNUSER])
-			REFERENCES [issues].[USERS]([ID]),
+----			CONSTRAINT [Fk_ProjcetsToIssues_User_Id] FOREIGN KEY ([Fk_CRTNUSER])
+----			REFERENCES [issues].[USERS]([ID]),
 
-			CONSTRAINT [Fk_ProjcetsToIssues_Projects_Id] FOREIGN KEY ([Fk_PROJECTS])
-			REFERENCES [issues].[MILESTONES]([ID]),
+----			CONSTRAINT [Fk_ProjcetsToIssues_Projects_Id] FOREIGN KEY ([Fk_PROJECTS])
+----			REFERENCES [issues].[MILESTONES]([ID]),
 
-			CONSTRAINT [Fk_ProjcetsToIssues_Issues_Id] FOREIGN KEY ([Fk_ISSUE])
-			REFERENCES [issues].[ISSUES]([ID]),
-	 )
+----			CONSTRAINT [Fk_ProjcetsToIssues_Issues_Id] FOREIGN KEY ([Fk_ISSUE])
+----			REFERENCES [issues].[ISSUES]([ID]),
+----	 )
 
-	 WITH (DATA_COMPRESSION = PAGE);
+----	 WITH (DATA_COMPRESSION = PAGE);
 
-      SELECT 'TABLE [issues].[PROJECTSTOISSUES] CREATED'
-  END
+----      SELECT 'TABLE [issues].[PROJECTSTOISSUES] CREATED'
+----  END
 --************************************** 
 --************************************** 
 --************************************** 
@@ -872,7 +890,7 @@ INSERT INTO [issues].[MILESTONES]
 				[TITLE])
 VALUES      (
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				2, 'SEND PRO V1.12', 0, 0, 'SENDPRO'
+				2, 'SEND PRO V1.12', NEXT VALUE FOR [issues].[COUNTBY1], 0, 'SENDPRO'
             )
 
 GO
@@ -887,7 +905,7 @@ INSERT INTO [issues].[MILESTONES]
 				[TITLE])
 VALUES      (
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				3, 'SEND PRE V1.12', 0, 0, 'SEND PRE'
+				3, 'SEND PRE V1.12', NEXT VALUE FOR [issues].[COUNTBY1], 0, 'SEND PRE'
             )
 
 GO
@@ -902,7 +920,7 @@ INSERT INTO [issues].[MILESTONES]
 				[TITLE])
 VALUES      (
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				4, 'SEND FOR V1.12', 0, 0, 'SEND FOR'
+				4, 'SEND FOR V1.12', NEXT VALUE FOR [issues].[COUNTBY1], 0, 'SEND FOR'
             )
 
 GO
@@ -924,7 +942,7 @@ INSERT INTO [issues].[issues]
 VALUES      (
 				'Allow adding xml files', NULL, NULL,
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				1, NULL, 1, 1, 'SART899876'
+				1, NULL, NEXT VALUE FOR [issues].[COUNTBY1], 1, 'SART899876'
 			)
            
 GO
@@ -943,7 +961,7 @@ INSERT INTO [issues].[issues]
 VALUES      (
 				'Create dark theme', NULL, NULL,
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				1, NULL, 1, 1, 'SART98354'
+				1, NULL, NEXT VALUE FOR [issues].[COUNTBY1], 1, 'SART98354'
 			)
            
 GO
@@ -962,7 +980,7 @@ INSERT INTO [issues].[issues]
 VALUES      (
 				'Call thrid party API REST', NULL, NULL,
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				1, NULL, 1, 1, 'FSDI76673'
+				1, NULL, NEXT VALUE FOR [issues].[COUNTBY1], 1, 'FSDI76673'
 			)
            
 GO
@@ -981,7 +999,7 @@ INSERT INTO [issues].[issues]
 VALUES      (
 				'Create new caller', NULL, NULL,
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				1, NULL, 1, 1, 'INTG33234'
+				1, NULL, NEXT VALUE FOR [issues].[COUNTBY1], 1, 'INTG33234'
 			)
 
 GO

@@ -11,17 +11,6 @@ namespace IssuesHoneys.Services.SQL
     /// </summary>
     internal static class Converters
     {
-        //private T GetValue<T>(SqlDataReader sqlDataReader, object type)
-        //{
-
-        //    switch (type.GetType())
-        //    {
-                
-        //    }
-
-        //}
-        internal static IIssueService IssueService { get; set; }
-
         /// <summary>
         /// Converts the results obtained from the model to the type of data expected by the application.
         /// </summary>
@@ -30,7 +19,7 @@ namespace IssuesHoneys.Services.SQL
         /// <param name="users">Users obtained from the model to cross-reference data</param>
         /// <param name="milestones">Milestones obtained from the model to cross-reference data</param>
         /// <returns>Issue</returns>
-        internal static Issue SQLIssueConverter(SqlDataReader reader, ref List<Label> labels, ref List<User> users, ref List<Milestone> milestones, IIssueService issueService)
+        internal static Issue SQLIssueConverter(SqlDataReader reader, IIssueService issueService)
         {
             //[BODY] [varchar](max)NOT NULL,
 	        //[Fk_CLOSEDBY] [int] NULL,
@@ -39,34 +28,31 @@ namespace IssuesHoneys.Services.SQL
             //[Fk_CRTNUSER] [int] NOT NULL,
             //[ID] [int] IDENTITY(1, 1) NOT NULL,
             //[LASTUPD] [datetime] NULL,
-	        //[MILESTONES] [varchar](50) NULL,
 	        //[NUMBER] [int] NOT NULL,
-            //[PROJECTS] [varchar](50) NULL,
 	        //[STATE] [int] NOT NULL,
             //[TITLE] [varchar](50) NOT NULL,
             //[TOTALCOMMENTS]  AS([issues].[Function_TotalComments]([ID])),
 
             Issue result = new Issue();
+
             int idx = 0;
             int issueId = 5;
 
             result.Assignees.FillOutAssigneeList<User>(ref result, issueService, Convert.ToInt32(reader[issueId]));
-            result.Body = Convert.ToString(reader[idx++]);
-            result.ClosedBy = Convert.ToInt32(reader[idx++]);
-            result.ClosedDate = Convert.ToDateTime(reader[idx++]);
-            result.CrtnDate = Convert.ToDateTime(reader[idx++]);
-            result.CrtnUser = Convert.ToString(reader[idx++]);
-            result.Id = Convert.ToInt32(reader[idx++]);
-            result.LastUpdDate = Convert.ToDateTime(reader[idx++]);
-            //result.Milestones.FillOutIssueList<Milestone>(milestones, reader[idx++], ref result);
-            idx++;
-            result.Number = Convert.ToString(reader[idx++]);
-            //result.Projects.FillOutIssueList<Project>(labels, reader[11], ref result);
-            idx++;
-            result.State = (State)Convert.ToInt32(reader[idx++]);
-            result.Title = Convert.ToString(reader[idx++]);
-            result.TotalComments = Convert.ToInt32(reader[idx++]);
-           
+            result.Body = reader[idx++] as string;
+            result.ClosedBy = reader[idx++] as int?;
+            result.ClosedDate = reader[idx++] as DateTime?;
+            result.CrtnDate = reader[idx++] as DateTime?;
+            result.CrtnUser = reader[idx++] as string;
+            result.Id = reader[idx++] as int?;
+            result.Labels.FillOutLabelList<Label>(ref result, issueService, Convert.ToInt32(reader[issueId]));
+            result.LastUpdDate = reader[idx++] as DateTime?;
+            result.Milestones.FillOutMilestoneList<Milestone>(ref result, issueService, Convert.ToInt32(reader[issueId]));
+            result.Number = reader[idx++] as int?;
+            result.State = (State?)(reader[idx++] as int?);
+            result.Title = reader[idx++] as string;
+            result.TotalComments = reader[idx++] as int?;
+
             return result;
         }
 
@@ -75,7 +61,7 @@ namespace IssuesHoneys.Services.SQL
         /// </summary>
         /// <param name="reader">Reader with datas</param>
         /// <returns>Label</returns>
-        internal static Label SQLLabelConverter(SqlDataReader reader)
+        internal static Label SQLLabelConverter(SqlDataReader reader, IIssueService issueService)
         {
             //[DESCRIPTION] [varchar](50) NOT NULL,
             //[COLOR] [varchar](50) NOT NULL,
@@ -94,7 +80,8 @@ namespace IssuesHoneys.Services.SQL
             result.CrtnUser = Convert.ToString(reader[idx++]);
             labelId = Convert.ToInt32(reader[idx++]);
             result.Name = Convert.ToString(reader[idx++]);
-            result.TotalIssuesWithLabel = result.GetTotalIssuesWithLabel(labelId, IssueService);
+            result.TotalIssuesWithLabel = result.GetTotalIssuesWithLabel(labelId, issueService);
+
             return result;
         }
         
@@ -113,7 +100,7 @@ namespace IssuesHoneys.Services.SQL
             //[STATE] [int] NOT NULL,
             //[TITLE] [varchar](50) NOT NULL,
 
-             Milestone result = new Milestone();
+            Milestone result = new Milestone();
             int idx = 0;
 
             result.CrtnDate = Convert.ToDateTime(reader[idx++]);

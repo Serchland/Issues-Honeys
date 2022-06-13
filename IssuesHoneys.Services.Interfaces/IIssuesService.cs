@@ -21,6 +21,21 @@ namespace IssuesHoneys.Services.Interfaces
         List<User> GetAssignedUsersToIssue(int issueId);
 
         /// <summary>
+        /// Gets the labels assigned to the ISSUE
+        /// </summary>
+        /// <param name="issueId"></param>
+        /// <returns></returns>
+        List<Label> GetAssignedLabelsToIssue(int issueId);
+        
+
+        /// <summary>
+        /// Gets milestones assigned to the ISSUE
+        /// </summary>
+        /// <param name="issueId"></param>
+        /// <returns></returns>
+        List<Milestone> GetAssignedMilestonesToIssue(int issueId);
+
+        /// <summary>
         /// Method used to obtain the ISSUES from the model
         /// </summary>
         /// <returns>List<Issue></returns>

@@ -34,8 +34,8 @@ namespace IssuesHoneys.BusinessTypes
         /// <summary>
         /// USER who close the ISSUE
         /// </summary>
-        private int _closedBy;
-        public int ClosedBy
+        private int? _closedBy;
+        public int? ClosedBy
         {
             get { return _closedBy; }
             set { SetProperty(ref _closedBy, value); }
@@ -44,8 +44,8 @@ namespace IssuesHoneys.BusinessTypes
         /// <summary>
         /// Date on which the ISSUE was closed
         /// </summary>
-        private DateTime _closedDate;
-        public DateTime ClosedDate
+        private DateTime? _closedDate;
+        public DateTime? ClosedDate
         {
             get { return _closedDate; }
             set { SetProperty(ref _closedDate, value); }
@@ -54,8 +54,8 @@ namespace IssuesHoneys.BusinessTypes
         /// <summary>
         /// Date on which the ISSUE was created
         /// </summary>
-        private DateTime _crtnDate;
-        public DateTime CrtnDate
+        private DateTime? _crtnDate;
+        public DateTime? CrtnDate
         {
             get { return _crtnDate; }
             set { SetProperty(ref _crtnDate, value); }
@@ -74,8 +74,8 @@ namespace IssuesHoneys.BusinessTypes
         /// <summary>
         /// ISSUE identifier
         /// </summary>
-        private int _id;
-        public int Id
+        private int? _id;
+        public int? Id
         {
             get { return _id; }
             set { SetProperty(ref _id, value); }
@@ -84,8 +84,8 @@ namespace IssuesHoneys.BusinessTypes
         /// <summary>
         /// Date of last update
         /// </summary>
-        private DateTime _lastUpdDate;
-        public DateTime LastUpdDate
+        private DateTime? _lastUpdDate;
+        public DateTime? LastUpdDate
         {
             get { return _lastUpdDate; }
             set { SetProperty(ref _lastUpdDate, value); }
@@ -114,8 +114,8 @@ namespace IssuesHoneys.BusinessTypes
         /// <summary>
         /// Number of the ISSUE
         /// </summary>
-        private string _number;
-        public string Number
+        private int? _number;
+        public int? Number
         {
             get { return _number; }
             set { SetProperty(ref _number, value); }
@@ -134,8 +134,8 @@ namespace IssuesHoneys.BusinessTypes
         /// <summary>
         /// State of the ISSUE. Values: Open (0)/ Closed(1)
         /// </summary>
-        private State _state;
-        public State State
+        private State? _state;
+        public State? State
         {
             get { return _state; }
             set { SetProperty(ref _state, value); }
@@ -154,8 +154,8 @@ namespace IssuesHoneys.BusinessTypes
         /// <summary>
         /// Total comments in the ISSUE. Calculated by SQL function
         /// </summary>
-        private int _totalComments;
-        public int TotalComments
+        private int? _totalComments;
+        public int? TotalComments
         {
             get { return _totalComments; }
             set { SetProperty(ref _totalComments, value); }

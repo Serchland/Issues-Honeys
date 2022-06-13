@@ -485,7 +485,7 @@
                                                 Margin="10 0 0 0"
                                                 VerticalAlignment="Top">
 
-                                        <TextBlock Text="{Binding Id, StringFormat=#{0}}" />
+                                        <TextBlock Text="{Binding Number, StringFormat=#{0}}" />
                                         <TextBlock Text=" "></TextBlock>
                                         <TextBlock Text="{Binding CrtnDate, StringFormat=opened on {0:D}}" />
                                         <TextBlock Text=" "></TextBlock>

@@ -14,11 +14,11 @@ namespace IssuesHoneys.Services.SQL
     /// </summary>
     public class IssueSQLService : BindableBase, IIssueService
     {
-        private List<User> _assigneeUsers = null;
-        private List<Issue> _iisues = null;
-        private List<Label> _labels = null;
-        private List<Milestone> _milestones = null;
-        private List<User> _users = null;
+        //private List<User> _assigneeUsers = null;
+        //private List<Issue> _iisues = null;
+        //private List<Label> _labels = null;
+        //private List<Milestone> _milestones = null;
+        //private List<User> _users = null;
 
         /// <summary>
         /// Create a LABEL in the sql model. Implementation of IIssueService.CreateLabel
@@ -39,7 +39,7 @@ namespace IssuesHoneys.Services.SQL
                                         ([DESCRIPTION]
                                         ,[COLOR]
                                         ,[CRTNDATE]
-                                        ,[CRTNUSER]
+                                        ,[Fk_CRTNUSER]
                                         ,[NAME])
                                     VALUES
                                         ('{description}'
@@ -64,9 +64,8 @@ namespace IssuesHoneys.Services.SQL
         /// </summary>
         public List<User> GetAssignedUsersToIssue(int issueId)
         {
-            _assigneeUsers = new List<User>();
+            List<User> _assigneeUsers = new List<User>();
 
-            _iisues = new List<Issue>();
             var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
             var queryString = "SELECT * FROM [HONEYS].[issues].[USERS] WHERE ID IN " +
                 "(SELECT Fk_USERASSIGNEE FROM [HONEYS].[issues].[USERSTOISSUES] WHERE Fk_ISSUE = " +  issueId + ")";
@@ -88,11 +87,66 @@ namespace IssuesHoneys.Services.SQL
         }
 
         /// <summary>
+        /// Gets users assigned labels to ISSUE. Implementation of IIssueService.GetLabelsToIssue
+        /// </summary>
+        public List<Label> GetAssignedLabelsToIssue(int issueId)
+        {
+            List<Label> _labels = new List<Label>();
+
+            var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
+            var queryString = "SELECT * FROM [HONEYS].[issues].[LABELS] WHERE ID IN " +
+                "(SELECT Fk_LABEL FROM [HONEYS].[issues].[LABELSTOISSUES] WHERE Fk_ISSUE = " + issueId + ")";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _labels.Add(Converters.SQLLabelConverter(reader, this));
+                    }
+                }
+            };
+
+            return _labels;
+        }
+
+        /// <summary>
+        /// Gets users assigned to ISSUE. Implementation of IIssueService.GetIssues
+        /// </summary>
+        public List<Milestone> GetAssignedMilestonesToIssue(int issueId)
+        {
+            List<Milestone> _milestones = new List<Milestone>();
+
+            var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
+            var queryString = "SELECT * FROM [HONEYS].[issues].[MILESTONES] WHERE ID IN " +
+                "(SELECT Fk_MILESTONE FROM [HONEYS].[issues].[MILESTONESTOISSUES] WHERE Fk_ISSUE = " + issueId + ")";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        _milestones.Add(Converters.SQLMilestoneConverter(reader));
+                    }
+                }
+            };
+
+            return _milestones;
+        }
+
+        /// <summary>
         /// Obtain ISSUES from the sql model. Implementation of IIssueService.GetIssues
         /// </summary>
         public List<Issue> GetIssues()
         {
-            _iisues = new List<Issue>();
+            List<Issue> issues = new List<Issue>();
+
             var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
             var queryString = "SELECT * FROM [HONEYS].[issues].[ISSUES];";
 
@@ -104,12 +158,12 @@ namespace IssuesHoneys.Services.SQL
                 {
                     while (reader.Read())
                     {
-                        _iisues.Add(Converters.SQLIssueConverter(reader, ref _labels, ref _users, ref _milestones, this));
+                        issues.Add(Converters.SQLIssueConverter(reader, this));
                     }
                 }
             };
 
-            return _iisues;
+            return issues;
         }
 
         public int GetIssuesWithLabelId(int labelID)
@@ -135,30 +189,25 @@ namespace IssuesHoneys.Services.SQL
         public List<Label> GetLabels()
         {
             //SERCH00: Assess whether it is necessary to have the values in memory
-            if (_labels == null)
+            List<Label> labels = new List<Label>();
+
+            var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
+            var queryString = "SELECT * FROM [HONEYS].[issues].[LABELS];";
+
+            using (var connection = new SqlConnection(connectionString))
             {
-                _labels = new List<Label>();
-                var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
-                var queryString = "SELECT * FROM [HONEYS].[issues].[LABELS];";
-
-                Converters.IssueService = this;
-
-                using (var connection = new SqlConnection(connectionString))
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                using (var reader = command.ExecuteReader())
                 {
-                    var command = new SqlCommand(queryString, connection);
-                    connection.Open();
-                    using (var reader = command.ExecuteReader())
+                    while (reader.Read())
                     {
-                        while (reader.Read())
-                        {
-                            _labels.Add(Converters.SQLLabelConverter(reader));
-                        }
+                        labels.Add(Converters.SQLLabelConverter(reader, this));
                     }
-                };
-            }
-
-            Converters.IssueService = null;
-            return _labels;
+                }
+            };
+            
+            return labels;
         }
 
         /// <summary>
@@ -168,27 +217,25 @@ namespace IssuesHoneys.Services.SQL
         public List<Milestone> GetMillestones()
         {
             //SERCH00: Assess whether it is necessary to have the values in memory
-            if (_milestones == null)
+            List<Milestone> milestones = new List<Milestone>();
+
+            var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
+            var queryString = "SELECT * FROM [HONEYS].[issues].[MILESTONES];";
+
+            using (var connection = new SqlConnection(connectionString))
             {
-                _milestones = new List<Milestone>();
-                var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
-                var queryString = "SELECT * FROM [HONEYS].[issues].[MILESTONES];";
-
-                using (var connection = new SqlConnection(connectionString))
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                using (var reader = command.ExecuteReader())
                 {
-                    var command = new SqlCommand(queryString, connection);
-                    connection.Open();
-                    using (var reader = command.ExecuteReader())
+                    while (reader.Read())
                     {
-                        while (reader.Read())
-                        {
-                            _milestones.Add(Converters.SQLMilestoneConverter(reader));
-                        }
+                        milestones.Add(Converters.SQLMilestoneConverter(reader));
                     }
-                };
-            }
+                }
+            };
 
-            return _milestones;
+            return milestones;
         }
 
         /// <summary>
@@ -198,6 +245,7 @@ namespace IssuesHoneys.Services.SQL
         public List<User> GetUsers()
         {
             //SERCH00: Assess whether it is necessary to have the values in memory
+            List<User> _users = new List<User>(); 
             if (_users == null)
             {
                 _users = new List<User>();
@@ -220,5 +268,7 @@ namespace IssuesHoneys.Services.SQL
 
             return _users;
         }
+
+       
     }
 }
