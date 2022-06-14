@@ -269,6 +269,54 @@ namespace IssuesHoneys.Services.SQL
             return _users;
         }
 
-       
+        public void UpdateLabel(Label updateLabel)
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
+
+            var description = updateLabel.Description;
+            var color = updateLabel.Color;
+            var crtnDate = DateTime.Now;
+            var crtnUser = 1;
+            var name = updateLabel.Name;
+
+            var queryString = $@"                                    
+                                    UPDATE [issues].[LABELS]
+                                    SET [DESCRIPTION] = '{description}'
+                                        ,[COLOR] = '{color}'
+                                        ,[CRTNDATE] = '{crtnDate}'
+                                        ,[Fk_CRTNUSER] = {crtnUser}
+                                        ,[NAME] = '{name}'";
+
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                command.ExecuteScalar();
+            };
+
+        }
+
+        public void DeleteLabel(int labelId)
+        {
+            //var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
+
+            
+            //var queryString = $@"                                    
+            //                        UPDATE [issues].[LABELS]
+            //                        SET [DESCRIPTION] = '{description}'
+            //                            ,[COLOR] = '{color}'
+            //                            ,[CRTNDATE] = '{crtnDate}'
+            //                            ,[Fk_CRTNUSER] = {crtnUser}
+            //                            ,[NAME] = '{name}'";
+
+
+            //using (var connection = new SqlConnection(connectionString))
+            //{
+            //    var command = new SqlCommand(queryString, connection);
+            //    connection.Open();
+            //    command.ExecuteScalar();
+            //};
+        }
     }
 }

@@ -100,6 +100,16 @@ namespace IssuesHoneys.Services.Dummies
             throw new NotImplementedException();
         }
 
+        public void UpdateLabel(Label updateLabel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteLabel(int labelId)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Dummies responses uses by IssueDummyService
         /// </summary>

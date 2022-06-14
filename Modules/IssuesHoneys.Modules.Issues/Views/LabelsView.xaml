@@ -74,10 +74,12 @@
 
                 <TextBox controls:TextBoxHelper.Watermark="{StaticResource WaterMarkSearchLabelsCaption}" 
                          controls:TextBoxHelper.ClearTextButton="True"
+                         controls:TextBoxHelper.ButtonCommand="{Binding Path=SearchLabelsCommand, Mode=OneWay}" 
                          MaxWidth="300"
                          MinWidth="200"
                          VerticalAlignment="Center"
                          HorizontalAlignment="Left"
+                         
                          Style ="{DynamicResource MahApps.Styles.TextBox.Search}"/>
             </DockPanel>
 

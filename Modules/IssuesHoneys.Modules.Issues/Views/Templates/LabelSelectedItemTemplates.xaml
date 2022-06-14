@@ -97,6 +97,12 @@
                                 </Style.Triggers>
                             </Style>
                         </TextBlock.Style>
+
+                        <TextBlock.InputBindings>
+                            <MouseBinding Command="{Binding ElementName=PART_LabelsListView, Path=DataContext.DeleteLabelCommand}" 
+                                                          MouseAction="LeftClick" >
+                            </MouseBinding>
+                        </TextBlock.InputBindings>
                     </TextBlock>
                 </DockPanel>
             </Grid>

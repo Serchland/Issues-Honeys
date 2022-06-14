@@ -103,14 +103,49 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             NewLabelViewVisibilitity = Visibility.Collapsed;
         }
 
+
+
+        private DelegateCommand _deleteLabelCommand;
+        public DelegateCommand DeleteLabelCommand =>
+            _updateLabelCommand ?? (_deleteLabelCommand = new DelegateCommand(ExecuteDeleteLabelCommand));
+
+        void ExecuteDeleteLabelCommand()
+        {
+
+            if (_selectedLabel == null)
+                throw new ArgumentException(ArgumentExceptionMessage);
+
+            
+        }
+
+
+        private DelegateCommand _searchLabelsCommand;
+        public DelegateCommand SearchLabelsCommand =>
+            _searchLabelsCommand ?? (_searchLabelsCommand = new DelegateCommand(ExecuteSearchLabelsCommand));
+
+        void ExecuteSearchLabelsCommand()
+        {
+
+            if (_selectedLabel == null)
+                throw new ArgumentException(ArgumentExceptionMessage);
+
+
+        }
+
+        
+
         private DelegateCommand _updateLabelCommand;
         public DelegateCommand UpdateCommand =>
             _updateLabelCommand ?? (_updateLabelCommand = new DelegateCommand(ExecuteUpdateLabelCommand));
 
         void ExecuteUpdateLabelCommand()
         {
-            //SelectedOriginalLabel = null;
-            //if (SelectedOrignalLabel)
+
+            if (_selectedLabel == null)
+                throw new ArgumentException(ArgumentExceptionMessage);
+
+            _isuesService.UpdateLabel(SelectedLabel);
+            SelectedLabel.IsEdditing = false;
         }
 
         private DelegateCommand<string> _newLabelVisibilityCommand;
