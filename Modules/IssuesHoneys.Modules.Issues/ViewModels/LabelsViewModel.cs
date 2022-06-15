@@ -174,11 +174,9 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             NewLabelViewVisibilitity = Visibility.Collapsed;
         }
 
-
-
         private DelegateCommand _deleteLabelCommand;
         public DelegateCommand DeleteLabelCommand =>
-            _updateLabelCommand ?? (_deleteLabelCommand = new DelegateCommand(ExecuteDeleteLabelCommand));
+            _deleteLabelCommand ?? (_deleteLabelCommand = new DelegateCommand(ExecuteDeleteLabelCommand));
 
         void ExecuteDeleteLabelCommand()
         {
@@ -189,41 +187,8 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
         }
 
-
-        private DelegateCommand _searchLabelsCommand;
-        public DelegateCommand SearchLabelsCommand =>
-            _searchLabelsCommand ?? (_searchLabelsCommand = new DelegateCommand(ExecuteSearchLabelsCommand));
-
-        void ExecuteSearchLabelsCommand()
-        {
-
-            if (_selectedLabel == null)
-                throw new ArgumentException(ArgumentExceptionMessage);
-
-
-        }
-
-
-
-        private DelegateCommand _updateLabelCommand;
-        public DelegateCommand UpdateCommand =>
-            _updateLabelCommand ?? (_updateLabelCommand = new DelegateCommand(ExecuteUpdateLabelCommand));
-
-        void ExecuteUpdateLabelCommand()
-        {
-<<<<<<< HEAD
-=======
-
->>>>>>> 9c2b9df77b6703191940e822e17e3ca0731211f0
-            if (_selectedLabel == null)
-                throw new ArgumentException(ArgumentExceptionMessage);
-
-            _isuesService.UpdateLabel(SelectedLabel);
-            SelectedLabel.IsEdditing = false;
-<<<<<<< HEAD
-        }
-
-        private DelegateCommand _filterLabelsCommand;
+        
+            private DelegateCommand _filterLabelsCommand;
         public DelegateCommand FilterLabelsCommand =>
             _filterLabelsCommand ?? (_filterLabelsCommand = new DelegateCommand(ExecuteFilterLabelsCommand));
 
@@ -232,24 +197,18 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             LabelsView.Refresh();
         }
 
-        private bool Filter(string p)
-        {
-            throw new NotImplementedException();
-        }
+        private DelegateCommand _updateLabelCommand;
+        public DelegateCommand UpdateCommand =>
+            _updateLabelCommand ?? (_updateLabelCommand = new DelegateCommand(ExecuteUpdateLabelCommand));
 
-        private DelegateCommand _deleteLabelCommand;
-        public DelegateCommand DeleteCommand =>
-            _deleteLabelCommand ?? (_deleteLabelCommand = new DelegateCommand(ExecuteDeleteLabelCommand));
-
-        void ExecuteDeleteLabelCommand()
+        void ExecuteUpdateLabelCommand()
         {
+
             if (_selectedLabel == null)
                 throw new ArgumentException(ArgumentExceptionMessage);
 
-            _isuesService.DeleteLabel(SelectedLabel.Id);
-            Labels.Remove(SelectedLabel);
-=======
->>>>>>> 9c2b9df77b6703191940e822e17e3ca0731211f0
+            _isuesService.UpdateLabel(SelectedLabel);
+            SelectedLabel.IsEdditing = false;
         }
 
         private DelegateCommand<string> _newLabelVisibilityCommand;

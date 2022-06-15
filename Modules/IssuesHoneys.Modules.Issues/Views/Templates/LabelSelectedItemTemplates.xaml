@@ -100,11 +100,9 @@
                         </TextBlock.Style>
 
                         <TextBlock.InputBindings>
-<<<<<<< HEAD
-                            <MouseBinding Command="{Binding ElementName=PART_LabelsListView, Path=DataContext.DeleteCommand}" 
-=======
+
                             <MouseBinding Command="{Binding ElementName=PART_LabelsListView, Path=DataContext.DeleteLabelCommand}" 
->>>>>>> 9c2b9df77b6703191940e822e17e3ca0731211f0
+
                                                           MouseAction="LeftClick" >
                             </MouseBinding>
                         </TextBlock.InputBindings>

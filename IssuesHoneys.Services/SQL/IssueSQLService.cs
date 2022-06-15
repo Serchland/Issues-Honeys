@@ -270,28 +270,6 @@ namespace IssuesHoneys.Services.SQL
             return _users;
         }
 
-<<<<<<< HEAD
-        void IIssueService.UpdateLabel(Label label)
-        {
-            var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
-
-            var id = label.Id;
-            var color = label.Color;
-            var crtnDate = DateTime.Now;
-            var crtnUser = 1;
-            var description = label.Description;
-            var name = label.Name;
-
-            var queryString = $@"                                    
-                                    UPDATE [issues].[LABELS] SET
-                                        [DESCRIPTION] = '{description}'
-                                        ,[COLOR] = '{color}'
-                                        ,[CRTNDATE] = '{crtnDate}'
-                                        ,[Fk_CRTNUSER] = {crtnUser}
-                                        ,[NAME] = '{name}'
-                                    WHERE ID = '{id}'
-                               ";
-=======
         public void UpdateLabel(Label updateLabel)
         {
             var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
@@ -309,7 +287,6 @@ namespace IssuesHoneys.Services.SQL
                                         ,[CRTNDATE] = '{crtnDate}'
                                         ,[Fk_CRTNUSER] = {crtnUser}
                                         ,[NAME] = '{name}'";
->>>>>>> 9c2b9df77b6703191940e822e17e3ca0731211f0
 
 
             using (var connection = new SqlConnection(connectionString))
@@ -318,31 +295,10 @@ namespace IssuesHoneys.Services.SQL
                 connection.Open();
                 command.ExecuteScalar();
             };
-<<<<<<< HEAD
-=======
-
->>>>>>> 9c2b9df77b6703191940e822e17e3ca0731211f0
         }
 
         public void DeleteLabel(int labelId)
         {
-<<<<<<< HEAD
-            var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
-
-            var queryString = $@"                                    
-                                    UPDATE [issues].[LABELS] SET
-                                        [ISACTIVE] = {0}
-                                    WHERE ID = {labelId}
-                               ";
-
-
-            using (var connection = new SqlConnection(connectionString))
-            {
-                var command = new SqlCommand(queryString, connection);
-                connection.Open();
-                command.ExecuteScalar();
-            };
-=======
             //var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
 
             
@@ -361,7 +317,6 @@ namespace IssuesHoneys.Services.SQL
             //    connection.Open();
             //    command.ExecuteScalar();
             //};
->>>>>>> 9c2b9df77b6703191940e822e17e3ca0731211f0
         }
     }
 }

@@ -77,22 +77,14 @@
 
                 <TextBox controls:TextBoxHelper.Watermark="{StaticResource WaterMarkSearchLabelsCaption}" 
                          controls:TextBoxHelper.ClearTextButton="True"
-<<<<<<< HEAD
                          controls:TextBoxHelper.ButtonCommand ="{Binding FilterLabelsCommand}"
-=======
-                         controls:TextBoxHelper.ButtonCommand="{Binding Path=SearchLabelsCommand, Mode=OneWay}" 
->>>>>>> 9c2b9df77b6703191940e822e17e3ca0731211f0
                          MaxWidth="300"
                          MinWidth="200"
                          VerticalAlignment="Center"
                          HorizontalAlignment="Left"
-<<<<<<< HEAD
                          Style ="{DynamicResource MahApps.Styles.TextBox.Search}"
                          Text="{Binding FilterText}"/>
-=======
-                         
-                         Style ="{DynamicResource MahApps.Styles.TextBox.Search}"/>
->>>>>>> 9c2b9df77b6703191940e822e17e3ca0731211f0
+
             </DockPanel>
 
             <Button Grid.Column="3"

@@ -100,11 +100,7 @@ namespace IssuesHoneys.Services.Dummies
             throw new NotImplementedException();
         }
 
-<<<<<<< HEAD
         public void UpdateLabel(Label label)
-=======
-        public void UpdateLabel(Label updateLabel)
->>>>>>> 9c2b9df77b6703191940e822e17e3ca0731211f0
         {
             throw new NotImplementedException();
         }

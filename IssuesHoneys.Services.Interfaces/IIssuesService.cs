@@ -72,7 +72,6 @@ namespace IssuesHoneys.Services.Interfaces
         /// <returns></returns>
         int GetIssuesWithLabelId(int labelID);
 
-<<<<<<< HEAD
 
         /// <summary>
         ///  Method used update the label.
@@ -80,16 +79,5 @@ namespace IssuesHoneys.Services.Interfaces
         /// <param name="labelID"></param>
         /// <returns></returns>
         void UpdateLabel(Label label);
-=======
-        /// <summary>
-        /// Method used to update a LABEL in the model
-        /// </summary>
-        void UpdateLabel(Label updateLabel);
-
-        /// <summary>
-        /// Method used to delete a LABEL in the model
-        /// </summary>
-        void DeleteLabel(int labelId);
->>>>>>> 9c2b9df77b6703191940e822e17e3ca0731211f0
     }
 }
