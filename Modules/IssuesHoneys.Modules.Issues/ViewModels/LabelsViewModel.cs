@@ -18,7 +18,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
     public class LabelsViewModel : ViewModelBase
     {
         private IIssueService _isuesService;
-        public LabelsViewModel(IApplicationCommands applicationsCommands, IIssueService issueService) : base (applicationsCommands)
+        public LabelsViewModel(IApplicationCommands applicationsCommands, IIssueService issueService) : base(applicationsCommands)
         {
             _isuesService = issueService;
             Initialize();
@@ -49,7 +49,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         }
 
         #region "Properties"
-       
+
         private ObservableCollection<Label> _labels;
         public ObservableCollection<Label> Labels
         {
@@ -80,27 +80,39 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         public Label NewLabel
         {
             get
-            { return _newLabel;}
+            {
+                return _newLabel;
+            }
             set
-            { SetProperty(ref _newLabel, value);}
+            {
+                SetProperty(ref _newLabel, value);
+            }
         }
 
         private string _filterText;
         public string FilterText
         {
             get
-            { return _filterText;}
+            {
+                return _filterText;
+            }
             set
-            { SetProperty(ref _filterText, value);}
+            {
+                SetProperty(ref _filterText, value);
+            }
         }
 
         private Label _oldLabelValue;
         public Label OldLabelValue
         {
             get
-            { return _oldLabelValue;}
+            {
+                return _oldLabelValue;
+            }
             set
-            {SetProperty(ref _oldLabelValue, value);}
+            {
+                SetProperty(ref _oldLabelValue, value);
+            }
         }
 
         private Label _selectedLabel;
@@ -108,7 +120,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         {
             get
             {
-                return _selectedLabel; 
+                return _selectedLabel;
             }
             set
             {
@@ -122,15 +134,27 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         private string _totalLabels;
         public string TotalLabels
         {
-            get { return _totalLabels; }
-            set { SetProperty(ref _totalLabels, value); }
+            get
+            {
+                return _totalLabels;
+            }
+            set
+            {
+                SetProperty(ref _totalLabels, value);
+            }
         }
 
         private Visibility _newLabelViewVisibility;
         public Visibility NewLabelViewVisibilitity
         {
-            get { return _newLabelViewVisibility; }
-            set { SetProperty(ref _newLabelViewVisibility, value); }
+            get
+            {
+                return _newLabelViewVisibility;
+            }
+            set
+            {
+                SetProperty(ref _newLabelViewVisibility, value);
+            }
         }
         #endregion
 
@@ -150,17 +174,53 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             NewLabelViewVisibilitity = Visibility.Collapsed;
         }
 
+
+
+        private DelegateCommand _deleteLabelCommand;
+        public DelegateCommand DeleteLabelCommand =>
+            _updateLabelCommand ?? (_deleteLabelCommand = new DelegateCommand(ExecuteDeleteLabelCommand));
+
+        void ExecuteDeleteLabelCommand()
+        {
+
+            if (_selectedLabel == null)
+                throw new ArgumentException(ArgumentExceptionMessage);
+
+
+        }
+
+
+        private DelegateCommand _searchLabelsCommand;
+        public DelegateCommand SearchLabelsCommand =>
+            _searchLabelsCommand ?? (_searchLabelsCommand = new DelegateCommand(ExecuteSearchLabelsCommand));
+
+        void ExecuteSearchLabelsCommand()
+        {
+
+            if (_selectedLabel == null)
+                throw new ArgumentException(ArgumentExceptionMessage);
+
+
+        }
+
+
+
         private DelegateCommand _updateLabelCommand;
         public DelegateCommand UpdateCommand =>
             _updateLabelCommand ?? (_updateLabelCommand = new DelegateCommand(ExecuteUpdateLabelCommand));
 
         void ExecuteUpdateLabelCommand()
         {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9c2b9df77b6703191940e822e17e3ca0731211f0
             if (_selectedLabel == null)
                 throw new ArgumentException(ArgumentExceptionMessage);
 
             _isuesService.UpdateLabel(SelectedLabel);
             SelectedLabel.IsEdditing = false;
+<<<<<<< HEAD
         }
 
         private DelegateCommand _filterLabelsCommand;
@@ -188,6 +248,8 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
             _isuesService.DeleteLabel(SelectedLabel.Id);
             Labels.Remove(SelectedLabel);
+=======
+>>>>>>> 9c2b9df77b6703191940e822e17e3ca0731211f0
         }
 
         private DelegateCommand<string> _newLabelVisibilityCommand;

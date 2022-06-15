@@ -11,7 +11,7 @@ namespace IssuesHoneys.Modules.Issues.Views.Converters
         {
             Visibility result = Visibility.Collapsed;
 
-            if ((int)value > 0)
+            if (value is null || (int)value > 0)
                 result = Visibility.Visible;
 
             return result;
