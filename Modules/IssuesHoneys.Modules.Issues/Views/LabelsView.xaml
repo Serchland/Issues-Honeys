@@ -13,7 +13,10 @@
         <ResourceDictionary Source="/IssuesHoneys.Modules.Issues;component/Views/Templates/LabelSelectedItemTemplates.xaml"></ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Margin="15">
+    <Grid Margin="15" x:Name="GridLabels">
+        <Grid.Resources>
+            <CollectionViewSource x:Name="LabelsFilteredCollection" x:Key="LabelsFilteredCollectionKey" Source="{Binding LabelsView}" />
+        </Grid.Resources>
         
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -74,11 +77,13 @@
 
                 <TextBox controls:TextBoxHelper.Watermark="{StaticResource WaterMarkSearchLabelsCaption}" 
                          controls:TextBoxHelper.ClearTextButton="True"
+                         controls:TextBoxHelper.ButtonCommand ="{Binding FilterLabelsCommand}"
                          MaxWidth="300"
                          MinWidth="200"
                          VerticalAlignment="Center"
                          HorizontalAlignment="Left"
-                         Style ="{DynamicResource MahApps.Styles.TextBox.Search}"/>
+                         Style ="{DynamicResource MahApps.Styles.TextBox.Search}"
+                         Text="{Binding FilterText}"/>
             </DockPanel>
 
             <Button Grid.Column="3"
@@ -192,12 +197,15 @@
 
                     </Grid>
                 </Border>
-                
-                <ListView Grid.ColumnSpan="2"
+
+            <!--ItemsSource="{Binding Labels}"-->
+            <!--ItemsSource="{Binding Source={StaticResource LabelsFilteredCollectionKey}}"-->
+             <ListView Grid.ColumnSpan="2"
                           Grid.Row="1"
                           BorderThickness="1 0 1 1"
                           BorderBrush="{StaticResource MainBorderBrush}"
-                          ItemsSource="{Binding Labels}"                         
+                          IsSynchronizedWithCurrentItem="True"
+                          ItemsSource="{Binding Source={StaticResource LabelsFilteredCollectionKey}}"                         
                           SelectedItem="{Binding SelectedLabel}"
                           Margin="5,0,5,5"
                           x:Name="PART_LabelsListView">

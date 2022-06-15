@@ -14,6 +14,7 @@ namespace IssuesHoneys.Services.SQL
     /// </summary>
     public class IssueSQLService : BindableBase, IIssueService
     {
+
         //private List<User> _assigneeUsers = null;
         //private List<Issue> _iisues = null;
         //private List<Label> _labels = null;
@@ -192,7 +193,7 @@ namespace IssuesHoneys.Services.SQL
             List<Label> labels = new List<Label>();
 
             var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
-            var queryString = "SELECT * FROM [HONEYS].[issues].[LABELS];";
+            var queryString = "SELECT * FROM [HONEYS].[issues].[LABELS] WHERE ISACTIVE = 1;";
 
             using (var connection = new SqlConnection(connectionString))
             {
@@ -269,6 +270,53 @@ namespace IssuesHoneys.Services.SQL
             return _users;
         }
 
-       
+        void IIssueService.UpdateLabel(Label label)
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
+
+            var id = label.Id;
+            var color = label.Color;
+            var crtnDate = DateTime.Now;
+            var crtnUser = 1;
+            var description = label.Description;
+            var name = label.Name;
+
+            var queryString = $@"                                    
+                                    UPDATE [issues].[LABELS] SET
+                                        [DESCRIPTION] = '{description}'
+                                        ,[COLOR] = '{color}'
+                                        ,[CRTNDATE] = '{crtnDate}'
+                                        ,[Fk_CRTNUSER] = {crtnUser}
+                                        ,[NAME] = '{name}'
+                                    WHERE ID = '{id}'
+                               ";
+
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                command.ExecuteScalar();
+            };
+        }
+
+        public void DeleteLabel(int labelId)
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
+
+            var queryString = $@"                                    
+                                    UPDATE [issues].[LABELS] SET
+                                        [ISACTIVE] = {0}
+                                    WHERE ID = {labelId}
+                               ";
+
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                command.ExecuteScalar();
+            };
+        }
     }
 }

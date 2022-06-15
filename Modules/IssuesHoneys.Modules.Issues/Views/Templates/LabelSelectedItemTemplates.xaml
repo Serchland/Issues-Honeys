@@ -85,9 +85,10 @@
                     </TextBlock>
 
                     <TextBlock Foreground="Red"
-                                               HorizontalAlignment="Right" 
-                                               Text="{StaticResource TextBlockDelete}" 
-                                               VerticalAlignment="Center">
+                               x:Name="PART_TextBlocklDelete"
+                               HorizontalAlignment="Right" 
+                               Text="{StaticResource TextBlockDelete}" 
+                               VerticalAlignment="Center">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
                                 <Style.Triggers>
@@ -97,6 +98,12 @@
                                 </Style.Triggers>
                             </Style>
                         </TextBlock.Style>
+
+                        <TextBlock.InputBindings>
+                            <MouseBinding Command="{Binding ElementName=PART_LabelsListView, Path=DataContext.DeleteCommand}" 
+                                                          MouseAction="LeftClick" >
+                            </MouseBinding>
+                        </TextBlock.InputBindings>
                     </TextBlock>
                 </DockPanel>
             </Grid>

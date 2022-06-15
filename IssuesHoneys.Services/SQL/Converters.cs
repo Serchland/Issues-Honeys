@@ -79,6 +79,8 @@ namespace IssuesHoneys.Services.SQL
             result.CrtnDate = Convert.ToDateTime(reader[idx++]);
             result.CrtnUser = Convert.ToString(reader[idx++]);
             labelId = Convert.ToInt32(reader[idx++]);
+            result.Id = labelId;
+            idx++;
             result.Name = Convert.ToString(reader[idx++]);
             result.TotalIssuesWithLabel = result.GetTotalIssuesWithLabel(labelId, issueService);
 

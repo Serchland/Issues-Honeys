@@ -57,6 +57,7 @@
             <Button Height="30"
                     Width="30"
                     BorderThickness="0.5"
+                    Background="{Binding Color}"
                     Style="{DynamicResource MahApps.Styles.Button.Circle}"
                     Command="{Binding RelativeSource={RelativeSource FindAncestor, 
                                 AncestorType={x:Type ListView}}, Path=DataContext.RandomColorCommand}"

@@ -14,6 +14,11 @@ namespace IssuesHoneys.Services.Interfaces
         void CreateLabel(Label newLabel);
 
         /// <summary>
+        /// Method used to delete a LABEL in the model
+        /// </summary>
+        void DeleteLabel(int labelId);
+
+        /// <summary>
         /// Gets the users assigned to the ISSUE
         /// </summary>
         /// <param name="issueId"></param>
@@ -66,5 +71,13 @@ namespace IssuesHoneys.Services.Interfaces
         /// <param name="labelID"></param>
         /// <returns></returns>
         int GetIssuesWithLabelId(int labelID);
+
+
+        /// <summary>
+        ///  Method used update the label.
+        /// </summary>
+        /// <param name="labelID"></param>
+        /// <returns></returns>
+        void UpdateLabel(Label label);
     }
 }

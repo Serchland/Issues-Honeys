@@ -8,7 +8,10 @@ using System;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Media;
+using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
@@ -23,19 +26,54 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
         private void Initialize()
         {
+
             _labels = new ObservableCollection<Label>(_isuesService.GetLabels());
+            _labelsView = CollectionViewSource.GetDefaultView(_labels);
             _newLabel = new Label(Brushes.Gray);
             _newLabelViewVisibility = Visibility.Collapsed;
             _totalLabels = _labels.Count.ToString();
+            _labelsView.Filter = LabelsFilter;
+        }
+
+        private bool LabelsFilter(object item)
+        {
+            Label label = item as Label;
+            if (!String.IsNullOrEmpty(FilterText))
+            {
+                return label.Name.ToLower().Contains(FilterText.ToLower());
+            }
+            else
+            {
+                return true;
+            }
         }
 
         #region "Properties"
-
+       
         private ObservableCollection<Label> _labels;
         public ObservableCollection<Label> Labels
         {
-            get { return _labels; }
-            set { SetProperty(ref _labels, value); }
+            get
+            {
+                return _labels;
+            }
+            set
+            {
+                SetProperty(ref _labels, value);
+            }
+        }
+
+        private ICollectionView _labelsView;
+        public ICollectionView LabelsView
+        {
+            get
+            {
+                return _labelsView;
+            }
+            set
+            {
+                SetProperty(ref _labelsView, value);
+            }
         }
 
         private Label _newLabel;
@@ -45,6 +83,15 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             { return _newLabel;}
             set
             { SetProperty(ref _newLabel, value);}
+        }
+
+        private string _filterText;
+        public string FilterText
+        {
+            get
+            { return _filterText;}
+            set
+            { SetProperty(ref _filterText, value);}
         }
 
         private Label _oldLabelValue;
@@ -109,8 +156,38 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
         void ExecuteUpdateLabelCommand()
         {
-            //SelectedOriginalLabel = null;
-            //if (SelectedOrignalLabel)
+            if (_selectedLabel == null)
+                throw new ArgumentException(ArgumentExceptionMessage);
+
+            _isuesService.UpdateLabel(SelectedLabel);
+            SelectedLabel.IsEdditing = false;
+        }
+
+        private DelegateCommand _filterLabelsCommand;
+        public DelegateCommand FilterLabelsCommand =>
+            _filterLabelsCommand ?? (_filterLabelsCommand = new DelegateCommand(ExecuteFilterLabelsCommand));
+
+        void ExecuteFilterLabelsCommand()
+        {
+            LabelsView.Refresh();
+        }
+
+        private bool Filter(string p)
+        {
+            throw new NotImplementedException();
+        }
+
+        private DelegateCommand _deleteLabelCommand;
+        public DelegateCommand DeleteCommand =>
+            _deleteLabelCommand ?? (_deleteLabelCommand = new DelegateCommand(ExecuteDeleteLabelCommand));
+
+        void ExecuteDeleteLabelCommand()
+        {
+            if (_selectedLabel == null)
+                throw new ArgumentException(ArgumentExceptionMessage);
+
+            _isuesService.DeleteLabel(SelectedLabel.Id);
+            Labels.Remove(SelectedLabel);
         }
 
         private DelegateCommand<string> _newLabelVisibilityCommand;
@@ -150,10 +227,12 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             PropertyInfo[] properties = brushesType.GetProperties();
             int random = rnd.Next(properties.Length);
 
+            result = (Brush)properties[random].GetValue(null, null);
             if (parameter == CommandParameters.Create)
-                NewLabel.Color = (Brush)properties[random].GetValue(null, null);
+                NewLabel.Color = result;
             else
-                SelectedLabel.Color = (Brush)properties[random].GetValue(null, null);
+                SelectedLabel.Color = result;
+
         }
 
         private DelegateCommand _cancelCommand;

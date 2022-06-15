@@ -3,6 +3,7 @@ using IssuesHoneys.Modules.Issues.ViewModels;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -13,14 +14,17 @@ namespace IssuesHoneys.Modules.Issues.Views
     /// </summary>
     public partial class LabelsView : UserControl
     {
-        public LabelsView()
+        public LabelsView(LabelsViewModel context)
         {
             InitializeComponent();
+            CollectionViewSource res = GridLabels.Resources["LabelsFilteredCollectionKey"] as CollectionViewSource;
+
+            res.Source = context.Labels;
         }
 
         private void PART_LabelsListViewItem_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.OriginalSource is TextBlock editTextblock && editTextblock.Name == "PART_TextBlocklEdit")
+            if (e.OriginalSource is TextBlock editTextblock && editTextblock.Name == "PART_TextBlocklEdit" || e.OriginalSource is TextBlock deleteTextblock && deleteTextblock.Name == "PART_TextBlocklDelete")
             {
                 var context = this.DataContext as LabelsViewModel;
                 var item = e.OriginalSource as TextBlock;
