@@ -17,9 +17,9 @@ namespace IssuesHoneys.Modules.Issues.Views
         public LabelsView(LabelsViewModel context)
         {
             InitializeComponent();
-            CollectionViewSource res = GridLabels.Resources["LabelsFilteredCollectionKey"] as CollectionViewSource;
+            //CollectionViewSource res = GridLabels.Resources["LabelsFilteredCollectionKey"] as CollectionViewSource;
 
-            res.Source = context.Labels;
+            //res.Source = context.Labels;
         }
 
         private void PART_LabelsListViewItem_MouseDown(object sender, MouseEventArgs e)

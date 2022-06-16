@@ -27,7 +27,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         private void Initialize()
         {
 
-            _labels = new ObservableCollection<Label>(_isuesService.GetLabels());
+            _labels = new List<Label>(_isuesService.GetLabels());
             _labelsView = CollectionViewSource.GetDefaultView(_labels);
             _newLabel = new Label(Brushes.Gray);
             _newLabelViewVisibility = Visibility.Collapsed;
@@ -36,7 +36,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         }
 
         private bool LabelsFilter(object item)
-        {
+         {
             Label label = item as Label;
             if (!String.IsNullOrEmpty(FilterText))
             {
@@ -50,8 +50,8 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
         #region "Properties"
 
-        private ObservableCollection<Label> _labels;
-        public ObservableCollection<Label> Labels
+        private List<Label> _labels;
+        public List<Label> Labels
         {
             get
             {
@@ -194,7 +194,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
         void ExecuteFilterLabelsCommand()
         {
-            LabelsView.Refresh();
+            CollectionViewSource.GetDefaultView(Labels).Refresh();
         }
 
         private DelegateCommand _updateLabelCommand;
