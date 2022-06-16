@@ -6,7 +6,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:coreNameDef="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
              xmlns:coreViews="clr-namespace:IssuesHoneys.Core.Views;assembly=IssuesHoneys.Core"
-            
+             xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <UserControl.Resources>
@@ -84,10 +84,11 @@
                          VerticalAlignment="Center"
                          HorizontalAlignment="Left"
                          Style ="{DynamicResource MahApps.Styles.TextBox.Search}"
-                         Text="{Binding FilterText}">
-                    
+                         Text="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+
                     <TextBox.InputBindings>
                         <KeyBinding Key="Enter" Command="{Binding FilterLabelsCommand}" />
+                        <KeyBinding Key="Return" Command="{Binding FilterLabelsCommand}" />
                     </TextBox.InputBindings>
                 </TextBox>
 
@@ -192,13 +193,30 @@
                         <Label Content="{Binding TotalLabels}"/>
                         <Label Content="Open" Padding="0,5,5,5"/>
                     </StackPanel>
+
+                    <!--ItemsSource="{Binding Source={x:Static models:SampleData.Artists}}"-->
+                    <mah:DropDownButton Grid.Column="1"
+                                        Grid.Row="0"
+                                        Margin="5,0,8,0"
+                                        BorderBrush="Transparent"
+                                        Background="Transparent"
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Right"
+                                        Content="Sort">
                         
-                        <Label Grid.Column="1"
+                        <mah:DropDownButton.ItemContainerStyle>
+                            <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
+                                
+                            </Style>
+                        </mah:DropDownButton.ItemContainerStyle>
+                    </mah:DropDownButton>
+                        
+                    <!--<Label Grid.Column="1"
                                Grid.Row="0"
                                Margin="5,0,8,0"
                                VerticalAlignment="Center" 
                                HorizontalAlignment="Right"
-                               Content="Sort"/>
+                               Content="Sort"/>-->
 
                         
 

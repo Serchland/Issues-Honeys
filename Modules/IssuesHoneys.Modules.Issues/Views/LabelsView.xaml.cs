@@ -1,11 +1,7 @@
-﻿using IssuesHoneys.BusinessTypes;
-using IssuesHoneys.Modules.Issues.ViewModels;
-using System;
+﻿using IssuesHoneys.Modules.Issues.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace IssuesHoneys.Modules.Issues.Views
 {
@@ -28,7 +24,7 @@ namespace IssuesHoneys.Modules.Issues.Views
             {
                 var context = this.DataContext as LabelsViewModel;
                 var item = e.OriginalSource as TextBlock;
-                context.SelectedLabel = item.DataContext as BusinessTypes.Label;
+                context.SelectedLabel = item.DataContext as Business.Types.Label;
             }
         }
 

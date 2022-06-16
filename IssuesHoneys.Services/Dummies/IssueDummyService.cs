@@ -1,4 +1,4 @@
-﻿using IssuesHoneys.BusinessTypes;
+﻿using IssuesHoneys.Business.Types;
 using IssuesHoneys.Services.Interfaces;
 using Prism.Mvvm;
 using System;

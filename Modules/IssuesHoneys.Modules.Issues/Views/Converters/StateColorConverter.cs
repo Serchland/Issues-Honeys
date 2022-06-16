@@ -1,4 +1,4 @@
-﻿using IssuesHoneys.BusinessTypes;
+﻿using IssuesHoneys.Business.Types;
 using System;
 using System.Globalization;
 using System.Windows.Data;

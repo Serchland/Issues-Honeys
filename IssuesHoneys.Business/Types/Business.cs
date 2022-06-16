@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Media;
 
-namespace IssuesHoneys.BusinessTypes
+namespace IssuesHoneys.Business.Types
 {
     #region "ISSUE"
     /// <summary>

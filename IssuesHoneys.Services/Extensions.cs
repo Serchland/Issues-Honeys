@@ -1,7 +1,6 @@
-﻿using IssuesHoneys.Services.Interfaces;
-using System;
+﻿using IssuesHoneys.Business.Types;
+using IssuesHoneys.Services.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Media;
 
 namespace IssuesHoneys.BusinessTypes

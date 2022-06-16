@@ -1,4 +1,4 @@
-﻿using IssuesHoneys.BusinessTypes;
+﻿using IssuesHoneys.Business.Types;
 using System.Collections.Generic;
 
 namespace IssuesHoneys.Services.Interfaces

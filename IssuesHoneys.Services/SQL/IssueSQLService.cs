@@ -1,4 +1,4 @@
-﻿using IssuesHoneys.BusinessTypes;
+﻿using IssuesHoneys.Business.Types;
 using IssuesHoneys.Services.Interfaces;
 using IssuesHoneys.Services.NameDefinition;
 using Prism.Mvvm;
@@ -278,6 +278,7 @@ namespace IssuesHoneys.Services.SQL
             var color = updateLabel.Color;
             var crtnDate = DateTime.Now;
             var crtnUser = 1;
+            var id = updateLabel.Id;
             var name = updateLabel.Name;
 
             var queryString = $@"                                    
@@ -286,7 +287,8 @@ namespace IssuesHoneys.Services.SQL
                                         ,[COLOR] = '{color}'
                                         ,[CRTNDATE] = '{crtnDate}'
                                         ,[Fk_CRTNUSER] = {crtnUser}
-                                        ,[NAME] = '{name}'";
+                                        ,[NAME] = '{name}'
+                                    WHERE [ID] = {id}";
 
 
             using (var connection = new SqlConnection(connectionString))
@@ -299,24 +301,21 @@ namespace IssuesHoneys.Services.SQL
 
         public void DeleteLabel(int labelId)
         {
-            //var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
-
-            
-            //var queryString = $@"                                    
-            //                        UPDATE [issues].[LABELS]
-            //                        SET [DESCRIPTION] = '{description}'
-            //                            ,[COLOR] = '{color}'
-            //                            ,[CRTNDATE] = '{crtnDate}'
-            //                            ,[Fk_CRTNUSER] = {crtnUser}
-            //                            ,[NAME] = '{name}'";
+            var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
 
 
-            //using (var connection = new SqlConnection(connectionString))
-            //{
-            //    var command = new SqlCommand(queryString, connection);
-            //    connection.Open();
-            //    command.ExecuteScalar();
-            //};
+            var queryString = $@"                                    
+                                    UPDATE [issues].[LABELS]
+                                    SET [ISACTIVE] = 0
+                                    WHERE [ID] = {labelId}";
+
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                command.ExecuteScalar();
+            };
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using IssuesHoneys.BusinessTypes;
+﻿using IssuesHoneys.Business.Types;
 using IssuesHoneys.Core.Base;
 using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;

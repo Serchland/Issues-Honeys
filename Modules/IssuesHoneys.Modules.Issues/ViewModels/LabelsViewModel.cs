@@ -1,17 +1,16 @@
-﻿using IssuesHoneys.BusinessTypes;
+﻿using IssuesHoneys.Business.Types;
 using IssuesHoneys.Core.Base;
 using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
-using System.ComponentModel;
-using System.Collections.Generic;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
@@ -184,7 +183,9 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             if (_selectedLabel == null)
                 throw new ArgumentException(ArgumentExceptionMessage);
 
-
+            _isuesService.DeleteLabel(SelectedLabel.Id);
+            Labels.Remove(SelectedLabel);
+            CollectionViewSource.GetDefaultView(Labels).Refresh();
         }
 
         

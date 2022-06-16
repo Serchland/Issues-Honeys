@@ -1,7 +1,7 @@
-﻿using IssuesHoneys.BusinessTypes;
+﻿using IssuesHoneys.Business.Types;
+using IssuesHoneys.BusinessTypes;
 using IssuesHoneys.Services.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace IssuesHoneys.Services.SQL
@@ -68,6 +68,7 @@ namespace IssuesHoneys.Services.SQL
             //[CRTNDATE] [datetime] NOT NULL,
             //[Fk_CRTNUSER] [int] NOT NULL,
             //[ID] [int] IDENTITY(1, 1) NOT NULL,
+            //[ISACTIVE] [bit] NOT NULL,
             //[NAME] [varchar](50) NOT NULL,
 
             int labelId = 0;

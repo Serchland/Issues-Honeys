@@ -15,7 +15,6 @@ namespace IssuesHoneys.Modules.Issues.Views
 
         private void got_GotFocus(object sender, RoutedEventArgs e)
         {
-            int i = 0;
         }
     }
 }
