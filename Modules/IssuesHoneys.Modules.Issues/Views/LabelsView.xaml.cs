@@ -10,11 +10,10 @@ namespace IssuesHoneys.Modules.Issues.Views
     /// </summary>
     public partial class LabelsView : UserControl
     {
-        public LabelsView(LabelsViewModel context)
+        public LabelsView()
         {
             InitializeComponent();
             //CollectionViewSource res = GridLabels.Resources["LabelsFilteredCollectionKey"] as CollectionViewSource;
-
             //res.Source = context.Labels;
         }
 

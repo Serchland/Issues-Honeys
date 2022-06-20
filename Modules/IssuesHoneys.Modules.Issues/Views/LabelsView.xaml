@@ -14,9 +14,6 @@
     </UserControl.Resources>
 
     <Grid Margin="15" x:Name="GridLabels">
-        <!--<Grid.Resources>
-            <CollectionViewSource x:Name="LabelsFilteredCollection" x:Key="LabelsFilteredCollectionKey" Source="{Binding LabelsView}" />
-        </Grid.Resources>-->
         
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -202,11 +199,19 @@
                                         Background="Transparent"
                                         VerticalAlignment="Center" 
                                         HorizontalAlignment="Right"
+                                        ItemsSource="{Binding SortItems}"
                                         Content="Sort">
-                        
+                        <mah:DropDownButton.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBlock Text="{Binding StringValue}"></TextBlock>
+                                </Grid>
+                            </DataTemplate>
+                        </mah:DropDownButton.ItemTemplate>
                         <mah:DropDownButton.ItemContainerStyle>
                             <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
-                                
+                                <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectedSortItemCommand}" />
+                                <Setter Property="CommandParameter" Value="{Binding StringValue}" />
                             </Style>
                         </mah:DropDownButton.ItemContainerStyle>
                     </mah:DropDownButton>
@@ -223,9 +228,6 @@
                     </Grid>
                 </Border>
 
-            <!--ItemsSource="{Binding Labels}"-->
-            <!--ItemsSource="{Binding Source={StaticResource LabelsFilteredCollectionKey}}"-->
-            <!--ItemsSource="{Binding Source={StaticResource LabelsFilteredCollectionKey}}"-->
             <ListView Grid.ColumnSpan="2"
                           Grid.Row="1"
                           BorderThickness="1 0 1 1"

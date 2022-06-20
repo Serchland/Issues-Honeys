@@ -270,7 +270,7 @@ namespace IssuesHoneys.Business.Types
         }
 
         /// <summary>
-        /// Extended property
+        /// Extended propertiy
         /// </summary>
         private bool _isSelected;
         public bool IsSelected
@@ -281,11 +281,17 @@ namespace IssuesHoneys.Business.Types
             { SetProperty(ref _isSelected, value); }
         }
 
+        /// <summary>
+        /// Extended 
+        /// </summary>
         public object Clone()
         {
             return this.MemberwiseClone();
         }
 
+        /// <summary>
+        /// Extended 
+        /// </summary>
         public void GetOldValue(Label oldValue)
         {
             this.Name = oldValue.Name;

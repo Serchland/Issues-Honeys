@@ -6,6 +6,7 @@ using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
@@ -26,16 +27,151 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         private void Initialize()
         {
 
-            _labels = new List<Label>(_isuesService.GetLabels());
+            _labels = new ObservableCollection<Label>(_isuesService.GetLabels());
             _labelsView = CollectionViewSource.GetDefaultView(_labels);
             _newLabel = new Label(Brushes.Gray);
             _newLabelViewVisibility = Visibility.Collapsed;
             _totalLabels = _labels.Count.ToString();
             _labelsView.Filter = LabelsFilter;
+
+            _sortItems = GetSortItems();
         }
 
+        #region "Commands"
+        private DelegateCommand<string> _selectedSortItemCommand;
+        public DelegateCommand<string> SelectedSortItemCommand =>
+            _selectedSortItemCommand ?? (_selectedSortItemCommand = new DelegateCommand<string>(ExecuteSelectedSortItemCommand));
+
+        void ExecuteSelectedSortItemCommand(string param)
+        {
+            //SERCH00: For testing purposes only
+            _labelsView.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Descending));
+        }
+
+        private DelegateCommand _createLabelCommand;
+        public DelegateCommand CreateLabelCommand =>
+            _createLabelCommand ?? (_createLabelCommand = new DelegateCommand(ExecuteCreateLabelCommand));
+
+        void ExecuteCreateLabelCommand()
+        {
+            if (_newLabel == null)
+                throw new ArgumentException(ArgumentExceptionMessage);
+
+            _isuesService.CreateLabel(NewLabel);
+            Labels.Add(NewLabel);
+            NewLabelViewVisibilitity = Visibility.Collapsed;
+        }
+
+        private DelegateCommand _deleteLabelCommand;
+        public DelegateCommand DeleteLabelCommand =>
+            _deleteLabelCommand ?? (_deleteLabelCommand = new DelegateCommand(ExecuteDeleteLabelCommand));
+
+        void ExecuteDeleteLabelCommand()
+        {
+
+            if (_selectedLabel == null)
+                throw new ArgumentException(ArgumentExceptionMessage);
+
+            _isuesService.DeleteLabel(SelectedLabel.Id);
+            Labels.Remove(SelectedLabel);
+            CollectionViewSource.GetDefaultView(Labels).Refresh();
+        }
+
+
+        private DelegateCommand _filterLabelsCommand;
+        public DelegateCommand FilterLabelsCommand =>
+            _filterLabelsCommand ?? (_filterLabelsCommand = new DelegateCommand(ExecuteFilterLabelsCommand));
+
+        void ExecuteFilterLabelsCommand()
+        {
+            CollectionViewSource.GetDefaultView(Labels).Refresh();
+        }
+
+        private DelegateCommand _updateLabelCommand;
+        public DelegateCommand UpdateCommand =>
+            _updateLabelCommand ?? (_updateLabelCommand = new DelegateCommand(ExecuteUpdateLabelCommand));
+
+        void ExecuteUpdateLabelCommand()
+        {
+
+            if (_selectedLabel == null)
+                throw new ArgumentException(ArgumentExceptionMessage);
+
+            _isuesService.UpdateLabel(SelectedLabel);
+            SelectedLabel.IsEdditing = false;
+        }
+
+        private DelegateCommand<string> _newLabelVisibilityCommand;
+        public DelegateCommand<string> NewLabelVisibilityCommand =>
+            _newLabelVisibilityCommand ?? (_newLabelVisibilityCommand = new DelegateCommand<string>(ExecuteNewLabelVisibilityCommand));
+
+        void ExecuteNewLabelVisibilityCommand(string parameter)
+        {
+            if (string.IsNullOrEmpty(parameter))
+                throw new ArgumentException(ArgumentExceptionMessage);
+
+            switch (parameter)
+            {
+                case CommandParameters.Cancel:
+                    NewLabelViewVisibilitity = Visibility.Collapsed;
+                    break;
+
+                case CommandParameters.NewLabel:
+                    NewLabel = new Label(Brushes.Gray);
+                    NewLabelViewVisibilitity = Visibility.Visible;
+                    break;
+            }
+        }
+
+        private DelegateCommand<string> _randomColor;
+        public DelegateCommand<string> RandomColorCommand =>
+            _randomColor ?? (_randomColor = new DelegateCommand<string>(ExecuteRandomColorCommand));
+
+        private void ExecuteRandomColorCommand(string parameter)
+        {
+            if (string.IsNullOrEmpty(parameter))
+                throw new ArgumentNullException(ArgumentExceptionMessage);
+
+            Brush result = Brushes.Transparent;
+            Random rnd = new Random();
+            Type brushesType = typeof(Brushes);
+            PropertyInfo[] properties = brushesType.GetProperties();
+            int random = rnd.Next(properties.Length);
+
+            result = (Brush)properties[random].GetValue(null, null);
+            if (parameter == CommandParameters.Create)
+                NewLabel.Color = result;
+            else
+                SelectedLabel.Color = result;
+
+        }
+
+        private DelegateCommand _cancelCommand;
+        public DelegateCommand CancelCommand =>
+            _cancelCommand ?? (_cancelCommand = new DelegateCommand(ExecuteCancelCommand));
+
+        void ExecuteCancelCommand()
+        {
+            SelectedLabel.GetOldValue(OldLabelValue);
+            SelectedLabel.IsEdditing = false;
+
+            OldLabelValue = null;
+        }
+
+        private DelegateCommand _isEdditingCommand;
+        public DelegateCommand IsEdditingCommand =>
+            _isEdditingCommand ?? (_isEdditingCommand = new DelegateCommand(ExecuteIsEdditingCommand));
+
+        void ExecuteIsEdditingCommand()
+        {
+            OldLabelValue = SelectedLabel.Clone() as Label;
+            SelectedLabel.IsEdditing = true;
+        }
+        #endregion
+
+        #region "Methods"
         private bool LabelsFilter(object item)
-         {
+        {
             Label label = item as Label;
             if (!String.IsNullOrEmpty(FilterText))
             {
@@ -47,10 +183,46 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             }
         }
 
+        private ObservableCollection<LabelSortDto> GetSortItems()
+        {
+            ObservableCollection<LabelSortDto> result = new ObservableCollection<LabelSortDto>()
+                { 
+                    new LabelSortDto(){StringValue =  Application.Current.Resources["SortAlphabetically"].ToString(), EnumValue = LabelSortEnum.Alphabetically}   ,
+                    new LabelSortDto(){StringValue =  Application.Current.Resources["SortReverseAlphabetically"].ToString(), EnumValue = LabelSortEnum.ReverseAlphabetically}   ,
+                    new LabelSortDto(){StringValue =  Application.Current.Resources["SortMostIssues"].ToString(), EnumValue = LabelSortEnum.MostIssues}   ,
+                    new LabelSortDto(){StringValue =  Application.Current.Resources["SortFewestAlphabetically"].ToString(), EnumValue = LabelSortEnum.FewestIssues}   ,
+                };
+
+            return result;
+        }
+        #endregion
+
         #region "Properties"
 
-        private List<Label> _labels;
-        public List<Label> Labels
+        private ObservableCollection<LabelSortDto> _sortItems;
+        public ObservableCollection<LabelSortDto> SortItems
+        {
+            get
+            {
+                return _sortItems;
+            }
+        }
+
+        private LabelSortDto _selectedLabelSort;
+        public LabelSortDto SelectedLabelSort
+        {
+            get
+            {
+                return _selectedLabelSort;
+            }
+            set
+            {
+                SetProperty(ref _selectedLabelSort, value);
+            }
+        }
+
+        private ObservableCollection<Label> _labels;
+        public ObservableCollection<Label> Labels
         {
             get
             {
@@ -157,127 +329,5 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         }
         #endregion
 
-        #region "Commands"
-
-        private DelegateCommand _createLabelCommand;
-        public DelegateCommand CreateLabelCommand =>
-            _createLabelCommand ?? (_createLabelCommand = new DelegateCommand(ExecuteCreateLabelCommand));
-
-        void ExecuteCreateLabelCommand()
-        {
-            if (_newLabel == null)
-                throw new ArgumentException(ArgumentExceptionMessage);
-
-            _isuesService.CreateLabel(NewLabel);
-            Labels.Add(NewLabel);
-            NewLabelViewVisibilitity = Visibility.Collapsed;
-        }
-
-        private DelegateCommand _deleteLabelCommand;
-        public DelegateCommand DeleteLabelCommand =>
-            _deleteLabelCommand ?? (_deleteLabelCommand = new DelegateCommand(ExecuteDeleteLabelCommand));
-
-        void ExecuteDeleteLabelCommand()
-        {
-
-            if (_selectedLabel == null)
-                throw new ArgumentException(ArgumentExceptionMessage);
-
-            _isuesService.DeleteLabel(SelectedLabel.Id);
-            Labels.Remove(SelectedLabel);
-            CollectionViewSource.GetDefaultView(Labels).Refresh();
-        }
-
-        
-            private DelegateCommand _filterLabelsCommand;
-        public DelegateCommand FilterLabelsCommand =>
-            _filterLabelsCommand ?? (_filterLabelsCommand = new DelegateCommand(ExecuteFilterLabelsCommand));
-
-        void ExecuteFilterLabelsCommand()
-        {
-            CollectionViewSource.GetDefaultView(Labels).Refresh();
-        }
-
-        private DelegateCommand _updateLabelCommand;
-        public DelegateCommand UpdateCommand =>
-            _updateLabelCommand ?? (_updateLabelCommand = new DelegateCommand(ExecuteUpdateLabelCommand));
-
-        void ExecuteUpdateLabelCommand()
-        {
-
-            if (_selectedLabel == null)
-                throw new ArgumentException(ArgumentExceptionMessage);
-
-            _isuesService.UpdateLabel(SelectedLabel);
-            SelectedLabel.IsEdditing = false;
-        }
-
-        private DelegateCommand<string> _newLabelVisibilityCommand;
-        public DelegateCommand<string> NewLabelVisibilityCommand =>
-            _newLabelVisibilityCommand ?? (_newLabelVisibilityCommand = new DelegateCommand<string>(ExecuteNewLabelVisibilityCommand));
-
-        void ExecuteNewLabelVisibilityCommand(string parameter)
-        {
-            if (string.IsNullOrEmpty(parameter))
-                throw new ArgumentException(ArgumentExceptionMessage);
-
-            switch (parameter)
-            {
-                case CommandParameters.Cancel:
-                    NewLabelViewVisibilitity = Visibility.Collapsed;
-                    break;
-
-                case CommandParameters.NewLabel:
-                    NewLabel = new Label(Brushes.Gray);
-                    NewLabelViewVisibilitity = Visibility.Visible;
-                    break;
-            }
-        }
-
-        private DelegateCommand<string> _randomColor;
-        public DelegateCommand<string> RandomColorCommand =>
-            _randomColor ?? (_randomColor = new DelegateCommand<string>(ExecuteRandomColorCommand));
-
-        private void ExecuteRandomColorCommand(string parameter)
-        {
-            if (string.IsNullOrEmpty(parameter))
-                throw new ArgumentNullException(ArgumentExceptionMessage);
-
-            Brush result = Brushes.Transparent;
-            Random rnd = new Random();
-            Type brushesType = typeof(Brushes);
-            PropertyInfo[] properties = brushesType.GetProperties();
-            int random = rnd.Next(properties.Length);
-
-            result = (Brush)properties[random].GetValue(null, null);
-            if (parameter == CommandParameters.Create)
-                NewLabel.Color = result;
-            else
-                SelectedLabel.Color = result;
-
-        }
-
-        private DelegateCommand _cancelCommand;
-        public DelegateCommand CancelCommand =>
-            _cancelCommand ?? (_cancelCommand = new DelegateCommand(ExecuteCancelCommand));
-
-        void ExecuteCancelCommand()
-        {
-            SelectedLabel.GetOldValue(OldLabelValue);
-            SelectedLabel.IsEdditing = false;
-
-            OldLabelValue = null;
-        }
-
-        private DelegateCommand _isEdditingCommand;
-        public DelegateCommand IsEdditingCommand =>
-            _isEdditingCommand ?? (_isEdditingCommand = new DelegateCommand(ExecuteIsEdditingCommand));
-
-        void ExecuteIsEdditingCommand()
-        {
-            OldLabelValue = SelectedLabel.Clone() as Label;
-            SelectedLabel.IsEdditing = true;
-        }
-        #endregion
     }
 }
