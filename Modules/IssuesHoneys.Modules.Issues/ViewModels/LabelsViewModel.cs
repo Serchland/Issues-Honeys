@@ -33,19 +33,38 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             _newLabelViewVisibility = Visibility.Collapsed;
             _totalLabels = _labels.Count.ToString();
             _labelsView.Filter = LabelsFilter;
+            _labelsView.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
 
             _sortItems = GetSortItems();
         }
 
         #region "Commands"
-        private DelegateCommand<string> _selectedSortItemCommand;
-        public DelegateCommand<string> SelectedSortItemCommand =>
-            _selectedSortItemCommand ?? (_selectedSortItemCommand = new DelegateCommand<string>(ExecuteSelectedSortItemCommand));
+        private DelegateCommand<LabelSortEnum?> _selectedSortItemCommand;
+        public DelegateCommand<LabelSortEnum?> SelectedSortItemCommand =>
+            _selectedSortItemCommand ?? (_selectedSortItemCommand = new DelegateCommand<LabelSortEnum?>(ExecuteSelectedSortItemCommand));
 
-        void ExecuteSelectedSortItemCommand(string param)
+        void ExecuteSelectedSortItemCommand(LabelSortEnum? param)
         {
             //SERCH00: For testing purposes only
-            _labelsView.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Descending));
+            _labelsView.SortDescriptions.Clear();
+            switch (param)
+            {
+                case LabelSortEnum.Alphabetically:
+                    _labelsView.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+                    break;
+
+                case LabelSortEnum.ReverseAlphabetically:
+                    _labelsView.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Descending));
+                    break;
+
+                case LabelSortEnum.FewestIssues:
+                    //SERCH00:TODO
+                    break;
+
+                case LabelSortEnum.MostIssues:
+                    //SERCH00:TODO
+                    break;
+            }
         }
 
         private DelegateCommand _createLabelCommand;
@@ -198,6 +217,18 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         #endregion
 
         #region "Properties"
+        private ObservableCollection<Label> _labels;
+        public ObservableCollection<Label> Labels
+        {
+            get
+            {
+                return _labels;
+            }
+            set
+            {
+                SetProperty(ref _labels, value);
+            }
+        }
 
         private ObservableCollection<LabelSortDto> _sortItems;
         public ObservableCollection<LabelSortDto> SortItems
@@ -218,19 +249,6 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             set
             {
                 SetProperty(ref _selectedLabelSort, value);
-            }
-        }
-
-        private ObservableCollection<Label> _labels;
-        public ObservableCollection<Label> Labels
-        {
-            get
-            {
-                return _labels;
-            }
-            set
-            {
-                SetProperty(ref _labels, value);
             }
         }
 

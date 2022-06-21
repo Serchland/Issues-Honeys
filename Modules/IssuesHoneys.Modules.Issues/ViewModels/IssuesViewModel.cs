@@ -35,8 +35,6 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             MessageBox.Show("Navigate to Milestone " + (list[0] as Milestone).Title);
         }
         #region "Properties"
-       
-
         private string _totalLabels;
         public string TotalLabels
         {

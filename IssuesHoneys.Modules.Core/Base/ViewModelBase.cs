@@ -1,7 +1,9 @@
-﻿using IssuesHoneys.Core.Types.Interfaces;
+﻿using IssuesHoneys.Business.Types;
+using IssuesHoneys.Core.Types.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace IssuesHoneys.Core.Base
@@ -15,7 +17,7 @@ namespace IssuesHoneys.Core.Base
             _argumentExceptionMessage = Application.Current.Resources["AppMessageArgumentException"].ToString();
         }
 
-        #region "Properties"
+        #region "Properties"       
         private string _argumentExceptionMessage;
         public string  ArgumentExceptionMessage
         {

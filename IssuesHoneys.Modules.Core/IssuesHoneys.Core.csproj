@@ -238,5 +238,11 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IssuesHoneys.Business\IssuesHoneys.Business.csproj">
+      <Project>{B8A75B55-994F-4920-A8E8-DC52482EBF23}</Project>
+      <Name>IssuesHoneys.Business</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

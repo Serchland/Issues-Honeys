@@ -207,11 +207,25 @@
                                     <TextBlock Text="{Binding StringValue}"></TextBlock>
                                 </Grid>
                             </DataTemplate>
+                            
                         </mah:DropDownButton.ItemTemplate>
+                        
                         <mah:DropDownButton.ItemContainerStyle>
                             <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
                                 <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectedSortItemCommand}" />
-                                <Setter Property="CommandParameter" Value="{Binding StringValue}" />
+                                <Setter Property="CommandParameter" Value="{Binding EnumValue}" />
+
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding }" Value="True" />
+                                            <Condition Binding="{Binding IsSelected}" Value="True" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Background" Value="Transparent" />
+                                        <Setter Property="BorderBrush" Value="#3D26A0DA" />
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+
                             </Style>
                         </mah:DropDownButton.ItemContainerStyle>
                     </mah:DropDownButton>

@@ -145,6 +145,7 @@
                                       controls:TextBoxHelper.AutoWatermark="True"
                                       controls:TextBoxHelper.Watermark="Author"
                                       controls:TextBoxHelper.WatermarkAlignment="Right"
+                                      DisplayMemberPath="Name"
                                       Background="Transparent"
                                       BorderBrush="Transparent">
                                 <ComboBox.Style>
