@@ -103,6 +103,7 @@ IF Object_id('[issues].[USERS]') IS NOT NULL
            [CRTNDATE]           DATETIME NOT NULL,
            [GU]                 VARCHAR(50) NOT NULL,
 		   [ID]					INT IDENTITY (1, 1) NOT NULL,
+		   [ISACTIVE]			BIT NOT NULL,
            [NAME]               VARCHAR(50) NOT NULL,
            [SURNAME]            VARCHAR(50) NULL,
 
@@ -123,6 +124,7 @@ ELSE
            [CRTNDATE]           DATETIME NOT NULL,
            [GU]                 VARCHAR(50) NOT NULL,
 		   [ID]					INT IDENTITY (1, 1) NOT NULL,
+		   [ISACTIVE]			BIT NOT NULL,
            [NAME]               VARCHAR(50) NOT NULL,
            [SURNAME]            VARCHAR(50) NULL,
 
@@ -717,24 +719,26 @@ INSERT INTO [issues].[USERS]
             (
 				[CRTNDATE],
 				[GU],
+				[ISACTIVE],
 				[NAME],
 				[SURNAME])
 VALUES      
 			(
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				'99GU9999', 'SYSTEM', 'SYSTEM'
+				'99GU9999', 1, 'SYSTEM', 'SYSTEM'
 			)
 
 INSERT INTO [issues].[USERS]
             (
 				[CRTNDATE],
 				[GU],
+				[ISACTIVE],
 				[NAME],
 				[SURNAME])
 
 VALUES      (
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				'99GU9889', 'Brian', 'J. Kidwell'
+				'99GU9889', 1, 'Brian', 'J. Kidwell'
 			)
 
 
@@ -743,11 +747,12 @@ INSERT INTO [issues].[USERS]
             (
 				[CRTNDATE],
 				[GU],
+				[ISACTIVE],
 				[NAME],
 				[SURNAME])
 VALUES      (
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				'99GU9888', 'Cora', 'L. Richards'
+				'99GU9888', 1, 'Cora', 'L. Richards'
 			)
 
 GO
@@ -756,11 +761,12 @@ INSERT INTO [issues].[USERS]
             (
 				[CRTNDATE],
 				[GU],
+				[ISACTIVE],
 				[NAME],
 				[SURNAME])
 VALUES      (
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				'99GU6544', 'Richard', 'L. Swink'
+				'99GU6544', 1, 'Richard', 'L. Swink'
 			)
 
 GO
@@ -769,11 +775,12 @@ INSERT INTO [issues].[USERS]
             (
 				[CRTNDATE],
 				[GU],
+				[ISACTIVE],
 				[NAME],
 				[SURNAME])
 VALUES      (
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				'99GU9834', 'Karen', 'A. McNally'
+				'99GU9834', 1, 'Karen', 'A. McNally'
 			)
 
 GO
@@ -782,12 +789,13 @@ INSERT INTO [issues].[USERS]
             (
 				[CRTNDATE],
 				[GU],
+				[ISACTIVE],
 				[NAME],
 				[SURNAME])
 VALUES      
 			(
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				'99GU5774', 'S. Morey', 'A. McNally'
+				'99GU5774', 1, 'S. Morey', 'A. McNally'
 			)
 GO
 
@@ -795,12 +803,13 @@ INSERT INTO [issues].[USERS]
             (
 				[CRTNDATE],
 				[GU],
+				[ISACTIVE],
 				[NAME],
 				[SURNAME])
 VALUES      
 			(
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				'99GU5575', 'K. Olmstead', 'A. McNally'
+				'99GU5575', 1, 'K. Olmstead', 'A. McNally'
 			)
 
 GO

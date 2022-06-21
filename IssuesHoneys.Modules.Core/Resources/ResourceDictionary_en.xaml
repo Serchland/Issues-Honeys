@@ -20,6 +20,9 @@
     <system:String x:Key="ButtonSubmitNewIssueCaption">SUBMIT NEW ISSUE</system:String>
     <system:String x:Key="ButtonUpdateLabelCaption">UPDATE LABEL</system:String>
 
+    <system:String x:Key="DropDownAuthors">Authors</system:String>
+    <system:String x:Key="DropDownSort">Sort</system:String>
+    
     <system:String x:Key="LabelAssignes">Assignes</system:String>
     <system:String x:Key="LabelCreateANewMilestoneToHelpOrganizeYourIssues">Create a new milestone to help organize your issues.</system:String>
     <system:String x:Key="LabelDescribeTheIssueInDetailHere">Describe the issue in detail here:</system:String>

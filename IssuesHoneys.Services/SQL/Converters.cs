@@ -126,16 +126,18 @@ namespace IssuesHoneys.Services.SQL
         {
             //[CRTNDATE]           DATETIME NOT NULL,
             //[GU]                 VARCHAR(50) NOT NULL,
-            //[NAME]               VARCHAR(50) NOT NULL,
-            //[PK_Usertracking_Id] INT IDENTITY(1, 1) NOT NULL,
+            //[ID]                 INT NOT NULL,
+            //[ISACTIVE]           [bit] NOT NULL,
+            //[NAME]               VARCHAR(50) NULL,
             //[SURNAME]            VARCHAR(50) NULL,
-            //CONSTRAINT[PK_UserTracking_Id] PRIMARY KEY CLUSTERED([PK_Usertracking_Id] ASC)
 
             User result = new User();
             int idx = 0;
 
             result.CrtnDate = Convert.ToDateTime(reader[idx++]);
             result.Gu = Convert.ToString(reader[idx++]);
+            result.Id = Convert.ToInt32(reader[idx++]);
+            idx++;
             result.Name = Convert.ToString(reader[idx++]);
             result.SurName = Convert.ToString(reader[idx++]);
            

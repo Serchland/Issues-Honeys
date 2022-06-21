@@ -7,6 +7,7 @@
              xmlns:coreNameDef="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
              xmlns:coreViews="clr-namespace:IssuesHoneys.Core.Views;assembly=IssuesHoneys.Core"
              xmlns:converters="clr-namespace:IssuesHoneys.Modules.Issues.Views.Converters"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              x:Class="IssuesHoneys.Modules.Issues.Views.IssuesView"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
@@ -140,7 +141,50 @@
                                 <ColumnDefinition Width="150" />
                             </Grid.ColumnDefinitions>
 
-                            <ComboBox Grid.Column="0" x:Name="ComboAuthor" ItemsSource="{Binding Labels}"
+
+                            <mah:DropDownButton Grid.Column="0"
+                                        Grid.Row="0"
+                                        Margin="5,0,8,0"
+                                        BorderBrush="Transparent"
+                                        Background="Transparent"
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Right"
+                                        ItemsSource="{Binding Users}"
+                                        Content="{StaticResource DropDownAuthors}">
+                                
+                                <mah:DropDownButton.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid SnapsToDevicePixels="True">
+                                            <Rectangle Name="Border" Stroke="Transparent" StrokeThickness="1"/>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition MinWidth="24" Width="Auto" SharedSizeGroup="Icon" />
+                                                    <ColumnDefinition Width="Auto" SharedSizeGroup="Text" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0" >
+                                                    <iconpacks:PackIconFeatherIcons 
+                                                                Kind="Tag">
+                                                    </iconpacks:PackIconFeatherIcons>
+                                                </Label>
+                                                <ContentPresenter Grid.Column="1" Margin="6"
+                                                        Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type MenuItem}}, Path=Header}"
+                                                        RecognizesAccessKey="True"
+                                                        SnapsToDevicePixels="True"/>
+                                            </Grid>
+                                        </Grid>
+                                    </DataTemplate>
+                                </mah:DropDownButton.ItemTemplate>
+
+                                <mah:DropDownButton.ItemContainerStyle>
+                                    <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
+                                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectedSortItemCommand}" />
+                                        <Setter Property="CommandParameter" Value="{Binding EnumValue}" />
+                                        <Setter Property="Header" Value="{Binding Name}"/>
+                                    </Style>
+                                </mah:DropDownButton.ItemContainerStyle>
+                            </mah:DropDownButton>
+
+                            <!--<ComboBox Grid.Column="0" x:Name="ComboAuthor" ItemsSource="{Binding Users}"
                                       VerticalAlignment="Center"
                                       controls:TextBoxHelper.AutoWatermark="True"
                                       controls:TextBoxHelper.Watermark="Author"
@@ -148,7 +192,7 @@
                                       DisplayMemberPath="Name"
                                       Background="Transparent"
                                       BorderBrush="Transparent">
-                                <ComboBox.Style>
+                                --><!--<ComboBox.Style>
                                     <Style TargetType="ComboBox" BasedOn="{StaticResource MahApps.Styles.ComboBox}">
                                         <Setter Property="Foreground"
                                                 Value="Black"></Setter>
@@ -162,9 +206,9 @@
                                             </Trigger>
                                         </Style.Triggers>
                                     </Style>
-                                </ComboBox.Style>
+                                </ComboBox.Style>-->
 
-                                <ComboBox.ItemContainerStyle>
+                                <!--<ComboBox.ItemContainerStyle>
                                     <Style TargetType="ComboBoxItem">
                                         <Setter Property="ContentTemplate">
                                             <Setter.Value>
@@ -179,9 +223,9 @@
                                             </Setter.Value>
                                         </Setter>
                                     </Style>
-                                </ComboBox.ItemContainerStyle>
+                                </ComboBox.ItemContainerStyle>--><!--
 
-                            </ComboBox>
+                            </ComboBox>-->
 
                             <ComboBox Grid.Column="1"
                                       Margin="5,0,0,0"

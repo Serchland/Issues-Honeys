@@ -11,18 +11,19 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 {
     public class IssuesViewModel : ViewModelBase
     {
-        private IIssueService _isuesService;
+        private IIssueService _issuesService;
         public IssuesViewModel(IApplicationCommands applicationsCommands, IIssueService issueService) : base(applicationsCommands)
         {
-            _isuesService = issueService;
+            _issuesService = issueService;
             Initialize();
         }
 
         private void Initialize()
         {
-            _totalLabels = _isuesService.GetLabels().Count.ToString();
-            _totalMilestones = _isuesService.GetMillestones().Count.ToString();
-            Issues = new ObservableCollection<Issue>(_isuesService.GetIssues());
+            _totalLabels = _issuesService.GetLabels().Count.ToString();
+            _totalMilestones = _issuesService.GetMillestones().Count.ToString();
+            _users = new ObservableCollection<User>(_issuesService.GetUsers());
+            _issues = new ObservableCollection<Issue>(_issuesService.GetIssues());
         }
 
         private DelegateCommand<SelectionChangedEventArgs> _testCommand;
@@ -47,6 +48,19 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         {
             get { return _totalMilestones; }
             set { SetProperty(ref _totalMilestones, value); }
+        }
+
+        private ObservableCollection<User> _users;
+        public ObservableCollection<User> Users
+        {
+            get
+            {
+                return _users;
+            }
+            set
+            {
+                SetProperty(ref _users, value);
+            }
         }
 
         private ObservableCollection<Issue> _issues;

@@ -200,7 +200,7 @@
                                         VerticalAlignment="Center" 
                                         HorizontalAlignment="Right"
                                         ItemsSource="{Binding SortItems}"
-                                        Content="Sort">
+                                        Content="{StaticResource DropDownSort}">
                         <mah:DropDownButton.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -215,7 +215,7 @@
                                 <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectedSortItemCommand}" />
                                 <Setter Property="CommandParameter" Value="{Binding EnumValue}" />
 
-                                <Style.Triggers>
+                                <!--<Style.Triggers>
                                     <MultiDataTrigger>
                                         <MultiDataTrigger.Conditions>
                                             <Condition Binding="{Binding }" Value="True" />
@@ -224,7 +224,7 @@
                                         <Setter Property="Background" Value="Transparent" />
                                         <Setter Property="BorderBrush" Value="#3D26A0DA" />
                                     </MultiDataTrigger>
-                                </Style.Triggers>
+                                </Style.Triggers>-->
 
                             </Style>
                         </mah:DropDownButton.ItemContainerStyle>

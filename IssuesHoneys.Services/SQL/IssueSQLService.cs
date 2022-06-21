@@ -28,7 +28,6 @@ namespace IssuesHoneys.Services.SQL
         public void CreateLabel(Label newLabel)
         {
             var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
-
             var description = newLabel.Description;
             var color = newLabel.Color;
             var crtnDate = DateTime.Now;
@@ -65,8 +64,7 @@ namespace IssuesHoneys.Services.SQL
         /// </summary>
         public List<User> GetAssignedUsersToIssue(int issueId)
         {
-            List<User> _assigneeUsers = new List<User>();
-
+            var assigneeUsers = new List<User>();
             var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
             var queryString = "SELECT * FROM [HONEYS].[issues].[USERS] WHERE ID IN " +
                 "(SELECT Fk_USERASSIGNEE FROM [HONEYS].[issues].[USERSTOISSUES] WHERE Fk_ISSUE = " +  issueId + ")";
@@ -79,12 +77,12 @@ namespace IssuesHoneys.Services.SQL
                 {
                     while (reader.Read())
                     {
-                        _assigneeUsers.Add(Converters.SQLUserConverter(reader));
+                        assigneeUsers.Add(Converters.SQLUserConverter(reader));
                     }
                 }
             };
 
-            return _assigneeUsers;
+            return assigneeUsers;
         }
 
         /// <summary>
@@ -92,8 +90,7 @@ namespace IssuesHoneys.Services.SQL
         /// </summary>
         public List<Label> GetAssignedLabelsToIssue(int issueId)
         {
-            List<Label> _labels = new List<Label>();
-
+            var labels = new List<Label>();
             var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
             var queryString = "SELECT * FROM [HONEYS].[issues].[LABELS] WHERE ID IN " +
                 "(SELECT Fk_LABEL FROM [HONEYS].[issues].[LABELSTOISSUES] WHERE Fk_ISSUE = " + issueId + ")";
@@ -106,12 +103,12 @@ namespace IssuesHoneys.Services.SQL
                 {
                     while (reader.Read())
                     {
-                        _labels.Add(Converters.SQLLabelConverter(reader, this));
+                        labels.Add(Converters.SQLLabelConverter(reader, this));
                     }
                 }
             };
 
-            return _labels;
+            return labels;
         }
 
         /// <summary>
@@ -119,8 +116,7 @@ namespace IssuesHoneys.Services.SQL
         /// </summary>
         public List<Milestone> GetAssignedMilestonesToIssue(int issueId)
         {
-            List<Milestone> _milestones = new List<Milestone>();
-
+            var milestones = new List<Milestone>();
             var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
             var queryString = "SELECT * FROM [HONEYS].[issues].[MILESTONES] WHERE ID IN " +
                 "(SELECT Fk_MILESTONE FROM [HONEYS].[issues].[MILESTONESTOISSUES] WHERE Fk_ISSUE = " + issueId + ")";
@@ -133,12 +129,12 @@ namespace IssuesHoneys.Services.SQL
                 {
                     while (reader.Read())
                     {
-                        _milestones.Add(Converters.SQLMilestoneConverter(reader));
+                        milestones.Add(Converters.SQLMilestoneConverter(reader));
                     }
                 }
             };
 
-            return _milestones;
+            return milestones;
         }
 
         /// <summary>
@@ -146,8 +142,7 @@ namespace IssuesHoneys.Services.SQL
         /// </summary>
         public List<Issue> GetIssues()
         {
-            List<Issue> issues = new List<Issue>();
-
+            var issues = new List<Issue>();
             var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
             var queryString = "SELECT * FROM [HONEYS].[issues].[ISSUES];";
 
@@ -190,8 +185,7 @@ namespace IssuesHoneys.Services.SQL
         public List<Label> GetLabels()
         {
             //SERCH00: Assess whether it is necessary to have the values in memory
-            List<Label> labels = new List<Label>();
-
+            var labels = new List<Label>();
             var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
             var queryString = "SELECT * FROM [HONEYS].[issues].[LABELS] WHERE ISACTIVE = 1;";
 
@@ -218,8 +212,7 @@ namespace IssuesHoneys.Services.SQL
         public List<Milestone> GetMillestones()
         {
             //SERCH00: Assess whether it is necessary to have the values in memory
-            List<Milestone> milestones = new List<Milestone>();
-
+            var milestones = new List<Milestone>();
             var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
             var queryString = "SELECT * FROM [HONEYS].[issues].[MILESTONES];";
 
@@ -245,29 +238,26 @@ namespace IssuesHoneys.Services.SQL
         /// <returns>List<User></returns>
         public List<User> GetUsers()
         {
-            //SERCH00: Assess whether it is necessary to have the values in memory
-            List<User> _users = new List<User>(); 
-            if (_users == null)
+
+            var users = new List<User>();
+            var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
+            var queryString = "SELECT * FROM [HONEYS].[issues].[USERS];";
+
+            using (var connection = new SqlConnection(connectionString))
             {
-                _users = new List<User>();
-                var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
-                var queryString = "SELECT * FROM [HONEYS].[issues].[USERS];";
-
-                using (var connection = new SqlConnection(connectionString))
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                using (var reader = command.ExecuteReader())
                 {
-                    var command = new SqlCommand(queryString, connection);
-                    connection.Open();
-                    using (var reader = command.ExecuteReader())
+                    while (reader.Read())
                     {
-                        while (reader.Read())
-                        {
-                            _users.Add(Converters.SQLUserConverter(reader));
-                        }
+                        users.Add(Converters.SQLUserConverter(reader));
                     }
-                };
-            }
+                }
+            };
 
-            return _users;
+
+            return users;
         }
 
         public void UpdateLabel(Label updateLabel)
