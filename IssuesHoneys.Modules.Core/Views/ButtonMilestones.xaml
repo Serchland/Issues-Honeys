@@ -1,7 +1,7 @@
 ﻿<Button x:Class="IssuesHoneys.Core.Views.ButtonMilestones"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:iconpacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:coreNameDef="clr-namespace:IssuesHoneys.Core.NameDefinition"
         MinWidth="100"
@@ -13,9 +13,9 @@
         CommandParameter="{x:Static coreNameDef:CommandParameters.Milestones}">
 
     <Button.Tag>
-        <iconpacks:PackIconUnicons Width="18"
+        <iconPacks:PackIconUnicons Width="18"
                                    Height="18"
                                    Kind="SignRight">
-        </iconpacks:PackIconUnicons>
+        </iconPacks:PackIconUnicons>
     </Button.Tag>
 </Button>

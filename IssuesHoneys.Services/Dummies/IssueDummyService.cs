@@ -77,7 +77,7 @@ namespace IssuesHoneys.Services.Dummies
         /// <returns>List<User></returns>
         public List<User> GetUsers()
         {
-            throw new NotImplementedException();
+            return IssuesResponse.Users();
         }
 
         public int GetIssuesWithLabelId(int labelID)
@@ -170,6 +170,19 @@ namespace IssuesHoneys.Services.Dummies
             internal static List<Milestone> Millestones()
             {
                 return _millestones;
+            }
+
+            internal static List<User> Users()
+            {
+                List<User> result = new List<User>();
+
+                result.Add(new User { CrtnDate = DateTime.Now, Id = 1, Name = "Justine", SurName = "Rice", Gu = "99GU0001" });
+                result.Add(new User { CrtnDate = DateTime.Now, Id = 2, Name = "Julia", SurName = "Ross", Gu = "99GU0002" });
+                result.Add(new User { CrtnDate = DateTime.Now, Id = 3, Name = "Nikolett", SurName = "Russell", Gu = "99GU0003" });
+                result.Add(new User { CrtnDate = DateTime.Now, Id = 4, Name = "Nicholas", SurName = "Porter", Gu = "99GU0004" });
+                result.Add(new User { CrtnDate = DateTime.Now, Id = 5, Name = "Matilde", SurName = "Wood", Gu = "99GU0005" });
+
+                return result;
             }
         }
     }
