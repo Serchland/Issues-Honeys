@@ -165,11 +165,12 @@
                                                         <iconPacks:PackIconBoxIcons Kind="RegularUser" />
                                                     </Label>
                                                     <!--{Binding DataContext.Users.Name, RelativeSource={RelativeSource AncestorType=mah:DropDownButton}}-->
-                                                    <Label Content="{Binding Path=Datacontext.Users.Name, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type mah:DropDownButton}}}"></Label>
+                                                    <Label Content="{Binding Name}"></Label>
                                                 </StackPanel>
-                                                
+
+                                                <!---->
                                                 <ContentPresenter Grid.Column="1" Margin="6"
-                                                        Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type MenuItem}}, Path=Header}"
+                                                        Content=""
                                                         RecognizesAccessKey="True"
                                                         SnapsToDevicePixels="True"/>
                                             </Grid>
@@ -177,13 +178,13 @@
                                     </DataTemplate>
                                 </mah:DropDownButton.ItemTemplate>
 
-                                <mah:DropDownButton.ItemContainerStyle>
+                                <!--<mah:DropDownButton.ItemContainerStyle>
                                     <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
                                         <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectedSortItemCommand}" />
-                                        <Setter Property="CommandParameter" Value="{Binding EnumValue}" />
-                                        <!--<Setter Property="Header" Value="{Binding Name}"/>-->
+                                        <Setter Property="CommandParameter" Value="{Binding Id}" />
+                                        --><!--<Setter Property="Header" Value="{Binding Name}"/>--><!--
                                     </Style>
-                                </mah:DropDownButton.ItemContainerStyle>
+                                </mah:DropDownButton.ItemContainerStyle>-->
                             </mah:DropDownButton>
 
                             <!--<ComboBox Grid.Column="0" x:Name="ComboAuthor" ItemsSource="{Binding Users}"
