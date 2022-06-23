@@ -21,6 +21,10 @@
     <system:String x:Key="ButtonUpdateLabelCaption">UPDATE LABEL</system:String>
 
     <system:String x:Key="DropDownAuthors">Authors</system:String>
+    <system:String x:Key="DropDownAssignee">Assignee</system:String>
+    <system:String x:Key="DropDownLabel">Label</system:String>
+    <system:String x:Key="DropDownMilestones">Milestones</system:String>
+    <system:String x:Key="DropDownProjects">Projects</system:String>
     <system:String x:Key="DropDownSort">Sort</system:String>
     
     <system:String x:Key="LabelAssignes">Assignes</system:String>

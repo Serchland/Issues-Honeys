@@ -138,6 +138,7 @@
                                 <ColumnDefinition Width="150" />
                                 <ColumnDefinition Width="150" />
                                 <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
                             </Grid.ColumnDefinitions>
 
 
@@ -156,19 +157,15 @@
                                         <Grid SnapsToDevicePixels="True">
                                             <Rectangle Name="Border" Stroke="Transparent" StrokeThickness="1"/>
                                             <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <!--<ColumnDefinition MinWidth="24" Width="Auto" SharedSizeGroup="Icon" />-->
-                                                    <ColumnDefinition Width="Auto"/>
-                                                </Grid.ColumnDefinitions>
-                                                <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                                
+                                                <StackPanel Orientation="Horizontal" >
                                                     <Label>
                                                         <iconPacks:PackIconBoxIcons Kind="RegularUser" />
                                                     </Label>
-                                                    <!--{Binding DataContext.Users.Name, RelativeSource={RelativeSource AncestorType=mah:DropDownButton}}-->
                                                     <Label Content="{Binding Name}"></Label>
+                                                    <Label Content="{Binding SurName}"></Label>
                                                 </StackPanel>
-
-                                                <!---->
+                                                
                                                 <ContentPresenter Grid.Column="1" Margin="6"
                                                         Content=""
                                                         RecognizesAccessKey="True"
@@ -178,73 +175,254 @@
                                     </DataTemplate>
                                 </mah:DropDownButton.ItemTemplate>
 
-                                <!--<mah:DropDownButton.ItemContainerStyle>
+                                <mah:DropDownButton.ItemContainerStyle>
                                     <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
                                         <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectedSortItemCommand}" />
-                                        <Setter Property="CommandParameter" Value="{Binding Id}" />
-                                        --><!--<Setter Property="Header" Value="{Binding Name}"/>--><!--
-                                    </Style>
-                                </mah:DropDownButton.ItemContainerStyle>-->
-                            </mah:DropDownButton>
+                                        <Setter Property="CommandParameter" Value="{Binding Name}" />
 
-                            <!--<ComboBox Grid.Column="0" x:Name="ComboAuthor" ItemsSource="{Binding Users}"
-                                      VerticalAlignment="Center"
-                                      controls:TextBoxHelper.AutoWatermark="True"
-                                      controls:TextBoxHelper.Watermark="Author"
-                                      controls:TextBoxHelper.WatermarkAlignment="Right"
-                                      DisplayMemberPath="Name"
-                                      Background="Transparent"
-                                      BorderBrush="Transparent">
-                                --><!--<ComboBox.Style>
-                                    <Style TargetType="ComboBox" BasedOn="{StaticResource MahApps.Styles.ComboBox}">
-                                        <Setter Property="Foreground"
-                                                Value="Black"></Setter>
                                         <Style.Triggers>
-                                            <Trigger Property="IsMouseOver"
-                                                     Value="True">
-                                                <Setter Property="Background"
-                                                        Value="Transparent" />
-                                                <Setter Property="BorderBrush"
-                                                        Value="Transparent" />
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="Gold" />
                                             </Trigger>
                                         </Style.Triggers>
                                     </Style>
-                                </ComboBox.Style>-->
+                                </mah:DropDownButton.ItemContainerStyle>
+                            </mah:DropDownButton>
 
-                                <!--<ComboBox.ItemContainerStyle>
-                                    <Style TargetType="ComboBoxItem">
-                                        <Setter Property="ContentTemplate">
-                                            <Setter.Value>
-                                                <DataTemplate>
-                                                    <DockPanel LastChildFill="False" Background="Orange">
-                                                        <ContentControl Content="{Binding Name}"
-                                                                        DockPanel.Dock="Left" />
-                                                        <ContentControl Content="{Binding Value}"
-                                                                        DockPanel.Dock="Right" />
-                                                    </DockPanel>
-                                                </DataTemplate>
-                                            </Setter.Value>
-                                        </Setter>
+                            <mah:DropDownButton Grid.Column="1"
+                                        Grid.Row="0"
+                                        Margin="5,0,8,0"
+                                        BorderBrush="Transparent"
+                                        Background="Transparent"
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Right"
+                                        ItemsSource="{Binding Users}"
+                                        Content="{StaticResource DropDownLabel}">
+
+                                <mah:DropDownButton.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid SnapsToDevicePixels="True">
+                                            <Rectangle Name="Border" Stroke="Transparent" StrokeThickness="1"/>
+                                            <Grid>
+
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Label>
+                                                        <iconPacks:PackIconBoxIcons Kind="RegularUser" />
+                                                    </Label>
+                                                    <Label Content="{Binding Name}"></Label>
+                                                    <Label Content="{Binding SurName}"></Label>
+                                                </StackPanel>
+
+                                                <ContentPresenter Grid.Column="1" Margin="6"
+                                                        Content=""
+                                                        RecognizesAccessKey="True"
+                                                        SnapsToDevicePixels="True"/>
+                                            </Grid>
+                                        </Grid>
+                                    </DataTemplate>
+                                </mah:DropDownButton.ItemTemplate>
+
+                                <mah:DropDownButton.ItemContainerStyle>
+                                    <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
+                                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectedSortItemCommand}" />
+                                        <Setter Property="CommandParameter" Value="{Binding Name}" />
+
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="Gold" />
+                                            </Trigger>
+                                        </Style.Triggers>
                                     </Style>
-                                </ComboBox.ItemContainerStyle>--><!--
+                                </mah:DropDownButton.ItemContainerStyle>
+                            </mah:DropDownButton>
 
-                            </ComboBox>-->
+                            <mah:DropDownButton Grid.Column="2"
+                                        Grid.Row="0"
+                                        Margin="5,0,8,0"
+                                        BorderBrush="Transparent"
+                                        Background="Transparent"
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Right"
+                                        ItemsSource="{Binding Users}"
+                                        Content="{StaticResource DropDownProjects}">
 
-                            <ComboBox Grid.Column="1"
-                                      Margin="5,0,0,0"
-                                      VerticalAlignment="Center" />
+                                <mah:DropDownButton.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid SnapsToDevicePixels="True">
+                                            <Rectangle Name="Border" Stroke="Transparent" StrokeThickness="1"/>
+                                            <Grid>
 
-                            <ComboBox Grid.Column="2"
-                                      Margin="5,0,0,0"
-                                      VerticalAlignment="Center" />
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Label>
+                                                        <iconPacks:PackIconBoxIcons Kind="RegularUser" />
+                                                    </Label>
+                                                    <Label Content="{Binding Name}"></Label>
+                                                    <Label Content="{Binding SurName}"></Label>
+                                                </StackPanel>
 
-                            <ComboBox Grid.Column="3"
-                                      Margin="5,0,0,0"
-                                      VerticalAlignment="Center" />
+                                                <ContentPresenter Grid.Column="1" Margin="6"
+                                                        Content=""
+                                                        RecognizesAccessKey="True"
+                                                        SnapsToDevicePixels="True"/>
+                                            </Grid>
+                                        </Grid>
+                                    </DataTemplate>
+                                </mah:DropDownButton.ItemTemplate>
 
-                            <ComboBox Grid.Column="4"
-                                      Margin="5,0,0,0"
-                                      VerticalAlignment="Center" />
+                                <mah:DropDownButton.ItemContainerStyle>
+                                    <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
+                                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectedSortItemCommand}" />
+                                        <Setter Property="CommandParameter" Value="{Binding Name}" />
+
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="Gold" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </mah:DropDownButton.ItemContainerStyle>
+                            </mah:DropDownButton>
+
+                            <mah:DropDownButton Grid.Column="3"
+                                        Grid.Row="0"
+                                        Margin="5,0,8,0"
+                                        BorderBrush="Transparent"
+                                        Background="Transparent"
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Right"
+                                        ItemsSource="{Binding Users}"
+                                        Content="{StaticResource DropDownMilestones}">
+
+                                <mah:DropDownButton.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid SnapsToDevicePixels="True">
+                                            <Rectangle Name="Border" Stroke="Transparent" StrokeThickness="1"/>
+                                            <Grid>
+
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Label>
+                                                        <iconPacks:PackIconBoxIcons Kind="RegularUser" />
+                                                    </Label>
+                                                    <Label Content="{Binding Name}"></Label>
+                                                    <Label Content="{Binding SurName}"></Label>
+                                                </StackPanel>
+
+                                                <ContentPresenter Grid.Column="1" Margin="6"
+                                                        Content=""
+                                                        RecognizesAccessKey="True"
+                                                        SnapsToDevicePixels="True"/>
+                                            </Grid>
+                                        </Grid>
+                                    </DataTemplate>
+                                </mah:DropDownButton.ItemTemplate>
+
+                                <mah:DropDownButton.ItemContainerStyle>
+                                    <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
+                                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectedSortItemCommand}" />
+                                        <Setter Property="CommandParameter" Value="{Binding Name}" />
+
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="Gold" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </mah:DropDownButton.ItemContainerStyle>
+                            </mah:DropDownButton>
+
+                            <mah:DropDownButton Grid.Column="4"
+                                        Grid.Row="0"
+                                        Margin="5,0,8,0"
+                                        BorderBrush="Transparent"
+                                        Background="Transparent"
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Right"
+                                        ItemsSource="{Binding Users}"
+                                        Content="{StaticResource DropDownAssignee}">
+
+                                <mah:DropDownButton.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid SnapsToDevicePixels="True">
+                                            <Rectangle Name="Border" Stroke="Transparent" StrokeThickness="1"/>
+                                            <Grid>
+
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Label>
+                                                        <iconPacks:PackIconBoxIcons Kind="RegularUser" />
+                                                    </Label>
+                                                    <Label Content="{Binding Name}"></Label>
+                                                    <Label Content="{Binding SurName}"></Label>
+                                                </StackPanel>
+
+                                                <ContentPresenter Grid.Column="1" Margin="6"
+                                                        Content=""
+                                                        RecognizesAccessKey="True"
+                                                        SnapsToDevicePixels="True"/>
+                                            </Grid>
+                                        </Grid>
+                                    </DataTemplate>
+                                </mah:DropDownButton.ItemTemplate>
+
+                                <mah:DropDownButton.ItemContainerStyle>
+                                    <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
+                                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectedSortItemCommand}" />
+                                        <Setter Property="CommandParameter" Value="{Binding Name}" />
+
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="Gold" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </mah:DropDownButton.ItemContainerStyle>
+                            </mah:DropDownButton>
+
+                            <mah:DropDownButton Grid.Column="5"
+                                        Grid.Row="0"
+                                        Margin="5,0,8,0"
+                                        BorderBrush="Transparent"
+                                        Background="Transparent"
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Right"
+                                        ItemsSource="{Binding Users}"
+                                        Content="{StaticResource DropDownSort}">
+
+                                <mah:DropDownButton.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid SnapsToDevicePixels="True">
+                                            <Rectangle Name="Border" Stroke="Transparent" StrokeThickness="1"/>
+                                            <Grid>
+
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Label>
+                                                        <iconPacks:PackIconBoxIcons Kind="RegularUser" />
+                                                    </Label>
+                                                    <Label Content="{Binding Name}"></Label>
+                                                    <Label Content="{Binding SurName}"></Label>
+                                                </StackPanel>
+
+                                                <ContentPresenter Grid.Column="1" Margin="6"
+                                                        Content=""
+                                                        RecognizesAccessKey="True"
+                                                        SnapsToDevicePixels="True"/>
+                                            </Grid>
+                                        </Grid>
+                                    </DataTemplate>
+                                </mah:DropDownButton.ItemTemplate>
+
+                                <mah:DropDownButton.ItemContainerStyle>
+                                    <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
+                                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectedSortItemCommand}" />
+                                        <Setter Property="CommandParameter" Value="{Binding Name}" />
+
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="Gold" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </mah:DropDownButton.ItemContainerStyle>
+                            </mah:DropDownButton>
 
                         </Grid>
                     </Grid>
