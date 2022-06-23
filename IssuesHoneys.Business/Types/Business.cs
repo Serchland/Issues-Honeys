@@ -270,7 +270,7 @@ namespace IssuesHoneys.Business.Types
         }
 
         /// <summary>
-        /// Extended propertiy
+        /// Extended property
         /// </summary>
         private bool _isSelected;
         public bool IsSelected
@@ -444,7 +444,17 @@ namespace IssuesHoneys.Business.Types
         {
             get { return _surName; }
             set { SetProperty(ref _surName, value); }
-        } 
+        }
+
+        /// <summary>
+        /// Extended Property
+        /// </summary>
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set { SetProperty(ref _isSelected, value); }
+        }
     }
     #endregion
 

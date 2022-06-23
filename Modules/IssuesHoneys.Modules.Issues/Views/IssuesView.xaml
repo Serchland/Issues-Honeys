@@ -177,7 +177,7 @@
 
                                 <mah:DropDownButton.ItemContainerStyle>
                                     <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
-                                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectedSortItemCommand}" />
+                                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.FilterIssuesCommand}" />
                                         <Setter Property="CommandParameter" Value="{Binding Name}" />
 
                                         <Style.Triggers>
@@ -196,22 +196,33 @@
                                         Background="Transparent"
                                         VerticalAlignment="Center" 
                                         HorizontalAlignment="Right"
-                                        ItemsSource="{Binding Users}"
+                                        ItemsSource="{Binding Labels}"
                                         Content="{StaticResource DropDownLabel}">
 
                                 <mah:DropDownButton.ItemTemplate>
                                     <DataTemplate>
                                         <Grid SnapsToDevicePixels="True">
-                                            <Rectangle Name="Border" Stroke="Transparent" StrokeThickness="1"/>
+                                            
                                             <Grid>
 
                                                 <StackPanel Orientation="Horizontal" >
-                                                    <Label>
-                                                        <iconPacks:PackIconBoxIcons Kind="RegularUser" />
-                                                    </Label>
+                                                    <Border 
+                                                        x:Name="circularBorder"
+                                                        BorderThickness="1"
+                                                        BorderBrush="LightGray"
+                                                        Background="{Binding Path=Color}"
+                                                        CornerRadius="{Binding Path=ActualHeight, ElementName=circularBorder}"
+                                                        Width="{Binding Path=ActualHeight, ElementName=circularBorder}">
+
+                                                    <Label 
+                                                        BorderThickness="1"
+                                                        Padding="0"
+                                                        
+                                                        />
+                                                    </Border>
                                                     <Label Content="{Binding Name}"></Label>
-                                                    <Label Content="{Binding SurName}"></Label>
                                                 </StackPanel>
+                                                
 
                                                 <ContentPresenter Grid.Column="1" Margin="6"
                                                         Content=""
@@ -224,8 +235,8 @@
 
                                 <mah:DropDownButton.ItemContainerStyle>
                                     <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
-                                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectedSortItemCommand}" />
-                                        <Setter Property="CommandParameter" Value="{Binding Name}" />
+                                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.FilterIssuesCommand}" />
+                                        <Setter Property="CommandParameter" Value="{Binding Title}" />
 
                                         <Style.Triggers>
                                             <Trigger Property="IsMouseOver" Value="True">
