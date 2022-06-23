@@ -8,6 +8,7 @@
              xmlns:coreViews="clr-namespace:IssuesHoneys.Core.Views;assembly=IssuesHoneys.Core"
              xmlns:converters="clr-namespace:IssuesHoneys.Modules.Issues.Views.Converters"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="IssuesHoneys.Modules.Issues.Views.IssuesView"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
@@ -15,6 +16,7 @@
         <converters:IconCommentsVisibilityConverter x:Key="IconCommentsVisibilityConverterKey"></converters:IconCommentsVisibilityConverter>
         <converters:IconMilestoneVisibilityConverter x:Key="IconMilestoneVisibilityConverterKey"></converters:IconMilestoneVisibilityConverter>
         <converters:StateColorConverter x:Key="StateColorConverterKey"></converters:StateColorConverter>
+        <converters:DropDownAuthorsMultiValueConverter x:Key="DropDownAuthorsMultiValueConverterKey"></converters:DropDownAuthorsMultiValueConverter>
     </UserControl.Resources>
 
     <Grid x:Name="grid"
@@ -178,13 +180,18 @@
                                 <mah:DropDownButton.ItemContainerStyle>
                                     <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
                                         <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.FilterIssuesCommand}" />
-                                        <Setter Property="CommandParameter" Value="{Binding Name}" />
-
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="Gold" />
-                                            </Trigger>
-                                        </Style.Triggers>
+                                        <Setter Property="CommandParameter" >
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource DropDownAuthorsMultiValueConverterKey}">
+                                                    <Binding>
+                                                    <Binding.Source>
+                                                        <sys:Int32>1</sys:Int32>
+                                                    </Binding.Source>
+                                                    </Binding>
+                                                    <Binding Path="Name"></Binding>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
                                     </Style>
                                 </mah:DropDownButton.ItemContainerStyle>
                             </mah:DropDownButton>
@@ -236,13 +243,18 @@
                                 <mah:DropDownButton.ItemContainerStyle>
                                     <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
                                         <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.FilterIssuesCommand}" />
-                                        <Setter Property="CommandParameter" Value="{Binding Title}" />
-
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="Gold" />
-                                            </Trigger>
-                                        </Style.Triggers>
+                                        <Setter Property="CommandParameter" >
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource DropDownAuthorsMultiValueConverterKey}">
+                                                    <Binding>
+                                                        <Binding.Source>
+                                                            <sys:Int32>2</sys:Int32>
+                                                        </Binding.Source>
+                                                    </Binding>
+                                                    <Binding Path="Name"></Binding>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
                                     </Style>
                                 </mah:DropDownButton.ItemContainerStyle>
                             </mah:DropDownButton>

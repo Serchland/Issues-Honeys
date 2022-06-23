@@ -59,13 +59,16 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             MessageBox.Show("Navigate to Milestone " + (list[0] as Milestone).Title);
         }
 
-        private DelegateCommand<string> _filterIssuesCommand;
-        public DelegateCommand<string> FilterIssuesCommand =>
-            _filterIssuesCommand ?? (_filterIssuesCommand = new DelegateCommand<string>(ExecuteFilterIssuesCommand));
+        private DelegateCommand<object> _filterIssuesCommand;
+        public DelegateCommand<object> FilterIssuesCommand =>
+            _filterIssuesCommand ?? (_filterIssuesCommand = new DelegateCommand<object>(ExecuteFilterIssuesCommand));
 
-        void ExecuteFilterIssuesCommand(string param)
+        void ExecuteFilterIssuesCommand(object param)
         {
-            CollectionViewSource.GetDefaultView(Issues).Refresh();
+            //FilterText = param;
+            //CollectionViewSource.GetDefaultView(Issues).Refresh();
+
+            //FilterText = string.Empty;
         }
 
         #region "Properties"
