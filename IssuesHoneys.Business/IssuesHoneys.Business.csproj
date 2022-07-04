@@ -58,6 +58,7 @@
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Types\Business.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\IssuesFilterEnum.cs" />
     <Compile Include="Types\LabelSortDto.cs" />
     <Compile Include="Types\SortEnum.cs" />
   </ItemGroup>

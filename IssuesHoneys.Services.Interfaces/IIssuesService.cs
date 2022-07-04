@@ -56,7 +56,7 @@ namespace IssuesHoneys.Services.Interfaces
         /// Method used to obtain the MILESTONES from the model
         /// </summary>
         /// <returns>List<Milestone></returns>
-        List<Milestone> GetMillestones();
+        List<Milestone> GetMilestones();
 
         /// <summary>
         /// Method used to obtain the USERS from the model

@@ -77,7 +77,8 @@
     <Compile Include="Views\AppFooter.xaml.cs">
       <DependentUpon>AppFooter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Converters\DropDownAuthorsMultiValueConverter.cs" />
+    <Compile Include="Views\Converters\DropDownItemIconVisibilityConverter.cs" />
+    <Compile Include="Views\Converters\DropDownMultiValueConverter.cs" />
     <Compile Include="Views\Converters\IconCommentsVisibilityConverter.cs" />
     <Compile Include="Views\Converters\IconMilestoneVisibilityConverter.cs" />
     <Compile Include="Views\Converters\MarkDownConverter.cs" />

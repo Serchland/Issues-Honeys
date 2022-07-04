@@ -209,7 +209,7 @@ namespace IssuesHoneys.Services.SQL
         /// Obtain MILESTONES from the SQL model. Implementation of IIssueService.GetMillestones
         /// </summary>
         /// <returns>List<Milestone></returns>
-        public List<Milestone> GetMillestones()
+        public List<Milestone> GetMilestones()
         {
             //SERCH00: Assess whether it is necessary to have the values in memory
             var milestones = new List<Milestone>();

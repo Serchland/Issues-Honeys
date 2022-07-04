@@ -66,7 +66,7 @@ namespace IssuesHoneys.Services.Dummies
         /// Obtain MILESTONES from the SQL model. Implementation of IIssueService.GetMillestones
         /// </summary>
         /// <returns>List<Milestone></returns>
-        public List<Milestone> GetMillestones()
+        public List<Milestone> GetMilestones()
         {
             return IssuesResponse.Millestones();
         }

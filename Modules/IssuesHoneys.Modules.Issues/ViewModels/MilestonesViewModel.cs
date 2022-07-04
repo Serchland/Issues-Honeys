@@ -17,7 +17,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
         private void Initialize()
         {
-            _milestones = new ObservableCollection<Milestone>(_issueService.GetMillestones());
+            _milestones = new ObservableCollection<Milestone>(_issueService.GetMilestones());
             _totalMilestones = _milestones.Count.ToString();
         }
 

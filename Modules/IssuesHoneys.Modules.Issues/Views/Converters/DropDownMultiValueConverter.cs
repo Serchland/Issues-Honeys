@@ -8,7 +8,7 @@ using System.Windows.Data;
 
 namespace IssuesHoneys.Modules.Issues.Views.Converters
 {
-    class DropDownAuthorsMultiValueConverter : IMultiValueConverter
+    class DropDownMultiValueConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

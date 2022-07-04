@@ -16,7 +16,8 @@
         <converters:IconCommentsVisibilityConverter x:Key="IconCommentsVisibilityConverterKey"></converters:IconCommentsVisibilityConverter>
         <converters:IconMilestoneVisibilityConverter x:Key="IconMilestoneVisibilityConverterKey"></converters:IconMilestoneVisibilityConverter>
         <converters:StateColorConverter x:Key="StateColorConverterKey"></converters:StateColorConverter>
-        <converters:DropDownAuthorsMultiValueConverter x:Key="DropDownAuthorsMultiValueConverterKey"></converters:DropDownAuthorsMultiValueConverter>
+        <converters:DropDownMultiValueConverter x:Key="DropDownMultiValueConverterKey"></converters:DropDownMultiValueConverter>
+        <converters:DropDownItemIconVisibilityConverter x:Key="DropDownItemIconVisibilityConverterKey"></converters:DropDownItemIconVisibilityConverter>
     </UserControl.Resources>
 
     <Grid x:Name="grid"
@@ -182,7 +183,7 @@
                                         <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.FilterIssuesCommand}" />
                                         <Setter Property="CommandParameter" >
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource DropDownAuthorsMultiValueConverterKey}">
+                                                <MultiBinding Converter="{StaticResource DropDownMultiValueConverterKey}">
                                                     <Binding>
                                                     <Binding.Source>
                                                         <sys:Int32>1</sys:Int32>
@@ -215,17 +216,17 @@
                                                 <StackPanel Orientation="Horizontal" >
                                                     <Border 
                                                         x:Name="circularBorder"
+                                                        Height="15"
                                                         BorderThickness="1"
                                                         BorderBrush="LightGray"
                                                         Background="{Binding Path=Color}"
                                                         CornerRadius="{Binding Path=ActualHeight, ElementName=circularBorder}"
-                                                        Width="{Binding Path=ActualHeight, ElementName=circularBorder}">
+                                                        Width="{Binding Path=ActualHeight, ElementName=circularBorder}"
+                                                        Visibility="{Binding Id, Converter= {StaticResource DropDownItemIconVisibilityConverterKey}}">
 
-                                                    <Label 
+                                                        <Label 
                                                         BorderThickness="1"
-                                                        Padding="0"
-                                                        
-                                                        />
+                                                        Padding="0" />
                                                     </Border>
                                                     <Label Content="{Binding Name}"></Label>
                                                 </StackPanel>
@@ -245,7 +246,7 @@
                                         <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.FilterIssuesCommand}" />
                                         <Setter Property="CommandParameter" >
                                             <Setter.Value>
-                                                <MultiBinding Converter="{StaticResource DropDownAuthorsMultiValueConverterKey}">
+                                                <MultiBinding Converter="{StaticResource DropDownMultiValueConverterKey}">
                                                     <Binding>
                                                         <Binding.Source>
                                                             <sys:Int32>2</sys:Int32>
@@ -259,6 +260,7 @@
                                 </mah:DropDownButton.ItemContainerStyle>
                             </mah:DropDownButton>
 
+                            <!--DropDown PROJECTS under construction-->
                             <mah:DropDownButton Grid.Column="2"
                                         Grid.Row="0"
                                         Margin="5,0,8,0"
@@ -313,7 +315,7 @@
                                         Background="Transparent"
                                         VerticalAlignment="Center" 
                                         HorizontalAlignment="Right"
-                                        ItemsSource="{Binding Users}"
+                                        ItemsSource="{Binding Milestones}"
                                         Content="{StaticResource DropDownMilestones}">
 
                                 <mah:DropDownButton.ItemTemplate>
@@ -323,11 +325,10 @@
                                             <Grid>
 
                                                 <StackPanel Orientation="Horizontal" >
-                                                    <Label>
-                                                        <iconPacks:PackIconBoxIcons Kind="RegularUser" />
+                                                    <Label Visibility="{Binding Id, Converter= {StaticResource DropDownItemIconVisibilityConverterKey}}">
+                                                        <iconPacks:PackIconUnicons Kind="SignRight" />
                                                     </Label>
-                                                    <Label Content="{Binding Name}"></Label>
-                                                    <Label Content="{Binding SurName}"></Label>
+                                                    <Label Content="{Binding Title}"></Label>
                                                 </StackPanel>
 
                                                 <ContentPresenter Grid.Column="1" Margin="6"
@@ -341,14 +342,19 @@
 
                                 <mah:DropDownButton.ItemContainerStyle>
                                     <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
-                                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectedSortItemCommand}" />
-                                        <Setter Property="CommandParameter" Value="{Binding Name}" />
-
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="Gold" />
-                                            </Trigger>
-                                        </Style.Triggers>
+                                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.FilterIssuesCommand}" />
+                                        <Setter Property="CommandParameter" >
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource DropDownMultiValueConverterKey}">
+                                                    <Binding>
+                                                        <Binding.Source>
+                                                            <sys:Int32>4</sys:Int32>
+                                                        </Binding.Source>
+                                                    </Binding>
+                                                    <Binding Path="Title"></Binding>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
                                     </Style>
                                 </mah:DropDownButton.ItemContainerStyle>
                             </mah:DropDownButton>
@@ -388,14 +394,19 @@
 
                                 <mah:DropDownButton.ItemContainerStyle>
                                     <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
-                                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.SelectedSortItemCommand}" />
-                                        <Setter Property="CommandParameter" Value="{Binding Name}" />
-
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="Gold" />
-                                            </Trigger>
-                                        </Style.Triggers>
+                                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.FilterIssuesCommand}" />
+                                        <Setter Property="CommandParameter" >
+                                            <Setter.Value>
+                                                <MultiBinding Converter="{StaticResource DropDownMultiValueConverterKey}">
+                                                    <Binding>
+                                                        <Binding.Source>
+                                                            <sys:Int32>5</sys:Int32>
+                                                        </Binding.Source>
+                                                    </Binding>
+                                                    <Binding Path="Name"></Binding>
+                                                </MultiBinding>
+                                            </Setter.Value>
+                                        </Setter>
                                     </Style>
                                 </mah:DropDownButton.ItemContainerStyle>
                             </mah:DropDownButton>

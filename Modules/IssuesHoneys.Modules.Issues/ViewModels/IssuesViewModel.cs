@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 using Label = IssuesHoneys.Business.Types.Label;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
@@ -26,14 +27,17 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         {
             _labels = new ObservableCollection<Label>(_issuesService.GetLabels());
             _issues = new ObservableCollection<Issue>(_issuesService.GetIssues());
+            _milestones = new ObservableCollection<Milestone>(_issuesService.GetMilestones());
+            _users = new ObservableCollection<User>(_issuesService.GetUsers());
             _issuesView = CollectionViewSource.GetDefaultView(_issues);
             _totalLabels = _labels.Count.ToString();
-            _totalMilestones = _issuesService.GetMillestones().Count.ToString();
-            _users = new ObservableCollection<User>(_issuesService.GetUsers());
+            _totalMilestones = _milestones.Count.ToString();
          
-
             _issuesView.Filter = IssuesFilter;
             _issuesView.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+
+            _milestones.Insert(0, new Milestone() { Title = "Issues with no millestones" });
+            _labels.Insert(0, new Label() { Name = "Unlabeled", Color = Brushes.Transparent });
         }
 
         private bool IssuesFilter(object item)
@@ -95,6 +99,19 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             set
             {
                 SetProperty(ref _issuesView, value);
+            }
+        }
+
+        private ObservableCollection<Milestone> _milestones;
+        public ObservableCollection<Milestone> Milestones
+        {
+            get
+            {
+                return _milestones;
+            }
+            set
+            {
+                SetProperty(ref _milestones, value);
             }
         }
 
