@@ -4,8 +4,11 @@ using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,6 +19,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 {
     public class IssuesViewModel : ViewModelBase
     {
+        private IssuesFilterEnum? issuesFilterEnum;
         private IIssueService _issuesService;
         public IssuesViewModel(IApplicationCommands applicationsCommands, IIssueService issueService) : base(applicationsCommands)
         {
@@ -42,15 +46,52 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
         private bool IssuesFilter(object item)
         {
+            bool result = false;
             Issue issue = item as Issue;
-            if (!String.IsNullOrEmpty(FilterText))
+
+            switch (issuesFilterEnum)
             {
-                return issue.Title.ToLower().Contains(FilterText.ToLower());
+                case IssuesFilterEnum.Assignee:
+                    User userFinder = null;
+                    userFinder = issue.Assignees.Where(i => i.Name.ToLower() == (FilterText.ToLower())).FirstOrDefault();
+
+                    result = userFinder != null;
+                    break;
+
+                case IssuesFilterEnum.Authors:
+                    result = _issuesService.GetUserById(issue.CrtnUser).Name.ToLower() == FilterText.ToLower();
+                    break;
+
+                case IssuesFilterEnum.Labels:
+                    Label labelFinder = null;
+                    labelFinder = issue.Labels.Where(i => i.Name.ToLower() == (FilterText.ToLower())).FirstOrDefault();
+                    
+                    if (IssuesFilterEnum.Unlabeled.ToString().ToLower() == FilterText.ToLower())
+                        result = true;
+                    else
+                        result = labelFinder != null;
+
+                    break;
+
+                case IssuesFilterEnum.Millestones:
+                    Milestone milestoneFinder = null;
+                    milestoneFinder = issue.Milestones.Where(i => i.Title.ToLower() == (FilterText.ToLower())).FirstOrDefault();
+
+                    if (IssuesFilterEnum.NoMillestones.ToString().ToLower().Contains(FilterText.ToLower()))
+                        result = true;
+                    else
+                        result = milestoneFinder != null;
+
+                    break;
+
+                case IssuesFilterEnum.Projects:
+                    //SERCH00: Under construction
+                    result = true;
+                    break;
+
             }
-            else
-            {
-                return true;
-            }
+            
+            return result;
         }
 
         private DelegateCommand<SelectionChangedEventArgs> _testCommand;
@@ -69,10 +110,17 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
         void ExecuteFilterIssuesCommand(object param)
         {
-            //FilterText = param;
-            //CollectionViewSource.GetDefaultView(Issues).Refresh();
+            if (param == null)
+                throw new ArgumentNullException(ArgumentExceptionMessage);
 
-            //FilterText = string.Empty;
+            var parameters = (object[])param;
+            issuesFilterEnum = (IssuesFilterEnum)Convert.ToInt32(parameters[0]);
+            FilterText = parameters[1].ToString();
+
+            CollectionViewSource.GetDefaultView(Issues).Refresh();
+
+            FilterText = string.Empty;
+            issuesFilterEnum = null;
         }
 
         #region "Properties"

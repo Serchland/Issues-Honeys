@@ -186,7 +186,7 @@
                                                 <MultiBinding Converter="{StaticResource DropDownMultiValueConverterKey}">
                                                     <Binding>
                                                     <Binding.Source>
-                                                        <sys:Int32>1</sys:Int32>
+                                                            <sys:Int32>0</sys:Int32>
                                                     </Binding.Source>
                                                     </Binding>
                                                     <Binding Path="Name"></Binding>
@@ -249,7 +249,7 @@
                                                 <MultiBinding Converter="{StaticResource DropDownMultiValueConverterKey}">
                                                     <Binding>
                                                         <Binding.Source>
-                                                            <sys:Int32>2</sys:Int32>
+                                                            <sys:Int32>1</sys:Int32>
                                                         </Binding.Source>
                                                     </Binding>
                                                     <Binding Path="Name"></Binding>
@@ -348,7 +348,7 @@
                                                 <MultiBinding Converter="{StaticResource DropDownMultiValueConverterKey}">
                                                     <Binding>
                                                         <Binding.Source>
-                                                            <sys:Int32>4</sys:Int32>
+                                                            <sys:Int32>3</sys:Int32>
                                                         </Binding.Source>
                                                     </Binding>
                                                     <Binding Path="Title"></Binding>
@@ -400,7 +400,7 @@
                                                 <MultiBinding Converter="{StaticResource DropDownMultiValueConverterKey}">
                                                     <Binding>
                                                         <Binding.Source>
-                                                            <sys:Int32>5</sys:Int32>
+                                                            <sys:Int32>4</sys:Int32>
                                                         </Binding.Source>
                                                     </Binding>
                                                     <Binding Path="Name"></Binding>

@@ -64,6 +64,11 @@ namespace IssuesHoneys.Services.Interfaces
         /// <returns>List<User></returns>
         List<User> GetUsers();
 
+        /// <summary>
+        /// Method used to obtain the USER by id
+        /// </summary>
+        /// <returns>List<User></returns>
+        User GetUserById(int? userId);
 
         /// <summary>
         ///  Method used to obtain the total number of ISSUES containing the LABEL identifier passed as a parameter.

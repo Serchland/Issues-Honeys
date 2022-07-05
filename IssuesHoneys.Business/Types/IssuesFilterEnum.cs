@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace IssuesHoneys.Business.Types
 {
-    enum IssuesFilterEnum
+    public enum IssuesFilterEnum
     {
+        NoMillestones = -2,
+        Unlabeled = -1,
         Authors = 0,
         Labels = 1,
         Projects = 2,
         Millestones = 3,
-        Assignee = 4
+        Assignee = 5
     }
 }

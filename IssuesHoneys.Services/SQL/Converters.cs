@@ -43,7 +43,7 @@ namespace IssuesHoneys.Services.SQL
             result.ClosedBy = reader[idx++] as int?;
             result.ClosedDate = reader[idx++] as DateTime?;
             result.CrtnDate = reader[idx++] as DateTime?;
-            result.CrtnUser = reader[idx++] as string;
+            result.CrtnUser = reader[idx++] as int?;
             result.Id = reader[idx++] as int?;
             result.Labels.FillOutLabelList<Label>(ref result, issueService, Convert.ToInt32(reader[issueId]));
             result.LastUpdDate = reader[idx++] as DateTime?;

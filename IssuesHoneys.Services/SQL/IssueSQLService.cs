@@ -66,7 +66,7 @@ namespace IssuesHoneys.Services.SQL
         {
             var assigneeUsers = new List<User>();
             var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
-            var queryString = "SELECT * FROM [HONEYS].[issues].[USERS] WHERE ID IN " +
+            var queryString = $@"SELECT * FROM [HONEYS].[issues].[USERS] WHERE ID IN " +
                 "(SELECT Fk_USERASSIGNEE FROM [HONEYS].[issues].[USERSTOISSUES] WHERE Fk_ISSUE = " +  issueId + ")";
 
             using (var connection = new SqlConnection(connectionString))
@@ -92,7 +92,7 @@ namespace IssuesHoneys.Services.SQL
         {
             var labels = new List<Label>();
             var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
-            var queryString = "SELECT * FROM [HONEYS].[issues].[LABELS] WHERE ID IN " +
+            var queryString = $@"SELECT * FROM [HONEYS].[issues].[LABELS] WHERE ID IN " +
                 "(SELECT Fk_LABEL FROM [HONEYS].[issues].[LABELSTOISSUES] WHERE Fk_ISSUE = " + issueId + ")";
 
             using (var connection = new SqlConnection(connectionString))
@@ -118,7 +118,7 @@ namespace IssuesHoneys.Services.SQL
         {
             var milestones = new List<Milestone>();
             var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
-            var queryString = "SELECT * FROM [HONEYS].[issues].[MILESTONES] WHERE ID IN " +
+            var queryString = $@"SELECT * FROM [HONEYS].[issues].[MILESTONES] WHERE ID IN " +
                 "(SELECT Fk_MILESTONE FROM [HONEYS].[issues].[MILESTONESTOISSUES] WHERE Fk_ISSUE = " + issueId + ")";
 
             using (var connection = new SqlConnection(connectionString))
@@ -144,7 +144,7 @@ namespace IssuesHoneys.Services.SQL
         {
             var issues = new List<Issue>();
             var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
-            var queryString = "SELECT * FROM [HONEYS].[issues].[ISSUES];";
+            var queryString = $@"SELECT * FROM [HONEYS].[issues].[ISSUES];";
 
             using (var connection = new SqlConnection(connectionString))
             {
@@ -166,7 +166,7 @@ namespace IssuesHoneys.Services.SQL
         {
             int result = 0;
             var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
-            var queryString = "SELECT COUNT(ID) FROM issues.LABELSTOISSUES WHERE FK_LABEL =" + labelID.ToString() + "";
+            var queryString = $@"SELECT COUNT(ID) FROM issues.LABELSTOISSUES WHERE FK_LABEL =" + labelID.ToString() + "";
 
             using (var connection = new SqlConnection(connectionString))
             {
@@ -187,7 +187,7 @@ namespace IssuesHoneys.Services.SQL
             //SERCH00: Assess whether it is necessary to have the values in memory
             var labels = new List<Label>();
             var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
-            var queryString = "SELECT * FROM [HONEYS].[issues].[LABELS] WHERE ISACTIVE = 1;";
+            var queryString = $@"SELECT * FROM [HONEYS].[issues].[LABELS] WHERE ISACTIVE = 1;";
 
             using (var connection = new SqlConnection(connectionString))
             {
@@ -214,7 +214,7 @@ namespace IssuesHoneys.Services.SQL
             //SERCH00: Assess whether it is necessary to have the values in memory
             var milestones = new List<Milestone>();
             var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
-            var queryString = "SELECT * FROM [HONEYS].[issues].[MILESTONES];";
+            var queryString = $@"SELECT * FROM [HONEYS].[issues].[MILESTONES];";
 
             using (var connection = new SqlConnection(connectionString))
             {
@@ -241,7 +241,7 @@ namespace IssuesHoneys.Services.SQL
 
             var users = new List<User>();
             var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
-            var queryString = "SELECT * FROM [HONEYS].[issues].[USERS];";
+            var queryString = $@"SELECT * FROM [HONEYS].[issues].[USERS];";
 
             using (var connection = new SqlConnection(connectionString))
             {
@@ -306,6 +306,29 @@ namespace IssuesHoneys.Services.SQL
                 connection.Open();
                 command.ExecuteScalar();
             };
+        }
+
+        public User GetUserById(int? userId)
+        {
+            var user = new User();
+            var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
+            var queryString = $@"SELECT * FROM [HONEYS].[issues].[USERS] WHERE ID = {userId}";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        user = Converters.SQLUserConverter(reader);
+                    }
+                }
+            };
+
+
+            return user;
         }
     }
 }

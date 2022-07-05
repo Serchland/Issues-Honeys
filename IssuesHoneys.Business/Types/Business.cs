@@ -64,8 +64,8 @@ namespace IssuesHoneys.Business.Types
         /// <summary>
         /// USER who created the ISSUE
         /// </summary>
-        private string _crtnUser;
-        public string CrtnUser
+        private int? _crtnUser;
+        public int? CrtnUser
         {
             get { return _crtnUser; }
             set { SetProperty(ref _crtnUser, value); }
