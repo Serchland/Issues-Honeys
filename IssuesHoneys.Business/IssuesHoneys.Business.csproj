@@ -59,9 +59,11 @@
     <Compile Include="Types\Business.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Types\IssuesFilterEnum.cs" />
+    <Compile Include="Types\IssuesSortDto.cs" />
     <Compile Include="Types\LabelSortDto.cs" />
     <Compile Include="Types\SelectedFilters.cs" />
-    <Compile Include="Types\SortEnum.cs" />
+    <Compile Include="Types\LabelSortEnum.cs" />
+    <Compile Include="Types\IssuesSortEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

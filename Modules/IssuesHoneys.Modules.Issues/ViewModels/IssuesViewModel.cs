@@ -40,7 +40,8 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
             _milestones.Insert(0, new Milestone() { Title = Application.Current.Resources["LabelNoMilestone"].ToString() });
             _labels.Insert(0, new Label() { Name = Application.Current.Resources["LabelUnlabeled"].ToString(), Color = Brushes.Transparent });
-
+            
+            _sortItems = GetSortItems();
             IsFiltered = false;
         }
 
@@ -91,7 +92,38 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             return result;
         }
 
+        private ObservableCollection<IssuesSortDto> GetSortItems()
+        {
+            ObservableCollection<IssuesSortDto> result = new ObservableCollection<IssuesSortDto>()
+                {
+                    new IssuesSortDto(){StringValue =  Application.Current.Resources["SortNewest"].ToString(), EnumValue = IssuesSortEnum.Newest},
+                    new IssuesSortDto(){StringValue =  Application.Current.Resources["SortOldest"].ToString(), EnumValue = IssuesSortEnum.Newest}
+                };
+
+            return result;
+        }
+
         #region "Commands"
+
+        private DelegateCommand<IssuesSortEnum?> _selectedSortItemCommand;
+        public DelegateCommand<IssuesSortEnum?> SelectedSortItemCommand =>
+            _selectedSortItemCommand ?? (_selectedSortItemCommand = new DelegateCommand<IssuesSortEnum?>(ExecuteSelectedSortItemCommand));
+
+        void ExecuteSelectedSortItemCommand(IssuesSortEnum? param)
+        {
+            //SERCH00: For testing purposes only
+            _issuesView.SortDescriptions.Clear();
+            switch (param)
+            {
+                case IssuesSortEnum.Newest:
+                    _issuesView.SortDescriptions.Add(new SortDescription("CrtnDate", ListSortDirection.Descending));
+                    break;
+
+                case IssuesSortEnum.Oldest:
+                    _issuesView.SortDescriptions.Add(new SortDescription("CrtnDate", ListSortDirection.Ascending));
+                    break;
+            }
+        }
 
         private DelegateCommand _isFilteredCommand;
         public DelegateCommand IsFilteredCommand =>
@@ -138,6 +170,15 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         #endregion
 
         #region "Properties"
+        private ObservableCollection<IssuesSortDto> _sortItems;
+        public ObservableCollection<IssuesSortDto> SortItems
+        {
+            get
+            {
+                return _sortItems;
+            }
+        }
+
         private bool _isFiltered;
         public bool IsFiltered
         {

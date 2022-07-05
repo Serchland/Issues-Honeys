@@ -44,9 +44,13 @@
     <system:String x:Key="LabelUnlabeled">Unlabeled</system:String>
 
     <system:String x:Key="SortAlphabetically">Alphabetically</system:String>
-    <system:String x:Key="SortReverseAlphabetically">Reverse alphabetically</system:String>
-    <system:String x:Key="SortMostIssues">Most issues</system:String>
     <system:String x:Key="SortFewestAlphabetically">Fewest issues</system:String>
+    <system:String x:Key="SortMostIssues">Most issues</system:String>
+    <system:String x:Key="SortNewest">Newest</system:String>
+    <system:String x:Key="SortOldest">Oldest</system:String>
+    <system:String x:Key="SortReverseAlphabetically">Reverse alphabetically</system:String>
+    
+    
 
     <system:String x:Key="TextBlockDelete">Delete</system:String>
     <system:String x:Key="TextBlockEdit">Edit</system:String>
