@@ -14,6 +14,6 @@ namespace IssuesHoneys.Business.Types
         Labels = 1,
         Projects = 2,
         Millestones = 3,
-        Assignee = 5
+        Assignee = 4
     }
 }

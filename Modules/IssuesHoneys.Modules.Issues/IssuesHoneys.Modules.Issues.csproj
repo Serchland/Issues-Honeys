@@ -81,6 +81,7 @@
     <Compile Include="Views\Converters\DropDownMultiValueConverter.cs" />
     <Compile Include="Views\Converters\IconCommentsVisibilityConverter.cs" />
     <Compile Include="Views\Converters\IconMilestoneVisibilityConverter.cs" />
+    <Compile Include="Views\Converters\IsFilteredConverter.cs" />
     <Compile Include="Views\Converters\MarkDownConverter.cs" />
     <Compile Include="Views\Converters\RGBConverter.cs" />
     <Compile Include="Views\Converters\StateColorConverter.cs" />

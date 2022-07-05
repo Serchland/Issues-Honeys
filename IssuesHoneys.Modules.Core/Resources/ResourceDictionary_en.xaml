@@ -36,10 +36,12 @@
     <system:String x:Key="LabelIssueBugreport">Issue: Bug report</system:String>
     <system:String x:Key="LabelMilestone">Milestone</system:String>
     <system:String x:Key="LabelNewMilestone">New milestone</system:String>
+    <system:String x:Key="LabelNoMilestone">Issues with no millestones</system:String>
     <system:String x:Key="LabelProjects">Projects</system:String>
     <system:String x:Key="LabelSearchCaption">Search:</system:String>
     <system:String x:Key="LabelStylingWithMarkdownIsSupported">Styling with Markdown is supported.</system:String>
     <system:String x:Key="LabelTitle">Title</system:String>
+    <system:String x:Key="LabelUnlabeled">Unlabeled</system:String>
 
     <system:String x:Key="SortAlphabetically">Alphabetically</system:String>
     <system:String x:Key="SortReverseAlphabetically">Reverse alphabetically</system:String>

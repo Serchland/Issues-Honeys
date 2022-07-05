@@ -4,8 +4,6 @@ using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -38,10 +36,12 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             _totalMilestones = _milestones.Count.ToString();
          
             _issuesView.Filter = IssuesFilter;
-            _issuesView.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+            _issuesView.SortDescriptions.Add(new SortDescription("CrtnDate", ListSortDirection.Descending));
 
-            _milestones.Insert(0, new Milestone() { Title = "Issues with no millestones" });
-            _labels.Insert(0, new Label() { Name = "Unlabeled", Color = Brushes.Transparent });
+            _milestones.Insert(0, new Milestone() { Title = Application.Current.Resources["LabelNoMilestone"].ToString() });
+            _labels.Insert(0, new Label() { Name = Application.Current.Resources["LabelUnlabeled"].ToString(), Color = Brushes.Transparent });
+
+            IsFiltered = false;
         }
 
         private bool IssuesFilter(object item)
@@ -65,11 +65,8 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
                 case IssuesFilterEnum.Labels:
                     Label labelFinder = null;
                     labelFinder = issue.Labels.Where(i => i.Name.ToLower() == (FilterText.ToLower())).FirstOrDefault();
-                    
-                    if (IssuesFilterEnum.Unlabeled.ToString().ToLower() == FilterText.ToLower())
-                        result = true;
-                    else
-                        result = labelFinder != null;
+
+                    result = labelFinder != null;
 
                     break;
 
@@ -77,10 +74,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
                     Milestone milestoneFinder = null;
                     milestoneFinder = issue.Milestones.Where(i => i.Title.ToLower() == (FilterText.ToLower())).FirstOrDefault();
 
-                    if (IssuesFilterEnum.NoMillestones.ToString().ToLower().Contains(FilterText.ToLower()))
-                        result = true;
-                    else
-                        result = milestoneFinder != null;
+                    result = milestoneFinder != null;
 
                     break;
 
@@ -89,9 +83,27 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
                     result = true;
                     break;
 
+                default:
+                    return true;
+
             }
             
             return result;
+        }
+
+        #region "Commands"
+
+        private DelegateCommand _isFilteredCommand;
+        public DelegateCommand IsFilteredCommand =>
+            _isFilteredCommand ?? (_isFilteredCommand = new DelegateCommand(ExecuteIsFilteredCommand));
+
+        void ExecuteIsFilteredCommand()
+        {
+            IsFiltered = false;
+            issuesFilterEnum = null;
+            FilterText = String.Empty;
+
+            CollectionViewSource.GetDefaultView(Issues).Refresh();
         }
 
         private DelegateCommand<SelectionChangedEventArgs> _testCommand;
@@ -121,9 +133,24 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
             FilterText = string.Empty;
             issuesFilterEnum = null;
+            IsFiltered = true;
         }
+        #endregion
 
         #region "Properties"
+        private bool _isFiltered;
+        public bool IsFiltered
+        {
+            get
+            {
+                return _isFiltered;
+            }
+            set
+            {
+                SetProperty(ref _isFiltered, value);
+            }
+        }
+
         private string _filterText;
         public string FilterText
         {
@@ -175,7 +202,6 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
                 SetProperty(ref _labels, value);
             }
         }
-
 
         private string _totalLabels;
         public string TotalLabels

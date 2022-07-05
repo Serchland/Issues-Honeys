@@ -18,6 +18,7 @@
         <converters:StateColorConverter x:Key="StateColorConverterKey"></converters:StateColorConverter>
         <converters:DropDownMultiValueConverter x:Key="DropDownMultiValueConverterKey"></converters:DropDownMultiValueConverter>
         <converters:DropDownItemIconVisibilityConverter x:Key="DropDownItemIconVisibilityConverterKey"></converters:DropDownItemIconVisibilityConverter>
+        <converters:IsFilteredConverter x:Key="IsFilteredConverterKey"></converters:IsFilteredConverter>
     </UserControl.Resources>
 
     <Grid x:Name="grid"
@@ -35,7 +36,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition  Width="*"></ColumnDefinition>
                 <ColumnDefinition  Width="*"></ColumnDefinition>
-                <ColumnDefinition  Width="*"></ColumnDefinition>
+                <ColumnDefinition  Width="Auto"></ColumnDefinition>
                 <ColumnDefinition  Width="Auto"></ColumnDefinition>
                 <ColumnDefinition  Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
@@ -45,7 +46,7 @@
 
             <DockPanel Grid.Column="0"
                        Grid.Row="0"
-                       Grid.ColumnSpan="2">
+                       >
 
                 <Label VerticalAlignment="Center"
                        Content="Filter:">
@@ -54,6 +55,28 @@
                 <ComboBox BorderBrush="LightGray"
                           VerticalAlignment="Center"></ComboBox>
             </DockPanel>
+
+
+            <DockPanel  Grid.Column="1"
+                    MinWidth="100"
+                    HorizontalAlignment="Left"
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    Grid.Row="0"
+                    Visibility="{Binding IsFiltered, Converter={StaticResource IsFilteredConverterKey}}">
+
+                <Button Content="X"
+                        HorizontalAlignment="Center"
+                        Command="{Binding IsFilteredCommand}"
+                        Style="{StaticResource MahApps.Styles.Button.Flat}">
+
+                </Button>
+                <Label Foreground="Gray" Content="Clear current search query, filters, and sorts"></Label>
+
+               
+                
+            </DockPanel>
+          
 
             <coreViews:ButtonLabels Grid.Column="2"
                                     Grid.Row="0"
