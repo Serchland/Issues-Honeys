@@ -70,6 +70,7 @@ namespace IssuesHoneys.Services.SQL
             //[ID] [int] IDENTITY(1, 1) NOT NULL,
             //[ISACTIVE] [bit] NOT NULL,
             //[NAME] [varchar](50) NOT NULL,
+            //[TOTALISSUES] [int] NOT NULL,
 
             int labelId = 0;
             Label result = new Label();
@@ -83,7 +84,7 @@ namespace IssuesHoneys.Services.SQL
             result.Id = labelId;
             idx++;
             result.Name = Convert.ToString(reader[idx++]);
-            result.TotalIssuesWithLabel = result.GetTotalIssuesWithLabel(labelId, issueService);
+            result.TotalIssues = Convert.ToInt32(reader[idx++]);
 
             return result;
         }

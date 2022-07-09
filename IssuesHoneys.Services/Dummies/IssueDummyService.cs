@@ -25,11 +25,11 @@ namespace IssuesHoneys.Services.Dummies
 
         private void Init()
         {
-            _labels.Add(new Label() { Color = Brushes.Red, Description = "Something isn't working", Id = 0, Name = "bug", TotalIssuesWithLabel=5 });
-            _labels.Add(new Label() { Color = Brushes.LightBlue, Description = "New feature or request", Id = 1, Name = "enhancement", TotalIssuesWithLabel = 5 });
-            _labels.Add(new Label() { Color = Brushes.Green, Description = "Transition phase", Id = 2, Name = "transition", TotalIssuesWithLabel = 5 });
-            _labels.Add(new Label() { Color = Brushes.Purple, Description = "synchronisation phase", Id = 3, Name = "sincro", TotalIssuesWithLabel = 5 });
-            _labels.Add(new Label() { Color = Brushes.Gold, Description = "associated to version", Id = 4, Name = "version", TotalIssuesWithLabel = 5 });
+            _labels.Add(new Label() { Color = Brushes.Red, Description = "Something isn't working", Id = 0, Name = "bug", TotalIssues=5 });
+            _labels.Add(new Label() { Color = Brushes.LightBlue, Description = "New feature or request", Id = 1, Name = "enhancement", TotalIssues = 5 });
+            _labels.Add(new Label() { Color = Brushes.Green, Description = "Transition phase", Id = 2, Name = "transition", TotalIssues = 5 });
+            _labels.Add(new Label() { Color = Brushes.Purple, Description = "synchronisation phase", Id = 3, Name = "sincro", TotalIssues = 5 });
+            _labels.Add(new Label() { Color = Brushes.Gold, Description = "associated to version", Id = 4, Name = "version", TotalIssues = 5 });
 
             _millestones.Add(new Milestone() { Description = "PRO V1.12", DueDate = new DateTime(2022, 6, 11), Id = 0, Title = "PRO" });
             _millestones.Add(new Milestone() { Description = "Send PRE", DueDate = new DateTime(2022, 5, 20), Id = 1, Title = "PRE" });

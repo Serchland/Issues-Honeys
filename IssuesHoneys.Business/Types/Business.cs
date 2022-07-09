@@ -250,11 +250,11 @@ namespace IssuesHoneys.Business.Types
             set { SetProperty(ref _name, value); }
         }
 
-        private int _totalIssuesWithLabel;
-        public int TotalIssuesWithLabel
+        private int _totalIssues;
+        public int TotalIssues
         {
-            get { return _totalIssuesWithLabel; }
-            set { _totalIssuesWithLabel = value; }
+            get { return _totalIssues; }
+            set { _totalIssues = value; }
         }
 
         /// <summary>

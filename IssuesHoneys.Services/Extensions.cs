@@ -105,10 +105,10 @@ namespace IssuesHoneys.BusinessTypes
         /// <returns></returns>
         /// 
 
-        //ref result, issueService, Convert.ToInt32(reader[issueId])
-        public static int GetTotalIssuesWithLabel(this Label label, int labelId, IIssueService issueService)
-        {
-            return issueService.GetIssuesWithLabelId(labelId);
-        }
+    //    //ref result, issueService, Convert.ToInt32(reader[issueId])
+    //    public static int GetTotalIssuesWithLabel(this Label label, int labelId, IIssueService issueService)
+    //    {
+    //        return issueService.GetIssuesWithLabelId(labelId);
+    //    }
     }
 }

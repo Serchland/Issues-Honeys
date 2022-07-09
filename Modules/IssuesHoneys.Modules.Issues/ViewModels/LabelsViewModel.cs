@@ -45,7 +45,6 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
         void ExecuteSelectedSortItemCommand(LabelSortEnum? param)
         {
-            //SERCH00: For testing purposes only
             _labelsView.SortDescriptions.Clear();
             switch (param)
             {
@@ -58,11 +57,11 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
                     break;
 
                 case LabelSortEnum.FewestIssues:
-                    //SERCH00:TODO
+                    _labelsView.SortDescriptions.Add(new SortDescription("TotalIssues", ListSortDirection.Ascending));
                     break;
 
                 case LabelSortEnum.MostIssues:
-                    //SERCH00:TODO
+                    _labelsView.SortDescriptions.Add(new SortDescription("TotalIssues", ListSortDirection.Descending));
                     break;
             }
         }
