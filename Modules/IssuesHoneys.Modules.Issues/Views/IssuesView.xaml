@@ -44,9 +44,8 @@
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <DockPanel Grid.Column="0"
-                       Grid.Row="0"
-                       >
+            <!--<DockPanel Grid.Column="0"
+                       Grid.Row="0">
 
                 <Label VerticalAlignment="Center"
                        Content="Filter:">
@@ -54,13 +53,13 @@
 
                 <ComboBox BorderBrush="LightGray"
                           VerticalAlignment="Center"></ComboBox>
-            </DockPanel>
+            </DockPanel>-->
 
 
-            <DockPanel  Grid.Column="1"
+            <DockPanel  Grid.Column="0"
                     MinWidth="100"
                     HorizontalAlignment="Left"
-                    Margin="10,0,0,0"
+                    Margin="5,0,0,0"
                     VerticalAlignment="Center"
                     Grid.Row="0"
                     Visibility="{Binding IsFiltered, Converter={StaticResource IsFilteredConverterKey}}">
