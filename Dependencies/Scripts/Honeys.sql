@@ -44,6 +44,27 @@ GO
 --END;
 
 
+--SELECT FK_LABEL, COUNT(Fk_ISSUE) AS ISS FROM ISSUES.LABELSTOISSUES 
+--GROUP BY FK_LABEL
+--ORDER BY ISS DESC
+
+---- ************************************** [FUNCTION_TOTALISSUES]
+--IF OBJECT_ID('FUNCTION_TOTALISSUES') IS NOT NULL 
+--CREATE FUNCTION [issues].[FUNCTION_TOTALISSUES] (@Id int)  
+--RETURNS int
+--AS  
+--BEGIN  
+--    DECLARE @Count int;
+--    SELECT @Count = COUNT(@Id)
+--    FROM LABELSTOISSUES 
+--    WHERE FK_LABEL = @Id AND ISACTIVE=1; 
+--    RETURN @Count;
+--END;
+--ELSE BEGIN
+--SELECT 'FUNCTION FFUNCTION_TOTALISSUES NOT EXISTS'
+--END;
+
+
 IF EXISTS(SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[issues].[COUNTBY1]') AND type = 'SO')
 	BEGIN
 		DROP SEQUENCE [issues].[COUNTBY1];
@@ -157,6 +178,8 @@ IF Object_id('[issues].[LABELS]') IS NOT NULL
            [ID]					 INT IDENTITY (1, 1) NOT NULL,
 		   [ISACTIVE]			 BIT NOT NULL,
            [NAME]                VARCHAR(50) NOT NULL,
+		   [TOTALISSUES] AS
+           [issues].[Function_Totalissues]([ID]),
 
            CONSTRAINT [PK_Labels_Id] PRIMARY KEY CLUSTERED (
            [ID] 
@@ -181,6 +204,8 @@ ELSE
            [ID]					 INT IDENTITY (1, 1) NOT NULL,
 		   [ISACTIVE]			 BIT NOT NULL,
            [NAME]                VARCHAR(50) NOT NULL,
+		   [TOTALISSUES] AS
+           [issues].[Function_Totalissues]([ID]),
 
            CONSTRAINT [PK_Labels_Id] PRIMARY KEY CLUSTERED (
            [ID] 
