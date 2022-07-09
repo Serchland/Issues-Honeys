@@ -36,7 +36,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             _totalMilestones = _milestones.Count.ToString();
          
             _issuesView.Filter = IssuesFilter;
-            //_issuesView.SortDescriptions.Add(new SortDescription("CrtnDate", ListSortDirection.Descending));
+            _issuesView.SortDescriptions.Add(new SortDescription("CrtnDate", ListSortDirection.Descending));
 
             _milestones.Insert(0, new Milestone() { Title = Application.Current.Resources["LabelNoMilestone"].ToString() });
             _labels.Insert(0, new Label() { Name = Application.Current.Resources["LabelUnlabeled"].ToString(), Color = Brushes.Transparent });
@@ -97,7 +97,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             ObservableCollection<IssuesSortDto> result = new ObservableCollection<IssuesSortDto>()
                 {
                     new IssuesSortDto(){StringValue =  Application.Current.Resources["SortNewest"].ToString(), EnumValue = IssuesSortEnum.Newest},
-                    new IssuesSortDto(){StringValue =  Application.Current.Resources["SortOldest"].ToString(), EnumValue = IssuesSortEnum.Newest}
+                    new IssuesSortDto(){StringValue =  Application.Current.Resources["SortOldest"].ToString(), EnumValue = IssuesSortEnum.Oldest}
                 };
 
             return result;
