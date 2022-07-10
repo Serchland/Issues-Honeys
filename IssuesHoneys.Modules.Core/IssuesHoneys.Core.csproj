@@ -194,6 +194,9 @@
     <Compile Include="Views\FooterView.xaml.cs">
       <DependentUpon>FooterView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\IssueAssigneeing.xaml.cs">
+      <DependentUpon>IssueAssigneeing.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewLabel.xaml.cs">
       <DependentUpon>NewLabel.xaml</DependentUpon>
     </Compile>
@@ -230,6 +233,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FooterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\IssueAssigneeing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
