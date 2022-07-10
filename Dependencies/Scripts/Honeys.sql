@@ -5,6 +5,15 @@
 --ISSUEDETAILS ACTIONS:
 --1 DELETELABEL
 
+--ISSUEDETAILS ACTIONS:
+-- 1 COMMENTADDED
+-- 2 COMMENTDELETED
+-- 3 COMMENTUPDATED
+-- 4 LABELADDED
+-- 5 LABELDELETED
+-- 6 MILESTONEADDED
+-- 7 MILESTONEDELETED
+
 
 USE [HONEYS]
 GO 
@@ -366,8 +375,8 @@ GO
 -- **************************************
 IF Object_id('[issues].[ISSUEDETAILS]') IS NOT NULL
   BEGIN
-      ALTER TABLE [issues].[USERCOMMENTS]
-      DROP CONSTRAINT Fk_UserComments_IssueDetails_Id;
+      ALTER TABLE [issues].[ISSUECOMMENTS]
+      DROP CONSTRAINT FK_IssueComments_IssueDetails_Id;
 
       DROP TABLE [issues].[ISSUEDETAILS];
 
@@ -423,54 +432,56 @@ ELSE
 
 -- **************************************
 -- **************************************
---				[USERCOMMENTS]
+--				[ISSUECOMMENTS]
 -- **************************************
 -- **************************************
-IF Object_id('[issues].[USERCOMMENTS]') IS NOT NULL
+IF Object_id('[issues].[ISSUECOMMENTS]') IS NOT NULL
   BEGIN
-      DROP TABLE [issues].[USERCOMMENTS];
+      DROP TABLE [issues].[ISSUECOMMENTS];
 
-      CREATE TABLE [issues].[USERCOMMENTS]
+      CREATE TABLE [issues].[ISSUECOMMENTS]
         (
            [COMMENT]                   VARCHAR(max) NOT NULL,
    		   [CRTNDATE]				   DATETIME,
            [Fk_ISSUEDETAIL]			   INT NOT NULL,
            [ID]						   INT IDENTITY (1, 1) NOT NULL,
+		   [ISACTIVE]				   BIT NOT NULL,
 
            CONSTRAINT [PK_Comment_Id] PRIMARY KEY CLUSTERED (
            [ID] 
 		   ASC),
 
-           CONSTRAINT [FK_UserComments_IssueDetails_Id] FOREIGN KEY (
+           CONSTRAINT [FK_IssueComments_IssueDetails_Id] FOREIGN KEY (
            [Fk_ISSUEDETAIL]) REFERENCES
            [issues].[ISSUEDETAILS]([ID])
         )
 		WITH (DATA_COMPRESSION = PAGE);
 
-      SELECT 'TABLE [issues].[USERCOMMENTS] REGENERATED'
+      SELECT 'TABLE [issues].[ISSUECOMMENTS] REGENERATED'
   END
 ELSE
   BEGIN
-      SELECT 'TABLE [issues].[USERCOMMENTS] NOT EXIST... CREATING TABLE'
+      SELECT 'TABLE [issues].[ISSUECOMMENTS] NOT EXIST... CREATING TABLE'
 
-     CREATE TABLE [issues].[USERCOMMENTS]
+     CREATE TABLE [issues].[ISSUECOMMENTS]
         (
            [COMMENT]                   VARCHAR(max) NOT NULL,
 		   [CRTNDATE]				   DATETIME,
            [Fk_ISSUEDETAIL]			   INT NOT NULL,
            [ID]						   INT IDENTITY (1, 1) NOT NULL,
+		   [ISACTIVE]				   BIT NOT NULL,
 
            CONSTRAINT [PK_Comment_Id] PRIMARY KEY CLUSTERED (
            [ID] 
 		   ASC),
 
-           CONSTRAINT [FK_UserComments_IssueDetails_Id] FOREIGN KEY (
+           CONSTRAINT [FK_IssueComments_IssueDetails_Id] FOREIGN KEY (
            [Fk_ISSUEDETAIL]) REFERENCES
            [issues].[ISSUEDETAILS]([ID])
         )
 		WITH (DATA_COMPRESSION = PAGE);
 
-      SELECT 'TABLE [issues].[USERCOMMENTS] CREATED'
+      SELECT 'TABLE [issues].[ISSUECOMMENTS] CREATED'
   END
 
   -- **************************************
