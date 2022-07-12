@@ -39,9 +39,9 @@ namespace Issues_Honeys.ViewModels
 
             switch (parameter)
             {
-                case CommandParameters.Comments:
+                case CommandParameters.Details:
                     _regionManager.RequestNavigate(RegionNames.FooterContentRegion, RegisterForNavigation.IssueFooter);
-                    _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.IssueComments);
+                    _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.IssueDetails);
 
                     ButtonContentRegionHeight = 0;
                     break;

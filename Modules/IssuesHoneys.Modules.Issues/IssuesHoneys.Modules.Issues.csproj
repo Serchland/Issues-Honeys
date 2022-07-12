@@ -64,7 +64,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ViewModels\AppFooterViewModel.cs" />
-    <Compile Include="ViewModels\IssueCommentsViewModel.cs" />
+    <Compile Include="ViewModels\IssueDetailsViewModel.cs" />
     <Compile Include="ViewModels\LabelsViewModel.cs" />
     <Compile Include="ViewModels\IssuesViewModel.cs" />
     <Compile Include="ViewModels\AppButtonViewModel.cs" />
@@ -79,14 +79,15 @@
     </Compile>
     <Compile Include="Views\Converters\DropDownItemIconVisibilityConverter.cs" />
     <Compile Include="Views\Converters\DropDownMultiValueConverter.cs" />
-    <Compile Include="Views\Converters\IconCommentsVisibilityConverter.cs" />
+    <Compile Include="Views\Converters\IconDetailsVisibilityConverter.cs" />
     <Compile Include="Views\Converters\IconMilestoneVisibilityConverter.cs" />
     <Compile Include="Views\Converters\IsFilteredConverter.cs" />
     <Compile Include="Views\Converters\MarkDownConverter.cs" />
     <Compile Include="Views\Converters\RGBConverter.cs" />
     <Compile Include="Views\Converters\StateColorConverter.cs" />
-    <Compile Include="Views\IssueCommentsView.xaml.cs">
-      <DependentUpon>IssueCommentsView.xaml</DependentUpon>
+    <Compile Include="Views\Converters\TextBlockMultiValueConverter.cs" />
+    <Compile Include="Views\IssueDetails.xaml.cs">
+      <DependentUpon>IssueDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LabelsView.xaml.cs">
       <DependentUpon>LabelsView.xaml</DependentUpon>
@@ -140,7 +141,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\IssueCommentsView.xaml">
+    <Page Include="Views\IssueDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -32,14 +32,14 @@ namespace Issues
             ViewModelLocationProvider.Register<AppButton, AppButtonViewModel>();
             ViewModelLocationProvider.Register<AppFooter, AppFooterViewModel>();
             ViewModelLocationProvider.Register<IssuesView, IssuesViewModel>();
-            ViewModelLocationProvider.Register<IssueCommentsView, IssueCommentsViewModel>();
+            ViewModelLocationProvider.Register<IssueDetails, IssueDetailsViewModel>();
             ViewModelLocationProvider.Register<LabelsView, LabelsViewModel>();
             ViewModelLocationProvider.Register<MilestonesView, MilestonesViewModel>();
             ViewModelLocationProvider.Register<NewIssue, NewIssueViewModel>();
             ViewModelLocationProvider.Register<NewMilestone, NewMilestoneViewModel>();
 
             containerRegistry.RegisterForNavigation<AppFooter, AppFooterViewModel>(RegisterForNavigation.IssueFooter);
-            containerRegistry.RegisterForNavigation<IssueCommentsView, IssueCommentsViewModel>(RegisterForNavigation.IssueComments);
+            containerRegistry.RegisterForNavigation<IssueDetails, IssueDetailsViewModel>(RegisterForNavigation.IssueDetails);
             containerRegistry.RegisterForNavigation<IssuesView, IssuesViewModel>(RegisterForNavigation.IssuesMain);
             containerRegistry.RegisterForNavigation<LabelsView, LabelsViewModel>(RegisterForNavigation.LabelsMain);
             containerRegistry.RegisterForNavigation<MilestonesView, MilestonesViewModel>(RegisterForNavigation.MilestonesMain);

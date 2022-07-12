@@ -61,6 +61,7 @@
     <Compile Include="Types\IssuesFilterEnum.cs" />
     <Compile Include="Types\IssuesSortDto.cs" />
     <Compile Include="Types\LabelSortDto.cs" />
+    <Compile Include="Types\NavigationParameters.cs" />
     <Compile Include="Types\SelectedFilters.cs" />
     <Compile Include="Types\LabelSortEnum.cs" />
     <Compile Include="Types\IssuesSortEnum.cs" />

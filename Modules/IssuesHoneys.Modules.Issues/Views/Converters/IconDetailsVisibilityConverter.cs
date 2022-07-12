@@ -5,7 +5,7 @@ using System.Windows.Data;
 
 namespace IssuesHoneys.Modules.Issues.Views.Converters
 {
-    class IconCommentsVisibilityConverter : IValueConverter
+    class IconDetailsVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

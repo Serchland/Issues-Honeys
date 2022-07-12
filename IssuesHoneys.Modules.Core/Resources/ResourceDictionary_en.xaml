@@ -28,6 +28,7 @@
     <system:String x:Key="DropDownSort">Sort</system:String>
     
     <system:String x:Key="LabelAssignes">Assignes</system:String>
+    <system:String x:Key="LabelClearFiltersAndSorts">Clear current filters and sorts</system:String>
     <system:String x:Key="LabelCreateANewMilestoneToHelpOrganizeYourIssues">Create a new milestone to help organize your issues.</system:String>
     <system:String x:Key="LabelDescribeTheIssueInDetailHere">Describe the issue in detail here:</system:String>
     <system:String x:Key="LabelDescription">Description:</system:String>
@@ -49,9 +50,7 @@
     <system:String x:Key="SortNewest">Newest</system:String>
     <system:String x:Key="SortOldest">Oldest</system:String>
     <system:String x:Key="SortReverseAlphabetically">Reverse alphabetically</system:String>
-    
-    
-
+   
     <system:String x:Key="TextBlockDelete">Delete</system:String>
     <system:String x:Key="TextBlockEdit">Edit</system:String>
     

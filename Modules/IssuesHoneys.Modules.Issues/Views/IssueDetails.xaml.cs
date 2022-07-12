@@ -18,9 +18,9 @@ namespace IssuesHoneys.Modules.Issues.Views
     /// <summary>
     /// Lógica de interacción para IssueCommentsView.xaml
     /// </summary>
-    public partial class IssueCommentsView : UserControl
+    public partial class IssueDetails : UserControl
     {
-        public IssueCommentsView()
+        public IssueDetails()
         {
             InitializeComponent();
         }

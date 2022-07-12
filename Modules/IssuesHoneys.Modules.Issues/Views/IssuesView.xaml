@@ -13,12 +13,13 @@
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <UserControl.Resources>
-        <converters:IconCommentsVisibilityConverter x:Key="IconCommentsVisibilityConverterKey"></converters:IconCommentsVisibilityConverter>
+        <converters:IconDetailsVisibilityConverter x:Key="IconDetailsVisibilityConverterKey"></converters:IconDetailsVisibilityConverter>
         <converters:IconMilestoneVisibilityConverter x:Key="IconMilestoneVisibilityConverterKey"></converters:IconMilestoneVisibilityConverter>
         <converters:StateColorConverter x:Key="StateColorConverterKey"></converters:StateColorConverter>
         <converters:DropDownMultiValueConverter x:Key="DropDownMultiValueConverterKey"></converters:DropDownMultiValueConverter>
         <converters:DropDownItemIconVisibilityConverter x:Key="DropDownItemIconVisibilityConverterKey"></converters:DropDownItemIconVisibilityConverter>
         <converters:IsFilteredConverter x:Key="IsFilteredConverterKey"></converters:IsFilteredConverter>
+        <converters:TextBlockMultiValueConverter x:Key="TextBlockMultiValueConverterKey"></converters:TextBlockMultiValueConverter>
     </UserControl.Resources>
 
     <Grid x:Name="grid"
@@ -70,7 +71,9 @@
                         Style="{StaticResource MahApps.Styles.Button.Flat}">
 
                 </Button>
-                <Label Foreground="Gray" Content="Clear current search query, filters, and sorts"></Label>
+
+
+                <Label Foreground="Gray" Content="{StaticResource LabelClearFiltersAndSorts}"></Label>
 
                
                 
@@ -597,8 +600,14 @@
 
                                             <TextBlock.InputBindings>
                                                 <MouseBinding Command="{Binding ElementName=PART_ListIssues, Path=DataContext.NavigateCommand}" 
-                                                              CommandParameter="{x:Static coreNameDef:CommandParameters.Comments}"
+                                                              CommandParameter="{x:Static coreNameDef:CommandParameters.Details}"
                                                               MouseAction="LeftClick" >
+                                                    <!--<MouseBinding.CommandParameter>
+                                                        <MultiBinding Converter="{StaticResource TextBlockMultiValueConverterKey}">
+                                                            --><!--<Binding Path="{x:Static coreNameDef:CommandParameters.Details}"></Binding>--><!--
+                                                            <Binding Path="Id"></Binding>
+                                                        </MultiBinding>
+                                                    </MouseBinding.CommandParameter>-->
                                                 </MouseBinding>
                                             </TextBlock.InputBindings>
 
@@ -855,13 +864,13 @@
                                                Padding="0,3,0,0">
                                         </Label>
 
-                                        <Label Visibility="{Binding TotalComments, Converter= {StaticResource IconCommentsVisibilityConverterKey}}">
+                                        <Label Visibility="{Binding TotalComments, Converter= {StaticResource IconDetailsVisibilityConverterKey}}">
                                             <iconPacks:PackIconCodicons Kind="Comment" />
                                         </Label>
 
                                         <StackPanel.InputBindings>
                                             <MouseBinding Command="{Binding ElementName=PART_ListIssues, Path=DataContext.NavigateCommand}" 
-                                                          CommandParameter="{x:Static coreNameDef:CommandParameters.Comments}"
+                                                          CommandParameter="{x:Static coreNameDef:CommandParameters.Details}"
                                                           MouseAction="LeftClick" >
                                             </MouseBinding>
                                         </StackPanel.InputBindings>
