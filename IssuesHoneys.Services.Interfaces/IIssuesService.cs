@@ -47,6 +47,12 @@ namespace IssuesHoneys.Services.Interfaces
         List<Issue> GetIssues();
 
         /// <summary>
+        /// Method used to obtain the ISSUES from the model
+        /// </summary>
+        /// <returns>List<Issue></returns>
+        Issue GetIssuesById(int issueId);
+
+        /// <summary>
         /// Method used to obtain the LABELS from the model
         /// </summary>
         /// <returns>List<Label></returns>

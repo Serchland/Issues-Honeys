@@ -1,13 +1,15 @@
-﻿using IssuesHoneys.Core.Base;
+﻿using IssuesHoneys.Business.Types;
+using IssuesHoneys.Core.Base;
 using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Core.Types.Interfaces;
 using Prism.Commands;
 using Prism.Regions;
 using System;
+using System.Linq;
 
 namespace Issues_Honeys.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : ViewModelBase<object>
     {
         IRegionManager _regionManager;
 
@@ -30,18 +32,21 @@ namespace Issues_Honeys.ViewModels
         public DelegateCommand<string> NavigateCommand =>
             _navigateCommand ?? (_navigateCommand = new DelegateCommand<string>(ExecuteNavigateCommand));
 
-        void ExecuteNavigateCommand(string parameter)
+        void ExecuteNavigateCommand(string param)
         {
             //SERCH00: only for test pourpoposes:
             //string res = Application.Current.FindResource("WaterMarkSearchLabelsCaption").ToString();
-            if (string.IsNullOrEmpty(parameter))
+            if (string.IsNullOrEmpty(param))
                 throw new ArgumentNullException(ArgumentExceptionMessage);
-
-            switch (parameter)
+                 
+            switch (param.Split(';').FirstOrDefault())
             {
                 case CommandParameters.Details:
+                    var navParam = new NavigationParameters();
+                    navParam.Add(BookMark.Id, param.Split(';').LastOrDefault());
+
                     _regionManager.RequestNavigate(RegionNames.FooterContentRegion, RegisterForNavigation.IssueFooter);
-                    _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.IssueDetails);
+                    _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.IssueDetails, navParam);
 
                     ButtonContentRegionHeight = 0;
                     break;

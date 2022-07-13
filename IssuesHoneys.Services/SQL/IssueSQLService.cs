@@ -330,5 +330,28 @@ namespace IssuesHoneys.Services.SQL
 
             return user;
         }
+
+        public Issue GetIssuesById(int issueId)
+        {
+            var issue = new Issue();
+            var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
+            var queryString = $@"SELECT * FROM [HONEYS].[issues].[ISSUES] WHERE ID = {issueId}";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        issue = Converters.SQLIssueConverter(reader, this);
+                    }
+                }
+            };
+
+
+            return issue;
+        }
     }
 }

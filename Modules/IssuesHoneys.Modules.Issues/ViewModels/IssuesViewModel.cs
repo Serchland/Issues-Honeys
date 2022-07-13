@@ -15,7 +15,7 @@ using Label = IssuesHoneys.Business.Types.Label;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class IssuesViewModel : ViewModelBase
+    public class IssuesViewModel : ViewModelBase<Issue>
     {
         private IssuesFilterEnum? issuesFilterEnum;
         private IIssueService _issuesService;
@@ -277,12 +277,12 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             set { SetProperty(ref _issues, value); }
         }
 
-        private Issue _selectedItem;
-        public Issue SelectedItem
-        {
-            get { return _selectedItem; }
-            set { SetProperty(ref _selectedItem, value); }
-        }
+        //private Issue _selectedItem;
+        //public Issue SelectedItem
+        //{
+        //    get { return _selectedItem; }
+        //    set { SetProperty(ref _selectedItem, value); }
+        //}
         #endregion
     }
 }

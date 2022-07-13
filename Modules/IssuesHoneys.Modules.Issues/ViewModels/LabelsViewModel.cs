@@ -15,7 +15,7 @@ using System.Windows.Media;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class LabelsViewModel : ViewModelBase
+    public class LabelsViewModel : ViewModelBase<Label>
     {
         private IIssueService _isuesService;
         public LabelsViewModel(IApplicationCommands applicationsCommands, IIssueService issueService) : base(applicationsCommands)
@@ -87,11 +87,11 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         void ExecuteDeleteLabelCommand()
         {
 
-            if (_selectedLabel == null)
+            if (_selectedItem == null)
                 throw new ArgumentException(ArgumentExceptionMessage);
 
-            _isuesService.DeleteLabel(SelectedLabel.Id);
-            Labels.Remove(SelectedLabel);
+            _isuesService.DeleteLabel(SelectedItem.Id);
+            Labels.Remove(SelectedItem);
             CollectionViewSource.GetDefaultView(Labels).Refresh();
         }
 
@@ -112,11 +112,11 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         void ExecuteUpdateLabelCommand()
         {
 
-            if (_selectedLabel == null)
+            if (_selectedItem == null)
                 throw new ArgumentException(ArgumentExceptionMessage);
 
-            _isuesService.UpdateLabel(SelectedLabel);
-            SelectedLabel.IsEdditing = false;
+            _isuesService.UpdateLabel(SelectedItem);
+            SelectedItem.IsEdditing = false;
         }
 
         private DelegateCommand<string> _newLabelVisibilityCommand;
@@ -160,7 +160,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             if (parameter == CommandParameters.Create)
                 NewLabel.Color = result;
             else
-                SelectedLabel.Color = result;
+                SelectedItem.Color = result;
 
         }
 
@@ -170,8 +170,8 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
         void ExecuteCancelCommand()
         {
-            SelectedLabel.GetOldValue(OldLabelValue);
-            SelectedLabel.IsEdditing = false;
+            SelectedItem.GetOldValue(OldLabelValue);
+            SelectedItem.IsEdditing = false;
 
             OldLabelValue = null;
         }
@@ -182,8 +182,8 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
         void ExecuteIsEdditingCommand()
         {
-            OldLabelValue = SelectedLabel.Clone() as Label;
-            SelectedLabel.IsEdditing = true;
+            OldLabelValue = SelectedItem.Clone() as Label;
+            SelectedItem.IsEdditing = true;
         }
         #endregion
 
@@ -303,19 +303,19 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             }
         }
 
-        private Label _selectedLabel;
-        public Label SelectedLabel
+        //private Label _selectedItem;
+        public override Label SelectedItem
         {
             get
             {
-                return _selectedLabel;
+                return _selectedItem;
             }
             set
             {
-                if (_selectedLabel != null)
-                    _selectedLabel.IsEdditing = false;
+                if (_selectedItem != null)
+                    _selectedItem.IsEdditing = false;
 
-                SetProperty(ref _selectedLabel, value);
+                SetProperty(ref _selectedItem, value);
             }
         }
 

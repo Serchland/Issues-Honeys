@@ -1,11 +1,12 @@
-﻿using IssuesHoneys.Core.Base;
+﻿using IssuesHoneys.Business.Types;
+using IssuesHoneys.Core.Base;
 using IssuesHoneys.Core.Types.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class NewIssueViewModel : ViewModelBase
+    public class NewIssueViewModel : ViewModelBase<Issue>
     {
         public NewIssueViewModel(IApplicationCommands applicationCommands) : base(applicationCommands)
         {

@@ -23,7 +23,7 @@ namespace IssuesHoneys.Modules.Issues.Views
             {
                 var context = this.DataContext as LabelsViewModel;
                 var item = e.OriginalSource as TextBlock;
-                context.SelectedLabel = item.DataContext as Business.Types.Label;
+                context.SelectedItem = item.DataContext as Business.Types.Label;
             }
         }
 

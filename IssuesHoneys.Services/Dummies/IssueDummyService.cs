@@ -120,6 +120,11 @@ namespace IssuesHoneys.Services.Dummies
             throw new NotImplementedException();
         }
 
+        public Issue GetIssuesById(int issueId)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Dummies responses uses by IssueDummyService
         /// </summary>

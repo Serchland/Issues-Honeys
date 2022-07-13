@@ -1,9 +1,13 @@
 ﻿<UserControl x:Class="IssuesHoneys.Modules.Issues.Views.IssueDetails"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:coreViews="clr-namespace:IssuesHoneys.Core.Views;assembly=IssuesHoneys.Core"
+             xmlns:converters="clr-namespace:IssuesHoneys.Modules.Issues.Views.Converters"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Grid>
+        <!--<Grid.Resources>
+            <converters:SelectedItemDetailConverter x:Key="SelectedItemDetailConverterKey"></converters:SelectedItemDetailConverter>
+        </Grid.Resources>-->
         
     <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -17,6 +21,29 @@
         <RowDefinition Height="Auto"></RowDefinition>
     </Grid.RowDefinitions>
 
+        <Grid Grid.Column="0" 
+              Name="PART_GridHeader"
+              Grid.ColumnSpan="3"
+              Grid.Row="0"
+              Margin="20">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                <Label FontSize="25" FontWeight="SemiBold"
+                   Content="{Binding SelectedItem.Title}"></Label>
+
+                <Label FontSize="25" FontWeight="SemiBold" Foreground="DarkGray"
+                   Content="#"></Label>
+
+                <Label FontSize="25" FontWeight="SemiBold" Foreground="DarkGray" Margin="-10,0,0,0"
+                   Content="{Binding SelectedItem.Number}"></Label>
+            </StackPanel>
+        </Grid>
+
         <Grid Grid.Column="2"
               Grid.ColumnSpan="3"
               Grid.Row="1"
@@ -26,7 +53,6 @@
         </Grid>
 
 
-        <Label Content="Issue COMMENTS VIEW" FontSize="50" FontWeight="Bold"></Label>
             
     </Grid>
 </UserControl>

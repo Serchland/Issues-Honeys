@@ -46,4 +46,10 @@
         public const string ProjectFooter = "ProjectFooter";
         public const string ProjectMain = "ProjectMain";
     }
+
+    public static class BookMark
+    {
+         public const string Id = "Id";
+    }
+
 }
