@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class NewIssueViewModel : ViewModelBase<Issue>
+    public class NewIssueViewModel : PartViewModelBase<Issue>
     {
         public NewIssueViewModel(IApplicationCommands applicationCommands) : base(applicationCommands)
         {

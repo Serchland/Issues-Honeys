@@ -15,7 +15,7 @@ using Label = IssuesHoneys.Business.Types.Label;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class IssuesViewModel : ViewModelBase<Issue>
+    public class IssuesViewModel : PartViewModelBase<Issue>
     {
         private IssuesFilterEnum? issuesFilterEnum;
         private IIssueService _issuesService;

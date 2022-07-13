@@ -15,7 +15,7 @@ using System.Windows.Media;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class LabelsViewModel : ViewModelBase<Label>
+    public class LabelsViewModel : PartViewModelBase<Label>
     {
         private IIssueService _isuesService;
         public LabelsViewModel(IApplicationCommands applicationsCommands, IIssueService issueService) : base(applicationsCommands)

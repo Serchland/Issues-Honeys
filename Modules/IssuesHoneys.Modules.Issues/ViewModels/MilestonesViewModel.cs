@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class MilestonesViewModel : ViewModelBase<Milestone>
+    public class MilestonesViewModel : PartViewModelBase<Milestone>
     {
         IIssueService _issueService;
         public MilestonesViewModel(IApplicationCommands applicationCommands, IIssueService issueService) : base(applicationCommands)

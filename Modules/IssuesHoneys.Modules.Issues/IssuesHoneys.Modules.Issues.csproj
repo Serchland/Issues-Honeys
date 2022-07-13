@@ -84,7 +84,6 @@
     <Compile Include="Views\Converters\IsFilteredConverter.cs" />
     <Compile Include="Views\Converters\MarkDownConverter.cs" />
     <Compile Include="Views\Converters\RGBConverter.cs" />
-    <Compile Include="Views\Converters\SelectedItemDetailConverter.cs" />
     <Compile Include="Views\Converters\StateColorConverter.cs" />
     <Compile Include="Views\Converters\TextBlockMultiValueConverter.cs" />
     <Compile Include="Views\IssueDetails.xaml.cs">

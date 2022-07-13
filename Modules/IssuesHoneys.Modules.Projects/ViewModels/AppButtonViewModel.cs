@@ -3,7 +3,7 @@ using IssuesHoneys.Core.Types.Interfaces;
 
 namespace IssuesHoneys.Modules.Projects.ViewModels
 {
-    public class AppButtonViewModel : ViewModelBase<string>
+    public class AppButtonViewModel : PartViewModelBase<string>
     {
         private IApplicationCommands _applicationCommands;
         public AppButtonViewModel(IApplicationCommands applicationCommands) : base(applicationCommands)
