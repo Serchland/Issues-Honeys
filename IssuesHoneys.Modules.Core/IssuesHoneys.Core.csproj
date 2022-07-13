@@ -166,8 +166,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\MainDataModelBase.cs" />
-    <Compile Include="Base\PartViewModelBase.cs" />
     <Compile Include="Base\ViewModelBase.cs" />
     <Compile Include="Types\Interfaces\IApplicationCommands.cs" />
     <Compile Include="NameDefinition\Captions.cs" />

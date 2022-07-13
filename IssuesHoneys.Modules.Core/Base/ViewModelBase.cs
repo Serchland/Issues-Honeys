@@ -17,6 +17,7 @@ namespace IssuesHoneys.Core.Base
         public ViewModelBase(IApplicationCommands applicationCommands)
         {
             _applicationCommands = applicationCommands;
+           
         }
 
         #region "Properties"       
@@ -46,7 +47,7 @@ namespace IssuesHoneys.Core.Base
 
             if (param == CommandParameters.Details)
             {
-                var current = SelectedItem as Issue;
+                var current = _selectedItem as Issue;
                 param += string.Format("{0}{1}", ";", current.Id.ToString());
             }
 
