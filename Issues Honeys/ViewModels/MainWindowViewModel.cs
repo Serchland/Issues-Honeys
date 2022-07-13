@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Issues_Honeys.ViewModels
 {
-    public class MainWindowViewModel : PartViewModelBase<object>
+    public class MainWindowViewModel : ViewModelBase<object>
     {
         IRegionManager _regionManager;
 

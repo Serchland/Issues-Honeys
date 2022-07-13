@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class IssueDetailsViewModel : PartViewModelBase<Issue>, INavigationAware
+    public class IssueDetailsViewModel : ViewModelBase<Issue>, INavigationAware
     {
         private IIssueService _issueService;
         public IssueDetailsViewModel(IApplicationCommands applicationCommands, IIssueService issueService) : base(applicationCommands)

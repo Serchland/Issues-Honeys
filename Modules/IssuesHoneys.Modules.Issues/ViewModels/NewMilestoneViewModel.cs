@@ -4,7 +4,7 @@ using IssuesHoneys.Core.Types.Interfaces;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
-    public class NewMilestoneViewModel : PartViewModelBase<Milestone>
+    public class NewMilestoneViewModel : ViewModelBase<Milestone>
     {
         public NewMilestoneViewModel(IApplicationCommands applicationCommands) : base(applicationCommands)
         {
