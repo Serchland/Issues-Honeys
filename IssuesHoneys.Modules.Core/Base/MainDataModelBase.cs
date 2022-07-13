@@ -1,6 +1,5 @@
 ﻿using IssuesHoneys.Core.Types.Interfaces;
 using Prism.Commands;
-using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +8,22 @@ using System.Threading.Tasks;
 
 namespace IssuesHoneys.Core.Base
 {
-    public class ViewModelBase : BindableBase
+    public class MainDataModelBase<T> : PartViewModelBase
     {
-        private IApplicationCommands _applicationCommands;
-        public ViewModelBase(IApplicationCommands applicationCommands)
+        IApplicationCommands _applicationCommands;
+        public MainDataModelBase(IApplicationCommands applicationCommands) : base(applicationCommands)
         {
             _applicationCommands = applicationCommands;
         }
+
+        #region "Properties"
+        public T _selectedItem;
+        public virtual T SelectedItem
+        {
+            get { return _selectedItem; }
+            set { SetProperty(ref _selectedItem, value); }
+        }
+        #endregion
 
         #region "Commands"
 
@@ -27,13 +35,6 @@ namespace IssuesHoneys.Core.Base
         {
             if (string.IsNullOrEmpty(param))
                 throw new ArgumentNullException(ArgumentExceptionMessage);
-
-            if (param == CommandParameters.Details)
-            {
-                var current = SelectedItem as Issue;
-                param += string.Format("{0}{1}", ";", current.Id.ToString());
-            }
-
 
             _applicationCommands.NavigateCommand.Execute(param);
         }
