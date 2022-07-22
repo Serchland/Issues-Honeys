@@ -188,6 +188,23 @@
     <Compile Include="Views\ButtonMilestones.xaml.cs">
       <DependentUpon>ButtonMilestones.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Converters\DropDownItemIconVisibilityConverter.cs" />
+    <Compile Include="Views\Converters\DropDownMultiValueConverter.cs" />
+    <Compile Include="Views\DropDownAssignee.xaml.cs">
+      <DependentUpon>DropDownAssignee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DropDownAuthors.xaml.cs">
+      <DependentUpon>DropDownAuthors.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DropDownLabels.xaml.cs">
+      <DependentUpon>DropDownLabels.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DropDownMilestones.xaml.cs">
+      <DependentUpon>DropDownMilestones.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DropDownProjects.xaml.cs">
+      <DependentUpon>DropDownProjects.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditLabel.xaml.cs">
       <DependentUpon>EditLabel.xaml</DependentUpon>
     </Compile>
@@ -225,6 +242,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ButtonMilestones.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DropDownAssignee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DropDownAuthors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DropDownLabels.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DropDownMilestones.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DropDownProjects.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

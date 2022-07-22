@@ -1,0 +1,63 @@
+﻿<mah:DropDownButton x:Class="IssuesHoneys.Core.Views.DropDownAssignee"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:IssuesHoneys.Core.Views.Converters"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             Margin="5,0,8,0"
+             BorderBrush="Transparent"
+             Background="Transparent"
+             VerticalAlignment="Center" 
+             HorizontalAlignment="Right"
+             ItemsSource="{Binding Users}"
+             Content="{StaticResource DropDownAssignee}"
+             ArrowMouseOverBrush ="Orange"
+             ArrowPressedBrush="DarkOrange">
+
+    <mah:DropDownButton.Resources>
+        <converters:DropDownMultiValueConverter x:Key="DropDownMultiValueConverterKey"></converters:DropDownMultiValueConverter>
+    </mah:DropDownButton.Resources>
+    
+    <mah:DropDownButton.ItemTemplate>
+        <DataTemplate>
+            <Grid SnapsToDevicePixels="True">
+                <Rectangle Name="Border" Stroke="Transparent" StrokeThickness="1"/>
+                <Grid>
+
+                    <StackPanel Orientation="Horizontal" >
+                        <Label>
+                            <iconPacks:PackIconBoxIcons Kind="RegularUser" />
+                        </Label>
+                        <Label Content="{Binding Name}"></Label>
+                        <Label Content="{Binding SurName}"></Label>
+                    </StackPanel>
+
+                    <ContentPresenter Grid.Column="1" Margin="6"
+                                                        Content=""
+                                                        RecognizesAccessKey="True"
+                                                        SnapsToDevicePixels="True"/>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+    </mah:DropDownButton.ItemTemplate>
+
+    <mah:DropDownButton.ItemContainerStyle>
+        <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
+            <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.FilterIssuesCommand}" />
+            <Setter Property="CommandParameter" >
+                <Setter.Value>
+                    <MultiBinding Converter="{StaticResource DropDownMultiValueConverterKey}">
+                        <Binding>
+                            <Binding.Source>
+                                <sys:Int32>4</sys:Int32>
+                            </Binding.Source>
+                        </Binding>
+                        <Binding Path="Name"></Binding>
+                    </MultiBinding>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </mah:DropDownButton.ItemContainerStyle>
+
+</mah:DropDownButton>

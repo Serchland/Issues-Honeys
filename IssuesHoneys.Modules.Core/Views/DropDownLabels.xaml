@@ -1,0 +1,75 @@
+﻿<mah:DropDownButton x:Class="IssuesHoneys.Core.Views.DropDownLabels"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:IssuesHoneys.Core.Views.Converters"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    Margin="5,0,8,0"
+                    BorderBrush="Transparent"
+                    Background="Transparent"
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Right"
+                    ItemsSource="{Binding Labels}"
+                    Content="{StaticResource DropDownLabel}"
+                    ArrowMouseOverBrush ="Orange"
+                    ArrowPressedBrush="DarkOrange">
+
+    <mah:DropDownButton.Resources>
+        <converters:DropDownMultiValueConverter x:Key="DropDownMultiValueConverterKey"></converters:DropDownMultiValueConverter>
+        <converters:DropDownItemIconVisibilityConverter x:Key="DropDownItemIconVisibilityConverterKey"></converters:DropDownItemIconVisibilityConverter>
+    </mah:DropDownButton.Resources>
+
+    <mah:DropDownButton.ItemTemplate>
+        <DataTemplate>
+            <Grid SnapsToDevicePixels="True">
+
+                <Grid>
+
+                    <StackPanel Orientation="Horizontal" >
+                        <Border 
+                                                        x:Name="circularBorder"
+                                                        Height="15"
+                                                        BorderThickness="1"
+                                                        BorderBrush="LightGray"
+                                                        Background="{Binding Path=Color}"
+                                                        CornerRadius="{Binding Path=ActualHeight, ElementName=circularBorder}"
+                                                        Width="{Binding Path=ActualHeight, ElementName=circularBorder}"
+                                                        Visibility="{Binding Id, Converter= {StaticResource DropDownItemIconVisibilityConverterKey}}">
+
+                            <Label 
+                                                        BorderThickness="1"
+                                                        Padding="0" />
+                        </Border>
+                        <Label Content="{Binding Name}"></Label>
+                    </StackPanel>
+
+
+                    <ContentPresenter Grid.Column="1" Margin="6"
+                                                        Content=""
+                                                        RecognizesAccessKey="True"
+                                                        SnapsToDevicePixels="True"/>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+    </mah:DropDownButton.ItemTemplate>
+
+    <mah:DropDownButton.ItemContainerStyle>
+        <Style BasedOn="{StaticResource {x:Type MenuItem}}" TargetType="{x:Type MenuItem}">
+            <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type mah:DropDownButton}}, Path=DataContext.FilterIssuesCommand}" />
+            <Setter Property="CommandParameter" >
+                <Setter.Value>
+                    <MultiBinding Converter="{StaticResource DropDownMultiValueConverterKey}">
+                        <Binding>
+                            <Binding.Source>
+                                <sys:Int32>1</sys:Int32>
+                            </Binding.Source>
+                        </Binding>
+                        <Binding Path="Name"></Binding>
+                    </MultiBinding>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </mah:DropDownButton.ItemContainerStyle>
+
+
+</mah:DropDownButton>
