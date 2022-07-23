@@ -22,33 +22,29 @@
     <mah:DropDownButton.ItemTemplate>
         <DataTemplate>
             <Grid SnapsToDevicePixels="True">
-
-                <Grid>
-
-                    <StackPanel Orientation="Horizontal" >
-                        <Border 
-                                                        x:Name="circularBorder"
-                                                        Height="15"
-                                                        BorderThickness="1"
-                                                        BorderBrush="LightGray"
-                                                        Background="{Binding Path=Color}"
-                                                        CornerRadius="{Binding Path=ActualHeight, ElementName=circularBorder}"
-                                                        Width="{Binding Path=ActualHeight, ElementName=circularBorder}"
-                                                        Visibility="{Binding Id, Converter= {StaticResource DropDownItemIconVisibilityConverterKey}}">
+                <StackPanel Orientation="Horizontal" >
+                    <Border 
+                            x:Name="circularBorder"
+                            Height="15"
+                            BorderThickness="1"
+                            BorderBrush="LightGray"
+                            Background="{Binding Path=Color}"
+                            CornerRadius="{Binding Path=ActualHeight, ElementName=circularBorder}"
+                            Width="{Binding Path=ActualHeight, ElementName=circularBorder}"
+                            Visibility="{Binding Id, Converter= {StaticResource DropDownItemIconVisibilityConverterKey}}">
 
                             <Label 
-                                                        BorderThickness="1"
-                                                        Padding="0" />
+                                BorderThickness="1"
+                                Padding="0" />
                         </Border>
                         <Label Content="{Binding Name}"></Label>
                     </StackPanel>
 
-
-                    <ContentPresenter Grid.Column="1" Margin="6"
-                                                        Content=""
-                                                        RecognizesAccessKey="True"
-                                                        SnapsToDevicePixels="True"/>
-                </Grid>
+                <ContentPresenter Grid.Column="1" 
+                                  Margin="6"
+                                  Content=""
+                                  RecognizesAccessKey="True"
+                                  SnapsToDevicePixels="True"/>
             </Grid>
         </DataTemplate>
     </mah:DropDownButton.ItemTemplate>

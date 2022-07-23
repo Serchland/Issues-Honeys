@@ -308,6 +308,8 @@
                                 </Setter.Value>
                             </Setter>
 
+                            <EventSetter Event="PreviewMouseDown" Handler="PART_IssuesListViewItem_MouseDown" />
+
                         </Style>
                     </ListView.ItemContainerStyle>
 
@@ -348,6 +350,7 @@
                                                    FontWeight="SemiBold"
                                                    FontSize="14"
                                                    HorizontalAlignment="Center"
+                                                   Name="PART_TextBlockDetails"
                                                    TextAlignment="Center"
                                                    TextWrapping="WrapWithOverflow"
                                                    Padding="0,8,10,0">

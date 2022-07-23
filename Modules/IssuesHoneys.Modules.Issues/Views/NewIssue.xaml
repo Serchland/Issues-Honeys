@@ -46,6 +46,7 @@
         
         <GroupBox  Grid.Column="1"
                    Grid.Row="1"
+                   BorderBrush="Orange"
                    Margin="10,0,10,0">
 
             <Grid>

@@ -5,8 +5,7 @@
         xmlns:coreNameDef="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
         MinWidth="60"
         Content="Issues"
-        Background="#FFF6F8FA"
-        BorderBrush="LightGray"
+        Style="{StaticResource MahApps.Styles.Button.DropDown}"
         Command="{Binding NavigateCommand}"
         CommandParameter="{x:Static coreNameDef:CommandParameters.Issues}">
     
@@ -16,6 +15,7 @@
         <DataTemplate>
             <StackPanel Orientation="Vertical">
                 <Label VerticalAlignment="Center"
+                       Foreground="Black"
                        HorizontalAlignment="Center">
                     <iconPacks:Codicons Width="22"
                                         Height="22"
@@ -23,6 +23,7 @@
                 </Label>
 
                 <TextBlock Margin="4 0 0 0"
+                           Foreground="Black"
                            VerticalAlignment="Center"
                            Text="{Binding}" />
             </StackPanel>

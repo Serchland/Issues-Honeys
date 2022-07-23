@@ -5,8 +5,7 @@
              xmlns:coreNameDef ="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
              MinWidth="60"
              Content="Projects"
-             Background="#FFF6F8FA"
-             BorderBrush="LightGray"
+             Style="{StaticResource MahApps.Styles.Button.DropDown}"
              Margin="5,0,0,0"
              Command="{Binding NavigateCommand}"
              CommandParameter="{x:Static coreNameDef:CommandParameters.Projects}">

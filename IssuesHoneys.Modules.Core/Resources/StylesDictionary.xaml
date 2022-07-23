@@ -6,11 +6,11 @@
            TargetType="{x:Type Button}"
            BasedOn="{StaticResource MahApps.Styles.Button}">
 
-        <Setter Property="Background"
+        <!--<Setter Property="Background"
                 Value="Transparent"></Setter>
 
         <Setter Property="BorderBrush"
-                Value="LightGray"></Setter>
+                Value="LightGray"></Setter>-->
 
         <Setter Property="ContentTemplate">
             <Setter.Value>
@@ -55,11 +55,11 @@
            TargetType="{x:Type Button}"
            BasedOn="{StaticResource MahApps.Styles.Button}">
 
-        <Setter Property="Background"
+        <!--<Setter Property="Background"
                 Value="Transparent"></Setter>
 
         <Setter Property="BorderBrush"
-                Value="LightGray"></Setter>
+                Value="LightGray"></Setter>-->
 
         <Setter Property="ContentTemplate">
             <Setter.Value>
