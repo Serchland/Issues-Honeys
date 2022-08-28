@@ -4,10 +4,7 @@ using IssuesHoneys.Core.Types.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace IssuesHoneys.Core.Base
 {
@@ -17,15 +14,11 @@ namespace IssuesHoneys.Core.Base
         public ViewModelBase(IApplicationCommands applicationCommands)
         {
             _applicationCommands = applicationCommands;
-           
+            ArgumentExceptionMessage = Application.Current.FindResource(CaptionResources.AppMessageArgumentException).ToString();
         }
 
         #region "Properties"       
-        private string _argumentExceptionMessage;
-        public string ArgumentExceptionMessage
-        {
-            get { return _argumentExceptionMessage; }
-        }
+        public string ArgumentExceptionMessage { get; }
 
         public T _selectedItem;
         public virtual T SelectedItem

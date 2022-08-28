@@ -8,5 +8,6 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         public AppButtonViewModel(IApplicationCommands applicationCommands) : base(applicationCommands)
         {
         }
+ 
     }
 }

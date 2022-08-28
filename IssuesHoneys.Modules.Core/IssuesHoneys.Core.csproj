@@ -182,6 +182,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Types\Interfaces\IMainProperties.cs" />
     <Compile Include="Views\ButtonLabels.xaml.cs">
       <DependentUpon>ButtonLabels.xaml</DependentUpon>
     </Compile>
@@ -288,8 +289,6 @@
       <Name>IssuesHoneys.Business</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\Converters\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

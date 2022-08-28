@@ -8,6 +8,11 @@
         public const string UseDummyService = "UseDummyService";
     }
 
+    public static class BookMark
+    {
+        public const string Id = "Id";
+    }
+
     public static class CommandParameters
     {
         public const string Assignes = "Assignes";
@@ -47,9 +52,9 @@
         public const string ProjectMain = "ProjectMain";
     }
 
-    public static class BookMark
+    public static class CaptionResources
     {
-         public const string Id = "Id";
+        public const string AppMessageArgumentException = "AppMessageArgumentException";
     }
 
 }
