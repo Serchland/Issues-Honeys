@@ -88,7 +88,7 @@
             <Button 
                     Content="{StaticResource ButtonCreateLabelCaption}"
                     Margin="10,0,0,0"
-                    MaxWidth="90"
+                    MaxWidth="100"
                     Command="{Binding CreateLabelCommand}"
                     controls:ControlsHelper.FocusBorderBrush="Orange"/>
         </StackPanel>

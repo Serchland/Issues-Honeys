@@ -3,22 +3,42 @@ using IssuesHoneys.Core.Base;
 using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
 using System.Collections.ObjectModel;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
+
     public class NewIssueViewModel : ViewModelBase<Issue>
     {
+        IMainProperties _mainProperties;
         IIssueService _issuesService;
-        public NewIssueViewModel(IApplicationCommands applicationCommands, IIssueService issuesService) : base(applicationCommands)
+        public NewIssueViewModel(IMainProperties mainProperties, IIssueService issuesService, IApplicationCommands applicationCommands) : base(applicationCommands)
         {
+            _mainProperties = mainProperties;
             _issuesService = issuesService;
-            _labels = new ObservableCollection<Label>(_issuesService.GetLabels());
-            _milestones = new ObservableCollection<Milestone>(_issuesService.GetMilestones());
-            _users = new ObservableCollection<User>(_issuesService.GetUsers());
 
-            _issueTextView = @"**Describe the bug**
+            _foregroundRed = 0x00;
+            _foregroundGreen = 0x00;
+            _foregroundBlue = 0x00;
+
+            _backgroundRed = 0xFF;
+            _backgroundGreen = 0xFF;
+            _backgroundBlue = 0xFF;
+
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            if (_mainProperties.Labels == null)
+                Labels = new ObservableCollection<Label>(_issuesService.GetLabels());
+
+            if (_mainProperties.Issues == null)
+                Issues = new ObservableCollection<Issue>(_issuesService.GetIssues());
+
+            if (_mainProperties.Users == null)
+                Users = new ObservableCollection<User>(_issuesService.GetUsers());
+
+            IssueTextView = @"**Describe the bug**
 A clear and concise description of what the bug is.
 
 **To Reproduce**
@@ -42,39 +62,19 @@ If applicable, add screenshots to help explain your problem.
 **Additional context**
 Add any other context about the problem here.
 ";
-
-            _foregroundRed = 0x00;
-            _foregroundGreen = 0x00;
-            _foregroundBlue = 0x00;
-
-            _backgroundRed = 0xFF;
-            _backgroundGreen = 0xFF;
-            _backgroundBlue = 0xFF;
         }
 
         #region "Properties"
-        private ObservableCollection<Milestone> _milestones;
-        public ObservableCollection<Milestone> Milestones
-        {
-            get
-            {
-                return _milestones;
-            }
-            set
-            {
-                SetProperty(ref _milestones, value);
-            }
-        }
-
         private ObservableCollection<Label> _labels;
         public ObservableCollection<Label> Labels
         {
             get
             {
-                return _labels;
+                return _mainProperties.Labels;
             }
             set
             {
+                _mainProperties.Labels = value;
                 SetProperty(ref _labels, value);
             }
         }
@@ -84,13 +84,29 @@ Add any other context about the problem here.
         {
             get
             {
-                return _users;
+                return _mainProperties.Users;
             }
             set
             {
+                _mainProperties.Users = value;
                 SetProperty(ref _users, value);
             }
         }
+
+        private ObservableCollection<Issue> _issues;
+        public ObservableCollection<Issue> Issues
+        {
+            get
+            {
+                return _mainProperties.Issues;
+            }
+            set
+            {
+                _mainProperties.Issues = value;
+                SetProperty(ref _issues, value);
+            }
+        }
+
 
         private string _issueTextView;
         public string IssueTextView

@@ -17,23 +17,26 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 {
     public class LabelsViewModel : ViewModelBase<Label>
     {
-        private IIssueService _isuesService;
-        public LabelsViewModel(IApplicationCommands applicationsCommands, IIssueService issueService) : base(applicationsCommands)
+        private IIssueService _issuesService;
+        private IMainProperties _mainProperties;
+        public LabelsViewModel(IMainProperties mainProperties, IIssueService issueService, IApplicationCommands applicationsCommands) : base(applicationsCommands)
         {
-            _isuesService = issueService;
+            _mainProperties = mainProperties;
+            _issuesService = issueService;
             Initialize();
         }
 
         private void Initialize()
         {
+            if (_mainProperties.Labels == null)
+                Labels = new ObservableCollection<Label>(_issuesService.GetLabels());
 
-            _labels = new ObservableCollection<Label>(_isuesService.GetLabels());
-            _labelsView = CollectionViewSource.GetDefaultView(_labels);
-            _newLabel = new Label(Brushes.Gray);
-            _newLabelViewVisibility = Visibility.Collapsed;
-            _totalLabels = _labels.Count.ToString();
-            _labelsView.Filter = LabelsFilter;
-            _labelsView.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+            LabelsView = CollectionViewSource.GetDefaultView(Labels);
+            NewLabel = new Label(Brushes.Gray);
+            NewLabelViewVisibilitity = Visibility.Collapsed;
+            TotalLabels = Labels.Count.ToString();
+            LabelsView.Filter = LabelsFilter;
+            LabelsView.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
 
             _sortItems = GetSortItems();
         }
@@ -75,8 +78,8 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             if (_newLabel == null)
                 throw new ArgumentException(ArgumentExceptionMessage);
 
-            _isuesService.CreateLabel(NewLabel);
-            Labels.Add(NewLabel);
+            _issuesService.CreateLabel(NewLabel);
+            Labels = new ObservableCollection<Label>(_issuesService.GetLabels());
             NewLabelViewVisibilitity = Visibility.Collapsed;
         }
 
@@ -90,8 +93,8 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             if (_selectedItem == null)
                 throw new ArgumentException(ArgumentExceptionMessage);
 
-            _isuesService.DeleteLabel(SelectedItem.Id);
-            Labels.Remove(SelectedItem);
+            _issuesService.DeleteLabel(SelectedItem.Id);
+            Labels = new ObservableCollection<Label>(_issuesService.GetLabels());
             CollectionViewSource.GetDefaultView(Labels).Refresh();
         }
 
@@ -115,7 +118,8 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             if (_selectedItem == null)
                 throw new ArgumentException(ArgumentExceptionMessage);
 
-            _isuesService.UpdateLabel(SelectedItem);
+            _issuesService.UpdateLabel(SelectedItem);
+            Labels = new ObservableCollection<Label>(_issuesService.GetLabels());
             SelectedItem.IsEdditing = false;
         }
 
@@ -221,10 +225,11 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         {
             get
             {
-                return _labels;
+                return _mainProperties.Labels;
             }
             set
             {
+                _mainProperties.Labels = value;
                 SetProperty(ref _labels, value);
             }
         }

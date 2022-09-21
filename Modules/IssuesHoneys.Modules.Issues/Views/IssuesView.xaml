@@ -156,8 +156,10 @@
                                    VerticalContentAlignment="Center" />
                         </StackPanel>
 
+                        <!--SERCH00: Review margin = -5 Why?-->
                         <Grid Grid.Column="3"
                               Grid.ColumnSpan="5"
+                              Margin="-5,0,0,0"
                               HorizontalAlignment="Right">
 
                             <Grid.ColumnDefinitions>

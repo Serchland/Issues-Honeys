@@ -19,27 +19,37 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
     {
         private IssuesFilterEnum? issuesFilterEnum;
         private IIssueService _issuesService;
-        public IssuesViewModel(IApplicationCommands applicationsCommands, IIssueService issueService) : base(applicationsCommands)
+        private IMainProperties _mainProperties;
+        public IssuesViewModel(IMainProperties mainProperties, IIssueService issueService, IApplicationCommands applicationsCommands) : base(applicationsCommands)
         {
+            _mainProperties = mainProperties;
             _issuesService = issueService;
             Initialize();
         }
 
         private void Initialize()
         {
-            _labels = new ObservableCollection<Label>(_issuesService.GetLabels());
-            _issues = new ObservableCollection<Issue>(_issuesService.GetIssues());
-            _milestones = new ObservableCollection<Milestone>(_issuesService.GetMilestones());
-            _users = new ObservableCollection<User>(_issuesService.GetUsers());
-            _issuesView = CollectionViewSource.GetDefaultView(_issues);
-            _totalLabels = _labels.Count.ToString();
-            _totalMilestones = _milestones.Count.ToString();
-         
-            _issuesView.Filter = IssuesFilter;
-            _issuesView.SortDescriptions.Add(new SortDescription("CrtnDate", ListSortDirection.Descending));
+            if (_mainProperties.Labels == null)
+                Labels = new ObservableCollection<Label>(_issuesService.GetLabels());
 
-            _milestones.Insert(0, new Milestone() { Title = Application.Current.Resources["LabelNoMilestone"].ToString() });
-            _labels.Insert(0, new Label() { Name = Application.Current.Resources["LabelUnlabeled"].ToString(), Color = Brushes.Transparent });
+            if (_mainProperties.Issues == null)
+                Issues = new ObservableCollection<Issue>(_issuesService.GetIssues());
+
+            if (_mainProperties.Milestones == null)
+                Milestones = new ObservableCollection<Milestone>(_issuesService.GetMilestones());
+
+            if (_mainProperties.Users == null)
+                Users = new ObservableCollection<User>(_issuesService.GetUsers());
+
+            TotalLabels = Labels.Count.ToString();
+            TotalMilestones = Milestones.Count.ToString();
+
+            IssuesView = CollectionViewSource.GetDefaultView(Issues);
+            IssuesView.Filter = IssuesFilter;
+            IssuesView.SortDescriptions.Add(new SortDescription("CrtnDate", ListSortDirection.Descending));
+
+            Milestones.Insert(0, new Milestone() { Title = Application.Current.Resources["LabelNoMilestone"].ToString() });
+            Labels.Insert(0, new Label() { Name = Application.Current.Resources["LabelUnlabeled"].ToString(), Color = Brushes.Transparent });
             
             _sortItems = GetSortItems();
             IsFiltered = false;
@@ -221,11 +231,10 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         public ObservableCollection<Milestone> Milestones
         {
             get
-            {
-                return _milestones;
-            }
+            { return _milestones; }
             set
             {
+                _mainProperties.Milestones = value;
                 SetProperty(ref _milestones, value);
             }
         }
@@ -233,13 +242,39 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         private ObservableCollection<Label> _labels;
         public ObservableCollection<Label> Labels
         {
+            get { return _mainProperties.Labels; }
+            set
+            {
+                _mainProperties.Labels = value;
+                SetProperty(ref _labels, value);
+            }
+        }
+
+        private ObservableCollection<User> _users;
+        public ObservableCollection<User> Users
+        {
             get
             {
-                return _labels;
+                return _mainProperties.Users;
             }
             set
             {
-                SetProperty(ref _labels, value);
+                _mainProperties.Users = value;
+                SetProperty(ref _users, value);
+            }
+        }
+
+        private ObservableCollection<Issue> _issues;
+        public ObservableCollection<Issue> Issues
+        {
+            get
+            {
+                return _mainProperties.Issues;
+            }
+            set
+            {
+                _mainProperties.Issues = value;
+                SetProperty(ref _issues, value);
             }
         }
 
@@ -257,25 +292,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             set { SetProperty(ref _totalMilestones, value); }
         }
 
-        private ObservableCollection<User> _users;
-        public ObservableCollection<User> Users
-        {
-            get
-            {
-                return _users;
-            }
-            set
-            {
-                SetProperty(ref _users, value);
-            }
-        }
-
-        private ObservableCollection<Issue> _issues;
-        public ObservableCollection<Issue> Issues
-        {
-            get { return _issues; }
-            set { SetProperty(ref _issues, value); }
-        }
+       
 
         //private Issue _selectedItem;
         //public Issue SelectedItem

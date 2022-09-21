@@ -35,6 +35,7 @@ namespace Issues_Honeys
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IApplicationCommands, ApplicationCommands>();
+            containerRegistry.RegisterSingleton<IMainProperties, MainProperties>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

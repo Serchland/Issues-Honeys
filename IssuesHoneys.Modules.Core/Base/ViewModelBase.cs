@@ -27,6 +27,7 @@ namespace IssuesHoneys.Core.Base
             set { SetProperty(ref _selectedItem, value); }
         }
         #endregion
+
         #region "Commands"
 
         private DelegateCommand<string> _navigateCommand;
@@ -40,10 +41,9 @@ namespace IssuesHoneys.Core.Base
 
             if (param == CommandParameters.Details)
             {
-                var current = _selectedItem as Issue;
-                param += string.Format("{0}{1}", ";", current.Id.ToString());
+               var current = _selectedItem as Issue;
+               param += string.Format("{0}{1}", ";", current.Id.ToString());  
             }
-
 
             _applicationCommands.NavigateCommand.Execute(param);
         }

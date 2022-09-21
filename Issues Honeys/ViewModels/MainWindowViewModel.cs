@@ -1,5 +1,4 @@
-﻿using IssuesHoneys.Business.Types;
-using IssuesHoneys.Core.Base;
+﻿using IssuesHoneys.Core.Base;
 using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Core.Types.Interfaces;
 using Prism.Commands;

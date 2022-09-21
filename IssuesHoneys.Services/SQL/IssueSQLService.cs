@@ -40,12 +40,14 @@ namespace IssuesHoneys.Services.SQL
                                         ,[COLOR]
                                         ,[CRTNDATE]
                                         ,[Fk_CRTNUSER]
+                                        ,[ISACTIVE]
                                         ,[NAME])
                                     VALUES
                                         ('{description}'
                                         ,'{color}'
                                         ,'{crtnDate}'
-                                        ,{crtnUser}
+                                        , {crtnUser}
+                                        , 1
                                         ,'{name}')
                                ";
 

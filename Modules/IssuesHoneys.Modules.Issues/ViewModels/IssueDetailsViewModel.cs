@@ -11,15 +11,31 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 {
     public class IssueDetailsViewModel : ViewModelBase<Issue>, INavigationAware
     {
+        IMainProperties _mainProperties;
         private IIssueService _issuesService;
-        public IssueDetailsViewModel(IApplicationCommands applicationCommands, IIssueService issueService) : base(applicationCommands)
+        public IssueDetailsViewModel(IMainProperties mainProperties, IIssueService issueService, IApplicationCommands applicationCommands) : base(applicationCommands)
         {
+            _mainProperties = mainProperties;
             _issuesService = issueService;
 
-            _labels = new ObservableCollection<Label>(_issuesService.GetLabels());
-            _issues = new ObservableCollection<Issue>(_issuesService.GetIssues());
-            _milestones = new ObservableCollection<Milestone>(_issuesService.GetMilestones());
-            _users = new ObservableCollection<User>(_issuesService.GetUsers());
+          
+
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            if (_mainProperties.Labels == null)
+                Labels = new ObservableCollection<Label>(_issuesService.GetLabels());
+
+            if (_mainProperties.Issues == null)
+                Issues = new ObservableCollection<Issue>(_issuesService.GetIssues());
+
+            if (_mainProperties.Milestones == null)
+                Milestones = new ObservableCollection<Milestone>(_issuesService.GetMilestones());
+
+            if (_mainProperties.Users == null)
+                Users = new ObservableCollection<User>(_issuesService.GetUsers());
         }
 
         #region "Properties"
@@ -32,6 +48,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             }
             set
             {
+                _mainProperties.Milestones = value;
                 SetProperty(ref _milestones, value);
             }
         }
@@ -41,10 +58,11 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         {
             get
             {
-                return _labels;
+                return _mainProperties.Labels;
             }
             set
             {
+                _mainProperties.Labels = value;
                 SetProperty(ref _labels, value);
             }
         }
@@ -54,10 +72,11 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         {
             get
             {
-                return _users;
+                return _mainProperties.Users;
             }
             set
             {
+                _mainProperties.Users = value;
                 SetProperty(ref _users, value);
             }
         }
@@ -67,10 +86,11 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         {
             get
             {
-                return _issues;
+                return _mainProperties.Issues;
             }
             set
             {
+                _mainProperties.Issues = value;
                 SetProperty(ref _issues, value);
             }
         }

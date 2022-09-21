@@ -8,25 +8,36 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 {
     public class MilestonesViewModel : ViewModelBase<Milestone>
     {
-        IIssueService _issueService;
-        public MilestonesViewModel(IApplicationCommands applicationCommands, IIssueService issueService) : base(applicationCommands)
+        IMainProperties _mainProperties;
+        IIssueService _issuesService;
+        public MilestonesViewModel(IMainProperties mainProperties, IIssueService issuesService, IApplicationCommands applicationCommands) : base(applicationCommands)
         {
-            _issueService = issueService;
+            _mainProperties = mainProperties;
+            _issuesService = issuesService;
             Initialize();
         }
 
         private void Initialize()
         {
-            _milestones = new ObservableCollection<Milestone>(_issueService.GetMilestones());
-            _totalMilestones = _milestones.Count.ToString();
+            if (_mainProperties.Milestones == null)
+                Milestones = new ObservableCollection<Milestone>(_issuesService.GetMilestones());
+
+            _totalMilestones = Milestones.Count.ToString();
         }
 
         #region "Properties"
         private ObservableCollection<Milestone> _milestones;
         public ObservableCollection<Milestone> Milestones
         {
-            get { return _milestones; }
-            set { SetProperty(ref _milestones, value); }
+            get
+            {
+                return _milestones;
+            }
+            set
+            {
+                _mainProperties.Milestones = value;
+                SetProperty(ref _milestones, value);
+            }
         }
 
         private string _totalMilestones;
