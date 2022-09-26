@@ -30,7 +30,7 @@
                        VerticalAlignment="Bottom">
         </Separator>
 
-        <coreViews:DropDownLabels 
+        <coreViews:DropDownLabels
                    Grid.Column="0" 
                    Grid.Row="1">
         </coreViews:DropDownLabels>

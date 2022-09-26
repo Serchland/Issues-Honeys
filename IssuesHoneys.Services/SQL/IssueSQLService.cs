@@ -1,4 +1,5 @@
 ﻿using IssuesHoneys.Business.Types;
+using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Services.Interfaces;
 using IssuesHoneys.Services.NameDefinition;
 using Prism.Mvvm;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Windows;
 
 namespace IssuesHoneys.Services.SQL
 {
@@ -184,13 +186,26 @@ namespace IssuesHoneys.Services.SQL
         /// Obtain LABELS from the SQL model. Implementation of IIssueService.GetLabels
         /// </summary>
         /// <returns>List<Label></returns>
-        public List<Label> GetLabels()
+        public List<Label> GetLabels(LabelType labelType)
         {
             //SERCH00: Assess whether it is necessary to have the values in memory
             var labels = new List<Label>();
             var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
             var queryString = $@"SELECT * FROM [HONEYS].[issues].[LABELS] WHERE ISACTIVE = 1;";
+            switch (labelType)
+            {
+                case LabelType.Issue:
+                    queryString = $@"SELECT * FROM [HONEYS].[issues].[LABELS] WHERE ISACTIVE = 1 AND LABELTYPE = 1";
+                    break;
 
+                case LabelType.Project:
+                    queryString = $@"SELECT * FROM [HONEYS].[issues].[LABELS] WHERE ISACTIVE = 1 AND LABELTYPE = 2";
+                    break;
+
+                default:
+                    throw new ArgumentException(Application.Current.FindResource(MessagesResources.AppArgumentException).ToString());
+            }
+                
             using (var connection = new SqlConnection(connectionString))
             {
                 var command = new SqlCommand(queryString, connection);

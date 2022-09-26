@@ -16,6 +16,9 @@
 -- 11 USERASSIGNED
 -- 12 USERDELETED
 
+--LABEL TYPES:
+-- 1 ISSUES
+-- 2 PROJECTS
 
 USE [HONEYS]
 GO 
@@ -188,10 +191,10 @@ IF Object_id('[issues].[LABELS]') IS NOT NULL
 		   [Fk_CRTNUSER]		 INT NOT NULL,
            [ID]					 INT IDENTITY (1, 1) NOT NULL,
 		   [ISACTIVE]			 BIT NOT NULL,
+		   [LABELTYPE]			 INT NOT NULL,
            [NAME]                VARCHAR(50) NOT NULL,
-		   [TOTALISSUES] AS
-           [issues].[Function_Totalissues]([ID]),
-
+		   [TOTALISSUES] AS [issues].[Function_Totalissues]([ID]),
+		   
            CONSTRAINT [PK_Labels_Id] PRIMARY KEY CLUSTERED (
            [ID] 
 		   ASC),
@@ -214,9 +217,10 @@ ELSE
 		   [Fk_CRTNUSER]		 INT NOT NULL,
            [ID]					 INT IDENTITY (1, 1) NOT NULL,
 		   [ISACTIVE]			 BIT NOT NULL,
+		   [LABELTYPE]			 INT NOT NULL,
            [NAME]                VARCHAR(50) NOT NULL,
-		   [TOTALISSUES] AS
-           [issues].[Function_Totalissues]([ID]),
+		   [TOTALISSUES] AS [issues].[Function_Totalissues]([ID]),
+		   
 
            CONSTRAINT [PK_Labels_Id] PRIMARY KEY CLUSTERED (
            [ID] 
@@ -864,11 +868,12 @@ INSERT INTO [issues].[LABELS]
 				[CRTNDATE],
 				[Fk_CRTNUSER],
 				[ISACTIVE],
+				[LABELTYPE],
 				[NAME])
 VALUES      (
 				'Something isnt working', '#FFFF0000', 
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				7, 1, 'bug'
+				7, 1, 1, 'bug'
 			)
 
 GO
@@ -880,11 +885,12 @@ INSERT INTO [issues].[LABELS]
 				[CRTNDATE],
 				[Fk_CRTNUSER],
 				[ISACTIVE],
+				[LABELTYPE],
 				[NAME])
 VALUES      (
 				'New feature or request', '#FFADD8E6',
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				7, 1, 'enhancement'
+				7, 1, 1, 'enhancement'
 			)
 
 GO
@@ -896,11 +902,12 @@ INSERT INTO [issues].[LABELS]
 				[CRTNDATE],
 				[Fk_CRTNUSER],
 				[ISACTIVE],
+				[LABELTYPE],
 				[NAME])
 VALUES      (
 				'Further information is requested', '#FFFFC0CB',
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				7, 1, 'question'
+				7, 1, 1, 'question'
 			)
 
 GO
@@ -912,11 +919,12 @@ INSERT INTO [issues].[LABELS]
 				[CRTNDATE],
 				[Fk_CRTNUSER],
 				[ISACTIVE],
+				[LABELTYPE],
 				[NAME])
 VALUES      (
 				'This issue already exists', '#FFFFD700',
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				7, 1, 'duplicate'
+				7, 1, 1, 'duplicate'
 			)
 
 GO
@@ -928,11 +936,12 @@ INSERT INTO [issues].[LABELS]
 				[CRTNDATE],
 				[ISACTIVE],
 				[Fk_CRTNUSER],
+				[LABELTYPE],
 				[NAME])
 VALUES      (
 				'Extra attention is needed', '#FF008000',
 				DATEADD(DAY, (ABS(CHECKSUM(NEWID())) % 3650) * -1, GETDATE()),
-				7, 1, 'help wanted'
+				7, 1, 1, 'help wanted'
 			)
 
 GO

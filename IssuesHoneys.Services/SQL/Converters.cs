@@ -69,10 +69,10 @@ namespace IssuesHoneys.Services.SQL
             //[Fk_CRTNUSER] [int] NOT NULL,
             //[ID] [int] IDENTITY(1, 1) NOT NULL,
             //[ISACTIVE] [bit] NOT NULL,
+            //[LABELTYPE] [int] not NULL,
             //[NAME] [varchar](50) NOT NULL,
             //[TOTALISSUES] [int] NOT NULL,
 
-            int labelId = 0;
             Label result = new Label();
             int idx = 0;
 
@@ -80,9 +80,9 @@ namespace IssuesHoneys.Services.SQL
             result.Color = Convert.ToString(reader[idx++]).ToBrush();
             result.CrtnDate = Convert.ToDateTime(reader[idx++]);
             result.CrtnUser = Convert.ToString(reader[idx++]);
-            labelId = Convert.ToInt32(reader[idx++]);
-            result.Id = labelId;
-            idx++;
+            result.Id = Convert.ToInt32(reader[idx++]);
+            result.IsActive = (Convert.ToInt32(reader[idx++]) == 1);
+            result.LabelType = (LabelType)Convert.ToInt32(reader[idx++]);
             result.Name = Convert.ToString(reader[idx++]);
             result.TotalIssues = Convert.ToInt32(reader[idx++]);
 

@@ -56,7 +56,7 @@ namespace IssuesHoneys.Services.Interfaces
         /// Method used to obtain the LABELS from the model
         /// </summary>
         /// <returns>List<Label></returns>
-        List<Label> GetLabels();
+        List<Label> GetLabels(LabelType labelType);
 
         /// <summary>
         /// Method used to obtain the MILESTONES from the model

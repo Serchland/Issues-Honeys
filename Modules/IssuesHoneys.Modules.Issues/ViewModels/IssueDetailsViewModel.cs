@@ -13,7 +13,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
     {
         IMainProperties _mainProperties;
         private IIssueService _issuesService;
-        public IssueDetailsViewModel(IMainProperties mainProperties, IIssueService issueService, IApplicationCommands applicationCommands) : base(applicationCommands)
+        public IssueDetailsViewModel(IMainProperties mainProperties, IIssueService issueService, IRegionManager regionManager, IApplicationCommands applicationCommands) : base(regionManager, applicationCommands)
         {
             _mainProperties = mainProperties;
             _issuesService = issueService;
@@ -26,7 +26,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         private void Initialize()
         {
             if (_mainProperties.Labels == null)
-                Labels = new ObservableCollection<Label>(_issuesService.GetLabels());
+                Labels = new ObservableCollection<Label>(_issuesService.GetLabels(LabelType.Issue));
 
             if (_mainProperties.Issues == null)
                 Issues = new ObservableCollection<Issue>(_issuesService.GetIssues());
@@ -44,7 +44,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         {
             get
             {
-                return _milestones;
+                return _mainProperties.Milestones;
             }
             set
             {

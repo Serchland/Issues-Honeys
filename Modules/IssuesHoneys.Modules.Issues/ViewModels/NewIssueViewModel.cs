@@ -2,6 +2,7 @@
 using IssuesHoneys.Core.Base;
 using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
+using Prism.Regions;
 using System.Collections.ObjectModel;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
@@ -11,7 +12,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
     {
         IMainProperties _mainProperties;
         IIssueService _issuesService;
-        public NewIssueViewModel(IMainProperties mainProperties, IIssueService issuesService, IApplicationCommands applicationCommands) : base(applicationCommands)
+        public NewIssueViewModel(IMainProperties mainProperties, IIssueService issuesService, IRegionManager regionManager, IApplicationCommands applicationCommands) : base(regionManager, applicationCommands)
         {
             _mainProperties = mainProperties;
             _issuesService = issuesService;
@@ -30,7 +31,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         private void Initialize()
         {
             if (_mainProperties.Labels == null)
-                Labels = new ObservableCollection<Label>(_issuesService.GetLabels());
+                Labels = new ObservableCollection<Label>(_issuesService.GetLabels(LabelType.Issue));
 
             if (_mainProperties.Issues == null)
                 Issues = new ObservableCollection<Issue>(_issuesService.GetIssues());

@@ -240,6 +240,15 @@ namespace IssuesHoneys.Business.Types
             set { SetProperty(ref _id, value); }
         }
 
+        private bool _isActive;
+        public bool IsActive
+        {
+            get
+            { return _isActive; }
+            set
+            { SetProperty(ref _isActive, value); }
+        }
+
         /// <summary>
         /// LABEL name
         /// </summary>
@@ -279,6 +288,15 @@ namespace IssuesHoneys.Business.Types
             { return _isSelected; }
             set
             { SetProperty(ref _isSelected, value); }
+        }
+
+        private LabelType _labelType;
+        public LabelType LabelType
+        {
+            get
+            { return _labelType; }
+            set
+            { SetProperty(ref _labelType, value); }
         }
 
         /// <summary>
@@ -466,6 +484,12 @@ namespace IssuesHoneys.Business.Types
     {
         IsOpen,
         IsClosed
+    }
+
+    public enum LabelType
+    {
+        Issue = 1,
+        Project = 2
     }
     #endregion
 }

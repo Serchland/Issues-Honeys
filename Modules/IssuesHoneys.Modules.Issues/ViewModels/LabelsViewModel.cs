@@ -4,8 +4,8 @@ using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
+using Prism.Regions;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reflection;
@@ -19,7 +19,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
     {
         private IIssueService _issuesService;
         private IMainProperties _mainProperties;
-        public LabelsViewModel(IMainProperties mainProperties, IIssueService issueService, IApplicationCommands applicationsCommands) : base(applicationsCommands)
+        public LabelsViewModel(IMainProperties mainProperties, IIssueService issueService, IRegionManager regionManager, IApplicationCommands applicationsCommands) : base(regionManager, applicationsCommands)
         {
             _mainProperties = mainProperties;
             _issuesService = issueService;
@@ -29,7 +29,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         private void Initialize()
         {
             if (_mainProperties.Labels == null)
-                Labels = new ObservableCollection<Label>(_issuesService.GetLabels());
+                Labels = new ObservableCollection<Label>(_issuesService.GetLabels(LabelType.Issue));
 
             LabelsView = CollectionViewSource.GetDefaultView(Labels);
             NewLabel = new Label(Brushes.Gray);
@@ -79,7 +79,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
                 throw new ArgumentException(ArgumentExceptionMessage);
 
             _issuesService.CreateLabel(NewLabel);
-            Labels = new ObservableCollection<Label>(_issuesService.GetLabels());
+            Labels = new ObservableCollection<Label>(_issuesService.GetLabels(LabelType.Issue));
             NewLabelViewVisibilitity = Visibility.Collapsed;
         }
 
@@ -94,10 +94,9 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
                 throw new ArgumentException(ArgumentExceptionMessage);
 
             _issuesService.DeleteLabel(SelectedItem.Id);
-            Labels = new ObservableCollection<Label>(_issuesService.GetLabels());
+            Labels = new ObservableCollection<Label>(_issuesService.GetLabels(LabelType.Issue));
             CollectionViewSource.GetDefaultView(Labels).Refresh();
         }
-
 
         private DelegateCommand _filterLabelsCommand;
         public DelegateCommand FilterLabelsCommand =>
@@ -119,7 +118,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
                 throw new ArgumentException(ArgumentExceptionMessage);
 
             _issuesService.UpdateLabel(SelectedItem);
-            Labels = new ObservableCollection<Label>(_issuesService.GetLabels());
+            Labels = new ObservableCollection<Label>(_issuesService.GetLabels(LabelType.Issue));
             SelectedItem.IsEdditing = false;
         }
 

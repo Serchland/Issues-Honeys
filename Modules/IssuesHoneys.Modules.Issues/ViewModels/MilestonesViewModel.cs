@@ -2,6 +2,7 @@
 using IssuesHoneys.Core.Base;
 using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
+using Prism.Regions;
 using System.Collections.ObjectModel;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
@@ -10,7 +11,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
     {
         IMainProperties _mainProperties;
         IIssueService _issuesService;
-        public MilestonesViewModel(IMainProperties mainProperties, IIssueService issuesService, IApplicationCommands applicationCommands) : base(applicationCommands)
+        public MilestonesViewModel(IMainProperties mainProperties, IIssueService issuesService, IRegionManager regionManager, IApplicationCommands applicationCommands) : base(regionManager, applicationCommands)
         {
             _mainProperties = mainProperties;
             _issuesService = issuesService;
@@ -31,7 +32,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         {
             get
             {
-                return _milestones;
+                return _mainProperties.Milestones;
             }
             set
             {

@@ -57,7 +57,7 @@ namespace IssuesHoneys.Services.Dummies
         /// Obtain LABELS from the SQL model. Implementation of IIssueService.GetLabels
         /// </summary>
         /// <returns>List<Label></returns>
-        public List<Label> GetLabels()
+        public List<Label> GetLabels(LabelType labelType)
         {
             return IssuesResponse.Labels();
         }

@@ -52,9 +52,10 @@
         public const string ProjectMain = "ProjectMain";
     }
 
-    public static class CaptionResources
+    public static class MessagesResources
     {
-        public const string AppMessageArgumentException = "AppMessageArgumentException";
+        public const string AppArgumentException = "AppMessageArgumentException";
+        public const string LabelMessageArgumentException = "LabelTypeArgumentException";
     }
 
 }
