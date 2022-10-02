@@ -1,12 +1,18 @@
 ﻿<UserControl x:Class="IssuesHoneys.Core.Views.IssueAssigneeing"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:coreViews="clr-namespace:IssuesHoneys.Core.Views">
+             xmlns:coreViews="clr-namespace:IssuesHoneys.Core.Views"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:coreConverters="clr-namespace:IssuesHoneys.Core.Views.Converters">
     
     <Grid Grid.Column="2"
               Grid.ColumnSpan="3"
               Grid.Row="1"
               Margin="0,20,0,0">
+
+        <Grid.Resources>
+            <coreConverters:AssigneesConverter x:Key="AssigneesConverterKey"></coreConverters:AssigneesConverter>
+        </Grid.Resources>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -19,11 +25,31 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <coreViews:DropDownAssignee  
-            Grid.Column="0" 
-            Grid.Row="0">
-        </coreViews:DropDownAssignee>
+        <StackPanel  Grid.Column="0" Grid.Row="0" Orientation="Vertical" Margin="10">
+            <coreViews:DropDownAssignee></coreViews:DropDownAssignee>
 
+            <ListView ItemsSource="{Binding SelectedItem.Assignees}" HorizontalAlignment="Right">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel  HorizontalAlignment="Right" Margin="0 0 10 0">
+                            <Label Content="{Binding Name}" ></Label>
+                            <Label Content="{Binding SurName}" ></Label>
+                            <Button Content="x" Style="{StaticResource MahApps.Styles.Button.Flat}" Background="Transparent"
+                                    Margin="-10 0 0 0" 
+                                    Padding="10 0 0 2"></Button>
+                        </DockPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <!--<ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"></StackPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>-->
+            </ListView>
+            <!--<Label Content="{Binding SelectedItem.Assignees, Converter={StaticResource AssigneesConverterKey}}"></Label>-->
+        </StackPanel>
+        
+        
         <Separator Grid.Column="0" 
                        Grid.Row="0"
                        Margin="0,0,5,0"

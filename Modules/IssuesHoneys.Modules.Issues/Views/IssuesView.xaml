@@ -6,6 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:coreNameDef="clr-namespace:IssuesHoneys.Core.NameDefinition;assembly=IssuesHoneys.Core"
              xmlns:coreViews="clr-namespace:IssuesHoneys.Core.Views;assembly=IssuesHoneys.Core"
+             xmlns:coreConverters="clr-namespace:IssuesHoneys.Core.Views.Converters;assembly=IssuesHoneys.Core"
              xmlns:converters="clr-namespace:IssuesHoneys.Modules.Issues.Views.Converters"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
@@ -16,8 +17,12 @@
         <converters:IconDetailsVisibilityConverter x:Key="IconDetailsVisibilityConverterKey"></converters:IconDetailsVisibilityConverter>
         <converters:IconMilestoneVisibilityConverter x:Key="IconMilestoneVisibilityConverterKey"></converters:IconMilestoneVisibilityConverter>
         <converters:StateColorConverter x:Key="StateColorConverterKey"></converters:StateColorConverter>
-        <converters:DropDownMultiValueConverter x:Key="DropDownMultiValueConverterKey"></converters:DropDownMultiValueConverter>
-        <converters:DropDownItemIconVisibilityConverter x:Key="DropDownItemIconVisibilityConverterKey"></converters:DropDownItemIconVisibilityConverter>
+
+
+        <coreConverters:DropDownItemIconVisibilityConverter x:Key="DropDownItemIconVisibilityConverterKey"></coreConverters:DropDownItemIconVisibilityConverter>
+        <coreConverters:DropDownMultiValueConverter x:Key="DropDownMultiValueConverterKey"></coreConverters:DropDownMultiValueConverter>
+        <!--<converters:DropDownMultiValueConverter x:Key="DropDownMultiValueConverterKey"></converters:DropDownMultiValueConverter>-->
+        <!--<converters:DropDownItemIconVisibilityConverter x:Key="DropDownItemIconVisibilityConverterKey"></converters:DropDownItemIconVisibilityConverter>-->
         <converters:IsFilteredConverter x:Key="IsFilteredConverterKey"></converters:IsFilteredConverter>
         <converters:TextBlockMultiValueConverter x:Key="TextBlockMultiValueConverterKey"></converters:TextBlockMultiValueConverter>
     </UserControl.Resources>

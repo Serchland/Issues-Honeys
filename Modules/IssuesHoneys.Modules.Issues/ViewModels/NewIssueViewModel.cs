@@ -2,7 +2,9 @@
 using IssuesHoneys.Core.Base;
 using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
+using Prism.Commands;
 using Prism.Regions;
+using System;
 using System.Collections.ObjectModel;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
@@ -64,6 +66,21 @@ If applicable, add screenshots to help explain your problem.
 Add any other context about the problem here.
 ";
         }
+
+
+        #region "Commands"
+        private DelegateCommand<object> _filterIssuesCommand;
+        public DelegateCommand<object> FilterIssuesCommand =>
+            _filterIssuesCommand ?? (_filterIssuesCommand = new DelegateCommand<object>(ExecuteFilterIssuesCommand));
+
+        void ExecuteFilterIssuesCommand(object param)
+        {
+            if (param == null)
+                throw new ArgumentNullException(ArgumentExceptionMessage);
+
+            var parameters = (object[])param;
+        }
+        #endregion
 
         #region "Properties"
         private ObservableCollection<Label> _labels;

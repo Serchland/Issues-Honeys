@@ -1,20 +1,17 @@
-﻿using System;
+﻿using IssuesHoneys.Business.Types;
+using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
 
 namespace IssuesHoneys.Core.Views.Converters
 {
-    public class DropDownItemIconVisibilityConverter : IValueConverter
+    public class AssigneesConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Visibility result = Visibility.Collapsed;
+            var user = (User)value;
 
-            if (value is null || (int)value > 0)
-                result = Visibility.Visible;
-
-            return result;
+            return String.Format("{0}{1}", user.Name, user.SurName);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -3,6 +3,7 @@ using IssuesHoneys.Core.Base;
 using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
+using Prism.Commands;
 using Prism.Regions;
 using System;
 using System.Collections.ObjectModel;
@@ -16,9 +17,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         public IssueDetailsViewModel(IMainProperties mainProperties, IIssueService issueService, IRegionManager regionManager, IApplicationCommands applicationCommands) : base(regionManager, applicationCommands)
         {
             _mainProperties = mainProperties;
-            _issuesService = issueService;
-
-          
+            _issuesService = issueService;     
 
             Initialize();
         }
@@ -37,6 +36,20 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             if (_mainProperties.Users == null)
                 Users = new ObservableCollection<User>(_issuesService.GetUsers());
         }
+
+        #region "Commands"
+        private DelegateCommand<object> _filterIssuesCommand;
+        public DelegateCommand<object> FilterIssuesCommand =>
+            _filterIssuesCommand ?? (_filterIssuesCommand = new DelegateCommand<object>(ExecuteFilterIssuesCommand));
+
+        void ExecuteFilterIssuesCommand(object param)
+        {
+            if (param == null)
+                throw new ArgumentNullException(ArgumentExceptionMessage);
+
+            var parameters = (object[])param;
+        }
+        #endregion
 
         #region "Properties"
         private ObservableCollection<Milestone> _milestones;

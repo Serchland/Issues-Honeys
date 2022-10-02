@@ -10,8 +10,9 @@
              Background="Transparent"
              VerticalAlignment="Center" 
              HorizontalAlignment="Right"
-             ItemsSource="{Binding Users}"
+             ItemsSource="{Binding Users}" 
              Content="{StaticResource DropDownAssignee}"
+             DataContext="{Binding}"
              ArrowMouseOverBrush ="Orange"
              ArrowPressedBrush="DarkOrange">
 
@@ -24,19 +25,21 @@
             <Grid SnapsToDevicePixels="True">
                 <Rectangle Name="Border" Stroke="Transparent" StrokeThickness="1"/>
                 <Grid>
-
-                    <StackPanel Orientation="Horizontal" >
-                        <Label>
-                            <iconPacks:PackIconBoxIcons Kind="RegularUser" />
-                        </Label>
-                        <Label Content="{Binding Name}"></Label>
-                        <Label Content="{Binding SurName}"></Label>
-                    </StackPanel>
-
-                    <ContentPresenter Grid.Column="1" Margin="6"
-                                                        Content=""
+                    <ContentPresenter x:Name="mo" Grid.Column="1" Margin="6"
                                                         RecognizesAccessKey="True"
-                                                        SnapsToDevicePixels="True"/>
+                                                        SnapsToDevicePixels="True">
+
+                        <ContentPresenter.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Label>
+                                    <iconPacks:PackIconBoxIcons Kind="RegularUser" />
+                                </Label>
+                                <Label Content="{Binding Name}" Tag="{Binding Id}" x:Name="NameLabel"></Label>
+                                <Label Content="{Binding SurName}"></Label>
+                            </StackPanel>
+                        </ContentPresenter.Content>
+                    </ContentPresenter> 
+                                      
                 </Grid>
             </Grid>
         </DataTemplate>

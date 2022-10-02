@@ -190,6 +190,7 @@
     <Compile Include="Views\ButtonMilestones.xaml.cs">
       <DependentUpon>ButtonMilestones.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Converters\AssigneesConverter.cs" />
     <Compile Include="Views\Converters\DropDownItemIconVisibilityConverter.cs" />
     <Compile Include="Views\Converters\DropDownMultiValueConverter.cs" />
     <Compile Include="Views\DropDownAssignee.xaml.cs">
