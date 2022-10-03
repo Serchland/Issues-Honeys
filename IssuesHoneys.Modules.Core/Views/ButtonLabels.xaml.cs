@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using IssuesHoneys.Core.Events.Prism;
+using Prism.Events;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace IssuesHoneys.Core.Views
@@ -25,7 +27,5 @@ namespace IssuesHoneys.Core.Views
         {
             element.SetValue(TotalItemsProperty, value);
         }
-
-        
     }
 }

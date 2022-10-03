@@ -1,7 +1,9 @@
 ﻿using IssuesHoneys.Business.Types;
+using IssuesHoneys.Core.Events.Prism;
 using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Core.Types.Interfaces;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
@@ -14,14 +16,17 @@ namespace IssuesHoneys.Core.Base
     {
         private IApplicationCommands _applicationCommands;
         private IRegionManager _regionManager;
+        private IEventAggregator _eventAggregator;
 
-        public ViewModelBase(IRegionManager regionManager, IApplicationCommands applicationCommands)
+        public ViewModelBase(IRegionManager regionManager, IApplicationCommands applicationCommands, IEventAggregator eventAggregator)
         {
             _applicationCommands = applicationCommands;
             ArgumentExceptionMessage = Application.Current.FindResource(MessagesResources.AppArgumentException).ToString();
 
             _regionManager = regionManager;
             applicationCommands.NavigateCommand.RegisterCommand(CompositeNavigateCommand);
+
+            _eventAggregator = eventAggregator;
         }
 
         #region "Properties"       
@@ -76,6 +81,7 @@ namespace IssuesHoneys.Core.Base
                     _regionManager.RequestNavigate(RegionNames.FooterContentRegion, RegisterForNavigation.IssueFooter);
                     _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.IssueDetails, navParam);
 
+                    _eventAggregator.GetEvent<ResaizeButtonContentRegionHeightEvent>().Publish();
                     break;
 
                 case CommandParameters.Issues:
@@ -87,28 +93,33 @@ namespace IssuesHoneys.Core.Base
                 case CommandParameters.Labels:
                     _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.LabelsMain);
 
+                    _eventAggregator.GetEvent<ResaizeButtonContentRegionHeightEvent>().Publish();
                     break;
 
                 case CommandParameters.Milestones:
                 case CommandParameters.CreateMilestone:
                     _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.MilestonesMain);
 
+                    _eventAggregator.GetEvent<ResaizeButtonContentRegionHeightEvent>().Publish();
                     break;
 
                 case CommandParameters.NewIssue:
                     _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.NewIssue);
 
+                    _eventAggregator.GetEvent<ResaizeButtonContentRegionHeightEvent>().Publish();
                     break;
 
                 case CommandParameters.NewMilestone:
                     _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.NewMilestone);
 
+                    _eventAggregator.GetEvent<ResaizeButtonContentRegionHeightEvent>().Publish();
                     break;
 
                 case CommandParameters.Projects:
                     _regionManager.RequestNavigate(RegionNames.FooterContentRegion, RegisterForNavigation.ProjectFooter);
                     _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.ProjectMain);
 
+                    _eventAggregator.GetEvent<ResaizeButtonContentRegionHeightEvent>().Publish();
                     break;
 
                 default:

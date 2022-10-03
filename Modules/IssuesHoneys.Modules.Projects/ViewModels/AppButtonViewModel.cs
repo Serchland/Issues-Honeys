@@ -1,5 +1,6 @@
 ﻿using IssuesHoneys.Core.Base;
 using IssuesHoneys.Core.Types.Interfaces;
+using Prism.Events;
 using Prism.Regions;
 
 namespace IssuesHoneys.Modules.Projects.ViewModels
@@ -7,7 +8,7 @@ namespace IssuesHoneys.Modules.Projects.ViewModels
     public class AppButtonViewModel : ViewModelBase<object>
     {
         private IApplicationCommands _applicationCommands;
-        public AppButtonViewModel(IRegionManager regionManager, IApplicationCommands applicationCommands) : base(regionManager, applicationCommands)
+        public AppButtonViewModel(IRegionManager regionManager, IApplicationCommands applicationCommands, IEventAggregator eventAggregator) : base(regionManager, applicationCommands, eventAggregator)
         {
             _applicationCommands = applicationCommands;
         }

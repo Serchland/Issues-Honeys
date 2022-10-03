@@ -4,6 +4,7 @@ using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Core.Types.Interfaces;
 using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Regions;
 using System;
 using System.Collections.ObjectModel;
@@ -19,7 +20,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
     {
         private IIssueService _issuesService;
         private IMainProperties _mainProperties;
-        public LabelsViewModel(IMainProperties mainProperties, IIssueService issueService, IRegionManager regionManager, IApplicationCommands applicationsCommands) : base(regionManager, applicationsCommands)
+        public LabelsViewModel(IMainProperties mainProperties, IIssueService issueService, IRegionManager regionManager, IApplicationCommands applicationsCommands, IEventAggregator eventAggregator) : base(regionManager, applicationsCommands, eventAggregator)
         {
             _mainProperties = mainProperties;
             _issuesService = issueService;

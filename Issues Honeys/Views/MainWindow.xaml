@@ -24,7 +24,7 @@
     
     <mah:MetroWindow.LeftWindowCommands>
         <mah:WindowCommands>
-            <Button Content="Issues" Command="{Binding NavigateCommand}" 
+            <Button Content="Issues" Command="{Binding NavigateModuleCommand}" 
                     CommandParameter="{x:Static core:CommandParameters.Issues}">
                 <Button.ContentTemplate>
                     <DataTemplate>

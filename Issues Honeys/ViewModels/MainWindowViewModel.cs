@@ -1,17 +1,31 @@
-﻿using Prism.Mvvm;
+﻿using IssuesHoneys.Core.Events.Prism;
+using IssuesHoneys.Core.Types.Interfaces;
+using Prism.Commands;
+using Prism.Events;
+using Prism.Mvvm;
+using System;
 
 namespace Issues_Honeys.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
         //IRegionManager _regionManager;
-
-        public MainWindowViewModel() 
+        private IApplicationCommands _applicationCommands;
+        private IEventAggregator _eventAggregator;
+        public MainWindowViewModel(IApplicationCommands applicationCommands, IEventAggregator eventAggregator) 
         {
             //_regionManager = regionManager;
             //applicationCommands.NavigateCommand.RegisterCommand(NavigateCommand);
+            _eventAggregator = eventAggregator;
+            _eventAggregator.GetEvent<ResaizeButtonContentRegionHeightEvent>().Subscribe(OnResaizeButtonContentRegionHeightEvent);
 
-            _buttonContentRegionHeight = 73;
+            _applicationCommands = applicationCommands;
+            ButtonContentRegionHeight = 73;
+        }
+
+        private void OnResaizeButtonContentRegionHeightEvent()
+        {
+            ButtonContentRegionHeight = 0;
         }
 
         //SERCH00: Manage height in the button directly
@@ -21,6 +35,17 @@ namespace Issues_Honeys.ViewModels
             get { return _buttonContentRegionHeight; }
             set { SetProperty(ref _buttonContentRegionHeight, value); }
         }
+
+        private DelegateCommand<string> _navigateModuleCommand;
+        public DelegateCommand<string> NavigateModuleCommand =>
+        _navigateModuleCommand ?? (_navigateModuleCommand = new DelegateCommand<string>(ExecuteNavigateModuleCommand));
+
+        private void ExecuteNavigateModuleCommand(string module)
+        {
+            ButtonContentRegionHeight = 73;
+            _applicationCommands.NavigateCommand.Execute(module);
+        }
+
 
         //private DelegateCommand<string> _navigateCommand;
         //public DelegateCommand<string> NavigateCommand =>
@@ -32,7 +57,7 @@ namespace Issues_Honeys.ViewModels
         //    //string res = Application.Current.FindResource("WaterMarkSearchLabelsCaption").ToString();
         //    if (string.IsNullOrEmpty(param))
         //        throw new ArgumentNullException(ArgumentExceptionMessage);
-                 
+
         //    switch (param.Split(';').FirstOrDefault())
         //    {
         //        case CommandParameters.Details:

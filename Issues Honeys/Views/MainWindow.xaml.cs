@@ -1,6 +1,8 @@
-﻿using IssuesHoneys.Core.NameDefinition;
+﻿using IssuesHoneys.Core.Events.Prism;
+using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Core.Types.Interfaces;
 using MahApps.Metro.Controls;
+using Prism.Events;
 using System;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -14,11 +16,14 @@ namespace Issues_Honeys.Views
     {
         private IApplicationCommands _applicationCommands;
 
+
         public MainWindow(IApplicationCommands applicationCommands)
         {
             InitializeComponent();
             _applicationCommands = applicationCommands;
         }
+
+       
 
         private void MetroWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
