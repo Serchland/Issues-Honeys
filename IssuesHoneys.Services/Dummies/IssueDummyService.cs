@@ -120,7 +120,12 @@ namespace IssuesHoneys.Services.Dummies
             throw new NotImplementedException();
         }
 
-        public Issue GetIssuesById(int issueId)
+        public Issue GetIssueById(int issueId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddUserToIssue(int detailId, int userId)
         {
             throw new NotImplementedException();
         }

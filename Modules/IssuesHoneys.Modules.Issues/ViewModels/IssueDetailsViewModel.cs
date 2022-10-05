@@ -39,6 +39,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         }
 
         #region "Commands"
+        //SERCH00: This command has incorrect name: change
         private DelegateCommand<object> _filterIssuesCommand;
         public DelegateCommand<object> FilterIssuesCommand =>
             _filterIssuesCommand ?? (_filterIssuesCommand = new DelegateCommand<object>(ExecuteFilterIssuesCommand));
@@ -48,7 +49,10 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             if (param == null)
                 throw new ArgumentNullException(ArgumentExceptionMessage);
 
-            var parameters = (object[])param;
+            var user= (object[])param;
+
+            _issuesService.AddUserToIssue(SelectedItem.Id.GetValueOrDefault(), (int)user[1]);
+            SelectedItem = _issuesService.GetIssueById(SelectedItem.Id.GetValueOrDefault());
         }
         #endregion
 
@@ -125,7 +129,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         {
             string detailId = (string)navigationContext.Parameters[BookMark.Id];
 
-            SelectedItem = _issuesService.GetIssuesById(Convert.ToInt32(detailId));
+            SelectedItem = _issuesService.GetIssueById(Convert.ToInt32(detailId));
         }
         #endregion
     }

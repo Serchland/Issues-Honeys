@@ -50,7 +50,7 @@ namespace IssuesHoneys.Services.Interfaces
         /// Method used to obtain the ISSUES from the model
         /// </summary>
         /// <returns>List<Issue></returns>
-        Issue GetIssuesById(int issueId);
+        Issue GetIssueById(int issueId);
 
         /// <summary>
         /// Method used to obtain the LABELS from the model
@@ -90,5 +90,12 @@ namespace IssuesHoneys.Services.Interfaces
         /// <param name="labelID"></param>
         /// <returns></returns>
         void UpdateLabel(Label label);
+
+        /// <summary>
+        /// Add assignee user to issue
+        /// </summary>
+        /// <param name="detailId"></param>
+        /// <param name="userId"></param>
+        void AddUserToIssue(int detailId, int userId);
     }
 }

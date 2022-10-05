@@ -3,7 +3,6 @@ using IssuesHoneys.Core.Types.Interfaces;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
-using System;
 
 namespace Issues_Honeys.ViewModels
 {

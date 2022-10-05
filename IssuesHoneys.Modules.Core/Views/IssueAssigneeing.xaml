@@ -5,18 +5,11 @@
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:coreConverters="clr-namespace:IssuesHoneys.Core.Views.Converters">
     
-    <Grid Grid.Column="2"
-              Grid.ColumnSpan="3"
-              Grid.Row="1"
-              Margin="0,20,0,0">
+    <Grid>
 
         <Grid.Resources>
             <coreConverters:AssigneesConverter x:Key="AssigneesConverterKey"></coreConverters:AssigneesConverter>
         </Grid.Resources>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -25,7 +18,7 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <StackPanel  Grid.Column="0" Grid.Row="0" Orientation="Vertical" Margin="10">
+        <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0">
             <coreViews:DropDownAssignee></coreViews:DropDownAssignee>
 
             <ListView ItemsSource="{Binding SelectedItem.Assignees}" HorizontalAlignment="Right">
@@ -40,48 +33,74 @@
                         </DockPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-                <!--<ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"></StackPanel>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>-->
             </ListView>
-            <!--<Label Content="{Binding SelectedItem.Assignees, Converter={StaticResource AssigneesConverterKey}}"></Label>-->
+        </StackPanel>
+
+        <Separator Grid.Row="0"
+                       Margin="0,0,5,0"
+                       VerticalAlignment="Bottom">
+        </Separator>
+
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0" >
+            <coreViews:DropDownLabels></coreViews:DropDownLabels>
+
+            <ListView ItemsSource="{Binding Labels}" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel  HorizontalAlignment="Right" Margin="0 0 10 0">
+                            <Label Content="{Binding Name}" ></Label>
+                            <Button Content="x" Style="{StaticResource MahApps.Styles.Button.Flat}" Background="Transparent"
+                                    Margin="-10 0 0 0" 
+                                    Padding="10 0 0 2"></Button>
+                        </DockPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+
+        <Separator Grid.Row="1"
+                       Margin="0,0,5,0"
+                       VerticalAlignment="Bottom">
+        </Separator>
+
+        <StackPanel Grid.Row="2" Orientation="Vertical" Margin="0" >
+            <coreViews:DropDownProjects></coreViews:DropDownProjects>
+
+            <ListView ItemsSource="{Binding Projects}" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel  HorizontalAlignment="Right" Margin="0 0 10 0">
+                            <Label Content="{Binding Name}" ></Label>
+                            <Button Content="x" Style="{StaticResource MahApps.Styles.Button.Flat}" Background="Transparent"
+                                    Margin="-10 0 0 0" 
+                                    Padding="10 0 0 2"></Button>
+                        </DockPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+
+        <Separator Grid.Row="2"
+                       Margin="0,0,5,0"
+                       VerticalAlignment="Bottom">
+        </Separator>
+
+        <StackPanel Grid.Row="3" Orientation="Vertical" Margin="0" >
+            <coreViews:DropDownMilestones></coreViews:DropDownMilestones>
+
+            <ListView ItemsSource="{Binding Milestones}" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel  HorizontalAlignment="Right" Margin="0 0 10 0">
+                            <Label Content="{Binding Name}" ></Label>
+                            <Button Content="x" Style="{StaticResource MahApps.Styles.Button.Flat}" Background="Transparent"
+                                    Margin="-10 0 0 0" 
+                                    Padding="10 0 0 2"></Button>
+                        </DockPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
         
-        
-        <Separator Grid.Column="0" 
-                       Grid.Row="0"
-                       Margin="0,0,5,0"
-                       VerticalAlignment="Bottom">
-        </Separator>
-
-        <coreViews:DropDownLabels
-                   Grid.Column="0" 
-                   Grid.Row="1">
-        </coreViews:DropDownLabels>
-        
-        <Separator Grid.Column="0" 
-                       Grid.Row="1"
-                       Margin="0,0,5,0"
-                       VerticalAlignment="Bottom">
-        </Separator>
-
-        <coreViews:DropDownProjects  
-            Grid.Column="0" 
-            Grid.Row="2">
-        </coreViews:DropDownProjects>
-      
-        <Separator Grid.Column="0" 
-                       Grid.Row="2"
-                       Margin="0,0,5,0"
-                       VerticalAlignment="Bottom">
-        </Separator>
-
-        <coreViews:DropDownMilestones  
-            Grid.Column="0" 
-            Grid.Row="3">
-
-        </coreViews:DropDownMilestones>
     </Grid>
 </UserControl>

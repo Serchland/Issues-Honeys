@@ -348,7 +348,7 @@ namespace IssuesHoneys.Services.SQL
             return user;
         }
 
-        public Issue GetIssuesById(int issueId)
+        public Issue GetIssueById(int issueId)
         {
             var issue = new Issue();
             var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
@@ -369,6 +369,34 @@ namespace IssuesHoneys.Services.SQL
 
 
             return issue;
+        }
+
+        public void AddUserToIssue(int detailId, int userId)
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
+            var crtnUser = 1;
+            var crtnDate = DateTime.Now;
+            var queryString = $@"                                    
+                                    INSERT INTO [issues].[USERSTOISSUES]
+                                        ([CRTNDATE]
+                                        ,[Fk_CRTNUSER]
+                                        ,[Fk_ISSUE]
+                                        ,[Fk_USERASSIGNEE]
+                                        ,[ISACTIVE])
+                                    VALUES
+                                        ('{crtnDate}'
+                                        ,{crtnUser}
+                                        ,{detailId} 
+                                        ,{userId}
+                                        ,{1})
+                               ";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                command.ExecuteScalar();
+            };
         }
     }
 }
