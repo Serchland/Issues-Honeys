@@ -3,33 +3,50 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:coreViews="clr-namespace:IssuesHoneys.Core.Views"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-             xmlns:coreConverters="clr-namespace:IssuesHoneys.Core.Views.Converters">
+             xmlns:coreConverters="clr-namespace:IssuesHoneys.Core.Views.Converters" xmlns:sys="clr-namespace:System;assembly=mscorlib">
     
     <Grid>
 
         <Grid.Resources>
             <coreConverters:AssigneesConverter x:Key="AssigneesConverterKey"></coreConverters:AssigneesConverter>
+            <coreConverters:DropDownMultiValueConverter x:Key="DropDownMultiValueConverterKey"></coreConverters:DropDownMultiValueConverter>
         </Grid.Resources>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0">
             <coreViews:DropDownAssignee></coreViews:DropDownAssignee>
 
-            <ListView ItemsSource="{Binding SelectedItem.Assignees}" HorizontalAlignment="Right">
+            <ListView ItemsSource="{Binding SelectedItem.Assignees}" HorizontalAlignment="Right"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                      Height="90">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <DockPanel  HorizontalAlignment="Right" Margin="0 0 10 0">
                             <Label Content="{Binding Name}" ></Label>
                             <Label Content="{Binding SurName}" ></Label>
-                            <Button Content="x" Style="{StaticResource MahApps.Styles.Button.Flat}" Background="Transparent"
+                            <Button Background="Transparent"
                                     Margin="-10 0 0 0" 
-                                    Padding="10 0 0 2"></Button>
+                                    Padding="10 0 0 2"
+                                    Content="x" Style="{StaticResource MahApps.Styles.Button.Flat}"
+                                    Command="{Binding DataContext.UnAssignCommand, RelativeSource={RelativeSource AncestorType=StackPanel}}">
+
+                                <Button.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource DropDownMultiValueConverterKey}">
+                                    <Binding>
+                                        <Binding.Source>
+                                            <sys:Int32>4</sys:Int32>
+                                        </Binding.Source>
+                                    </Binding>
+                                    <Binding Path="Id"></Binding>
+                                    </MultiBinding>
+                                </Button.CommandParameter>
+                            </Button>
                         </DockPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -44,14 +61,29 @@
         <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0" >
             <coreViews:DropDownLabels></coreViews:DropDownLabels>
 
-            <ListView ItemsSource="{Binding Labels}" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <ListView ItemsSource="{Binding SelectedItem.Labels}" HorizontalAlignment="Right" VerticalAlignment="Top" 
+                      Height="90"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <DockPanel  HorizontalAlignment="Right" Margin="0 0 10 0">
                             <Label Content="{Binding Name}" ></Label>
-                            <Button Content="x" Style="{StaticResource MahApps.Styles.Button.Flat}" Background="Transparent"
+                            <Button Content="x" Style="{StaticResource MahApps.Styles.Button.Flat}" 
+                                    Background="Transparent"
                                     Margin="-10 0 0 0" 
-                                    Padding="10 0 0 2"></Button>
+                                    Padding="10 0 0 2"
+                                    Command="{Binding DataContext.UnAssignCommand, RelativeSource={RelativeSource AncestorType=StackPanel}}">
+                                <Button.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource DropDownMultiValueConverterKey}">
+                                        <Binding>
+                                            <Binding.Source>
+                                                <sys:Int32>1</sys:Int32>
+                                            </Binding.Source>
+                                        </Binding>
+                                        <Binding Path="Id"></Binding>
+                                    </MultiBinding>
+                                </Button.CommandParameter>
+                            </Button>
                         </DockPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -66,14 +98,29 @@
         <StackPanel Grid.Row="2" Orientation="Vertical" Margin="0" >
             <coreViews:DropDownProjects></coreViews:DropDownProjects>
 
-            <ListView ItemsSource="{Binding Projects}" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <ListView ItemsSource="{Binding Projects}" HorizontalAlignment="Right" VerticalAlignment="Top"
+                      Height="90"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <DockPanel  HorizontalAlignment="Right" Margin="0 0 10 0">
                             <Label Content="{Binding Name}" ></Label>
-                            <Button Content="x" Style="{StaticResource MahApps.Styles.Button.Flat}" Background="Transparent"
+                            <Button Content="x" Style="{StaticResource MahApps.Styles.Button.Flat}" 
+                                    Background="Transparent"
                                     Margin="-10 0 0 0" 
-                                    Padding="10 0 0 2"></Button>
+                                    Padding="10 0 0 2"
+                                    Command="{Binding DataContext.UnAssignCommand, RelativeSource={RelativeSource AncestorType=StackPanel}}">
+                                <Button.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource DropDownMultiValueConverterKey}">
+                                        <Binding>
+                                            <Binding.Source>
+                                                <sys:Int32>2</sys:Int32>
+                                            </Binding.Source>
+                                        </Binding>
+                                        <Binding Path="Id"></Binding>
+                                    </MultiBinding>
+                                </Button.CommandParameter>
+                            </Button>
                         </DockPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -88,14 +135,29 @@
         <StackPanel Grid.Row="3" Orientation="Vertical" Margin="0" >
             <coreViews:DropDownMilestones></coreViews:DropDownMilestones>
 
-            <ListView ItemsSource="{Binding Milestones}" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <ListView ItemsSource="{Binding SelectedItem.Milestones}" HorizontalAlignment="Right" VerticalAlignment="Top"
+                      Height="90"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <DockPanel  HorizontalAlignment="Right" Margin="0 0 10 0">
-                            <Label Content="{Binding Name}" ></Label>
-                            <Button Content="x" Style="{StaticResource MahApps.Styles.Button.Flat}" Background="Transparent"
+                            <Label Content="{Binding Title}" ></Label>
+                            <Button Content="x" Style="{StaticResource MahApps.Styles.Button.Flat}" 
+                                    Background="Transparent"
                                     Margin="-10 0 0 0" 
-                                    Padding="10 0 0 2"></Button>
+                                    Padding="10 0 0 2"
+                                    Command="{Binding DataContext.UnAssignCommand, RelativeSource={RelativeSource AncestorType=StackPanel}}">
+                                <Button.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource DropDownMultiValueConverterKey}">
+                                        <Binding>
+                                            <Binding.Source>
+                                                <sys:Int32>3</sys:Int32>
+                                            </Binding.Source>
+                                        </Binding>
+                                        <Binding Path="Id"></Binding>
+                                    </MultiBinding>
+                                </Button.CommandParameter>
+                            </Button>
                         </DockPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

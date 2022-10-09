@@ -130,6 +130,31 @@ namespace IssuesHoneys.Services.Dummies
             throw new NotImplementedException();
         }
 
+        public void DeleteUserToIssue(int detailId, int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddLabelToIssue(int issueId, int labelId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteLabelToIssue(int detailId, int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteMilestoneToIssue(int issueId, int milestoneId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddMilestoneToIssue(int issueId, int milestoneId)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Dummies responses uses by IssueDummyService
         /// </summary>

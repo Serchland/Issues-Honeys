@@ -53,7 +53,7 @@
                                 <sys:Int32>3</sys:Int32>
                             </Binding.Source>
                         </Binding>
-                        <Binding Path="Title"></Binding>
+                        <Binding Path="Id"></Binding>
                     </MultiBinding>
                 </Setter.Value>
             </Setter>

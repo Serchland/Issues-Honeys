@@ -15,6 +15,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
     {
         IMainProperties _mainProperties;
         private IIssueService _issuesService;
+
         public IssueDetailsViewModel(IMainProperties mainProperties, IIssueService issueService, IRegionManager regionManager, IApplicationCommands applicationCommands, IEventAggregator eventAggregator) : base(regionManager, applicationCommands, eventAggregator)
         {
             _mainProperties = mainProperties;
@@ -49,9 +50,72 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             if (param == null)
                 throw new ArgumentNullException(ArgumentExceptionMessage);
 
-            var user= (object[])param;
+            var parameters = (object[])param;
+            var issuesFilterEnum = (IssuesFilterEnum)Convert.ToInt32(parameters[0]);
+            var itemId = (int)parameters[1];
 
-            _issuesService.AddUserToIssue(SelectedItem.Id.GetValueOrDefault(), (int)user[1]);
+            switch (issuesFilterEnum)
+            {
+                case IssuesFilterEnum.Assignee:
+                    var user = (object[])param;
+                    _issuesService.AddUserToIssue(SelectedItem.Id.GetValueOrDefault(), itemId);
+                    break;
+
+                case IssuesFilterEnum.Labels:
+                    _issuesService.AddLabelToIssue(SelectedItem.Id.GetValueOrDefault(), itemId);
+                    break;
+
+                case IssuesFilterEnum.Millestones:
+                    _issuesService.AddMilestoneToIssue (SelectedItem.Id.GetValueOrDefault(), itemId);
+                    break;
+
+                default:
+                    break;
+            
+            }
+
+            SelectedItem = _issuesService.GetIssueById(SelectedItem.Id.GetValueOrDefault());
+
+        }
+
+        private DelegateCommand<object> _unAssignCommand;
+        public DelegateCommand<object> UnAssignCommand =>
+            _unAssignCommand ?? (_unAssignCommand = new DelegateCommand<object>(ExecuteUnAssignCommand));
+
+        void ExecuteUnAssignCommand(object param)
+        {
+            if (param == null)
+                throw new ArgumentNullException(ArgumentExceptionMessage);
+
+            var parameters = (object[])param;
+            var issuesFilterEnum = (IssuesFilterEnum)Convert.ToInt32(parameters[0]);
+            var itemId = (int)parameters[1];
+
+
+            switch (issuesFilterEnum)
+            {
+                case IssuesFilterEnum.Assignee:
+                    _issuesService.DeleteUserToIssue(SelectedItem.Id.GetValueOrDefault(), itemId);
+                    break;
+
+                case IssuesFilterEnum.Labels:
+                    _issuesService.DeleteLabelToIssue(SelectedItem.Id.GetValueOrDefault(), itemId);
+                    break;
+
+                case IssuesFilterEnum.Millestones:
+                    _issuesService.DeleteMilestoneToIssue(SelectedItem.Id.GetValueOrDefault(), itemId);
+                    break;
+
+                case IssuesFilterEnum.Projects:
+                    //SERCH00: Under construction
+                    break;
+
+                default:
+                    break;
+
+
+            }
+
             SelectedItem = _issuesService.GetIssueById(SelectedItem.Id.GetValueOrDefault());
         }
         #endregion

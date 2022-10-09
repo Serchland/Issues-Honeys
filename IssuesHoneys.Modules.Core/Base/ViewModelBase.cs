@@ -2,6 +2,7 @@
 using IssuesHoneys.Core.Events.Prism;
 using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Core.Types.Interfaces;
+using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -29,6 +30,8 @@ namespace IssuesHoneys.Core.Base
             _eventAggregator = eventAggregator;
         }
 
+        public event EventHandler<EventArgs> ReloadMainPropertiesEvent;
+
         #region "Properties"       
         public string ArgumentExceptionMessage { get; }
 
@@ -41,7 +44,6 @@ namespace IssuesHoneys.Core.Base
         #endregion
 
         #region "Commands"
-
         private DelegateCommand<string> _navigateCommand;
         public DelegateCommand<string> NavigateCommand =>
             _navigateCommand ?? (_navigateCommand = new DelegateCommand<string>(ExecuteNavigateCommand));
@@ -88,6 +90,7 @@ namespace IssuesHoneys.Core.Base
                     _regionManager.RequestNavigate(RegionNames.FooterContentRegion, RegisterForNavigation.IssueFooter);
                     _regionManager.RequestNavigate(RegionNames.MainContentRegion, RegisterForNavigation.IssuesMain);
 
+                    ReloadMainPropertiesEvent?.Invoke(this, EventArgs.Empty);
                     break;
 
                 case CommandParameters.Labels:

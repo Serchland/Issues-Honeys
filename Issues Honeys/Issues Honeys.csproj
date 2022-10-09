@@ -121,6 +121,10 @@
       <Project>{b3645851-0f0d-4de6-93da-cf95fcda5315}</Project>
       <Name>IssuesHoneys.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IssuesHoneys.Services.Interfaces\IssuesHoneys.Services.Interfaces.csproj">
+      <Project>{712893A3-05FF-4755-A023-24522FB43520}</Project>
+      <Name>IssuesHoneys.Services.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Modules\IssuesHoneys.Modules.Issues\IssuesHoneys.Modules.Issues.csproj">
       <Project>{810E8FAD-1071-4582-B3B8-6991618C1671}</Project>
       <Name>IssuesHoneys.Modules.Issues</Name>

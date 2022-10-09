@@ -22,6 +22,8 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         private IssuesFilterEnum? issuesFilterEnum;
         private IIssueService _issuesService;
         private IMainProperties _mainProperties;
+
+        private IssuesSortEnum _currentSort;
         public IssuesViewModel(IMainProperties mainProperties, IIssueService issueService, IRegionManager regionManager, IApplicationCommands applicationsCommands, IEventAggregator eventAggregator) : base(regionManager, applicationsCommands, eventAggregator)
         {
             _mainProperties = mainProperties;
@@ -55,6 +57,15 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             
             _sortItems = GetSortItems();
             IsFiltered = false;
+
+            this.ReloadMainPropertiesEvent += OnReloadMainPropertiesEvent;
+        }
+
+        private void OnReloadMainPropertiesEvent(object sender, EventArgs e)
+        {
+            Issues = new ObservableCollection<Issue>(_issuesService.GetIssues());
+            IssuesView = CollectionViewSource.GetDefaultView(Issues);
+            SelectedSortItemCommand.Execute(_currentSort);
         }
 
         private bool IssuesFilter(object item)
@@ -65,19 +76,21 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             switch (issuesFilterEnum)
             {
                 case IssuesFilterEnum.Assignee:
-                    User userFinder = null;
-                    userFinder = issue.Assignees.Where(i => i.Name.ToLower() == (FilterText.ToLower())).FirstOrDefault();
+                    User assigneeFinder = null;
+                    assigneeFinder = issue.Assignees.Where(i => i.Id == (Convert.ToInt32(FilterText))).FirstOrDefault();
 
-                    result = userFinder != null;
+                    result = assigneeFinder != null;
                     break;
 
                 case IssuesFilterEnum.Authors:
-                    result = _issuesService.GetUserById(issue.CrtnUser).Name.ToLower() == FilterText.ToLower();
+                    int? authorId = Int32.TryParse(FilterText, out var authorTempVal) ? authorTempVal : (int?)null;
+                    result = issue.CrtnUser == authorId;
+
                     break;
 
                 case IssuesFilterEnum.Labels:
                     Label labelFinder = null;
-                    labelFinder = issue.Labels.Where(i => i.Name.ToLower() == (FilterText.ToLower())).FirstOrDefault();
+                    labelFinder = issue.Labels.Where(i => i.Id == Convert.ToInt32(FilterText)).FirstOrDefault();
 
                     result = labelFinder != null;
 
@@ -85,7 +98,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
 
                 case IssuesFilterEnum.Millestones:
                     Milestone milestoneFinder = null;
-                    milestoneFinder = issue.Milestones.Where(i => i.Title.ToLower() == (FilterText.ToLower())).FirstOrDefault();
+                    milestoneFinder = issue.Milestones.Where(i => i.Id == Convert.ToInt32(FilterText)).FirstOrDefault();
 
                     result = milestoneFinder != null;
 
@@ -128,10 +141,12 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             {
                 case IssuesSortEnum.Newest:
                     _issuesView.SortDescriptions.Add(new SortDescription("CrtnDate", ListSortDirection.Descending));
+                    _currentSort = IssuesSortEnum.Newest;
                     break;
 
                 case IssuesSortEnum.Oldest:
                     _issuesView.SortDescriptions.Add(new SortDescription("CrtnDate", ListSortDirection.Ascending));
+                    _currentSort = IssuesSortEnum.Oldest;
                     break;
             }
         }

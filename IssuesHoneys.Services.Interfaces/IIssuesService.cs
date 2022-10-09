@@ -96,6 +96,41 @@ namespace IssuesHoneys.Services.Interfaces
         /// </summary>
         /// <param name="detailId"></param>
         /// <param name="userId"></param>
-        void AddUserToIssue(int detailId, int userId);
+        void AddUserToIssue(int issueId, int userId);
+
+        /// <summary>
+        /// Add label to issue
+        /// </summary>
+        /// <param name="detailId"></param>
+        /// <param name="userId"></param>
+        void AddLabelToIssue(int issueId, int labelId);
+
+        /// <summary>
+        /// Delete assignee user to issue
+        /// </summary>
+        /// <param name="issueId"></param>
+        /// <param name="userId"></param>
+        void DeleteUserToIssue(int issueId, int userId);
+
+        /// <summary>
+        /// Delete label to issue
+        /// </summary>
+        /// <param name="issueId"></param>
+        /// <param name="userId"></param>
+        void DeleteLabelToIssue(int issueId, int labelId);
+
+        /// <summary>
+        /// Delete milestone to issue
+        /// </summary>
+        /// <param name="issueId"></param>
+        /// <param name="userId"></param>
+        void DeleteMilestoneToIssue(int issueId, int milestoneId);
+
+        /// <summary>
+        /// Add milestone to issue
+        /// </summary>
+        /// <param name="issueId"></param>
+        /// <param name="milestoneId"></param>
+        void AddMilestoneToIssue(int issueId, int milestoneId);
     }
 }

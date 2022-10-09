@@ -23,8 +23,6 @@ namespace Issues_Honeys.Views
             _applicationCommands = applicationCommands;
         }
 
-       
-
         private void MetroWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             _applicationCommands.NavigateCommand.Execute(CommandParameters.Issues);

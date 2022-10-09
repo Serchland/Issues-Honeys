@@ -371,7 +371,7 @@ namespace IssuesHoneys.Services.SQL
             return issue;
         }
 
-        public void AddUserToIssue(int detailId, int userId)
+        public void AddUserToIssue(int issueId, int userId)
         {
             var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
             var crtnUser = 1;
@@ -386,8 +386,109 @@ namespace IssuesHoneys.Services.SQL
                                     VALUES
                                         ('{crtnDate}'
                                         ,{crtnUser}
-                                        ,{detailId} 
+                                        ,{issueId} 
                                         ,{userId}
+                                        ,{1})
+                               ";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                command.ExecuteScalar();
+            };
+        }
+
+        public void DeleteUserToIssue(int issueId, int userId)
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
+            var queryString = $@"                                    
+                                    DELETE FROM [issues].[USERSTOISSUES] 
+                                    WHERE Fk_ISSUE = {issueId} AND Fk_USERASSIGNEE = {userId}";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                command.ExecuteScalar();
+            };
+        }
+
+        public void AddLabelToIssue(int issueId, int labelId)
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
+            var crtnUser = 1;
+            var crtnDate = DateTime.Now;
+            var queryString = $@"                                    
+                                    INSERT INTO [issues].[LABELSTOISSUES]
+                                        ([CRTNDATE]
+                                        ,[Fk_CRTNUSER]
+                                        ,[Fk_LABEL]
+                                        ,[Fk_ISSUE]
+                                        ,[ISACTIVE])
+                                    VALUES
+                                        ('{crtnDate}'
+                                        ,{crtnUser}
+                                        ,{labelId}
+                                        ,{issueId} 
+                                        ,{1})
+                               ";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                command.ExecuteScalar();
+            };
+        }
+
+        public void DeleteLabelToIssue(int issueId, int labelId)
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
+            var queryString = $@"                                    
+                                    DELETE FROM [issues].[LABELSTOISSUES] 
+                                    WHERE Fk_ISSUE = {issueId} AND Fk_LABEL = {labelId}";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                command.ExecuteScalar();
+            };
+        }
+
+        public void DeleteMilestoneToIssue(int issueId, int milestoneId)
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
+            var queryString = $@"                                    
+                                    DELETE FROM [issues].[MILESTONESTOISSUES]
+                                    WHERE Fk_ISSUE = {issueId} AND Fk_MILESTONE = {milestoneId}";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                command.ExecuteScalar();
+            };
+        }
+
+        public void AddMilestoneToIssue(int issueId, int milestoneId)
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
+            var crtnUser = 1;
+            var crtnDate = DateTime.Now;
+            var queryString = $@"                                    
+                                    INSERT INTO [issues].[MILESTONESTOISSUES]
+                                        ([CRTNDATE]
+                                        ,[Fk_CRTNUSER]
+                                        ,[Fk_MILESTONE]
+                                        ,[Fk_ISSUE]
+                                        ,[ISACTIVE])
+                                    VALUES
+                                        ('{crtnDate}'
+                                        ,{crtnUser}
+                                        ,{milestoneId}
+                                        ,{issueId} 
                                         ,{1})
                                ";
 

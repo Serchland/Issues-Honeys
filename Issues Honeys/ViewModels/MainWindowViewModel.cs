@@ -1,8 +1,11 @@
-﻿using IssuesHoneys.Core.Events.Prism;
+﻿using IssuesHoneys.Business.Types;
+using IssuesHoneys.Core.Events.Prism;
 using IssuesHoneys.Core.Types.Interfaces;
+using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
+using System.Collections.ObjectModel;
 
 namespace Issues_Honeys.ViewModels
 {
@@ -11,6 +14,7 @@ namespace Issues_Honeys.ViewModels
         //IRegionManager _regionManager;
         private IApplicationCommands _applicationCommands;
         private IEventAggregator _eventAggregator;
+
         public MainWindowViewModel(IApplicationCommands applicationCommands, IEventAggregator eventAggregator) 
         {
             //_regionManager = regionManager;

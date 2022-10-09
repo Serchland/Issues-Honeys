@@ -53,6 +53,8 @@ namespace IssuesHoneys.Services.SQL
             result.Title = reader[idx++] as string;
             result.TotalComments = reader[idx++] as int?;
 
+            //SERCH00: Think about order lists
+            //result.Labels.Sort((x, y) => x.CrtnDate.CompareTo(y.CrtnDate));
             return result;
         }
 

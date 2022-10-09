@@ -34,7 +34,7 @@
                                 <Label>
                                     <iconPacks:PackIconBoxIcons Kind="RegularUser" />
                                 </Label>
-                                <Label Content="{Binding Name}" Tag="{Binding Id}" x:Name="NameLabel"></Label>
+                                <Label Content="{Binding Name}" x:Name="NameLabel"></Label>
                                 <Label Content="{Binding SurName}"></Label>
                             </StackPanel>
                         </ContentPresenter.Content>
