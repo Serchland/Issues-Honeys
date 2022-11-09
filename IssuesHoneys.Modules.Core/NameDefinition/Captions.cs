@@ -58,4 +58,9 @@
         public const string LabelMessageArgumentException = "LabelTypeArgumentException";
     }
 
+    public static class LabelsResources
+    {
+        public const string TextBlockOpenedTheIssueOn = "TextBlockOpenedTheIssueOn";
+    }
+
 }

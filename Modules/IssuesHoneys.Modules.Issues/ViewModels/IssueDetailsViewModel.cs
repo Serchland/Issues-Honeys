@@ -8,6 +8,8 @@ using Prism.Events;
 using Prism.Regions;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
 
 namespace IssuesHoneys.Modules.Issues.ViewModels
 {
@@ -113,7 +115,6 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
                 default:
                     break;
 
-
             }
 
             SelectedItem = _issuesService.GetIssueById(SelectedItem.Id.GetValueOrDefault());
@@ -176,6 +177,20 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
                 SetProperty(ref _issues, value);
             }
         }
+
+        private string _crtnIssueStamp;
+        public string CrtnIssueStamp
+        {
+            get
+            {
+                return _crtnIssueStamp;
+            }
+
+            set
+            {
+                SetProperty(ref _crtnIssueStamp, value);
+            }
+        }
         #endregion
 
         #region "INavigationAware implementation"
@@ -194,6 +209,11 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             string detailId = (string)navigationContext.Parameters[BookMark.Id];
 
             SelectedItem = _issuesService.GetIssueById(Convert.ToInt32(detailId));
+
+            var _crtnUser = Users.Where(u => u.Id == SelectedItem.Id).SingleOrDefault();
+            var _crtnOpenText = Application.Current.FindResource(LabelsResources.TextBlockOpenedTheIssueOn).ToString();
+            CrtnIssueStamp = string.Format("{0} {1} {2}", _crtnUser.Name, _crtnOpenText, SelectedItem.CrtnDate);
+            
         }
         #endregion
     }

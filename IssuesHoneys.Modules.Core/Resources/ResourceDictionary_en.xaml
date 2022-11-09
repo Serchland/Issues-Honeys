@@ -48,6 +48,8 @@
     <system:String x:Key="LabelTitle">Title</system:String>
     <system:String x:Key="LabelUnlabeled">Unlabeled</system:String>
 
+    <system:String x:Key="TextBlockOpenedTheIssueOn">Opened the issue on:</system:String>
+    
     <system:String x:Key="SortAlphabetically">Alphabetically</system:String>
     <system:String x:Key="SortFewestAlphabetically">Fewest issues</system:String>
     <system:String x:Key="SortMostIssues">Most issues</system:String>
