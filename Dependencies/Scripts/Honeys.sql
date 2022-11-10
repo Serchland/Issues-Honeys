@@ -2,19 +2,21 @@
 --ISACTIVE = 1 TRUE
 --ISACTIVE = 0 FALSE
 
---ISSUEDETAILS ACTIONS:
--- 1 COMMENTADDED
--- 2 COMMENTDELETED
--- 3 COMMENTUPDATED
--- 4 ISSUEADDED
--- 5 ISSUEDELETED
--- 6 ISSUEUPDATED
--- 7 LABELADDED
--- 8 LABELDELETED
--- 9 MILESTONEADDED
--- 10 MILESTONEDELETED
--- 11 USERASSIGNED
--- 12 USERDELETED
+--HISTORICAL ACTIONS:
+-- 0 ADDISSUE
+-- 1 DELETEISSUE
+-- 2 UPDATEISSUE
+-- 3 ADDLABEL
+-- 4 DELETELABEL
+-- 5 UPDATELABEL
+-- 6 ADDMILESTONE
+-- 7 DELETEMILESTONE
+-- 8 UPDATMILESTONE
+-- 9 ADDCOMMENT
+-- 10 DELETECOMMENT
+-- 11 UPDATECOMMENT
+-- 12 ASSIGNUSER
+-- 13 DELETEUSER
 
 --LABEL TYPES:
 -- 1 ISSUES
@@ -28,7 +30,7 @@ GO
 --				[CREATE SHEMA]
 -- **************************************
 -- **************************************
-IF NOT EXISTS (SELECT * FROM   sys.schemas WHERE  NAME = 'issues')
+IF NOT EXISTS (SELECT * FROM   sys.schemas WHERE NAME = 'issues')
   BEGIN
       SELECT 'SCHEMA [issues] not EXITS. Creating'
       EXEC('CREATE SCHEMA issues')
@@ -49,7 +51,7 @@ GO
 --BEGIN  
 --    DECLARE @Count int;
 --    SELECT @Count = COUNT(@Id)
---    FROM ISSUEDETAILS
+--    FROM ISSUEHISTORICAL
 --    WHERE Fk_ISSUE = @Id AND ACTION=1; 
 --    RETURN @Count;
 --END;
@@ -108,11 +110,11 @@ IF Object_id('[issues].[USERS]') IS NOT NULL
 	  ALTER TABLE [issues].[MILESTONES]
       DROP CONSTRAINT [FK_Milestones_User_Id]
 
-      ALTER TABLE [issues].[ISSUEDETAILS]
-      DROP CONSTRAINT [Fk_IssueDetails_User_Id]
+      ALTER TABLE [issues].[ISSUEHISTORICAL]
+      DROP CONSTRAINT [Fk_IssueHistorical_User_Id]
 
-	  ALTER TABLE [issues].[ISSUEDETAILS]
-      DROP CONSTRAINT [Fk_IssueDetails_Issue_Id]
+	  ALTER TABLE [issues].[ISSUEHISTORICAL]
+      DROP CONSTRAINT [Fk_IssueHistorical_Issue_Id]
 
 	  ALTER TABLE [issues].[USERSTOISSUES]
 	  DROP CONSTRAINT [FK_UsersToIssues_AssignedBy_User_Id]
@@ -199,7 +201,7 @@ IF Object_id('[issues].[LABELS]') IS NOT NULL
            [ID] 
 		   ASC),
 
-		   CONSTRAINT [Fk_Labels_User_Id] FOREIGN KEY ([Fk_CRTNUSER])
+		   CONSTRAINT [FK_Labels_User_Id] FOREIGN KEY ([Fk_CRTNUSER])
            REFERENCES [issues].[USERS]([ID]),
         )
 		WITH (DATA_COMPRESSION = PAGE);
@@ -226,7 +228,7 @@ ELSE
            [ID] 
 		   ASC),
 
-		   CONSTRAINT [Fk_Labels_User_Id] FOREIGN KEY ([Fk_CRTNUSER])
+		   CONSTRAINT [FK_Labels_User_Id] FOREIGN KEY ([Fk_CRTNUSER])
            REFERENCES [issues].[USERS]([ID]),
         )
 		WITH (DATA_COMPRESSION = PAGE);
@@ -376,17 +378,17 @@ GO
 
 -- **************************************
 -- **************************************
---				[ISSUESDETAILS]
+--				[ISSUESHISTORICAL]
 -- **************************************
 -- **************************************
-IF Object_id('[issues].[ISSUEDETAILS]') IS NOT NULL
+IF Object_id('[issues].[ISSUEHISTORICAL]') IS NOT NULL
   BEGIN
       ALTER TABLE [issues].[ISSUECOMMENTS]
-      DROP CONSTRAINT FK_IssueComments_IssueDetails_Id;
+      DROP CONSTRAINT FK_IssueComments_IssueHistorical_Id;
 
-      DROP TABLE [issues].[ISSUEDETAILS];
+      DROP TABLE [issues].ISSUEHISTORICAL;
 
-      CREATE TABLE [issues].[ISSUEDETAILS]
+      CREATE TABLE [issues].ISSUEHISTORICAL
         (
             [ACTION]                    INT NOT NULL,
 			[CRTNDATE]                  DATETIME NOT NULL,
@@ -394,25 +396,25 @@ IF Object_id('[issues].[ISSUEDETAILS]') IS NOT NULL
 			[Fk_ISSUE]  				INT NOT NULL,
 			[ID]						INT IDENTITY (1, 1) NOT NULL
            
-		   CONSTRAINT [PK_IssueDetails_Id] PRIMARY KEY CLUSTERED (
+		   CONSTRAINT [PK_IssueHistorical_Id] PRIMARY KEY CLUSTERED (
 		   [ID] 
 		   ASC),
            		   
-		   CONSTRAINT [FK_IssueDetails_Issue_Id] FOREIGN KEY ([Fk_ISSUE])
+		   CONSTRAINT [FK_IssueHistorical_Issue_Id] FOREIGN KEY ([Fk_ISSUE])
            REFERENCES [issues].[ISSUES]([ID]),
 
-		   CONSTRAINT [FK_IssueDetails_User_Id] FOREIGN KEY ([Fk_CRTNUSER] )
+		   CONSTRAINT [FK_IssueHistorical_User_Id] FOREIGN KEY ([Fk_CRTNUSER] )
            REFERENCES [issues].[USERS]([ID])
         )
 		WITH (DATA_COMPRESSION = PAGE);
 
-      SELECT 'TABLE [issues].[ISSUEDETAILS] REGENERATED'
+      SELECT 'TABLE [issues].[ISSUEHISTORICAL] REGENERATED'
   END
 ELSE
   BEGIN
-      SELECT 'TABLE [issues].[ISSUEDETAILS] NOT EXIST... CREATING TABLE'
+      SELECT 'TABLE [issues].[ISSUEHISTORICAL] NOT EXIST... CREATING TABLE'
 
-       CREATE TABLE [issues].[ISSUEDETAILS]
+       CREATE TABLE [issues].[ISSUEHISTORICAL]
         (
             [ACTION]                    INT NOT NULL,
 			[CRTNDATE]                  DATETIME NOT NULL,
@@ -420,19 +422,19 @@ ELSE
 			[Fk_ISSUE]  				INT NOT NULL,
 			[ID]						INT IDENTITY (1, 1) NOT NULL
            
-		   CONSTRAINT [PK_IssueDetails_Id] PRIMARY KEY CLUSTERED (
+		   CONSTRAINT [PK_IssueHistorical_Id] PRIMARY KEY CLUSTERED (
 		   [ID] 
 		   ASC),
            		   
-		   CONSTRAINT [FK_IssueDetails_Issue_Id] FOREIGN KEY ([Fk_ISSUE])
+		   CONSTRAINT [FK_IssueHistorical_Issue_Id] FOREIGN KEY ([Fk_ISSUE])
            REFERENCES [issues].[ISSUES]([ID]),
 
-		   CONSTRAINT [FK_IssueDetails_User_Id] FOREIGN KEY ([Fk_CRTNUSER] )
+		   CONSTRAINT [FK_IssueHistorical_User_Id] FOREIGN KEY ([Fk_CRTNUSER] )
            REFERENCES [issues].[USERS]([ID])
         )
 		WITH (DATA_COMPRESSION = PAGE);
 
-      SELECT 'TABLE [issues].[ISSUEDETAILS] CREATED'
+      SELECT 'TABLE [issues].[ISSUEHISTORICAL] CREATED'
   END
 
 
@@ -449,7 +451,7 @@ IF Object_id('[issues].[ISSUECOMMENTS]') IS NOT NULL
         (
            [COMMENT]                   VARCHAR(max) NOT NULL,
    		   [CRTNDATE]				   DATETIME,
-           [Fk_ISSUEDETAIL]			   INT NOT NULL,
+           [Fk_ISSUEHISTORICAL]			   INT NOT NULL,
            [ID]						   INT IDENTITY (1, 1) NOT NULL,
 		   [ISACTIVE]				   BIT NOT NULL,
 
@@ -457,9 +459,9 @@ IF Object_id('[issues].[ISSUECOMMENTS]') IS NOT NULL
            [ID] 
 		   ASC),
 
-           CONSTRAINT [FK_IssueComments_IssueDetails_Id] FOREIGN KEY (
-           [Fk_ISSUEDETAIL]) REFERENCES
-           [issues].[ISSUEDETAILS]([ID])
+           CONSTRAINT [FK_IssueComments_IssueHistorical_Id] FOREIGN KEY (
+           [Fk_ISSUEHISTORICAL]) REFERENCES
+           [issues].[ISSUEHISTORICAL]([ID])
         )
 		WITH (DATA_COMPRESSION = PAGE);
 
@@ -473,7 +475,7 @@ ELSE
         (
            [COMMENT]                   VARCHAR(max) NOT NULL,
 		   [CRTNDATE]				   DATETIME,
-           [Fk_ISSUEDETAIL]			   INT NOT NULL,
+           [Fk_ISSUEHISTORICAL]			   INT NOT NULL,
            [ID]						   INT IDENTITY (1, 1) NOT NULL,
 		   [ISACTIVE]				   BIT NOT NULL,
 
@@ -481,9 +483,9 @@ ELSE
            [ID] 
 		   ASC),
 
-           CONSTRAINT [FK_IssueComments_IssueDetails_Id] FOREIGN KEY (
-           [Fk_ISSUEDETAIL]) REFERENCES
-           [issues].[ISSUEDETAILS]([ID])
+           CONSTRAINT [FK_IssueComments_IssueHistorical_Id] FOREIGN KEY (
+           [Fk_ISSUEHISTORICAL]) REFERENCES
+           [issues].[ISSUEHISTORICAL]([ID])
         )
 		WITH (DATA_COMPRESSION = PAGE);
 
@@ -526,7 +528,7 @@ ELSE
   END
 ELSE
   BEGIN
-      SELECT 'TABLE [issues].[ISSUEDETAILS] NOT EXIST... CREATING TABLE'
+      SELECT 'TABLE [issues].[ISSUEHISTORICAL] NOT EXIST... CREATING TABLE'
 
         CREATE TABLE [issues].[USERSTOISSUES]
         (
@@ -1077,8 +1079,8 @@ GO
 
 SELECT 'DUMMY ISSUES ADDED'
 
---************************************** POPULATE ISSUEDETAILS
-INSERT INTO [issues].[issuedetails]
+--************************************** POPULATE ISSUEHISTORICAL
+INSERT INTO [issues].[issuehistorical]
             (
 				[ACTION],
 				[CRTNDATE],
@@ -1090,7 +1092,7 @@ VALUES      (
 
 GO
 
-SELECT 'DUMMY ISSUES DETAILS ADDED'
+SELECT 'DUMMY ISSUES HISTORICAL ADDED'
 
 
 ----************************************** POPULATE USERSTOISSUES

@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace IssuesHoneys.Services.SQL
@@ -60,6 +62,8 @@ namespace IssuesHoneys.Services.SQL
                 connection.Open();
                 command.ExecuteScalar();
             };
+
+
 
         }
 
@@ -304,6 +308,9 @@ namespace IssuesHoneys.Services.SQL
                 connection.Open();
                 command.ExecuteScalar();
             };
+
+            Task task = new Task(AddHistorical);
+            task.Start();
         }
 
         public void DeleteLabel(int labelId)
@@ -498,6 +505,12 @@ namespace IssuesHoneys.Services.SQL
                 connection.Open();
                 command.ExecuteScalar();
             };
+        }
+
+        async void AddHistorical ()
+        {
+            if (true)
+                await Task.Delay(10000);
         }
     }
 }
