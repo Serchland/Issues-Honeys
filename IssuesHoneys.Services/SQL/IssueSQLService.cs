@@ -2,6 +2,7 @@
 using IssuesHoneys.Core.NameDefinition;
 using IssuesHoneys.Services.Interfaces;
 using IssuesHoneys.Services.NameDefinition;
+using IssuesHoneys.Services.Types;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -309,8 +310,7 @@ namespace IssuesHoneys.Services.SQL
                 command.ExecuteScalar();
             };
 
-            Task task = new Task(AddHistorical);
-            task.Start();
+            AddHistorical(HistoricalEnum.UPDATELABEL, id);
         }
 
         public void DeleteLabel(int labelId)
@@ -462,6 +462,8 @@ namespace IssuesHoneys.Services.SQL
                 connection.Open();
                 command.ExecuteScalar();
             };
+
+            AddHistorical(HistoricalEnum.DELETELABEL, issueId);
         }
 
         public void DeleteMilestoneToIssue(int issueId, int milestoneId)
@@ -477,6 +479,8 @@ namespace IssuesHoneys.Services.SQL
                 connection.Open();
                 command.ExecuteScalar();
             };
+
+            AddHistorical(HistoricalEnum.DELETEMILESTONE, issueId);
         }
 
         public void AddMilestoneToIssue(int issueId, int milestoneId)
@@ -505,12 +509,34 @@ namespace IssuesHoneys.Services.SQL
                 connection.Open();
                 command.ExecuteScalar();
             };
+
+            AddHistorical(HistoricalEnum.ADDMILESTONE, issueId);
         }
 
-        async void AddHistorical ()
+        async void AddHistorical (HistoricalEnum historicalEnum, int Id)
         {
-            if (true)
-                await Task.Delay(10000);
+            var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
+            var crtnUser = 1;
+            var crtnDate = DateTime.Now;
+            var queryString = $@"                                    
+                                    INSERT INTO [issues].[ISSUESHISTORICAL]
+                                        ([ACTION],
+                                         [CRTNDATE],
+                                         [Fk_CRTNUSER],
+                                         [Fk_ISSUE])
+                                    VALUES
+                                        ('{(int)historicalEnum}'
+                                        ,{crtnDate}
+                                        ,{crtnUser}
+                                        ,{Id})
+                               ";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(queryString, connection);
+                connection.Open();
+                var res = await command.ExecuteScalarAsync();
+            };
         }
     }
 }

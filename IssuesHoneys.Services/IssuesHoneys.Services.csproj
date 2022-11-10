@@ -61,6 +61,7 @@
     <Compile Include="SQL\Converters.cs" />
     <Compile Include="SQL\IssueSQLService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\HistoricalEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IssuesHoneys.Business\IssuesHoneys.Business.csproj">
