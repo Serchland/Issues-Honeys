@@ -1,11 +1,8 @@
-﻿using IssuesHoneys.Business.Types;
-using IssuesHoneys.Core.Events.Prism;
+﻿using IssuesHoneys.Core.Events.Prism;
 using IssuesHoneys.Core.Types.Interfaces;
-using IssuesHoneys.Services.Interfaces;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
-using System.Collections.ObjectModel;
 
 namespace Issues_Honeys.ViewModels
 {

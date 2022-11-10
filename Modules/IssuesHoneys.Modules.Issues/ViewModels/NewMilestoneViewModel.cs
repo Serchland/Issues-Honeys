@@ -12,4 +12,11 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
         {
         }
     }
+
+    //public class NewMilestoneViewModel 
+    //{
+    //    public NewMilestoneViewModel(IRegionManager regionManager, IApplicationCommands applicationCommands, IEventAggregator eventAggregator)
+    //    {
+    //    }
+    //}
 }

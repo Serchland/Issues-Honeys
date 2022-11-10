@@ -25,7 +25,9 @@ namespace IssuesHoneys.Core.Base
             ArgumentExceptionMessage = Application.Current.FindResource(MessagesResources.AppArgumentException).ToString();
 
             _regionManager = regionManager;
-            applicationCommands.NavigateCommand.RegisterCommand(CompositeNavigateCommand);
+
+            if (applicationCommands.NavigateCommand.RegisteredCommands.Count == 0)
+                applicationCommands.NavigateCommand.RegisterCommand(CompositeNavigateCommand);
 
             _eventAggregator = eventAggregator;
         }
