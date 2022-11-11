@@ -561,7 +561,7 @@ namespace IssuesHoneys.Services.SQL
                                         ({histValue}
                                         ,'{crtnDate}'
                                         ,{crtnUser}
-                                        ,{issueId}))
+                                        ,{issueId})
                                ";
             }
 
@@ -578,7 +578,7 @@ namespace IssuesHoneys.Services.SQL
                                         ({histValue}
                                         ,'{crtnDate}'
                                         ,{crtnUser}
-                                        ,{issueId})
+                                        ,{issueId}
                                         ,{toId})
                                ";
             }

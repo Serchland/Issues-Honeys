@@ -33,7 +33,7 @@
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            
+
             <StackPanel Orientation="Horizontal" Grid.Row="0">
                 <Label FontSize="25" FontWeight="SemiBold"
                    Content="{Binding SelectedItem.Title}"></Label>
@@ -45,7 +45,8 @@
                    Content="{Binding SelectedItem.Number}"></Label>
             </StackPanel>
 
-            <Border CornerRadius="10" Grid.Row="1" Background="{Binding SelectedItem.State, Converter={StaticResource StateColorConverterKey}}"
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Border CornerRadius="10" Background="{Binding SelectedItem.State, Converter={StaticResource StateColorConverterKey}}"
                     MaxWidth="100" HorizontalAlignment="Left">
 
                 <StackPanel Orientation="Horizontal">
@@ -54,20 +55,23 @@
                                         Height="18"
                                         Kind="Issues" />
                 </Label>
-                    
-                <Label Content="Is closed" Foreground="White"/>
-                
+
+                    <Label Content="Is closed" Foreground="White"/>
                 </StackPanel>
             </Border>
 
-            <Separator Grid.Column="0"
-                       Grid.ColumnSpan="3"
+                <Label Content="{Binding CrtnIssueStamp}" VerticalContentAlignment="Center"></Label>
+            </StackPanel>
+
+                    <Separator 
                        Grid.Row="2"
                        Margin="0,10,5,0"
                        VerticalAlignment="Bottom">
             </Separator>
 
-            <TextBlock Grid.Row="3" Text="{Binding CrtnIssueStamp}"></TextBlock>
+            
+            
+            
         </Grid>
 
         <Grid Grid.Column="1"
