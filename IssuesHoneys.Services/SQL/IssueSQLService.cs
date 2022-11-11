@@ -38,6 +38,7 @@ namespace IssuesHoneys.Services.SQL
             var crtnDate = DateTime.Now;
             var crtnUser = 1;
             var name = newLabel.Name;
+            int labelId;
 
             var queryString = $@"                                    
                                     INSERT INTO [issues].[LABELS]
@@ -46,6 +47,7 @@ namespace IssuesHoneys.Services.SQL
                                         ,[CRTNDATE]
                                         ,[Fk_CRTNUSER]
                                         ,[ISACTIVE]
+                                        ,[LABELTYPE]
                                         ,[NAME])
                                     VALUES
                                         ('{description}'
@@ -53,7 +55,8 @@ namespace IssuesHoneys.Services.SQL
                                         ,'{crtnDate}'
                                         , {crtnUser}
                                         , 1
-                                        ,'{name}')
+                                        , 1
+                                        ,'{name}'); SELECT SCOPE_IDENTITY();
                                ";
 
 
@@ -61,11 +64,11 @@ namespace IssuesHoneys.Services.SQL
             {
                 var command = new SqlCommand(queryString, connection);
                 connection.Open();
-                command.ExecuteScalar();
+                labelId = (int)command.ExecuteScalar();
             };
 
 
-
+            AddHistorical(HistoricalEnum.ADDLABEL, null, labelId);
         }
 
         /// <summary>
@@ -290,7 +293,7 @@ namespace IssuesHoneys.Services.SQL
             var color = updateLabel.Color;
             var crtnDate = DateTime.Now;
             var crtnUser = 1;
-            var id = updateLabel.Id;
+            var labelId = updateLabel.Id;
             var name = updateLabel.Name;
 
             var queryString = $@"                                    
@@ -300,7 +303,7 @@ namespace IssuesHoneys.Services.SQL
                                         ,[CRTNDATE] = '{crtnDate}'
                                         ,[Fk_CRTNUSER] = {crtnUser}
                                         ,[NAME] = '{name}'
-                                    WHERE [ID] = {id}";
+                                    WHERE [ID] = {labelId}";
 
 
             using (var connection = new SqlConnection(connectionString))
@@ -310,7 +313,7 @@ namespace IssuesHoneys.Services.SQL
                 command.ExecuteScalar();
             };
 
-            AddHistorical(HistoricalEnum.UPDATELABEL, id);
+            AddHistorical(HistoricalEnum.UPDATELABEL, null, labelId);
         }
 
         public void DeleteLabel(int labelId)
@@ -330,6 +333,8 @@ namespace IssuesHoneys.Services.SQL
                 connection.Open();
                 command.ExecuteScalar();
             };
+
+            AddHistorical(HistoricalEnum.DELETELABEL, null, labelId);
         }
 
         public User GetUserById(int? userId)
@@ -404,6 +409,8 @@ namespace IssuesHoneys.Services.SQL
                 connection.Open();
                 command.ExecuteScalar();
             };
+
+            AddHistorical(HistoricalEnum.ADDUSERTOIISUE, issueId, userId);
         }
 
         public void DeleteUserToIssue(int issueId, int userId)
@@ -419,6 +426,8 @@ namespace IssuesHoneys.Services.SQL
                 connection.Open();
                 command.ExecuteScalar();
             };
+
+            AddHistorical(HistoricalEnum.DELETEUSERTOIISUE, issueId, userId);
         }
 
         public void AddLabelToIssue(int issueId, int labelId)
@@ -447,6 +456,8 @@ namespace IssuesHoneys.Services.SQL
                 connection.Open();
                 command.ExecuteScalar();
             };
+
+            AddHistorical(HistoricalEnum.ADDLABELTOIISUE, issueId, labelId);
         }
 
         public void DeleteLabelToIssue(int issueId, int labelId)
@@ -463,7 +474,7 @@ namespace IssuesHoneys.Services.SQL
                 command.ExecuteScalar();
             };
 
-            AddHistorical(HistoricalEnum.DELETELABEL, issueId);
+            AddHistorical(HistoricalEnum.DELETELABELTOIISUE, issueId, labelId);
         }
 
         public void DeleteMilestoneToIssue(int issueId, int milestoneId)
@@ -480,7 +491,7 @@ namespace IssuesHoneys.Services.SQL
                 command.ExecuteScalar();
             };
 
-            AddHistorical(HistoricalEnum.DELETEMILESTONE, issueId);
+            AddHistorical(HistoricalEnum.DELETEMILESTONETOIISUE, issueId, milestoneId);
         }
 
         public void AddMilestoneToIssue(int issueId, int milestoneId)
@@ -510,26 +521,67 @@ namespace IssuesHoneys.Services.SQL
                 command.ExecuteScalar();
             };
 
-            AddHistorical(HistoricalEnum.ADDMILESTONE, issueId);
+            AddHistorical(HistoricalEnum.ADDMILESTONETOIISUE, issueId, milestoneId);
         }
 
-        async void AddHistorical (HistoricalEnum historicalEnum, int Id)
+        async void AddHistorical (HistoricalEnum historicalEnum, int? issueId, int? toId)
         {
             var connectionString = ConfigurationManager.ConnectionStrings["HONEYSCONTEXT"].ConnectionString;
             var crtnUser = 1;
             var crtnDate = DateTime.Now;
-            var queryString = $@"                                    
-                                    INSERT INTO [issues].[ISSUESHISTORICAL]
+            var queryString = string.Empty;
+
+            var histValue = (int)historicalEnum;
+
+            if (issueId == null)
+            {
+                queryString = $@"                                    
+                                    INSERT INTO [issues].[ISSUEHISTORICAL]
+                                        ([ACTION],
+                                         [CRTNDATE],
+                                         [Fk_CRTNUSER],
+                                         [TOID])
+                                    VALUES
+                                        ({histValue}
+                                        ,'{crtnDate}'
+                                        ,{crtnUser}
+                                        ,{toId})
+                               ";
+            }
+
+            if (toId == null)
+            {
+                queryString = $@"                                    
+                                    INSERT INTO [issues].[ISSUEHISTORICAL]
                                         ([ACTION],
                                          [CRTNDATE],
                                          [Fk_CRTNUSER],
                                          [Fk_ISSUE])
                                     VALUES
-                                        ('{(int)historicalEnum}'
-                                        ,{crtnDate}
+                                        ({histValue}
+                                        ,'{crtnDate}'
                                         ,{crtnUser}
-                                        ,{Id})
+                                        ,{issueId}))
                                ";
+            }
+
+            if (issueId != null && toId != null)
+            {
+                queryString = $@"                                    
+                                    INSERT INTO [issues].[ISSUEHISTORICAL]
+                                        ([ACTION],
+                                         [CRTNDATE],
+                                         [Fk_CRTNUSER],
+                                         [Fk_ISSUE],
+                                         [TOID])
+                                    VALUES
+                                        ({histValue}
+                                        ,'{crtnDate}'
+                                        ,{crtnUser}
+                                        ,{issueId})
+                                        ,{toId})
+                               ";
+            }
 
             using (var connection = new SqlConnection(connectionString))
             {
