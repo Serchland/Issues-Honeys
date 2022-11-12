@@ -11,7 +11,7 @@ namespace IssuesHoneys.Services.Interfaces
         /// <summary>
         /// Method used to create a new LABEL in the model
         /// </summary>
-        void CreateLabel(Label newLabel);
+        void AddLabel(Label newLabel);
 
         /// <summary>
         /// Method used to delete a LABEL in the model

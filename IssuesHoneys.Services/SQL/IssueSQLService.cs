@@ -30,7 +30,7 @@ namespace IssuesHoneys.Services.SQL
         /// Create a LABEL in the sql model. Implementation of IIssueService.CreateLabel
         /// </summary>
         /// <param name="newLabel"></param>
-        public void CreateLabel(Label newLabel)
+        public void AddLabel(Label newLabel)
         {
             var connectionString = ConfigurationManager.ConnectionStrings[Captions.AppSettings.HONEYSCONTEXT].ConnectionString;
             var description = newLabel.Description;
@@ -64,7 +64,7 @@ namespace IssuesHoneys.Services.SQL
             {
                 var command = new SqlCommand(queryString, connection);
                 connection.Open();
-                labelId = (int)command.ExecuteScalar();
+                labelId = Convert.ToInt32(command.ExecuteScalar());
             };
 
 

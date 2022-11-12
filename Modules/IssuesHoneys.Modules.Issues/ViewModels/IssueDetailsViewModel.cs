@@ -214,6 +214,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             var _crtnOpenText = Application.Current.FindResource(LabelsResources.TextBlockOpenedTheIssueOn).ToString();
             CrtnIssueStamp = string.Format("{0} {1} {2}", _crtnUser.Name, _crtnOpenText, SelectedItem.CrtnDate);
             
+
         }
         #endregion
     }

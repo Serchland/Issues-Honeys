@@ -79,7 +79,7 @@ namespace IssuesHoneys.Modules.Issues.ViewModels
             if (_newLabel == null)
                 throw new ArgumentException(ArgumentExceptionMessage);
 
-            _issuesService.CreateLabel(NewLabel);
+            _issuesService.AddLabel(NewLabel);
             Labels = new ObservableCollection<Label>(_issuesService.GetLabels(LabelType.Issue));
             NewLabelViewVisibilitity = Visibility.Collapsed;
         }

@@ -40,7 +40,7 @@ namespace IssuesHoneys.Services.Dummies
         /// Create a LABEL in the sql model. Implementation of IIssueService.CreateLabel
         /// </summary>
         /// <param name="newLabel"></param>
-        public void CreateLabel(Label newLabel)
+        public void AddLabel(Label newLabel)
         {
             _labels.Add(newLabel);
         }
